@@ -53,6 +53,7 @@ def support(g,cfg):
 def quantile_bin(series,cfg):
     s=series.replace([np.inf,-np.inf],np.nan)
     edges=np.unique(s.dropna().quantile(cfg['quantiles']).to_numpy())
+    edges=edges[np.isfinite(edges)]
     if len(edges)<2:
         labels=pd.Series(np.where(s.notna(),'constant','missing'),index=s.index).mask(s.isna())
         return labels, {'edges':edges.tolist(),'labels':['constant'] if len(edges) else ['unavailable'],'collapsed':True}
