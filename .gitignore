@@ -1,0 +1,31 @@
+# Large data (root anchored so src/data remains trackable)
+/data/
+/datasets/
+/nuscenes/
+*.pth
+*.pt
+*.ckpt
+cache/
+predictions/
+__pycache__/
+*.py[cod]
+.venv/
+.venv-*/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.local/
+.DS_Store
+*.tgz
+*.tar
+*.tar.gz
+*.zip
+*.part
+
+# SSH material
+id_ed25519*
+id_rsa*
+known_hosts*

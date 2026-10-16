@@ -1,0 +1,29 @@
+{
+  "datacenter": "EU-RO-1",
+  "cloud": "SECURE",
+  "network_volume": {
+    "id": "p6vb29fmlu",
+    "name": "camera-lidar-backfire-data",
+    "size_gb": 50,
+    "type": "STANDARD",
+    "mount_path": "/workspace"
+  },
+  "pod": {
+    "id": "fc6ypwq4yajvmj",
+    "name": "camera-lidar-preaudit-cpu",
+    "cpu": {
+      "id": "cpu3g",
+      "vcpuCount": 4
+    },
+    "ram_gb": 16,
+    "image": "runpod/base:1.0.2-ubuntu2404",
+    "disk_gb": 20,
+    "ports": [
+      "22/tcp"
+    ]
+  },
+  "dataset_root": "/workspace/datasets/nuscenes",
+  "source_checkout": "/root/camera-lidar-backfire",
+  "metadata_venv": "/opt/venvs/nuscenes-metadata",
+  "note": "Resource IDs describe this deployment. Query current SSH address/port before connecting; replacement Pods get new IDs."
+}
