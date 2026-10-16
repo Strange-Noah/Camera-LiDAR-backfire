@@ -154,6 +154,9 @@ def construct(root, version, output, cache, config):
             assert group.iloc[-1].annotation_token==inst['last_annotation_token']
             velocity,span,neighbors,method=differences(group.timestamp.to_numpy(),group[['x_world','y_world']].to_numpy(),config['object_neighbor_max_gap_s'])
             ix=group.index
+            tokens=group.annotation_token.tolist()
+            assert group.prev_annotation_token.tolist()==['']+tokens[:-1]
+            assert group.next_annotation_token.tolist()==tokens[1:]+['']
             obj.loc[ix,['object_vx','object_vy']]=velocity
             obj.loc[ix,'object_speed']=np.linalg.norm(velocity,axis=1)
             obj.loc[ix,'velocity_span_s']=span; obj.loc[ix,'velocity_neighbors']=neighbors;obj.loc[ix,'velocity_method']=method

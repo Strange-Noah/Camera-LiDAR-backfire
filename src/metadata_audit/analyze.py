@@ -55,7 +55,7 @@ def quantile_bin(series,cfg):
     edges=np.unique(s.dropna().quantile(cfg['quantiles']).to_numpy())
     if len(edges)<2:
         labels=pd.Series(np.where(s.notna(),'constant','missing'),index=s.index).mask(s.isna())
-        return labels, {'edges':edges.tolist(),'labels':['constant'] if len(edges) else [],'collapsed':True}
+        return labels, {'edges':edges.tolist(),'labels':['constant'] if len(edges) else ['unavailable'],'collapsed':True}
     names=['low','middle','high'] if len(edges)==4 else [f'q{i+1}' for i in range(len(edges)-1)]
     bins=pd.cut(s,edges,labels=names,include_lowest=True,right=True)
     return bins, {'edges':edges.tolist(),'labels':names,'collapsed':len(edges)!=4,'boundary':'right-closed; first includes minimum'}
@@ -326,7 +326,9 @@ def gate_report(obj,traj,scenes,timing,construct,regime,joint,matched,confoundin
     if weak_joint:limits.append('Some requested joint bins fail configured support; broad comparisons need restriction.')
     if any(v==0 for v in matched.values()):limits.append('At least one comparison has no qualifying within-class, same-scene overlap in the current coarse bins; that comparison is unsupported under this design.')
     if not proxy_good:limits.append('No single tested dt has all four mismatch regimes meeting configured independent-support thresholds.')
-    structural=bool(missing or no_range or not any_large)
+    # Lack of a large-r band alone restricts the sweep; it is not a structural failure.
+    any_nontrivial=bool(((proxy.regime!='r<0.1') & (proxy.N_ann>0)).any())
+    structural=bool(missing or 'distance_xy' in no_range or 'relative_lateral_velocity' in no_range or not any_nontrivial)
     decision='NO-GO' if structural else ('CONDITIONAL GO' if weak_ind or weak_joint or confounding!='LOW CONFOUNDING' or not proxy_good else 'GO')
     return {'scope':version,'final_gating_eligible':final,'n_scenes':len(scenes),'constructability':{'status':'FAIL' if missing else 'PASS','unconstructible_essential':missing,'evidence':'gates/constructability.csv'},
         'motion_diversity':{'status':'FAIL' if 'relative_lateral_velocity' in no_range else 'VARIATION PRESENT','evidence':'motion/motion_summary.json'},
