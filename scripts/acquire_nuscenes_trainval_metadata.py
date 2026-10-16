@@ -20,7 +20,7 @@ with tarfile.open(archive,'r:gz') as tar:
     for m in members:
         p=Path(m.name)
         if p.is_absolute() or '..' in p.parts or not(m.isfile() or m.isdir()):raise SystemExit('Unsafe archive member')
-        if p.parts and p.parts[0] not in ['v1.0-trainval','maps']:raise SystemExit('Unexpected member outside metadata/maps; refusing extraction')
+        if p.parts and p.parts[0] not in ['v1.0-trainval','maps','.v1.0-trainval_meta.txt','LICENSE']:raise SystemExit('Unexpected member outside metadata/maps/license; refusing extraction')
     selected=[m for m in members if Path(m.name).parts and Path(m.name).parts[0]=='v1.0-trainval']
     if not selected:raise SystemExit('No trainval metadata in archive')
     tar.extractall(root,members=selected,filter='data')
