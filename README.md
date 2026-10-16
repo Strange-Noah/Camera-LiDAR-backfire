@@ -64,3 +64,15 @@ This is schema and file-access validation, not a statistical metadata audit.
 
 No datasets, model weights, credentials, or large predictions belong in Git.
 Small verification reports and environment locks may be committed.
+
+See [storage and recovery](docs/storage_and_recovery.md) for volume expansion and
+Pod replacement. `configs/runpod-create-pod.json` is an MCP `create-pod` request
+shape for a future replacement, not an instruction to create another Pod now.
+Re-check inventory and pricing before reusing it.
+
+## Verified checkpoint
+
+See [pre-audit deployment report](docs/pre_audit_deployment.md) for the completed
+acceptance checklist, live resource IDs, reproducibility proof, and known limits.
+Both isolated environments loaded 10 scenes / 404 samples / 18,538 annotations.
+No formal metadata audit or model deployment has been performed.

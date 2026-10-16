@@ -2,6 +2,8 @@
 /data/
 /datasets/
 /nuscenes/
+/checkpoints/
+*.safetensors
 *.pth
 *.pt
 *.ckpt

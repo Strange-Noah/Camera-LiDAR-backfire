@@ -1,0 +1,267 @@
+{
+  "status": "PASS",
+  "scope": "Pre-audit bounded schema/file-access validation only",
+  "time_utc": "2026-10-16T12:25:03.426366+00:00",
+  "git_commit": "7f59b982b73e439dea725ed8776713cf56bb50e3",
+  "dataroot": "/workspace/datasets/nuscenes",
+  "version": "v1.0-mini",
+  "python": "3.12.3",
+  "packages": {
+    "nuscenes-devkit": "1.2.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.3",
+    "pyquaternion": "0.9.9"
+  },
+  "counts": {
+    "scenes": 10,
+    "samples": 404,
+    "annotations": 18538
+  },
+  "scene": {
+    "token": "cc8c0bf57f984915a77078b10eb33198",
+    "log_token": "7e25a2c8ea1f41c5b0da1e69ecfa71a2",
+    "nbr_samples": 39,
+    "first_sample_token": "ca9a282c9e77460f8360f564131a8af5",
+    "last_sample_token": "ed5fc18c31904f96a8f0dbb99ff069c0",
+    "name": "scene-0061",
+    "description": "Parked truck, construction, intersection, turn left, following a van"
+  },
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "sample_timestamp_us": 1532402927647951,
+  "sensor_channels": [
+    "CAM_BACK",
+    "CAM_BACK_LEFT",
+    "CAM_BACK_RIGHT",
+    "CAM_FRONT",
+    "CAM_FRONT_LEFT",
+    "CAM_FRONT_RIGHT",
+    "LIDAR_TOP",
+    "RADAR_BACK_LEFT",
+    "RADAR_BACK_RIGHT",
+    "RADAR_FRONT",
+    "RADAR_FRONT_LEFT",
+    "RADAR_FRONT_RIGHT"
+  ],
+  "sensors": {
+    "CAM_FRONT": {
+      "sample_data_token": "e3d495d4ac534d54b321f50006683844",
+      "filename": "samples/CAM_FRONT/n015-2018-07-24-11-22-45+0800__CAM_FRONT__1532402927612460.jpg",
+      "file_bytes": 131197,
+      "timestamp_us": 1532402927612460,
+      "calibrated_sensor_token": "1d31c729b073425e8e0202c5c6e66ee1",
+      "extrinsics": {
+        "translation": [
+          1.70079118954,
+          0.0159456324149,
+          1.51095763913
+        ],
+        "rotation": [
+          0.4998015430569128,
+          -0.5030316162024876,
+          0.4997798114386805,
+          -0.49737083824542755
+        ]
+      },
+      "ego_pose_token": "e3d495d4ac534d54b321f50006683844",
+      "ego_pose": {
+        "translation": [
+          411.4199861830012,
+          1181.197175631848,
+          0.0
+        ],
+        "rotation": [
+          0.5720063498929273,
+          -0.0021434844534272707,
+          0.011564094980151613,
+          -0.8201648693182716
+        ]
+      },
+      "ego_timestamp_us": 1532402927612460,
+      "prev": "",
+      "next": "68e8e98cf7b0487baa139df808641db7",
+      "camera_intrinsic": [
+        [
+          1266.417203046554,
+          0.0,
+          816.2670197447984
+        ],
+        [
+          0.0,
+          1266.417203046554,
+          491.50706579294757
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image_size": [
+        1600,
+        900
+      ],
+      "resolved_links": {
+        "next": {
+          "token": "68e8e98cf7b0487baa139df808641db7",
+          "timestamp_us": 1532402927662460,
+          "is_key_frame": false
+        }
+      }
+    },
+    "LIDAR_TOP": {
+      "sample_data_token": "9d9bf11fb0e144c8b446d54a8a00184f",
+      "filename": "samples/LIDAR_TOP/n015-2018-07-24-11-22-45+0800__LIDAR_TOP__1532402927647951.pcd.bin",
+      "file_bytes": 693760,
+      "timestamp_us": 1532402927647951,
+      "calibrated_sensor_token": "a183049901c24361a6b0b11b8013137c",
+      "extrinsics": {
+        "translation": [
+          0.943713,
+          0.0,
+          1.84023
+        ],
+        "rotation": [
+          0.7077955119163518,
+          -0.006492242056004365,
+          0.010646214713995808,
+          -0.7063073142877817
+        ]
+      },
+      "ego_pose_token": "9d9bf11fb0e144c8b446d54a8a00184f",
+      "ego_pose": {
+        "translation": [
+          411.3039349319818,
+          1180.8903791765097,
+          0.0
+        ],
+        "rotation": [
+          0.5720320396729045,
+          -0.0016977771610471074,
+          0.011798001930183783,
+          -0.8201446642457809
+        ]
+      },
+      "ego_timestamp_us": 1532402927647951,
+      "prev": "",
+      "next": "0cedf1d2d652468d92d23491136b5d15",
+      "point_count": 34688,
+      "resolved_links": {
+        "next": {
+          "token": "0cedf1d2d652468d92d23491136b5d15",
+          "timestamp_us": 1532402927697752,
+          "is_key_frame": false
+        }
+      }
+    }
+  },
+  "camera_minus_lidar_timestamp_us": -35491,
+  "instance": {
+    "token": "6dd2cbf4c24b4caeb625035869bca7b5",
+    "category_token": "1fa93b757fc74fb197cdd60001ad8abf",
+    "nbr_annotations": 39,
+    "first_annotation_token": "ef63a697930c4b20a6b9791f423351da",
+    "last_annotation_token": "8bb63134d48840aaa2993f490855ff0d"
+  },
+  "annotation_chain": [
+    {
+      "token": "ef63a697930c4b20a6b9791f423351da",
+      "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+      "translation": [
+        373.256,
+        1130.419,
+        0.8
+      ],
+      "size": [
+        0.621,
+        0.669,
+        1.642
+      ],
+      "rotation": [
+        0.9831098797903927,
+        0.0,
+        0.0,
+        -0.18301629506281616
+      ],
+      "visibility_token": "1",
+      "num_lidar_pts": 1,
+      "instance_token": "6dd2cbf4c24b4caeb625035869bca7b5",
+      "prev": "",
+      "next": "7987617983634b119e383d8a29607fd7",
+      "timestamp_us": 1532402927647951,
+      "visibility": {
+        "description": "visibility of whole object is between 0 and 40%",
+        "token": "1",
+        "level": "v0-40"
+      }
+    },
+    {
+      "token": "7987617983634b119e383d8a29607fd7",
+      "sample_token": "39586f9d59004284a7114a68825e8eec",
+      "translation": [
+        373.256,
+        1130.419,
+        0.81
+      ],
+      "size": [
+        0.621,
+        0.669,
+        1.642
+      ],
+      "rotation": [
+        0.9831098797903927,
+        0.0,
+        0.0,
+        -0.18301629506281616
+      ],
+      "visibility_token": "1",
+      "num_lidar_pts": 1,
+      "instance_token": "6dd2cbf4c24b4caeb625035869bca7b5",
+      "prev": "ef63a697930c4b20a6b9791f423351da",
+      "next": "9acb7dfed3454f72b2874dda3bdacc48",
+      "timestamp_us": 1532402928147847,
+      "visibility": {
+        "description": "visibility of whole object is between 0 and 40%",
+        "token": "1",
+        "level": "v0-40"
+      }
+    },
+    {
+      "token": "9acb7dfed3454f72b2874dda3bdacc48",
+      "sample_token": "356d81f38dd9473ba590f39e266f54e5",
+      "translation": [
+        373.256,
+        1130.419,
+        0.82
+      ],
+      "size": [
+        0.621,
+        0.669,
+        1.642
+      ],
+      "rotation": [
+        0.9831098797903927,
+        0.0,
+        0.0,
+        -0.18301629506281616
+      ],
+      "visibility_token": "1",
+      "num_lidar_pts": 0,
+      "instance_token": "6dd2cbf4c24b4caeb625035869bca7b5",
+      "prev": "7987617983634b119e383d8a29607fd7",
+      "next": "74f550e3257c4f52af1102c0d49d37b8",
+      "timestamp_us": 1532402928698048,
+      "visibility": {
+        "description": "visibility of whole object is between 0 and 40%",
+        "token": "1",
+        "level": "v0-40"
+      }
+    }
+  ],
+  "visualization": "camera_lidar_projection.png",
+  "limitations": [
+    "Only one sample and one bounded object trajectory checked.",
+    "Counts are loading diagnostics, not a scene-level statistical audit.",
+    "No inference, corruption, temporal resampling, or suitability conclusions."
+  ]
+}

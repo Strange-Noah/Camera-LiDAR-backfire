@@ -1,0 +1,32 @@
+{
+  "body": {
+    "name": "camera-lidar-preaudit-cpu",
+    "cloud": "SECURE",
+    "cpu": {
+      "id": "cpu3g",
+      "vcpuCount": 4
+    },
+    "dataCenterIds": [
+      "EU-RO-1"
+    ],
+    "image": "runpod/base:1.0.2-ubuntu2404",
+    "disk": 20,
+    "ports": [
+      "22/tcp"
+    ],
+    "startSsh": true,
+    "startJupyter": false,
+    "mounts": {
+      "network": [
+        {
+          "volumeId": "p6vb29fmlu",
+          "path": "/workspace"
+        }
+      ]
+    },
+    "env": {
+      "NUSCENES_ROOT": "/workspace/datasets/nuscenes",
+      "PIP_CACHE_DIR": "/workspace/cache/pip"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "tested_source_commit": "7f59b982b73e439dea725ed8776713cf56bb50e3",
+  "python": "3.12.3",
+  "platform": "Linux x86_64 / Ubuntu 24.04",
+  "original_environment": "/opt/venvs/nuscenes-metadata",
+  "rebuilt_environment": "/opt/venvs/nuscenes-metadata-rebuild",
+  "method": "Create a fresh second venv using committed requirements.lock.txt, pip check, compare full pip freeze, rerun bounded smoke test.",
+  "full_freeze_matches_lock": true,
+  "locked_package_count": 31,
+  "both_smoke_tests_passed": true,
+  "sensor_results_identical": true,
+  "annotation_chain_identical": true,
+  "original_test_time_utc": "2026-10-16T12:25:03.426366+00:00",
+  "rebuilt_test_time_utc": "2026-10-16T12:25:05.036545+00:00",
+  "visualizations_rendered": 1,
+  "limits": [
+    "The base-image tag and Ubuntu package repositories are not immutable snapshots.",
+    "No destructive Pod replacement or volume expansion was performed."
+  ]
+}

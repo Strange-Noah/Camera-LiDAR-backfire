@@ -1,0 +1,40 @@
+2026-10-16T12:29:17Z
+TARGET     SOURCE                                               FSTYPE OPTIONS
+/workspace mfs#euro.runpod.net:9421[/networkvolumes/p6vb29fmlu] fuse   rw,nosuid,nodev,relatime,user_id=0,group_id=0,allow_other
+Filesystem                Size  Used Avail Use% Mounted on
+mfs#euro.runpod.net:9421  2.3P  1.8P  465T  80% /workspace
+5.1G	/workspace/datasets/nuscenes
+3.9G	/workspace/staging
+604M	/workspace/cache
+7.9M	/workspace/results
+/workspace/datasets/nuscenes
+/workspace/datasets/nuscenes/maps
+/workspace/datasets/nuscenes/samples
+/workspace/datasets/nuscenes/samples/CAM_BACK
+/workspace/datasets/nuscenes/samples/CAM_BACK_LEFT
+/workspace/datasets/nuscenes/samples/CAM_BACK_RIGHT
+/workspace/datasets/nuscenes/samples/CAM_FRONT
+/workspace/datasets/nuscenes/samples/CAM_FRONT_LEFT
+/workspace/datasets/nuscenes/samples/CAM_FRONT_RIGHT
+/workspace/datasets/nuscenes/samples/LIDAR_TOP
+/workspace/datasets/nuscenes/samples/RADAR_BACK_LEFT
+/workspace/datasets/nuscenes/samples/RADAR_BACK_RIGHT
+/workspace/datasets/nuscenes/samples/RADAR_FRONT
+/workspace/datasets/nuscenes/samples/RADAR_FRONT_LEFT
+/workspace/datasets/nuscenes/samples/RADAR_FRONT_RIGHT
+/workspace/datasets/nuscenes/sweeps
+/workspace/datasets/nuscenes/sweeps/CAM_BACK
+/workspace/datasets/nuscenes/sweeps/CAM_BACK_LEFT
+/workspace/datasets/nuscenes/sweeps/CAM_BACK_RIGHT
+/workspace/datasets/nuscenes/sweeps/CAM_FRONT
+/workspace/datasets/nuscenes/sweeps/CAM_FRONT_LEFT
+/workspace/datasets/nuscenes/sweeps/CAM_FRONT_RIGHT
+/workspace/datasets/nuscenes/sweeps/LIDAR_TOP
+/workspace/datasets/nuscenes/sweeps/RADAR_BACK_LEFT
+/workspace/datasets/nuscenes/sweeps/RADAR_BACK_RIGHT
+/workspace/datasets/nuscenes/sweeps/RADAR_FRONT
+/workspace/datasets/nuscenes/sweeps/RADAR_FRONT_LEFT
+/workspace/datasets/nuscenes/sweeps/RADAR_FRONT_RIGHT
+/workspace/datasets/nuscenes/v1.0-mini
+No broken requirements found.
+No broken requirements found.
