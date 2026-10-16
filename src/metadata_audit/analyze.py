@@ -94,10 +94,15 @@ def boxplot(frame,category,variables,path):
 def matrix_plot(frame,x,y,path):
     fig,axes=plt.subplots(1,3,figsize=(12,4))
     for ax,metric in zip(axes,['N_ann','N_traj','N_scene']):
-        pivot=frame.pivot(index=x,columns=y,values=metric)
-        im=ax.imshow(pivot.fillna(0).to_numpy(),aspect='auto',cmap='viridis')
+        pivot=frame.pivot(index=x,columns=y,values=metric).reindex(index=frame[x].drop_duplicates(),columns=frame[y].drop_duplicates())
+        im=ax.imshow(pivot.fillna(0).to_numpy(),aspect='auto',cmap='viridis',vmin=0)
         ax.set_xticks(range(len(pivot.columns)),pivot.columns,rotation=45)
         ax.set_yticks(range(len(pivot.index)),pivot.index);ax.set_title(metric)
+        ax.set_xlabel(y);ax.set_ylabel(x)
+        for i in range(len(pivot.index)):
+            for j in range(len(pivot.columns)):
+                val=pivot.iloc[i,j]
+                ax.text(j,i,f'{int(val):,}',ha='center',va='center',fontsize=8,color='white' if val < .5*pivot.max().max() else 'black')
         fig.colorbar(im,ax=ax,shrink=.7)
     fig.tight_layout();fig.savefig(path,dpi=140);plt.close(fig)
 
@@ -224,7 +229,7 @@ def analyze(tables,output,version,cfg):
         frame=pd.DataFrame(records)
         frame.to_csv(out/f'joint/{name}_coverage.csv',index=False)
         for metric,suffix in [('N_ann','annotations'),('N_traj','trajectories'),('N_scene','scenes')]:
-            frame.pivot(index=x,columns=y,values=metric).to_csv(out/f'joint/{name}_{suffix}.csv')
+            frame.pivot(index=x,columns=y,values=metric).reindex(index=specs[x]['labels'],columns=specs[y]['labels']).to_csv(out/f'joint/{name}_{suffix}.csv')
         matrix_plot(frame,x,y,out/f'joint/{name}.png')
         joint_summaries[name]={'total_bins':len(frame),'occupied_bins':int((frame.N_ann>0).sum()),'supported_bins':int((frame.status=='SUPPORTED').sum()),'weak_bins':int((frame.status=='WEAK').sum()),'sparse_bins':int((frame.status=='SPARSE').sum())}
         joint_rows.extend([{'analysis':name,**r} for r in records])
