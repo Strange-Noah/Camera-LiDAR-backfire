@@ -31,5 +31,7 @@ Dev access also permits deleting shared storage. Never delete or reconfigure the
 Network Volume, or manage another member's Pod, without agreement. Stop your own
 idle Pod, push code before shutdown, and persist needed outputs in your own run
 directory. See `docs/team_collaboration.md` for the setup commands and safety rules.
-The Team/access and filesystem-protection rollout is pending confirmation; do not
-assume either is already active merely because these instructions are in GitHub.
+The owner has confirmed Team conversion, and data-protection tests passed on the
+maintenance Pod. Each member must still accept the invitation and have the protected
+non-root login provisioned on every new/restarted Pod; default root sessions are
+not protected. See `docs/dataset_readonly.md`.

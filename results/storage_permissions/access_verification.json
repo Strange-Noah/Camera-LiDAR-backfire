@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "uid": 20001,
+  "gid": 20001,
+  "checks": {
+    "real_metadata_camera_lidar_readable": true,
+    "real_dataset_and_parents_not_writable": true,
+    "create_denied": true,
+    "overwrite_denied": true,
+    "delete_denied": true,
+    "rename_file_denied": true,
+    "rename_directory_via_parent_denied": true,
+    "write_denied_after_chmod_attempt": true,
+    "personal_outputs_writable": true
+  },
+  "user": "researcher",
+  "completed_utc": "2026-10-17T14:20:56.345571+00:00",
+  "destructive_probes": "temporary fixture only; never real dataset"
+}

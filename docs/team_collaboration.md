@@ -9,8 +9,10 @@ This document does not establish that the account has already been converted.
 
 Verified existing volume: `camera-lidar-backfire-data`, `p6vb29fmlu`, 50 GB STANDARD,
 EU-RO-1. Existing dataset path: `/workspace/datasets/nuscenes`.
-Team conversion, member access, non-root logins and dataset permission enforcement
-remain pending live verification. Do not claim the dataset is already protected.
+The owner confirmed Team conversion. Dataset permission modes and a protected
+non-root SSH experiment login passed maintenance-Pod tests; see
+[deployment evidence and required per-Pod setup](dataset_readonly.md). Member
+invitations/Cost Centers and each new Pod still require their own verification.
 No Pod needs to run for Team conversion. Do not recreate or copy the dataset.
 
 ## Owner: enable Team and invite members
@@ -124,7 +126,9 @@ Validate on a disposable test fixture on the volume first: read succeeds; create
 overwrite, rename and deletion fail under the experiment identity; personal output
 writes succeed. Never test deletion against real dataset files. Then verify actual
 dataset ownership/modes and access without modifying data. Recheck after creating
-replacement Pods. This protection is not yet applied or tested on the existing volume.
+replacement Pods. Modes and Landlock protection have been applied/tested; see `dataset_readonly.md`.
+This FUSE backend allows non-root chmod, so the protected experiment shell is
+required in addition to file modes. An ordinary non-root process alone is insufficient.
 
 Dev members can still delete the entire volume through the console/API, and root
 can defeat ordinary file protections. Never delete, resize or reconfigure shared
@@ -137,7 +141,8 @@ path convention as the sole write barrier.
 - [ ] Each invitee accepts and sees that exact volume in Team context.
 - [ ] Per-member Cost Centers and shared-storage attribution are configured.
 - [ ] Member Pods use EU-RO-1, independent local clones and non-root experiments.
-- [ ] Fixture-based permission checks pass; canonical data access is read-only.
+- [x] Maintenance-Pod fixture checks and protected SSH login pass; dataset content writes denied.
+- [ ] Provision and verify protected login on every member/replacement Pod.
 - [ ] Member outputs are isolated; published audit files remain untouched.
 
 ## Official references

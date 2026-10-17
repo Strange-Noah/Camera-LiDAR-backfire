@@ -30,9 +30,12 @@ The dataset is canonical input, not an output directory. Use non-root experiment
 users and administrator-managed filesystem permissions; Dev membership alone does
 not enforce read-only data and still permits deleting the entire volume.
 
-**Rollout status:** this is the agreed design. Team conversion/member access and
-dataset permission enforcement have not yet been verified or applied. The existing
-volume must be reused in place, not copied or recreated for this transition.
+**Rollout status:** the owner confirmed Team conversion. Dataset modes and a
+Landlock-protected non-root experiment login have been applied and tested on the
+maintenance Pod. Every new/restarted Pod must provision that protected login before
+experiments; default root sessions are not protected. Member invitations and Cost
+Centers still require separate verification. The existing volume is reused in place.
+See [dataset protection and per-Pod setup](docs/dataset_readonly.md).
 
 - [Team workflow, billing, safety and rollout checklist](docs/team_collaboration.md)
 - [English message for teammates](docs/team_invitation.md)
