@@ -81,6 +81,9 @@ volume; verification never downloads data.
 
 ## Pre-audit verification
 
+Run from the protected member login after sourcing your configured
+`.local/member.env`; do not run this from the administrator root bootstrap shell.
+
 ```bash
 ./scripts/verify_nuscenes.sh --render-once
 ```

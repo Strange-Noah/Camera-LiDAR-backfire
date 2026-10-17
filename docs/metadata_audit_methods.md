@@ -4,15 +4,23 @@
 
 This pipeline uses official nuScenes metadata only. Mini is development/verification data; **only an exactly 850-scene v1.0-trainval run can issue the final recommendation**. It never downloads data, starts a GPU, installs BEVFusion or runs corruption/inference. Acquisition is a separate explicit script. Raw JSON, Parquet tables, SQLite indexes and full logs stay on Runpod; code/configuration, small summary tables and figures are versioned in GitHub.
 
+Run from your protected member login with a Pod-local checkout. Configure
+`.local/member.env` first (see `docs/team_collaboration.md`). The examples below
+create a new independent run; do not overwrite the published baseline.
+
 ```bash
+source .local/member.env
 ./scripts/setup_metadata_env.sh
-PYTHONPATH=src /opt/venvs/nuscenes-metadata/bin/python -m unittest discover -s tests -v
-./scripts/run_metadata_audit.sh --version v1.0-mini --output /workspace/results/metadata_audit_mini
-/opt/venvs/nuscenes-metadata/bin/python scripts/validate_audit_mini.py --tables /workspace/results/metadata_audit_mini/tables
-# Only after mini numerical validation succeeds:
-python3.12 scripts/acquire_nuscenes_trainval_metadata.py
-./scripts/run_metadata_audit.sh --version v1.0-trainval --output /workspace/results/metadata_audit
+PYTHONPATH=src "$METADATA_VENV/bin/python" -m unittest discover -s tests -v
+export RUN_ID=replace-with-a-unique-run-id
+./scripts/run_metadata_audit.sh --version v1.0-mini --output "/workspace/results/$MEMBER_SLUG/$RUN_ID/mini"
+"$METADATA_VENV/bin/python" scripts/validate_audit_mini.py --tables "/workspace/results/$MEMBER_SLUG/$RUN_ID/mini/tables"
+# Only after mini validation, and only if a new full audit is deliberately required:
+./scripts/run_metadata_audit.sh --version v1.0-trainval --output "/workspace/results/$MEMBER_SLUG/$RUN_ID/trainval"
 ```
+
+Official mini and trainval metadata are already present. Do not rerun acquisition
+as part of an experiment; canonical acquisition is administrator-only.
 
 SQLite is a disposable streaming index under `/tmp/nuscenes-audit-index`; original JSON remains on the Network Volume. Individual scenes are constructed and appended as Parquet row groups. Completed outputs cannot be overwritten by the entry point. Use a fresh output directory for a new version/configuration. If analysis alone failed after successful table construction, `--analyze-only` can resume that incomplete run. `RUN_COMPLETE.json` is written only after all analyses/report generation finish. Mini's separate `numerical_validation.json` confirms reference tests.
 

@@ -1,0 +1,68 @@
+{
+  "checked_utc": "2026-10-17T19:00:35.555393+00:00",
+  "dataset_files": 31240,
+  "dataset_directories": 30,
+  "permissions": "PASS",
+  "fixture_residue": [],
+  "formal_audit_complete": true,
+  "gating_overall": "CONDITIONAL GO",
+  "status": "PASS",
+  "environment_rebuilt_under_guard": true,
+  "lock_requirements_match": true,
+  "locked_packages": 33,
+  "smoke_test_counts": {
+    "scenes": 10,
+    "samples": 404,
+    "annotations": 18538
+  },
+  "unit_tests_passed": 10,
+  "initial_test_invocation_issue": "Missing PYTHONPATH=src in check invocation; corrected documented invocation passed.",
+  "removed_temporary_paths": [
+    "/workspace/results/researcher",
+    "/workspace/cache/researcher",
+    "/workspace/staging/researcher",
+    "/workspace/checkpoints/researcher",
+    "/workspace/results/audit-validation.tgz",
+    "/workspace/results/metadata-audit-report.tgz",
+    "/workspace/results/mini-review.tgz"
+  ],
+  "preserved": [
+    "canonical datasets and original acquisition archives",
+    "formal 850-scene audit",
+    "mini/pre-audit reproducibility evidence",
+    "permission rollback snapshot and verification reports"
+  ],
+  "tested_commit": "10eba662693f106083ed9bf017c3a74857cb8c5b",
+  "limitations": [
+    "Each new/restarted Pod needs protected member login and environment setup.",
+    "Member invitations and Cost Centers are not verified by this filesystem check.",
+    "GPU/BEVFusion/production notebooks are outside this milestone."
+  ],
+  "pre_cleanup_member_test_directories": {
+    "results": [],
+    "cache": [
+      "matplotlib",
+      "pip"
+    ],
+    "staging": [],
+    "checkpoints": []
+  },
+  "removed_local_temporary_paths": [
+    ".local/audit-final.bundle",
+    ".local/audit-update.bundle",
+    ".local/audit-validation.tgz",
+    ".local/metadata-audit-report.tgz",
+    ".local/mini-review.tgz",
+    ".local/mini-review",
+    ".local/finalize_permissions.py",
+    ".local/deployment-check.tar",
+    ".local/recheck_volume.py",
+    ".local/member-check.sh",
+    ".local/cleanup_recheck.py"
+  ],
+  "final_pod_status": {
+    "h369s5s77xhlqi": "EXITED",
+    "fc6ypwq4yajvmj": "EXITED"
+  },
+  "network_volume_retained": "p6vb29fmlu"
+}
