@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "all_object_velocities_compared": 18508,
+  "max_velocity_absolute_error_m_s": 8.517469940017008e-06,
+  "projection_reference_checks": 120,
+  "max_projection_error_px": 6.446043698815629e-11,
+  "relative_radial_lateral_identity_rows": 18508,
+  "static_class_speed_p95_m_s": 0.09177729358616782,
+  "object_speed_max_m_s": 31.19131227820731,
+  "ego_speed_max_m_s": 15.164891666481962,
+  "notes": "Static-class motion and high-speed values are retained for annotation-noise scrutiny, not clamped. Independent synthetic tests cover time gaps, unequal spacing, quaternion transforms, wraparound and near-plane rejection."
+}

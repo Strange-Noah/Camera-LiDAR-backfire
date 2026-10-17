@@ -1,0 +1,65 @@
+{
+  "instance_cross_scene": [],
+  "scenes": 850,
+  "annotation_links_checked": 1166187,
+  "sensor_links_checked": 3818628,
+  "sample_links_checked": 34149,
+  "all_camera_channels_checked": true,
+  "source_tables": [
+    {
+      "table": "category",
+      "bytes": 4747,
+      "sha256": "30f64fb175e5bd7db99892d90f9034481bca491f26600c5c0d1a56106b198dfe"
+    },
+    {
+      "table": "visibility",
+      "bytes": 418,
+      "sha256": "87088bf2c78d070e1e215ff108f9c5c0958d124a14cce8f72bfb5d9651295749"
+    },
+    {
+      "table": "instance",
+      "bytes": 16012833,
+      "sha256": "8f8b19496ce45353874714ce23a9df7f47f48cb6203df2dd456ea0247d146461"
+    },
+    {
+      "table": "sensor",
+      "bytes": 1185,
+      "sha256": "4d5c96570e2d8b09b88ce4c605e40ee43c4909f97bea5741185f18f92eb491ae"
+    },
+    {
+      "table": "calibrated_sensor",
+      "bytes": 3268133,
+      "sha256": "67781a5dd7b2504b046ef89d6dcb267b12d1cc91af21f1ec5758624588e99865"
+    },
+    {
+      "table": "ego_pose",
+      "bytes": 645746265,
+      "sha256": "be12bd501f694b344628ba0680a37d6e1ec83e62b37f310c205c1dbe41cd09ff"
+    },
+    {
+      "table": "log",
+      "bytes": 11968,
+      "sha256": "774c8256554a5569f64660e5f450394ce7e3a82168edfab530edab81f9ae7edc"
+    },
+    {
+      "table": "scene",
+      "bytes": 285132,
+      "sha256": "bdc3211bfbfda652d5e9dab73c45c7132925ca84f869bf45e8e14edeafb1d20b"
+    },
+    {
+      "table": "sample",
+      "bytes": 7424233,
+      "sha256": "6035ac58b6e971622be2bb1be15b917e7cb4e05ae984d6b339c27c1699c4ad9d"
+    },
+    {
+      "table": "sample_data",
+      "bytes": 1345678379,
+      "sha256": "6dcad49f0b9bd7b1cef04e2a0ff2ac2879b46b938e8d48153f00693cebb4de21"
+    },
+    {
+      "table": "sample_annotation",
+      "bytes": 583417244,
+      "sha256": "1f4f3835cb86f4efe49ccad3ae6f5f6a2d068422696de564c5892b5b06bea2a9"
+    }
+  ]
+}

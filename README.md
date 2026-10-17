@@ -76,3 +76,13 @@ See [pre-audit deployment report](docs/pre_audit_deployment.md) for the complete
 acceptance checklist, live resource IDs, reproducibility proof, and known limits.
 Both isolated environments loaded 10 scenes / 404 samples / 18,538 annotations.
 No formal metadata audit or model deployment has been performed.
+
+## Full metadata audit checkpoint
+
+The official 850-scene trainval metadata-only audit is complete: 34,149 samples, 64,386 trajectories and 1,166,187 annotations. The reviewed recommendation is **CONDITIONAL GO**, with class/perturbation-specific restrictions; this is not a model-performance result.
+
+- [Research report and supported/unsupported claims](results/metadata_audit/README.md)
+- [Machine-readable gates](results/metadata_audit/gating_report.json)
+- [Methods, validity rules and reproduction commands](docs/metadata_audit_methods.md)
+
+Row-level Parquet and large trajectory tables remain on the persistent volume at `/workspace/results/metadata_audit/`. Only small derived summaries and figures are versioned here. No trainval sensor blobs, GPU deployment, BEVFusion or corruption/inference were needed.

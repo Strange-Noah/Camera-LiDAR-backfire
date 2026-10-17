@@ -1,0 +1,77 @@
+{
+  "canonical_distance": "distance_xy (ego origin, sample timestamp)",
+  "canonical_camera": "CAM_FRONT",
+  "statistics": {
+    "distance_xy": {
+      "count": 1166187,
+      "missing_count": 0,
+      "missing_rate": 0.0,
+      "p05": 7.467445212603979,
+      "p25": 17.64066637466035,
+      "p50": 29.328488713287513,
+      "p75": 44.49046352351592,
+      "p95": 73.87363561212211,
+      "IQR": 26.849797148855572,
+      "R90": 66.40619039951814,
+      "min": 0.9302216902160857,
+      "max": 312.6017264395037
+    },
+    "width": {
+      "count": 1166187,
+      "missing_count": 0,
+      "missing_rate": 0.0,
+      "p05": 0.4,
+      "p25": 0.725,
+      "p50": 1.891,
+      "p75": 2.12,
+      "p95": 3.114,
+      "IQR": 1.395,
+      "R90": 2.714,
+      "min": 0.094,
+      "max": 18.228
+    },
+    "length": {
+      "count": 1166187,
+      "missing_count": 0,
+      "missing_rate": 0.0,
+      "p05": 0.35,
+      "p25": 0.614,
+      "p50": 4.136,
+      "p75": 4.733,
+      "p95": 8.142,
+      "IQR": 4.119,
+      "R90": 7.792,
+      "min": 0.091,
+      "max": 34.422
+    },
+    "height": {
+      "count": 1166187,
+      "missing_count": 0,
+      "missing_rate": 0.0,
+      "p05": 0.852,
+      "p25": 1.353,
+      "p50": 1.679,
+      "p75": 1.884,
+      "p95": 3.454,
+      "IQR": 0.5309999999999999,
+      "R90": 2.6020000000000003,
+      "min": 0.123,
+      "max": 10.096
+    },
+    "projected_width_px": {
+      "count": 331904,
+      "missing_count": 834283,
+      "missing_rate": 0.7153938433544534,
+      "p05": 19.272808786015485,
+      "p25": 42.31059265764222,
+      "p50": 86.33703456219763,
+      "p75": 180.5786016731739,
+      "p95": 544.9688733842045,
+      "IQR": 138.26800901553167,
+      "R90": 525.696064598189,
+      "min": 4.881455017423718,
+      "max": 108504.07966519361
+    }
+  },
+  "projection": "Unclipped 3D-box envelope at camera ego pose; box remains at keyframe annotation time, no occlusion measurement or object-time compensation."
+}

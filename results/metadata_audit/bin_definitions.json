@@ -1,0 +1,161 @@
+{
+  "distance_xy": {
+    "edges": [
+      0.9302216902160857,
+      21.439953950832404,
+      38.58353894922061,
+      312.6017264395037
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "width": {
+    "edges": [
+      0.094,
+      1.638,
+      2.026,
+      18.228
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "relative_lateral_velocity": {
+    "edges": [
+      0.0,
+      0.854746140276515,
+      3.0978891366436687,
+      34.986531196938714
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "num_lidar_pts": {
+    "edges": [
+      0.0,
+      2.0,
+      10.0,
+      12356.0
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "abs_ego_yaw_rate": {
+    "edges": [
+      1.6690465519300663e-12,
+      0.0025806204813617786,
+      0.017928027068448257,
+      0.6662832973496653
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "projected_width_px": {
+    "edges": [
+      4.881455017423718,
+      54.08952899549448,
+      138.22387899498406,
+      108504.07966519361
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "object_speed": {
+    "edges": [
+      0.0,
+      0.01251913503436577,
+      0.17567577154288297,
+      48.8251772528693
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "ego_speed": {
+    "edges": [
+      0.0,
+      2.869417285051618,
+      6.573285545588722,
+      18.392230845409244
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "relative_speed": {
+    "edges": [
+      0.0,
+      3.0237969939623763,
+      6.715487970370142,
+      46.406073349490924
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "relative_radial_velocity": {
+    "edges": [
+      -35.12978911297009,
+      -1.6164986042052953,
+      1.327857169193604,
+      43.56856744588782
+    ],
+    "labels": [
+      "low",
+      "middle",
+      "high"
+    ],
+    "collapsed": false,
+    "boundary": "right-closed; first includes minimum"
+  },
+  "visibility": {
+    "labels": [
+      "v0-40",
+      "v40-60",
+      "v60-80",
+      "v80-100"
+    ],
+    "ordinal": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "source_row_counts": {
+    "scene": 850,
+    "sample": 34149,
+    "instance": 64386,
+    "sample_annotation": 1166187
+  },
+  "official_split_membership": {
+    "train": 700,
+    "val": 150
+  },
+  "sanity_diagnostics_not_filters": {
+    "static_class_object_speed_p95_m_s": 0.2152111597911104,
+    "object_speed_max_m_s": 48.8251772528693,
+    "ego_speed_max_m_s": 18.392230845409244,
+    "abs_ego_yaw_rate_max_rad_s": 0.6662832973496653
+  },
+  "metadata_only_feasibility": {
+    "constructible": "All requested canonical metadata variables and geometric box projections; see missingness flags",
+    "requires_sensor_data": [
+      "Actual per-camera occlusion or pixel/object visibility",
+      "Image blur/exposure/content quality",
+      "Recomputed LiDAR return geometry and sensor noise",
+      "Any detector/fusion performance"
+    ],
+    "sensor_blob_download_needed_for_this_audit": false
+  }
+}

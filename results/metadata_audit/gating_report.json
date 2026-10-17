@@ -1,0 +1,254 @@
+{
+  "scope": "v1.0-trainval",
+  "final_gating_eligible": true,
+  "n_scenes": 850,
+  "constructability": {
+    "status": "PASS",
+    "unconstructible_essential": [],
+    "evidence": "gates/constructability.csv"
+  },
+  "motion_diversity": {
+    "status": "VARIATION PRESENT",
+    "evidence": "motion/motion_summary.json"
+  },
+  "geometry_diversity": {
+    "status": "VARIATION PRESENT",
+    "evidence": "geometry/geometry_summary.json"
+  },
+  "visibility_diversity": {
+    "observed_tokens": 4,
+    "evidence": "visibility/visibility_summary.json"
+  },
+  "trajectory_independence": {
+    "status": "SUPPORTED",
+    "n_trajectories": 64386,
+    "evidence": "independence/regime_concentration.csv"
+  },
+  "scene_diversity": {
+    "n_scenes": 850,
+    "status": "DESIGN SUPPORT CHECKED; NOT PROVEN INDEPENDENCE"
+  },
+  "timing_diversity": {
+    "valid_pairs": 204894,
+    "evidence": "timing/timing_summary.json"
+  },
+  "joint_coverage": {
+    "status": "SUPPORTED",
+    "matrices": {
+      "distance_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "size_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "distance_x_visibility": {
+        "total_bins": 12,
+        "occupied_bins": 12,
+        "supported_bins": 12,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "distance_x_lidar_support": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "lateral_motion_x_ego_yaw_rate": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "projected_width_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      }
+    }
+  },
+  "identifiability": {
+    "status": "MANAGEABLE CONFOUNDING",
+    "matched_strata": {
+      "relative_lateral_velocity": 64,
+      "distance_xy": 70
+    },
+    "evidence": "identifiability/matched_support_summary.csv"
+  },
+  "mismatch_proxy_coverage": {
+    "status": "SUPPORTED",
+    "large_regime_has_minimum_scene_support": true,
+    "evidence": "mismatch_proxy/r_regime_coverage.csv"
+  },
+  "overall": "CONDITIONAL GO",
+  "hierarchical_logic": "Essential constructability -> physical variation -> independent support -> joint support -> overlap/confounding -> proxy regimes. No aggregate score. Thresholds are declared project choices; final recommendation remains research judgment.",
+  "limitations": [
+    "Observational metadata cannot establish fusion degradation, backfire, causal attribution or a normalization law.",
+    "Clusters are nested and dependent; counts are not an effective independent sample size.",
+    "Projection uses keyframe box position and camera-time ego pose; native object displacement is not compensated.",
+    "Metadata visibility is not per-camera occlusion; LiDAR support is a provided count, not recomputed raw sensor quality.",
+    "Velocity is a finite-difference estimate, not instantaneous ground truth; edges, gaps and annotation noise matter.",
+    "Physical-width proxy ignores rotational image motion and orientation-dependent image scale.",
+    "Pooled mismatch coverage does not transfer to every class/dt. In vehicle.car, 50 ms has no r>=1 observations; see class-conditioned coverage.",
+    "Physical size is semantically confounded: the middle-width bin is dominated by vehicle.car. Use within-class comparisons and observed overlapping support, not pooled size effects.",
+    "CAM_FRONT projected scale is valid only on its geometric-FOV subset; near-plane rejection and partial image boundaries create selection. Large unclipped box envelopes are not visible object widths.",
+    "Distance and LiDAR point support are dependent (descriptive pooled Spearman about -0.652); control observation quality when comparing geometric regimes.",
+    "Relative lateral motion is strongly influenced by ego translation and is not equivalent to moving-object speed. Ego rotation needs a separate axis or a full projection-based model.",
+    "Rare semantic classes do not share the broad pooled support. Emergency ambulance and some mobility classes cannot support the same broad claims under the configured design thresholds."
+  ],
+  "supported_claims": [
+    "All structurally essential requested variables are constructible on the full official 850-scene trainval split; object/relative velocity remains missing on 4,405 annotations rather than imputed.",
+    "Distance/lateral-motion comparisons have broad scene and trajectory support: all nine global tertile cells meet the declared project support rules.",
+    "Within-class coarse comparisons can hold distance/width approximately fixed while lateral motion varies, and conversely; overlap is evidence for designing comparisons, not a causal estimate.",
+    "A class-conditioned temporal perturbation study is feasible. For vehicle.car, 100\u2013200 ms supports all four specified physical-proxy bands; 50 ms is a lower-mismatch control axis.",
+    "Native sensor offsets are predominantly camera-dependent with additional scene variation and outliers; actual timestamps should define future perturbations."
+  ],
+  "unsupported_claims": [
+    "An existing fusion failure/backfire boundary, accuracy degradation curve, or validated cross-scene normalization law.",
+    "Uniform large-mismatch coverage at 50 ms for vehicle.car, or pooled coverage generalized to all semantic classes.",
+    "Causal separation of size, motion, distance and sensing quality from a correlation matrix or coarse quantile matching alone.",
+    "Treating 1,166,187 annotations as independent trials, or treating counts of trajectories/scenes as a formally estimated effective sample size.",
+    "Interpreting camera FOV projection as unoccluded camera visibility, or physical width W as an orientation-independent projected width.",
+    "Treating the 0.5 s first-order proxy or finite-difference velocity as exact instantaneous geometry."
+  ],
+  "recommended_next_step": "Proceed with a restricted experimental design, not automatic full sensor acquisition: start with well-supported classes such as vehicle.car and adult pedestrians; prespecify distance \u00d7 lateral-motion strata within class and width strata, balance visibility/LiDAR support, and separate high-yaw scenes. Use 50/100/200 ms initially, with 500 ms as a clearly approximate stress test. Reserve held-out scenes (prefer also log-level separation), cluster summaries by trajectory/scene, and check clipped versus unclipped camera scale before testing normalization. Download only the sensor subsets needed for that prespecified design, then obtain explicit authorization for GPU/BEVFusion deployment. Current evidence does not require switching to Waymo/AV2; supplement only if a targeted unsupported class/regime or external generalization claim is required.",
+  "thresholds": {
+    "schema_version": 1,
+    "canonical_distance": "distance_xy",
+    "canonical_camera": "CAM_FRONT",
+    "object_neighbor_max_gap_s": 1.5,
+    "ego_neighbor_max_gap_s": 1.5,
+    "projection_near_plane_m": 0.1,
+    "moving_speed_m_s": 0.5,
+    "yaw_regime_edges_rad_s": [
+      0.02,
+      0.1
+    ],
+    "quantiles": [
+      0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1
+    ],
+    "support": {
+      "supported_min_trajectories": 30,
+      "supported_min_scenes": 10,
+      "weak_min_trajectories": 5,
+      "weak_min_scenes": 3,
+      "supported_max_top1_scene_fraction": 0.3
+    },
+    "dependence_warning_abs_spearman": 0.7,
+    "class_dominance_warning_fraction": 0.8,
+    "matched_support_min_scenes_per_extreme": 3,
+    "matched_support_min_trajectories_per_extreme": 5,
+    "temporal_perturbations_s": [
+      0.05,
+      0.1,
+      0.2,
+      0.5
+    ],
+    "notes": "All support, motion, yaw and dependence thresholds are configurable project design diagnostics, not scientific laws. Quantile ties collapse rather than splitting identical values. Mini never yields a final suitability decision."
+  },
+  "automatic_recommendation_requires_research_review": true,
+  "research_review": {
+    "status": "CONDITIONAL GO",
+    "scope": "850 scenes only",
+    "automatic_output_preserved": "gating_report.automatic.json",
+    "critical_class_specific_proxy_evidence": [
+      {
+        "delta_t_s": "0.05",
+        "category": "vehicle.car",
+        "regime": "r>=1",
+        "N_ann": "0",
+        "N_traj": "0",
+        "N_scene": "0",
+        "top1_scene_fraction": "",
+        "top3_scene_fraction": "",
+        "top10_scene_fraction": "",
+        "top1_trajectory_fraction": "",
+        "top10_trajectory_fraction": "",
+        "status": "SPARSE"
+      },
+      {
+        "delta_t_s": "0.1",
+        "category": "vehicle.car",
+        "regime": "r>=1",
+        "N_ann": "567",
+        "N_traj": "378",
+        "N_scene": "117",
+        "top1_scene_fraction": "0.10934744268077601",
+        "top3_scene_fraction": "0.23809523809523808",
+        "top10_scene_fraction": "0.4444444444444444",
+        "top1_trajectory_fraction": "0.007054673721340388",
+        "top10_trajectory_fraction": "0.0564373897707231",
+        "status": "SUPPORTED"
+      },
+      {
+        "delta_t_s": "0.2",
+        "category": "vehicle.car",
+        "regime": "r>=1",
+        "N_ann": "9750",
+        "N_traj": "3366",
+        "N_scene": "559",
+        "top1_scene_fraction": "0.021538461538461538",
+        "top3_scene_fraction": "0.062461538461538464",
+        "top10_scene_fraction": "0.16",
+        "top1_trajectory_fraction": "0.001641025641025641",
+        "top10_trajectory_fraction": "0.012923076923076923",
+        "status": "SUPPORTED"
+      },
+      {
+        "delta_t_s": "0.5",
+        "category": "vehicle.car",
+        "regime": "r>=1",
+        "N_ann": "137782",
+        "N_traj": "18110",
+        "N_scene": "828",
+        "top1_scene_fraction": "0.011837540462469699",
+        "top3_scene_fraction": "0.03300866586346547",
+        "top10_scene_fraction": "0.08590381907651218",
+        "top1_trajectory_fraction": "0.0002903136839354923",
+        "top10_trajectory_fraction": "0.002496697681845234",
+        "status": "SUPPORTED"
+      }
+    ],
+    "class_dominance_flags": [
+      {
+        "variable": "width",
+        "regime": "middle",
+        "top_class": "vehicle.car",
+        "top_class_fraction": "0.8715538380557446",
+        "N_ann": "389455",
+        "N_traj": "21713",
+        "N_scene": "848",
+        "top1_scene_fraction": "0.007081691081126189",
+        "top3_scene_fraction": "0.017809503023455856",
+        "top10_scene_fraction": "0.05106880127357461",
+        "top1_trajectory_fraction": "0.00010527532064038207",
+        "top10_trajectory_fraction": "0.0010527532064038207",
+        "status": "SUPPORTED"
+      }
+    ],
+    "projection_scale_evidence": {
+      "valid_front_projection_count": 331904,
+      "partial_boundary_count": 50942,
+      "projected_width_over_image_width_count": 3295,
+      "note": "Unclipped 3D-box envelopes can exceed the image width; not all projected widths are suitable observed object scales. 1600 is the metadata image width used by these nuScenes camera records; this diagnostic is not a rejection rule."
+    },
+    "decision_basis": "Broad constructability/joint/independent support, but class/dt restrictions, sensing-quality dependence and geometric approximations prevent unrestricted claims.",
+    "requires_additional_trainval_sensor_blobs_for_this_audit": false,
+    "is_research_judgment_not_universal_statistical_rule": true
+  }
+}

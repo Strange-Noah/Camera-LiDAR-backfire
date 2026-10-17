@@ -8,6 +8,7 @@ if platform.system()!='Linux' or not base.is_mount():raise SystemExit('Requires 
 if (root/'v1.0-trainval').exists():raise SystemExit('Trainval metadata exists; refusing overwrite')
 archive=stage/'v1.0-trainval_meta.tgz';partial=archive.with_suffix('.tgz.part')
 started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+reused=archive.exists()
 if not archive.exists():
     subprocess.run(['curl','--fail','--location','--proto','=https','--proto-redir','=https','--retry','3','--continue-at','-','--max-filesize','1500000000','--output',str(partial),URL],check=True)
     partial.rename(archive)
@@ -27,6 +28,6 @@ with tarfile.open(archive,'r:gz') as tar:
 for m in selected:
     if m.isfile():assert (root/m.name).stat().st_size==m.size
 assert len(json.loads((root/'v1.0-trainval/scene.json').read_text()))==850
-manifest={'dataset':'nuScenes','version':'v1.0-trainval','component':'metadata only','source_page':'https://www.nuscenes.org/nuscenes#download','source_url':URL,'authorization':'Official Trainval Metadata URL supplied by user in this session','download_started_utc':started,'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'archive_name':archive.name,'archive_bytes':archive.stat().st_size,'sha256':h.hexdigest(),'official_checksum':None,'gzip_integrity':'PASS','member_sizes':'PASS','archive_retained':True,'extracted_files':sum(m.isfile() for m in selected),'extracted_bytes':sum(m.size for m in selected if m.isfile()),'maps_note':'Existing mini maps untouched; this audit needs no raster maps or sensor blobs','n_scenes':850}
+manifest={'dataset':'nuScenes','version':'v1.0-trainval','component':'metadata only','source_page':'https://www.nuscenes.org/nuscenes#download','source_url':URL,'authorization':'Official Trainval Metadata URL supplied by user in this session','download_started_utc':None if reused else started,'processing_started_utc':started,'archive_reused':reused,'archive_download_completed_utc':datetime.datetime.fromtimestamp(archive.stat().st_mtime,datetime.timezone.utc).isoformat(),'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'archive_name':archive.name,'archive_bytes':archive.stat().st_size,'sha256':h.hexdigest(),'official_checksum':None,'gzip_integrity':'PASS','member_sizes':'PASS','archive_retained':True,'extracted_files':sum(m.isfile() for m in selected),'extracted_bytes':sum(m.size for m in selected if m.isfile()),'maps_note':'Existing mini maps untouched; this audit needs no raster maps or sensor blobs','n_scenes':850}
 (root/'trainval_metadata_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 print(json.dumps(manifest,indent=2))

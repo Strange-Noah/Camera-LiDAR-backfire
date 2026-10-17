@@ -1,0 +1,9 @@
+{
+  "classification": "MANAGEABLE CONFOUNDING",
+  "strong_dependence_flags": [],
+  "matched_strata_with_same_scene_overlap": {
+    "relative_lateral_velocity": 64,
+    "distance_xy": 70
+  },
+  "interpretation": "Coarse within-class quantile strata are support diagnostics, not exact causal matching. No overlap under these bins does not prove no overlap under all possible designs. No Pearson or independence-based p-values are reported."
+}

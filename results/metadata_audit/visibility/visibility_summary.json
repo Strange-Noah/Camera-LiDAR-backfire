@@ -1,0 +1,65 @@
+{
+  "visibility_counts": {
+    "4": 544720,
+    "1": 335059,
+    "3": 155814,
+    "2": 130594
+  },
+  "lidar_support": {
+    "count": 1166187,
+    "missing_count": 0,
+    "missing_rate": 0.0,
+    "p05": 0.0,
+    "p25": 1.0,
+    "p50": 4.0,
+    "p75": 19.0,
+    "p95": 259.0,
+    "IQR": 18.0,
+    "R90": 259.0,
+    "min": 0,
+    "max": 12356
+  },
+  "geometric_projection_counts": {
+    "N_ann": {
+      "CAM_BACK": 1166187,
+      "CAM_BACK_LEFT": 1166187,
+      "CAM_BACK_RIGHT": 1166187,
+      "CAM_FRONT": 1166187,
+      "CAM_FRONT_LEFT": 1166187,
+      "CAM_FRONT_RIGHT": 1166187
+    },
+    "N_valid_projection": {
+      "CAM_BACK": 389420,
+      "CAM_BACK_LEFT": 162397,
+      "CAM_BACK_RIGHT": 147581,
+      "CAM_FRONT": 331904,
+      "CAM_FRONT_LEFT": 192730,
+      "CAM_FRONT_RIGHT": 182707
+    },
+    "N_geometric_fov": {
+      "CAM_BACK": 389420,
+      "CAM_BACK_LEFT": 162397,
+      "CAM_BACK_RIGHT": 147581,
+      "CAM_FRONT": 331904,
+      "CAM_FRONT_LEFT": 192730,
+      "CAM_FRONT_RIGHT": 182707
+    },
+    "N_partial": {
+      "CAM_BACK": 46321,
+      "CAM_BACK_LEFT": 45505,
+      "CAM_BACK_RIGHT": 47909,
+      "CAM_FRONT": 50942,
+      "CAM_FRONT_LEFT": 43268,
+      "CAM_FRONT_RIGHT": 49756
+    },
+    "N_near_plane_crossing": {
+      "CAM_BACK": 37834,
+      "CAM_BACK_LEFT": 57403,
+      "CAM_BACK_RIGHT": 56975,
+      "CAM_FRONT": 37795,
+      "CAM_FRONT_LEFT": 52038,
+      "CAM_FRONT_RIGHT": 51254
+    }
+  },
+  "limits": "Visibility is object-level categorical metadata, not per-camera occlusion. Image content, blur, real detection support and actual image-box widths need sensor blobs."
+}

@@ -1,0 +1,11 @@
+object_speed_gt_m_s,category,N_ann,N_traj,N_scene,top1_scene_fraction,top3_scene_fraction,top10_scene_fraction,top1_trajectory_fraction,top10_trajectory_fraction,status
+20,vehicle.bus.rigid,3,2,2,0.6666666666666666,1.0,1.0,0.6666666666666666,1.0,SPARSE
+20,vehicle.car,100,38,30,0.09,0.24,0.64,0.08,0.5,SUPPORTED
+20,vehicle.motorcycle,1,1,1,1.0,1.0,1.0,1.0,1.0,SPARSE
+20,vehicle.trailer,3,2,2,0.6666666666666666,1.0,1.0,0.6666666666666666,1.0,SPARSE
+20,vehicle.truck,7,5,5,0.2857142857142857,0.7142857142857143,1.0,0.2857142857142857,1.0,WEAK
+30,vehicle.car,5,4,4,0.4,0.8,1.0,0.4,1.0,SPARSE
+30,vehicle.trailer,1,1,1,1.0,1.0,1.0,1.0,1.0,SPARSE
+30,vehicle.truck,1,1,1,1.0,1.0,1.0,1.0,1.0,SPARSE
+40,vehicle.car,2,2,2,0.5,1.0,1.0,0.5,1.0,SPARSE
+40,vehicle.truck,1,1,1,1.0,1.0,1.0,1.0,1.0,SPARSE

@@ -1,0 +1,6 @@
+{
+  "valid_front_projection_count": 331904,
+  "partial_boundary_count": 50942,
+  "projected_width_over_image_width_count": 3295,
+  "note": "Unclipped 3D-box envelopes can exceed the image width; not all projected widths are suitable observed object scales. 1600 is the metadata image width used by these nuScenes camera records; this diagnostic is not a rejection rule."
+}

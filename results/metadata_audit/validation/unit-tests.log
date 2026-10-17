@@ -1,0 +1,15 @@
+test_corners_and_full_transform_devkit (test_audit_math.AuditMath.test_corners_and_full_transform_devkit) ... ok
+test_gap_and_singleton_no_imputation (test_audit_math.AuditMath.test_gap_and_singleton_no_imputation) ... ok
+test_projection_rejects_behind_and_crossing (test_audit_math.AuditMath.test_projection_rejects_behind_and_crossing) ... ok
+test_radial_lateral_rotation_invariance (test_audit_math.AuditMath.test_radial_lateral_rotation_invariance) ... ok
+test_unwrap_yaw (test_audit_math.AuditMath.test_unwrap_yaw) ... ok
+test_velocity_unequal_and_edges (test_audit_math.AuditMath.test_velocity_unequal_and_edges) ... ok
+test_empty_coverage (test_audit_support.Support.test_empty_coverage) ... ok
+test_missing_is_not_zero (test_audit_support.Support.test_missing_is_not_zero) ... ok
+test_repeated_frames_not_independent (test_audit_support.Support.test_repeated_frames_not_independent) ... ok
+test_ties_not_forced_into_three_bins (test_audit_support.Support.test_ties_not_forced_into_three_bins) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.007s
+
+OK

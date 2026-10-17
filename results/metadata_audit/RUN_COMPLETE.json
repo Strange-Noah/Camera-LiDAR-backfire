@@ -1,0 +1,44 @@
+{
+  "completed_utc": "2026-10-16T13:53:38.445278+00:00",
+  "version": "v1.0-trainval",
+  "git_commit": "3664a79df36c47bc475d2ba98df8634f69c5594f",
+  "git_dirty": false,
+  "overall": "CONDITIONAL GO",
+  "config": {
+    "schema_version": 1,
+    "canonical_distance": "distance_xy",
+    "canonical_camera": "CAM_FRONT",
+    "object_neighbor_max_gap_s": 1.5,
+    "ego_neighbor_max_gap_s": 1.5,
+    "projection_near_plane_m": 0.1,
+    "moving_speed_m_s": 0.5,
+    "yaw_regime_edges_rad_s": [
+      0.02,
+      0.1
+    ],
+    "quantiles": [
+      0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1
+    ],
+    "support": {
+      "supported_min_trajectories": 30,
+      "supported_min_scenes": 10,
+      "weak_min_trajectories": 5,
+      "weak_min_scenes": 3,
+      "supported_max_top1_scene_fraction": 0.3
+    },
+    "dependence_warning_abs_spearman": 0.7,
+    "class_dominance_warning_fraction": 0.8,
+    "matched_support_min_scenes_per_extreme": 3,
+    "matched_support_min_trajectories_per_extreme": 5,
+    "temporal_perturbations_s": [
+      0.05,
+      0.1,
+      0.2,
+      0.5
+    ],
+    "notes": "All support, motion, yaw and dependence thresholds are configurable project design diagnostics, not scientific laws. Quantile ties collapse rather than splitting identical values. Mini never yields a final suitability decision."
+  }
+}

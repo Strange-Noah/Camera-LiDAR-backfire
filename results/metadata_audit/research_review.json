@@ -1,0 +1,89 @@
+{
+  "status": "CONDITIONAL GO",
+  "scope": "850 scenes only",
+  "automatic_output_preserved": "gating_report.automatic.json",
+  "critical_class_specific_proxy_evidence": [
+    {
+      "delta_t_s": "0.05",
+      "category": "vehicle.car",
+      "regime": "r>=1",
+      "N_ann": "0",
+      "N_traj": "0",
+      "N_scene": "0",
+      "top1_scene_fraction": "",
+      "top3_scene_fraction": "",
+      "top10_scene_fraction": "",
+      "top1_trajectory_fraction": "",
+      "top10_trajectory_fraction": "",
+      "status": "SPARSE"
+    },
+    {
+      "delta_t_s": "0.1",
+      "category": "vehicle.car",
+      "regime": "r>=1",
+      "N_ann": "567",
+      "N_traj": "378",
+      "N_scene": "117",
+      "top1_scene_fraction": "0.10934744268077601",
+      "top3_scene_fraction": "0.23809523809523808",
+      "top10_scene_fraction": "0.4444444444444444",
+      "top1_trajectory_fraction": "0.007054673721340388",
+      "top10_trajectory_fraction": "0.0564373897707231",
+      "status": "SUPPORTED"
+    },
+    {
+      "delta_t_s": "0.2",
+      "category": "vehicle.car",
+      "regime": "r>=1",
+      "N_ann": "9750",
+      "N_traj": "3366",
+      "N_scene": "559",
+      "top1_scene_fraction": "0.021538461538461538",
+      "top3_scene_fraction": "0.062461538461538464",
+      "top10_scene_fraction": "0.16",
+      "top1_trajectory_fraction": "0.001641025641025641",
+      "top10_trajectory_fraction": "0.012923076923076923",
+      "status": "SUPPORTED"
+    },
+    {
+      "delta_t_s": "0.5",
+      "category": "vehicle.car",
+      "regime": "r>=1",
+      "N_ann": "137782",
+      "N_traj": "18110",
+      "N_scene": "828",
+      "top1_scene_fraction": "0.011837540462469699",
+      "top3_scene_fraction": "0.03300866586346547",
+      "top10_scene_fraction": "0.08590381907651218",
+      "top1_trajectory_fraction": "0.0002903136839354923",
+      "top10_trajectory_fraction": "0.002496697681845234",
+      "status": "SUPPORTED"
+    }
+  ],
+  "class_dominance_flags": [
+    {
+      "variable": "width",
+      "regime": "middle",
+      "top_class": "vehicle.car",
+      "top_class_fraction": "0.8715538380557446",
+      "N_ann": "389455",
+      "N_traj": "21713",
+      "N_scene": "848",
+      "top1_scene_fraction": "0.007081691081126189",
+      "top3_scene_fraction": "0.017809503023455856",
+      "top10_scene_fraction": "0.05106880127357461",
+      "top1_trajectory_fraction": "0.00010527532064038207",
+      "top10_trajectory_fraction": "0.0010527532064038207",
+      "status": "SUPPORTED"
+    }
+  ],
+  "projection_scale_evidence": {
+    "valid_front_projection_count": 331904,
+    "partial_boundary_count": 50942,
+    "projected_width_over_image_width_count": 3295,
+    "note": "Unclipped 3D-box envelopes can exceed the image width; not all projected widths are suitable observed object scales. 1600 is the metadata image width used by these nuScenes camera records; this diagnostic is not a rejection rule."
+  },
+  "decision_basis": "Broad constructability/joint/independent support, but class/dt restrictions, sensing-quality dependence and geometric approximations prevent unrestricted claims.",
+  "requires_additional_trainval_sensor_blobs_for_this_audit": false,
+  "is_research_judgment_not_universal_statistical_rule": true
+}

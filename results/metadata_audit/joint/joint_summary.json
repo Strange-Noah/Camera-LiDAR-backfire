@@ -1,0 +1,44 @@
+{
+  "distance_x_lateral_velocity": {
+    "total_bins": 9,
+    "occupied_bins": 9,
+    "supported_bins": 9,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  },
+  "size_x_lateral_velocity": {
+    "total_bins": 9,
+    "occupied_bins": 9,
+    "supported_bins": 9,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  },
+  "distance_x_visibility": {
+    "total_bins": 12,
+    "occupied_bins": 12,
+    "supported_bins": 12,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  },
+  "distance_x_lidar_support": {
+    "total_bins": 9,
+    "occupied_bins": 9,
+    "supported_bins": 9,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  },
+  "lateral_motion_x_ego_yaw_rate": {
+    "total_bins": 9,
+    "occupied_bins": 9,
+    "supported_bins": 9,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  },
+  "projected_width_x_lateral_velocity": {
+    "total_bins": 9,
+    "occupied_bins": 9,
+    "supported_bins": 9,
+    "weak_bins": 0,
+    "sparse_bins": 0
+  }
+}

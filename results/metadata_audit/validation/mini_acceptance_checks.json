@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "version": "v1.0-mini",
+  "n_annotations": 18538,
+  "n_trajectories": 911,
+  "n_scenes": 10,
+  "n_sensor_pairs": 2424,
+  "n_camera_projection_rows": 111228,
+  "n_required_named_outputs": 45,
+  "no_model_or_blob_requirement": true
+}

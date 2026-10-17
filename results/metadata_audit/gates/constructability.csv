@@ -1,0 +1,11 @@
+variable,population,valid_count,missing_count,valid_fraction,N_trajectories_valid,N_scenes_valid
+distance_xy,annotations,1166187,0,1.0,64386.0,850
+width,annotations,1166187,0,1.0,64386.0,850
+object_speed,annotations,1161782,4405,0.9962227327178231,62083.0,850
+ego_speed,annotations,1166187,0,1.0,64386.0,850
+relative_lateral_velocity,annotations,1161782,4405,0.9962227327178231,62083.0,850
+ego_yaw_rate,annotations,1166187,0,1.0,64386.0,850
+visibility,annotations,1166187,0,1.0,64386.0,850
+num_lidar_pts,annotations,1166187,0,1.0,64386.0,850
+projected_width_px,annotations,331904,834283,0.28460615664554656,32252.0,850
+camera_minus_lidar_dt_s,keyframe camera-lidar pairs,204894,0,1.0,,850

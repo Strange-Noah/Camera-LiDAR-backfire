@@ -1,0 +1,104 @@
+{
+  "offset_s": {
+    "count": 204894,
+    "missing_count": 0,
+    "missing_rate": 0.0,
+    "p05": -0.044169349999999996,
+    "p25": -0.035862,
+    "p50": -0.0249775,
+    "p75": -0.010749,
+    "p95": -0.000317,
+    "IQR": 0.025112999999999996,
+    "R90": 0.04385235,
+    "min": -0.117877,
+    "max": 0.049992
+  },
+  "absolute_offset_s": {
+    "count": 204894,
+    "missing_count": 0,
+    "missing_rate": 0.0,
+    "p05": 0.00052,
+    "p25": 0.01074925,
+    "p50": 0.024987000000000002,
+    "p75": 0.035862,
+    "p95": 0.04417,
+    "IQR": 0.025112749999999996,
+    "R90": 0.04365,
+    "min": 0.0,
+    "max": 0.117877
+  },
+  "camera_median_range_s": 0.042595999999999995,
+  "camera_scene_medians": {
+    "count": 5100,
+    "missing_count": 0,
+    "missing_rate": 0.0,
+    "p05": -0.044156,
+    "p25": -0.0357065,
+    "p50": -0.02476775,
+    "p75": -0.010638375,
+    "p95": -0.00034494999999999985,
+    "IQR": 0.025068125000000004,
+    "R90": 0.043811050000000004,
+    "min": -0.04644,
+    "max": 0.0006945
+  },
+  "within_camera_residual_s": {
+    "count": 204894,
+    "missing_count": 0,
+    "missing_rate": 0.0,
+    "p05": -0.002079000000000001,
+    "p25": -0.000879,
+    "p50": 0.0,
+    "p75": 0.0006910000000000006,
+    "p95": 0.001582,
+    "IQR": 0.0015700000000000006,
+    "R90": 0.003661000000000001,
+    "min": -0.099634,
+    "max": 0.050868000000000003
+  },
+  "sampling_outliers": [
+    {
+      "channel": "CAM_BACK",
+      "n_intervals": 194752,
+      "tukey_outlier_count": 1196,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "CAM_BACK_LEFT",
+      "n_intervals": 194155,
+      "tukey_outlier_count": 737,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "CAM_BACK_RIGHT",
+      "n_intervals": 197565,
+      "tukey_outlier_count": 458,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "CAM_FRONT",
+      "n_intervals": 197465,
+      "tukey_outlier_count": 419,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "CAM_FRONT_LEFT",
+      "n_intervals": 197573,
+      "tukey_outlier_count": 300,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "CAM_FRONT_RIGHT",
+      "n_intervals": 197180,
+      "tukey_outlier_count": 538,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    },
+    {
+      "channel": "LIDAR_TOP",
+      "n_intervals": 331036,
+      "tukey_outlier_count": 7062,
+      "method": "descriptive Tukey 1.5 IQR; not defective sensor classification"
+    }
+  ],
+  "pattern_assessment": "Compare per-camera and per-scene medians/ranges; nonzero within-camera spread rules out an exactly fixed offset. Lag-1..10 autocorrelation is diagnostic only: short scene windows do not establish periodicity. No artificial corruption has been applied."
+}

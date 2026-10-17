@@ -81,3 +81,14 @@ All requested canonical variables, provided LiDAR/radar counts, categorical visi
 - [Official nuScenes schema](https://github.com/nutonomy/nuscenes-devkit/blob/master/docs/schema_nuscenes.md): annotation, calibrated_sensor, ego_pose, sample_data and instance fields.
 - [Official devkit NuScenes implementation](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/nuscenes.py): box_velocity, get_sample_data and keyframe box convention. Numerical comparisons use installed pinned nuscenes-devkit 1.2.0, not an unpinned remote runtime.
 - [Official devkit geometry](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/utils/geometry_utils.py): projection and visibility reference.
+
+## Completing and reviewing the full result
+
+```bash
+/opt/venvs/nuscenes-metadata/bin/python scripts/check_audit_outputs.py /workspace/results/metadata_audit
+/opt/venvs/nuscenes-metadata/bin/python scripts/supplement_audit.py /workspace/results/metadata_audit
+/opt/venvs/nuscenes-metadata/bin/python scripts/review_audit_claims.py /workspace/results/metadata_audit
+/opt/venvs/nuscenes-metadata/bin/python scripts/finalize_audit_report.py /workspace/results/metadata_audit
+```
+
+The finalizer records the evidence-based review for the audited official trainval version and declared design configuration; it preserves the original automatic report. It refuses a changed configuration rather than silently reusing this research judgment. New design thresholds or datasets require a fresh review. The reviewed conclusion is CONDITIONAL GO, with class-specific perturbation support and sensing/geometry limitations spelled out in the report.

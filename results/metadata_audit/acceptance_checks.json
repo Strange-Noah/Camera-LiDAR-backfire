@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "version": "v1.0-trainval",
+  "n_annotations": 1166187,
+  "n_trajectories": 64386,
+  "n_scenes": 850,
+  "n_sensor_pairs": 204894,
+  "n_camera_projection_rows": 6997122,
+  "n_required_named_outputs": 45,
+  "no_model_or_blob_requirement": true
+}

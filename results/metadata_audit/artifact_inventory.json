@@ -1,0 +1,840 @@
+{
+  "persistent_root": "/workspace/results/metadata_audit",
+  "generated_utc": "2026-10-17T07:34:52.481255+00:00",
+  "files": [
+    {
+      "relative_path": "README.automatic.md",
+      "bytes": 6927,
+      "sha256": "b3e8e7bb9b3be3b7066b63712235e45eb723da49913141bc5f74605df478de6d",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "README.md",
+      "bytes": 13795,
+      "sha256": "d2375e3086b73810b8b0b419387f1a4c996fb349bc2decc0878829eaa31dea7e",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "RUN_COMPLETE.json",
+      "bytes": 1345,
+      "sha256": "0fa400aaca2747eaaf041cc9b118a333b061654d7c96d25734436d5e4d553cc3",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "acceptance_checks.json",
+      "bytes": 268,
+      "sha256": "7bfa89fb8b6bb8d1105c7a723a719790a55558eac9ad9194b4f3f2fea272655f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "audit_config.json",
+      "bytes": 1059,
+      "sha256": "e2d0df8b84ff58f7572005c33564fca94a26f465c5a862724395276ce4527bb6",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "bin_definitions.json",
+      "bytes": 2933,
+      "sha256": "28f737b59ecb9d04c92aa0609a935ab47fe8db82919a554dd25c801c079a2a42",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "gates/constructability.csv",
+      "bytes": 689,
+      "sha256": "d66f52304fb8272f4a10c8d0fdd4aa1d7f5a8c81745df90cebc035b28376450c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "gates/dynamic_range.csv",
+      "bytes": 2507,
+      "sha256": "9f0b022986be2b51b4bcdf9962b90b1e3c83f748515661f1721fbe61ad852370",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "gates/support_threshold_sensitivity.csv",
+      "bytes": 10893,
+      "sha256": "ef53791da63585764f87b1262958402c39cc3d444bda718b220c5ff9ae1bea7f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "gating_report.automatic.json",
+      "bytes": 5421,
+      "sha256": "12c1a6c45233de26eb758932b3fbe13cdf5ebdc98de449b49ca694e24630297c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "gating_report.json",
+      "bytes": 11806,
+      "sha256": "09a42f140301c9e1e5a708640acabc11058defeb89adaa49aba1f0e73fb036b8",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/distance.png",
+      "bytes": 38503,
+      "sha256": "78fedbf6f3f2ae2b07a9a32d58dc365d3e0d7eb609d2397c71244ef9be6389e7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/distance_by_class.png",
+      "bytes": 155310,
+      "sha256": "004614b392f840841df4437309a7a8cde9045e4dff21587b59fa84dc5db5c816",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/distance_by_scene.csv",
+      "bytes": 187579,
+      "sha256": "bc019919b30a5736f41c5f6bc4851203befb6eac1f5df4c2e2beaf82066d32cf",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/geometry_by_class.csv",
+      "bytes": 12890,
+      "sha256": "2840c12ba5b27b30002cd57933908acf899d8217e388737e583520ab150db9fe",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/geometry_coverage.csv",
+      "bytes": 1518,
+      "sha256": "9c6a7cb59edb245d203e3c4d2f1067e48abde3da9d7c48e989300db82d2e9820",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/geometry_summary.json",
+      "bytes": 1966,
+      "sha256": "bffc54ae236dfc0c1e1bfdf43ddf32e5272c830338415df0b9f374a1ffa34fd7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/orientation_coverage.csv",
+      "bytes": 577,
+      "sha256": "3370670e45bb9a0638cb4d9327b491433df9d786ffb65be5df742a2c490582ea",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/physical_size_by_class.png",
+      "bytes": 462806,
+      "sha256": "109e68375410f2c236a4d13b4cab206e9728308fa61b7ab71974431cc3265f6e",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/projected_width.png",
+      "bytes": 40928,
+      "sha256": "5ef98cc98957aa0c1df1d0e42b102ad2eb56d15ce7f89141ea17168f335f17ff",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/projection_scale_review.json",
+      "bytes": 373,
+      "sha256": "bac605820de8d8f68ede9e3d3f9d620002ba7857cf51e14c53e5e97cf4c634c7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/relative_orientation.png",
+      "bytes": 40954,
+      "sha256": "ee54a8dfd144b259c53365b90f3915230c4cd30b66cd972419dad3512b534863",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "geometry/trajectory_distance_range.csv",
+      "bytes": 6836812,
+      "sha256": "6cbfb4275ab53ebca046931a8749a9c589ec88d85caa917d845566423bb8ec45",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "identifiability/class_conditioned_statistics.csv",
+      "bytes": 17474,
+      "sha256": "0a50007a1bd911d643e06259eedfb286bb8e150f03be26513fc09d2a4bc99295",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/class_dominance.csv",
+      "bytes": 3542,
+      "sha256": "7506224709962147ce76a8d125d22432a05069523e80bfd642153336db1e5a3a",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/identifiability_summary.json",
+      "bytes": 441,
+      "sha256": "3b6de0b433d3212ab665b486d6793d803457bc1856e40ba7dc4adeafe5267969",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/matched_support_summary.csv",
+      "bytes": 76726,
+      "sha256": "fd5d5d01f5428d05970e4f9a707f1bd7c70cab1b794160348f8ee22db0c260b2",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/scene_concentration.csv",
+      "bytes": 5382,
+      "sha256": "5e5078744b8f5cdb9f748ad70e1942a9ac65bcadcec437187359da90c7f8bfc7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/spearman_matrix.csv",
+      "bytes": 3089,
+      "sha256": "221b141a05ef9d6c25a6cea60a1a0e8bf7145d58bce303174fc8c4e3329a1d6c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/spearman_scene_medians.csv",
+      "bytes": 3053,
+      "sha256": "fe0134d4e0e77eb10f9d22652d5da5dd73a57b519c62b817fae5d26987845dc1",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/spearman_trajectory_medians.csv",
+      "bytes": 3097,
+      "sha256": "45a157c07e9a0d6e4e5643c2163086063a13a3e149a2db49e999a08a35022689",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "identifiability/spearman_within_scene.csv",
+      "bytes": 469913,
+      "sha256": "3b697b750bbe06f3ca61050599e1b719b8714464814c290ef7ebbdb2cbeb8215",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/annotations_per_trajectory.png",
+      "bytes": 37436,
+      "sha256": "bad8eee4074d3bf55b1493fce0ebb995b87a74ff9c0a8e1f748b17c4070844b7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/independence_summary.json",
+      "bytes": 1136,
+      "sha256": "6eb8bf7083b406cfada581028e7ec5a46ac279f7a82044999c09b3791b4e725c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/instances_per_scene.png",
+      "bytes": 29559,
+      "sha256": "0baef2609e8550dff7c4b53899071fabac8bc04b5b34821fe6d3ced2b349066e",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/observations_per_scene.png",
+      "bytes": 29790,
+      "sha256": "1bf3e0fe6081847917638fe04742bca6e4ec6cfff3f6b491f2533d8b20698738",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/regime_concentration.csv",
+      "bytes": 5382,
+      "sha256": "5e5078744b8f5cdb9f748ad70e1942a9ac65bcadcec437187359da90c7f8bfc7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/scene_regime_coverage.csv",
+      "bytes": 3248286,
+      "sha256": "41c715a16ea44dfcbf01fcf061dfbad3b1c3f46418e1c3d32774cb65909dac4f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/scene_support.csv",
+      "bytes": 523604,
+      "sha256": "b2bcdb6bb6bfc356f17f41b3877c8de8a7915bf24e535e1a8462e5ed41aa0ce9",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/trajectory_by_class.csv",
+      "bytes": 7817,
+      "sha256": "156462b24b595a35f92d17db65fdfa2950994b2ba967c288003cc16ed24d22f9",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/trajectory_duration.png",
+      "bytes": 37333,
+      "sha256": "01b24c91c6e3bb874c28e532e3ac9a8c5645927d1cf7bb0ae8bbf3b582b4217f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/trajectory_length.png",
+      "bytes": 37436,
+      "sha256": "bad8eee4074d3bf55b1493fce0ebb995b87a74ff9c0a8e1f748b17c4070844b7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "independence/trajectory_support.csv",
+      "bytes": 16816387,
+      "sha256": "6e7b9ce7230390bfc7190832885f3203134b83b59befbdf6730199a65f7d173e",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "joint/all_joint_coverage.csv",
+      "bytes": 10188,
+      "sha256": "261c12903fbdd180909d27660790e0eeb94c963df7936807513d56c01f19d39a",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/class_x_motion_x_distance.csv",
+      "bytes": 29042,
+      "sha256": "e80e8ccd6fef00869c74df8636a2959afdb6f9ebd4a22e7b710aa01ebe161253",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lateral_velocity.png",
+      "bytes": 80063,
+      "sha256": "28bc12e69e778455d29fb0a2a8bfb4b11fb5247ad8629c080e378bd0f9486ab8",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lateral_velocity_annotations.csv",
+      "bytes": 106,
+      "sha256": "428550a8e496e2bada2012d3f6de9fa582824f42e987312847a0731abc508b73",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lateral_velocity_coverage.csv",
+      "bytes": 1461,
+      "sha256": "8fb4467c7bbbfe3a17ebd6bef58ffb465d8f8663710636c4ae9ed5438fc15230",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lateral_velocity_scenes.csv",
+      "bytes": 80,
+      "sha256": "3fd5508d1a6c8569d8f9ed1249786299a422d6fd049c79427ed6720478f590dd",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lateral_velocity_trajectories.csv",
+      "bytes": 97,
+      "sha256": "6cf2a8b54431711c6515575ef29d816a04e3cb58a5a1fba4695776ebbc3bf5fa",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lidar_support.png",
+      "bytes": 77444,
+      "sha256": "54b30184e14f7da8f0d6248d68d943e2a91ec14b7857640ee634bb5573fe9420",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lidar_support_annotations.csv",
+      "bytes": 102,
+      "sha256": "e1707e93aceffcddfdc3a11b78a1d53f92917e1c3f162ed9ff5b7c563d6dd893",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lidar_support_coverage.csv",
+      "bytes": 1442,
+      "sha256": "cd9278827a65fde311589eac42926fc571488d45d1639a6a7deb0933265548a1",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lidar_support_scenes.csv",
+      "bytes": 80,
+      "sha256": "8e8546d84592e38926c93f6c871b4ddb867f67859913a903c802e3c854ed637d",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_lidar_support_trajectories.csv",
+      "bytes": 97,
+      "sha256": "bbf0d04385730d910f49a0dedf86df63d97f0fe0d10ad86e40c34592b35293fb",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_visibility.png",
+      "bytes": 91560,
+      "sha256": "f58b1e9182c969c05dd3381e59b737973bfd858078cde80e88bcee2365955cd1",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_visibility_annotations.csv",
+      "bytes": 133,
+      "sha256": "ad647746cc462008c80dc4afbbc109d67d0a0ef642ea21fed041602e3d36efab",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_visibility_coverage.csv",
+      "bytes": 1887,
+      "sha256": "fd89a2f2d519ae006de281703696ebe70af8e7e0437e18252833a04c048189f2",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_visibility_scenes.csv",
+      "bytes": 104,
+      "sha256": "be01b8dd803b96dd857b1883c616d759120b1fc2aa8b4e716c7b6d76d2b953f9",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/distance_x_visibility_trajectories.csv",
+      "bytes": 128,
+      "sha256": "75016e53fc008b7509589836ccd0eafab42cb8906cc9cb7e65e740d8cccf90b5",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/joint_summary.json",
+      "bytes": 908,
+      "sha256": "9d9cf98203de6af3ca10c48568a48fc86e000845c8cb93af3d7223d3d6f9df37",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/lateral_motion_x_ego_yaw_rate.png",
+      "bytes": 80777,
+      "sha256": "b8bd9eace436b13c5846859f6b2f85018cebcc144d941f46e732f10161b2c97f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/lateral_motion_x_ego_yaw_rate_annotations.csv",
+      "bytes": 117,
+      "sha256": "23bd9bca4512e019f04ba39f993c46a4aa56cee0c9301c65b3446295289bc092",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/lateral_motion_x_ego_yaw_rate_coverage.csv",
+      "bytes": 1463,
+      "sha256": "0c9fbe087e29ee6f2b48785c8902d89d3ce49846a5a7bec6b9de7983f9111f4c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/lateral_motion_x_ego_yaw_rate_scenes.csv",
+      "bytes": 94,
+      "sha256": "7082eab282c4d6a4fcecb87e3d83b1d6cece684d629572458b0d2601bc20274f",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/lateral_motion_x_ego_yaw_rate_trajectories.csv",
+      "bytes": 112,
+      "sha256": "f5d5907baffe82b41f12baeb2fd39973cb826f743d526ce19b93c9d2d15a3e38",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/projected_width_x_lateral_velocity.png",
+      "bytes": 79303,
+      "sha256": "2ee8ca5d84d1f058958ba7e3306bd2522b2b83bf7fed04f5e1a0f2eb94520792",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/projected_width_x_lateral_velocity_annotations.csv",
+      "bytes": 104,
+      "sha256": "3956a21db92ce65a78d21d64e3fc565b77322674bef113a4cd64d789198b1a0b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/projected_width_x_lateral_velocity_coverage.csv",
+      "bytes": 1443,
+      "sha256": "852dab22d06826e37336733bb7d05c0ef71aec28ce248d1950573008f6414636",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/projected_width_x_lateral_velocity_scenes.csv",
+      "bytes": 87,
+      "sha256": "3b2d6f043631310c846478ad3f2db73b849c80de55c9bcee49dbd48c98f165b5",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/projected_width_x_lateral_velocity_trajectories.csv",
+      "bytes": 100,
+      "sha256": "167d2ca0e99492ad4b0aca86563436cd62c7ab09a374f6328344045cf792de60",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/size_x_lateral_velocity.png",
+      "bytes": 77842,
+      "sha256": "816e5d39580c9e24a689754f57593aad84a25e6ce130a75642a3b17f806b3795",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/size_x_lateral_velocity_annotations.csv",
+      "bytes": 101,
+      "sha256": "290f3370536f1f58dfbe456e725a5a8870444f005cd5a30134db49cf6db2df5b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/size_x_lateral_velocity_coverage.csv",
+      "bytes": 1458,
+      "sha256": "d582a982493888e16dc3e7c72e738a64dc6fc86a3780b190853472f9874e67b6",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/size_x_lateral_velocity_scenes.csv",
+      "bytes": 74,
+      "sha256": "53b30ccf474e5c47cef1492cbe7293560a3cec85777f13acbb76e64ec41892ae",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "joint/size_x_lateral_velocity_trajectories.csv",
+      "bytes": 90,
+      "sha256": "73edaedeff575c08b02d54c93a4d9ff13b23709e2de0530d120e22cfbbbdb159",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/mismatch_proxy.parquet",
+      "bytes": 163638015,
+      "sha256": "ef3d99aed73e61333475267ef1940f2df4b2601570ca8180fee395d9d8d5e1c7",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "mismatch_proxy/mismatch_summary.json",
+      "bytes": 7132,
+      "sha256": "2c0620da27cde6e5334a8a44fbde5f81912ce0ce56ecc46c4cb98d9890cd6b74",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_100ms.png",
+      "bytes": 43479,
+      "sha256": "479f8357ef6378e7f10b71de31bf38aa97c6e1748f21bdb2df97fbe7f802907d",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_200ms.png",
+      "bytes": 43760,
+      "sha256": "d52aa865982bd3351bc2ae18cc93ab4e6ed0f08bf4c2bd6c00251c7961334ebf",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_500ms.png",
+      "bytes": 43368,
+      "sha256": "4de558203c1117583939a9bf1d92f1e585d3c212c40a7e26f9fb5a4e4b7d9051",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_50ms.png",
+      "bytes": 43819,
+      "sha256": "1de6d9b7de6072b38e53460b8696bb069e2803afffbe4f563b326c948bd0c2ee",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_regime_by_class.csv",
+      "bytes": 51704,
+      "sha256": "b0b5f0ddaa53069b0ca194fdb928b0ef9fdda9518843d438c92ec27327665907",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "mismatch_proxy/r_regime_coverage.csv",
+      "bytes": 2459,
+      "sha256": "18c6146be1d01d9aa393a90e5ac638f3db8b20131cbc8e2b7584481b4d538949",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/ego_by_scene.csv",
+      "bytes": 396852,
+      "sha256": "ca0e536889ad9566cc7c38ba4c6e9e2847c550fae3c917ef1116bc1733a0772d",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/ego_speed.png",
+      "bytes": 37596,
+      "sha256": "05717d2af4837787f6e308532003940180c952fa370517717013bac6ce9797ae",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/ego_yaw_rate.png",
+      "bytes": 39364,
+      "sha256": "6ef385c34fca7d858b511089edc7f202b03cda4c0b1c9613d64a1e0302465674",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/high_speed_diagnostics.csv",
+      "bytes": 790,
+      "sha256": "98d61d8f6579f7517dbfd11ce3e7449428ccc38afa80ac1d60ef475350a317eb",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/high_speed_examples.csv",
+      "bytes": 7189,
+      "sha256": "eb4ec1d6815ce92ea387fecbf4308d056ef6a1ae760be50d78e02dad62ab8569",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/lateral_velocity.png",
+      "bytes": 40806,
+      "sha256": "0304a786b18ae3511453138d76092bc0846834af3ef4f77694d8941a555ae2c4",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/motion_by_class.csv",
+      "bytes": 31624,
+      "sha256": "a5f04ac42edf48b537a085bce2386a1f6f6326f0b63a791fb8cfa67cf3baf3dc",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/motion_by_class.png",
+      "bytes": 311730,
+      "sha256": "54d3293597c592d164226d4ad9f7d9f5230554fad8c9c7edac683ec587cf0b86",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/motion_by_trajectory.csv",
+      "bytes": 27000792,
+      "sha256": "cb8462dad1245c12ab2e9dde535f6bcea19601f32cf03b4539cd9d31f50a46c7",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "motion/motion_coverage.csv",
+      "bytes": 2962,
+      "sha256": "951b422564594948ff4291d3681b26aeadc6d1978a6884d37aa180cdfe8dab46",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/motion_summary.json",
+      "bytes": 3716,
+      "sha256": "b5377d2693a014773eb8b5ad765c8ec693aafb51d27b168a75f7625d5a9b5791",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/object_speed.png",
+      "bytes": 36110,
+      "sha256": "2f89dc1bd1f3159398c6d6e204aecda61486681de0942f9924cd5a13ec13f98a",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/physical_yaw_regimes.csv",
+      "bytes": 624,
+      "sha256": "1ddb775c128166c4713a3a958d2cb1bd8d57296fc35d989c0f582b1d16a75a67",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/radial_velocity.png",
+      "bytes": 39716,
+      "sha256": "200e052ce1927092af217d706a5ec459f8027689f982adf4bc686a65b988f1c9",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "motion/relative_speed.png",
+      "bytes": 40253,
+      "sha256": "e2b82080af19d3833f1a08723e606aac196cfcddf77c028ef886af6ffd5ae557",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "research_review.json",
+      "bytes": 3229,
+      "sha256": "b6a52dbf79c94cc0ae6217c07ec558bcf7ba07491382159d467f85b270a3aa5b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "source_and_scope_validation.json",
+      "bytes": 926,
+      "sha256": "8655cf5edd88c3d071544f9f69deeb95b3978a7f96fb8fa8c92556caef2bc06b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "tables/camera_projections.parquet",
+      "bytes": 62973936,
+      "sha256": "8a36f82ba393eb1a7daa9b8310f58f32e61c3c19f461c60007aa35243b2a3ed9",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/construction_validation.json",
+      "bytes": 1844,
+      "sha256": "2a9353e9c6537a4f5b87874bb49cf33db59168a9a6b2f3fa840be6a8c4badc71",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/ego_samples.parquet",
+      "bytes": 6219368,
+      "sha256": "defe47ed9364bfc9eb31e782f8b0de8b2f759899722c6ee3db275315c67279b2",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/objects.parquet",
+      "bytes": 242457192,
+      "sha256": "d3df03588bf89d349d95ba800be4ec4000069ce41eb507d8f2e9a36f5719f410",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/scenes.parquet",
+      "bytes": 5377712,
+      "sha256": "4db7646fe84cde5b552b8e47498afc3dd111e9a6f8c8fdc15f700408393f3ea5",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/sensor_intervals.parquet",
+      "bytes": 45876936,
+      "sha256": "94531d9b5616cef55bb98a6659e170d7424d50769b4b86bf855142392f16b332",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/sensor_timing.parquet",
+      "bytes": 18049883,
+      "sha256": "b95c89b946a355fe2aea6caced59534c48c9dbb8da9896707c38d4dad79ce2bb",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "tables/trajectories.parquet",
+      "bytes": 10062128,
+      "sha256": "545ba780b5902313fa671d03381cc93eba9f934e73b7161f6ff1b77c1617c41a",
+      "storage": "persistent volume only"
+    },
+    {
+      "relative_path": "timing/absolute_offset.png",
+      "bytes": 37700,
+      "sha256": "918ee0fc8236c79f90ea1405a2f26fe5943122aa27695253f0eb67beb1a75eba",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/camera_sampling_interval.png",
+      "bytes": 44466,
+      "sha256": "8bea42431b1ec0d46581447cd68e5957159bfdf6819ca8eca261dde62c24de3b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/interval_outliers.csv",
+      "bytes": 656,
+      "sha256": "eded2d99d68c02f627ba7816589493fba9eb76b22d5f66b4d88338a3fa72e79a",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/lidar_sampling_interval.png",
+      "bytes": 40403,
+      "sha256": "c477c2789cb599bb2d68d897a6caaf2fdb0e34ddb0519affac91b6256d13aca2",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/native_camera_lidar_offset.png",
+      "bytes": 38382,
+      "sha256": "1d5196b3b944b4d7e11b7ed354be625f4a22b88420a9406c9045dfc849900f4e",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/offset_autocorrelation.csv",
+      "bytes": 3636686,
+      "sha256": "34de87af813e2604e53294df3e9a582640656510d585e3d7643850ca8f5547e7",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/offset_by_camera.csv",
+      "bytes": 1985,
+      "sha256": "06e537e6f0437cb545115b7afe36ef863911cdcc8fa1aa2b148160187127c3bb",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/offset_by_camera.png",
+      "bytes": 49005,
+      "sha256": "a907d444fb84e1960a8d7357621610fb95fb7393eac950ef0ec7488017c949e2",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/offset_by_scene.csv",
+      "bytes": 2028075,
+      "sha256": "9159b4ae1b958ed66b881bacfa253beaf98110a577e1a139bf81a1741ed2169b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/sampling_intervals.csv",
+      "bytes": 884,
+      "sha256": "d41104e8de84af1daa45b8412e88d53bdcc0217199d413cd8f8701497116069c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "timing/timing_summary.json",
+      "bytes": 3002,
+      "sha256": "2a1217f4a89b9eeee3275a49a678e5aacf0c5f557d556f3050b9f7b97a7e9858",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/construction_validation.json",
+      "bytes": 1844,
+      "sha256": "2a9353e9c6537a4f5b87874bb49cf33db59168a9a6b2f3fa840be6a8c4badc71",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/mini_acceptance_checks.json",
+      "bytes": 256,
+      "sha256": "8b566026688cf7d3c9e3e919f89902b4c44f0dfbf84838869923ae1af235f201",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/mini_numerical_validation.json",
+      "bytes": 642,
+      "sha256": "4ce8066129c1f514c904f75f12c354aca0b3e4db1bf153e7f088600241233288",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/pip-freeze.txt",
+      "bytes": 576,
+      "sha256": "928f5956a8d57dc410df18f2c880b5b673515d307389931a10fd40e59c065e5c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/python-version.txt",
+      "bytes": 14,
+      "sha256": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/trainval_metadata_manifest.json",
+      "bytes": 1185,
+      "sha256": "7943ed1be2e520c9363d2ac59e1bb4d4820d6bc564726ccefd158419759440c0",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "validation/unit-tests.log",
+      "bytes": 1107,
+      "sha256": "613747141ddfbf01fff5f3e437d70bcd25e245e978cd54082c0b3131cc14b896",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/camera_observability.csv",
+      "bytes": 327953,
+      "sha256": "a7a062bb563856277befe364b56d39cf73bca64ed8dbbdb62bbc871007378c95",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/camera_observability_independent_support.csv",
+      "bytes": 1109,
+      "sha256": "b760823954ee333cb17795ab952facb81fa8a6fa526754dae3e9b5f85bb70db6",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/lidar_points.png",
+      "bytes": 33174,
+      "sha256": "42ee7adbe2ed09f165881db67ee1ed8033c82332bdbd08670a21bc631c4d39e5",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/lidar_points_by_class_distance.csv",
+      "bytes": 12860,
+      "sha256": "79345ad732a6eca196807bb7c92f38da70b16e494337231a40b3245292f9e343",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/lidar_points_vs_distance.png",
+      "bytes": 50705,
+      "sha256": "27944f83270230f106a3df2a331f964999015ac47a4210ea36f5f8acdab9e8db",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_by_class_counts.csv",
+      "bytes": 12766,
+      "sha256": "f40ba2c3f079f98b6891db920c15510cbdf4bdf4590b985e5fd28536a8bc9e5b",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_by_distance.png",
+      "bytes": 25678,
+      "sha256": "6c44c58aba9d040da7909065f994da27b3fc0c1897ddd2f9fae5ab51567368aa",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_by_distance_counts.csv",
+      "bytes": 1837,
+      "sha256": "82ea306aa1386273d6410e020c518e5e0da451431899c8efacb13c8e4b71743c",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_by_scene.csv",
+      "bytes": 77153,
+      "sha256": "221b8f78d7ed1efceec9af78dee953b05d8eb8a1f942dc77450f5f71c6861872",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_by_scene_counts.csv",
+      "bytes": 334136,
+      "sha256": "b0daff85e5e9c2a01182e7ea2eb6b5740cfb273cf197878015ee5853d6f16441",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_distribution.png",
+      "bytes": 40064,
+      "sha256": "093663e2faa28396102ea68b52ce9f2b70c032b9d79b11c88df0fe2662b25719",
+      "storage": "persistent volume and GitHub summary copy"
+    },
+    {
+      "relative_path": "visibility/visibility_summary.json",
+      "bytes": 1613,
+      "sha256": "69be167c2204dc840a919e4087636f83730645e751289eb2dfe6ca896a1350ee",
+      "storage": "persistent volume and GitHub summary copy"
+    }
+  ]
+}

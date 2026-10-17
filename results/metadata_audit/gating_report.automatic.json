@@ -1,0 +1,153 @@
+{
+  "scope": "v1.0-trainval",
+  "final_gating_eligible": true,
+  "n_scenes": 850,
+  "constructability": {
+    "status": "PASS",
+    "unconstructible_essential": [],
+    "evidence": "gates/constructability.csv"
+  },
+  "motion_diversity": {
+    "status": "VARIATION PRESENT",
+    "evidence": "motion/motion_summary.json"
+  },
+  "geometry_diversity": {
+    "status": "VARIATION PRESENT",
+    "evidence": "geometry/geometry_summary.json"
+  },
+  "visibility_diversity": {
+    "observed_tokens": 4,
+    "evidence": "visibility/visibility_summary.json"
+  },
+  "trajectory_independence": {
+    "status": "SUPPORTED",
+    "n_trajectories": 64386,
+    "evidence": "independence/regime_concentration.csv"
+  },
+  "scene_diversity": {
+    "n_scenes": 850,
+    "status": "DESIGN SUPPORT CHECKED; NOT PROVEN INDEPENDENCE"
+  },
+  "timing_diversity": {
+    "valid_pairs": 204894,
+    "evidence": "timing/timing_summary.json"
+  },
+  "joint_coverage": {
+    "status": "SUPPORTED",
+    "matrices": {
+      "distance_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "size_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "distance_x_visibility": {
+        "total_bins": 12,
+        "occupied_bins": 12,
+        "supported_bins": 12,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "distance_x_lidar_support": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "lateral_motion_x_ego_yaw_rate": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      },
+      "projected_width_x_lateral_velocity": {
+        "total_bins": 9,
+        "occupied_bins": 9,
+        "supported_bins": 9,
+        "weak_bins": 0,
+        "sparse_bins": 0
+      }
+    }
+  },
+  "identifiability": {
+    "status": "MANAGEABLE CONFOUNDING",
+    "matched_strata": {
+      "relative_lateral_velocity": 64,
+      "distance_xy": 70
+    },
+    "evidence": "identifiability/matched_support_summary.csv"
+  },
+  "mismatch_proxy_coverage": {
+    "status": "SUPPORTED",
+    "large_regime_has_minimum_scene_support": true,
+    "evidence": "mismatch_proxy/r_regime_coverage.csv"
+  },
+  "overall": "CONDITIONAL GO",
+  "hierarchical_logic": "Essential constructability -> physical variation -> independent support -> joint support -> overlap/confounding -> proxy regimes. No aggregate score. Thresholds are declared project choices; final recommendation remains research judgment.",
+  "limitations": [
+    "Observational metadata cannot establish fusion degradation, backfire, causal attribution or a normalization law.",
+    "Clusters are nested and dependent; counts are not an effective independent sample size.",
+    "Projection uses keyframe box position and camera-time ego pose; native object displacement is not compensated.",
+    "Metadata visibility is not per-camera occlusion; LiDAR support is a provided count, not recomputed raw sensor quality.",
+    "Velocity is a finite-difference estimate, not instantaneous ground truth; edges, gaps and annotation noise matter.",
+    "Physical-width proxy ignores rotational image motion and orientation-dependent image scale."
+  ],
+  "supported_claims": [
+    "Metadata constructs the listed geometric and kinematic variables on validity-flagged rows.",
+    "Observed descriptive variation and overlap can motivate restricted future tests, conditional on scene/trajectory support."
+  ],
+  "unsupported_claims": [
+    "Actual fusion degradation/backfire or superiority of a normalization.",
+    "Universal cross-scene/semantic-class generalization from observational coverage.",
+    "Causal separation based solely on correlations or coarse matching."
+  ],
+  "recommended_next_step": "Inspect supported joint/matched regimes, prespecify scene-held-out comparisons and perturbation sweep; do not auto-deploy BEVFusion. Supplement/reformulate unsupported comparisons before acquisition.",
+  "thresholds": {
+    "schema_version": 1,
+    "canonical_distance": "distance_xy",
+    "canonical_camera": "CAM_FRONT",
+    "object_neighbor_max_gap_s": 1.5,
+    "ego_neighbor_max_gap_s": 1.5,
+    "projection_near_plane_m": 0.1,
+    "moving_speed_m_s": 0.5,
+    "yaw_regime_edges_rad_s": [
+      0.02,
+      0.1
+    ],
+    "quantiles": [
+      0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1
+    ],
+    "support": {
+      "supported_min_trajectories": 30,
+      "supported_min_scenes": 10,
+      "weak_min_trajectories": 5,
+      "weak_min_scenes": 3,
+      "supported_max_top1_scene_fraction": 0.3
+    },
+    "dependence_warning_abs_spearman": 0.7,
+    "class_dominance_warning_fraction": 0.8,
+    "matched_support_min_scenes_per_extreme": 3,
+    "matched_support_min_trajectories_per_extreme": 5,
+    "temporal_perturbations_s": [
+      0.05,
+      0.1,
+      0.2,
+      0.5
+    ],
+    "notes": "All support, motion, yaw and dependence thresholds are configurable project design diagnostics, not scientific laws. Quantile ties collapse rather than splitting identical values. Mini never yields a final suitability decision."
+  },
+  "automatic_recommendation_requires_research_review": true
+}

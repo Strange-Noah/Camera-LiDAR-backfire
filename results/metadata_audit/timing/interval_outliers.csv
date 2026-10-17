@@ -1,0 +1,8 @@
+channel,n_intervals,tukey_outlier_count,method
+CAM_BACK,194752,1196,descriptive Tukey 1.5 IQR; not defective sensor classification
+CAM_BACK_LEFT,194155,737,descriptive Tukey 1.5 IQR; not defective sensor classification
+CAM_BACK_RIGHT,197565,458,descriptive Tukey 1.5 IQR; not defective sensor classification
+CAM_FRONT,197465,419,descriptive Tukey 1.5 IQR; not defective sensor classification
+CAM_FRONT_LEFT,197573,300,descriptive Tukey 1.5 IQR; not defective sensor classification
+CAM_FRONT_RIGHT,197180,538,descriptive Tukey 1.5 IQR; not defective sensor classification
+LIDAR_TOP,331036,7062,descriptive Tukey 1.5 IQR; not defective sensor classification
