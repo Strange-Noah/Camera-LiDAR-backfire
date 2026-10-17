@@ -1,8 +1,8 @@
 # Camera–LiDAR backfire
 
 Research on camera–LiDAR fusion robustness under sensor misalignment.
-This milestone prepares Runpod and official nuScenes mini for a later metadata audit.
-It does not deploy BEVFusion/MultiCorrupt or run an audit or inference.
+The 850-scene nuScenes metadata audit is complete (CONDITIONAL GO).
+BEVFusion/MultiCorrupt deployment and inference are separate, future milestones.
 
 ## Storage and compute
 
@@ -14,10 +14,36 @@ It does not deploy BEVFusion/MultiCorrupt or run an audit or inference.
 - `/workspace/{datasets,checkpoints,results,cache,staging}` survives Pod replacement.
   Keep the volume in the same datacenter as replacement compute.
 
-## Prepare a new Ubuntu 24.04 CPU Pod
+## Team collaboration
+
+We use a Runpod **Team with Dev members**: GitHub `main` holds reviewed code,
+environment definitions and project conventions; each member develops on a personal
+branch and a separate disposable Pod. All project Pods use the same Network Volume
+in EU-RO-1, mounted at `/workspace`. Clone the repository into your Pod-local home;
+never share a Git working tree or writable Python environment across Pods.
+
+Dev members create their own Pods **in the Team context**. Charges are deducted from
+the Team account, with member Cost Centers for internal settlement; this does not
+charge each member's personal Runpod balance.
+
+The dataset is canonical input, not an output directory. Use non-root experiment
+users and administrator-managed filesystem permissions; Dev membership alone does
+not enforce read-only data and still permits deleting the entire volume.
+
+**Rollout status:** this is the agreed design. Team conversion/member access and
+dataset permission enforcement have not yet been verified or applied. The existing
+volume must be reused in place, not copied or recreated for this transition.
+
+- [Team workflow, billing, safety and rollout checklist](docs/team_collaboration.md)
+- [English message for teammates](docs/team_invitation.md)
+- [Personal environment example](configs/member.env.example)
+
+## Administrator bootstrap: new Ubuntu 24.04 CPU Pod
 
 Attach the project Network Volume at `/workspace` at creation. Use at least
 4 vCPU and 16 GB RAM. Register your SSH public key before boot; expose only 22/tcp.
+These are administrator bootstrap commands, not the member experiment login.
+For member checkouts and non-root environments, follow the team workflow above.
 From a root shell inside the Pod:
 
 ```bash
@@ -75,7 +101,8 @@ Re-check inventory and pricing before reusing it.
 See [pre-audit deployment report](docs/pre_audit_deployment.md) for the completed
 acceptance checklist, live resource IDs, reproducibility proof, and known limits.
 Both isolated environments loaded 10 scenes / 404 samples / 18,538 annotations.
-No formal metadata audit or model deployment has been performed.
+This describes the earlier pre-audit checkpoint; the subsequent full metadata audit
+is documented below. No model deployment has been performed.
 
 ## Full metadata audit checkpoint
 

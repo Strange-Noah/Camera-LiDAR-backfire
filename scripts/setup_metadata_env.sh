@@ -14,7 +14,7 @@ SPEC="$REPO_ROOT/environment/metadata/requirements.lock.txt"
 [[ -f "$SPEC" ]] || SPEC="$REPO_ROOT/environment/metadata/requirements.in"
 "$METADATA_VENV/bin/python" -m pip install -r "$SPEC"
 "$METADATA_VENV/bin/python" -m pip check
-mkdir -p "$PERSISTENT_ROOT/results/environment"
-"$METADATA_VENV/bin/python" --version | tee "$PERSISTENT_ROOT/results/environment/python-version.txt"
-"$METADATA_VENV/bin/python" -m pip freeze > "$PERSISTENT_ROOT/results/environment/pip-freeze.txt"
+mkdir -p "$ENVIRONMENT_OUTPUT_DIR"
+"$METADATA_VENV/bin/python" --version | tee "$ENVIRONMENT_OUTPUT_DIR/python-version.txt"
+"$METADATA_VENV/bin/python" -m pip freeze > "$ENVIRONMENT_OUTPUT_DIR/pip-freeze.txt"
 "$METADATA_VENV/bin/python" -c 'from nuscenes.nuscenes import NuScenes; print("Official devkit import OK")'
