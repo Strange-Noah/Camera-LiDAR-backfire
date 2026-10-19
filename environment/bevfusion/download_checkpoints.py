@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import shutil
 import urllib.request
+import time
 
 
 def main():
@@ -26,7 +27,22 @@ def main():
                 if 'text/html' in content_type:
                     raise RuntimeError('Download returned HTML instead of checkpoint')
                 with partial.open('wb') as out:
-                    shutil.copyfileobj(response, out)
+                    total = response.headers.get('Content-Length', 'unknown')
+                    last = time.monotonic()
+                    written = 0
+                    print('Downloading', model['file'], 'expected bytes', total, flush=True)
+                    while True:
+                        chunk = response.read(4 * 1024**2)
+                        if not chunk:
+                            break
+                        out.write(chunk)
+                        written += len(chunk)
+                        if time.monotonic() - last >= 15:
+                            out.flush()
+                            print(model['file'], 'downloaded bytes', written, flush=True)
+                            last = time.monotonic()
+                    if total != 'unknown' and written != int(total):
+                        raise RuntimeError('Incomplete checkpoint download')
             if partial.stat().st_size < 1024 * 1024:
                 raise RuntimeError('Unexpectedly small checkpoint')
             partial.replace(dest)
