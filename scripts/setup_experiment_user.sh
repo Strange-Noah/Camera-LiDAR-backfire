@@ -24,8 +24,13 @@ for top in results cache staging checkpoints; do
   if [[ -e "$target" ]]; then
     [[ "$(stat -c %u "$target")" = "$member_uid" ]]
   else
-    install -d -o "$member_uid" -g "$member_gid" -m 0750 "$target"
+    # Some GPU-host FUSE mounts reject chown even for root. Create as the
+    # intended member instead, then verify ownership rather than weakening it.
+    runuser -u "$login" -- mkdir -m 0750 -- "$target"
   fi
+  [[ "$(stat -c %u "$target")" = "$member_uid" ]]
+  [[ "$(stat -c %g "$target")" = "$member_gid" ]]
+  [[ "$(stat -c %a "$target")" = 750 ]]
 done
 if [[ "$#" -eq 3 ]]; then
   [[ -f "$3" ]]
