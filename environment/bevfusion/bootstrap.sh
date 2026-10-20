@@ -14,7 +14,8 @@ cleanup() {
 }
 trap cleanup EXIT
 apt-get update
-apt-get install -y --no-install-recommends openssh-server ca-certificates curl python3 git
+apt-get install -y --no-install-recommends openssh-server ca-certificates curl python3 git \
+  libgl1 libglib2.0-0 libopenmpi3
 mkdir -p /run/sshd /root/.ssh /opt/deployment
 chmod 700 /root/.ssh
 printf '%s\n' "$PUBLIC_KEY" > /root/.ssh/authorized_keys
