@@ -1,0 +1,14 @@
+{
+  "verified_at_utc": "2026-10-20T12:08:55.966968+00:00",
+  "gpu_pod": "w5ohqdj3jyneoz",
+  "gpu_job_exit_code": 0,
+  "pod_side_delete_http": 204,
+  "account_get_after_delete_http": 404,
+  "cpu_pod": "0r16w5qp56o0qa",
+  "cpu_delete_http": 204,
+  "cpu_account_get_after_delete_http": 404,
+  "external_watcher": "Could not arm: successful job deleted Pod and revoked scoped credential first",
+  "billing_ledger": "No records yet in current hourly buckets; delayed ledger is not zero cost",
+  "network_volume_retained": "p6vb29fmlu",
+  "checkpoint_hashes_rechecked_after_gpu_deletion": true
+}

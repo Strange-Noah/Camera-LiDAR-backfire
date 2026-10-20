@@ -2,7 +2,7 @@
 """Fail-closed Linux Landlock write allowlist, inherited by experiment subprocesses.
 Usage: python3 scripts/run_readonly_experiment.py -- COMMAND [ARG...]
 """
-import ctypes, os, platform, pwd, stat, sys
+import ctypes, os, platform, pwd, re, stat, sys
 from pathlib import Path
 
 def main():
@@ -31,7 +31,8 @@ def main():
     if home==Path('/') or home==Path('/workspace') or Path('/workspace') in home.parents:
         raise SystemExit('Experiment home must be Pod-local, outside /workspace')
     paths=[home,Path('/tmp'),Path('/dev/shm')]
-    paths += [Path('/workspace')/top/account.pw_name for top in ['results','cache','staging','checkpoints']]
+    if os.environ.get('PROJECT_OUTPUT_MODE') != 'local':
+        paths += [Path('/workspace')/top/account.pw_name for top in ['results','cache','staging','checkpoints']]
     try:
         for path in paths:
             if not path.is_dir() or path.is_symlink(): raise SystemExit(f'Missing/unsafe writable directory: {path}')
@@ -42,11 +43,26 @@ def main():
                 rule=PathRule(handled,pathfd); syscall(445,fd,1,ctypes.byref(rule),0)
             finally: os.close(pathfd)
         # Writable device sinks, not arbitrary /dev or /proc paths.
-        for name in ['/dev/null','/dev/tty']:
+        devices=['/dev/null','/dev/tty']
+        # CUDA opens only these real NVIDIA character devices read/write.
+        # Do not allow the /dev directory or symlinks to arbitrary paths.
+        for device in Path('/dev').glob('nvidia*'):
+            if re.fullmatch(r'nvidia(?:[0-9]+|ctl|-uvm(?:-tools)?|-modeset)',device.name) and not device.is_symlink() and stat.S_ISCHR(device.stat().st_mode):
+                devices.append(str(device))
+        for name in devices:
             if not os.path.exists(name): continue
             pathfd=os.open(name,os.O_PATH|os.O_CLOEXEC)
             try:
                 rule=PathRule(1<<1,pathfd); syscall(445,fd,1,ctypes.byref(rule),0)
+            finally: os.close(pathfd)
+        if os.environ.get('PROJECT_CUDA_SANDBOX') == '1':
+            # CUDA names its own threads through procfs during cuInit. Pin only
+            # this final workload PID's task subtree, never all of /proc.
+            # The caller must exec the workload directly, without a later fork.
+            pathfd=os.open('/proc/self/task',os.O_PATH|os.O_CLOEXEC)
+            try:
+                rule=PathRule((1<<1)|(1<<14),pathfd)
+                syscall(445,fd,1,ctypes.byref(rule),0)
             finally: os.close(pathfd)
         if libc.prctl(38,1,0,0,0)!=0: raise OSError(ctypes.get_errno(),'PR_SET_NO_NEW_PRIVS')
         syscall(446,fd,0)

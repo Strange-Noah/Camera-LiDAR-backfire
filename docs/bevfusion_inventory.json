@@ -1,0 +1,365 @@
+{
+  "checked_at": "2026-10-19T05:11:44.611Z",
+  "catalog": {
+    "gpus": [
+      {
+        "community": true,
+        "id": "NVIDIA A100 80GB PCIe",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 6,
+          "secure": 8
+        },
+        "memory": 80,
+        "name": "A100 PCIe",
+        "pool": "AMPERE_80",
+        "price": {
+          "community": 1.19,
+          "secure": 1.79,
+          "serverless": 2.72
+        },
+        "secure": true
+      },
+      {
+        "community": true,
+        "id": "NVIDIA A100-SXM4-80GB",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 8,
+          "secure": 8
+        },
+        "memory": 80,
+        "name": "A100 SXM",
+        "pool": "AMPERE_80",
+        "price": {
+          "community": 1.39,
+          "secure": 1.79,
+          "serverless": 2.72
+        },
+        "secure": true
+      },
+      {
+        "community": false,
+        "id": "NVIDIA A40",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 1,
+          "secure": 10
+        },
+        "memory": 48,
+        "name": "A40",
+        "pool": "AMPERE_48",
+        "price": {
+          "community": 0.35,
+          "secure": 0.59,
+          "serverless": 1.22
+        },
+        "secure": true
+      },
+      {
+        "community": true,
+        "id": "NVIDIA GeForce RTX 3090",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 8,
+          "secure": 8
+        },
+        "memory": 24,
+        "name": "RTX 3090",
+        "pool": "AMPERE_24",
+        "price": {
+          "community": 0.22,
+          "secure": 0.5,
+          "serverless": 0.69
+        },
+        "secure": true
+      },
+      {
+        "community": true,
+        "id": "NVIDIA GeForce RTX 4090",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 8,
+          "secure": 8
+        },
+        "memory": 24,
+        "name": "RTX 4090",
+        "pool": "ADA_24",
+        "price": {
+          "community": 0.34,
+          "secure": 0.89,
+          "serverless": 1.1
+        },
+        "secure": true
+      },
+      {
+        "community": false,
+        "id": "NVIDIA L4",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 1,
+          "secure": 9
+        },
+        "memory": 24,
+        "name": "L4",
+        "pool": "AMPERE_24",
+        "price": {
+          "community": 0.44,
+          "secure": 0.59,
+          "serverless": 0.69
+        },
+        "secure": true
+      },
+      {
+        "community": true,
+        "id": "NVIDIA RTX A6000",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 3,
+          "secure": 10
+        },
+        "memory": 48,
+        "name": "RTX A6000",
+        "pool": "AMPERE_48",
+        "price": {
+          "community": 0.33,
+          "secure": 0.59,
+          "serverless": 1.22
+        },
+        "secure": true
+      },
+      {
+        "community": false,
+        "id": "NVIDIA RTX PRO 4000 Blackwell",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 0,
+          "secure": 4
+        },
+        "memory": 24,
+        "name": "RTX PRO 4000",
+        "pool": null,
+        "price": {
+          "community": 0.5,
+          "secure": 0.57
+        },
+        "secure": true
+      },
+      {
+        "community": false,
+        "id": "NVIDIA RTX PRO 4500 Blackwell",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 0,
+          "secure": 8
+        },
+        "memory": 32,
+        "name": "RTX PRO 4500",
+        "pool": "BLACKWELL_32",
+        "price": {
+          "community": 0.34,
+          "secure": 0.72,
+          "serverless": 1.15
+        },
+        "secure": true
+      }
+    ]
+  },
+  "romania_secure_stock": {
+    "gpus": [
+      {
+        "availability": "MEDIUM",
+        "community": true,
+        "cudaVersions": [
+          {
+            "available": true,
+            "version": "12.8"
+          },
+          {
+            "available": true,
+            "version": "13.0"
+          },
+          {
+            "available": true,
+            "version": "13.2"
+          }
+        ],
+        "dataCenters": [
+          {
+            "availability": "MEDIUM",
+            "id": "EU-RO-1",
+            "name": "EU-RO-1"
+          }
+        ],
+        "id": "NVIDIA GeForce RTX 4090",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 8,
+          "secure": 8
+        },
+        "memory": 24,
+        "name": "RTX 4090",
+        "pool": "ADA_24",
+        "price": {
+          "community": 0.34,
+          "secure": 0.89,
+          "serverless": 1.1
+        },
+        "secure": true
+      },
+      {
+        "availability": "LOW",
+        "community": false,
+        "cudaVersions": [
+          {
+            "available": false,
+            "version": "12.8"
+          },
+          {
+            "available": true,
+            "version": "13.0"
+          },
+          {
+            "available": true,
+            "version": "13.2"
+          }
+        ],
+        "dataCenters": [
+          {
+            "availability": "LOW",
+            "id": "EU-RO-1",
+            "name": "EU-RO-1"
+          }
+        ],
+        "id": "NVIDIA L4",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 1,
+          "secure": 9
+        },
+        "memory": 24,
+        "name": "L4",
+        "pool": "AMPERE_24",
+        "price": {
+          "community": 0.44,
+          "secure": 0.59,
+          "serverless": 0.69
+        },
+        "secure": true
+      },
+      {
+        "availability": "LOW",
+        "community": false,
+        "cudaVersions": [
+          {
+            "available": true,
+            "version": "13.0"
+          },
+          {
+            "available": true,
+            "version": "13.2"
+          }
+        ],
+        "dataCenters": [
+          {
+            "availability": "LOW",
+            "id": "EU-RO-1",
+            "name": "EU-RO-1"
+          }
+        ],
+        "id": "NVIDIA RTX PRO 4000 Blackwell",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 0,
+          "secure": 4
+        },
+        "memory": 24,
+        "name": "RTX PRO 4000",
+        "pool": null,
+        "price": {
+          "community": 0.5,
+          "secure": 0.57
+        },
+        "secure": true
+      },
+      {
+        "availability": "MEDIUM",
+        "community": false,
+        "cudaVersions": [
+          {
+            "available": true,
+            "version": "13.0"
+          },
+          {
+            "available": true,
+            "version": "13.2"
+          }
+        ],
+        "dataCenters": [
+          {
+            "availability": "MEDIUM",
+            "id": "EU-RO-1",
+            "name": "EU-RO-1"
+          }
+        ],
+        "id": "NVIDIA RTX PRO 4500 Blackwell",
+        "manufacturer": "NVIDIA",
+        "maxCount": {
+          "community": 0,
+          "secure": 8
+        },
+        "memory": 32,
+        "name": "RTX PRO 4500",
+        "pool": "BLACKWELL_32",
+        "price": {
+          "community": 0.34,
+          "secure": 0.72,
+          "serverless": 1.15
+        },
+        "secure": true
+      }
+    ]
+  },
+  "datacenter": {
+    "compliance": [
+      "GDPR",
+      "HIPAA"
+    ],
+    "globalNetwork": true,
+    "gpuAvailability": [
+      {
+        "availability": "MEDIUM",
+        "id": "NVIDIA GeForce RTX 4090",
+        "name": "RTX 4090"
+      },
+      {
+        "availability": "MEDIUM",
+        "id": "NVIDIA RTX PRO 4500 Blackwell",
+        "name": "RTX PRO 4500"
+      },
+      {
+        "availability": "LOW",
+        "id": "NVIDIA RTX PRO 4000 Blackwell",
+        "name": "RTX PRO 4000"
+      },
+      {
+        "availability": "LOW",
+        "id": "NVIDIA L4",
+        "name": "L4"
+      }
+    ],
+    "id": "EU-RO-1",
+    "name": "EU-RO-1",
+    "networkVolumeTypes": [
+      "STANDARD"
+    ],
+    "region": "EUROPE"
+  },
+  "volume": {
+    "dataCenter": "EU-RO-1",
+    "id": "p6vb29fmlu",
+    "name": "camera-lidar-backfire-data",
+    "size": 50,
+    "type": "STANDARD"
+  }
+}

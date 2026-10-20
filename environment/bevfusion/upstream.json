@@ -1,0 +1,19 @@
+{
+  "repository": "https://github.com/mit-han-lab/bevfusion.git",
+  "commit": "db75150717a9462cb60241e36ba28d65f6908607",
+  "download_script_commit": "326653dc06e0938edf1aae7d01efcd158ba83de5",
+  "license": "Apache-2.0",
+  "reason": "Last first-parent commit before BEVFusion-R introduced Radar into the shared detection pipeline. No upstream source patch. Checkpoint compatibility still requires runtime validation.",
+  "models": {
+    "fusion": {
+      "file": "bevfusion-det.pth",
+      "url": "https://www.dropbox.com/scl/fi/ulaz9z4wdwtypjhx7xdi3/bevfusion-det.pth?rlkey=ovusfi2rchjub5oafogou255v&dl=1",
+      "config": "configs/nuscenes/det/transfusion/secfpn/camera+lidar/swint_v0p075/convfuser.yaml"
+    },
+    "lidar": {
+      "file": "lidar-only-det.pth",
+      "url": "https://www.dropbox.com/scl/fi/b1zvgrg9ucmv0wtx6pari/lidar-only-det.pth?rlkey=fw73bmdh57jxtudw6osloywah&dl=1",
+      "config": "configs/nuscenes/det/transfusion/secfpn/lidar/voxelnet_0p075.yaml"
+    }
+  }
+}

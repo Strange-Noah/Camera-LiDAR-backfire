@@ -1,0 +1,24 @@
+[
+  {
+    "model": {
+      "file": "bevfusion-det.pth",
+      "url": "https://www.dropbox.com/scl/fi/ulaz9z4wdwtypjhx7xdi3/bevfusion-det.pth?rlkey=ovusfi2rchjub5oafogou255v&dl=1",
+      "config": "configs/nuscenes/det/transfusion/secfpn/camera+lidar/swint_v0p075/convfuser.yaml"
+    },
+    "name": "fusion",
+    "bytes": 163715701,
+    "sha256": "ee0a389213922343508db40dff0ec04767b36d8f512da34b093939c37aaf2122",
+    "code_commit": "db75150717a9462cb60241e36ba28d65f6908607"
+  },
+  {
+    "model": {
+      "file": "lidar-only-det.pth",
+      "url": "https://www.dropbox.com/scl/fi/b1zvgrg9ucmv0wtx6pari/lidar-only-det.pth?rlkey=fw73bmdh57jxtudw6osloywah&dl=1",
+      "config": "configs/nuscenes/det/transfusion/secfpn/lidar/voxelnet_0p075.yaml"
+    },
+    "name": "lidar",
+    "bytes": 33362653,
+    "sha256": "7f3f1f83754752ea2091543d010a87109d724dc48512a6258c31ef6545619a0e",
+    "code_commit": "db75150717a9462cb60241e36ba28d65f6908607"
+  }
+]

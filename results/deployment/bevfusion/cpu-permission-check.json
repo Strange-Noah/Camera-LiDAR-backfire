@@ -1,0 +1,9 @@
+{
+  "host_type": "CPU Pod",
+  "user": "bfprobe",
+  "uid": 20004,
+  "protected_output_write": true,
+  "dataset_write_open_denied": true,
+  "dataset_content_modified": false,
+  "gpu_device_access_tested": false
+}

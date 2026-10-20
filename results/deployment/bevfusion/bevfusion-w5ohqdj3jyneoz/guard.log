@@ -1,0 +1,17 @@
+/workspace/cache/bevfusion-runtime/runtime.tar.gz: OK
+1.10.1+cu113 1.4.0 NVIDIA GeForce RTX 4090
+/opt/venvs/bevfusion/lib/python3.8/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+2026-10-20 12:03:19,202 - mmdet - WARNING - No pre-trained weights for SwinTransformer, training start from scratch
+/opt/bevfusion/mmdet3d/models/heads/bbox/transfusion.py:273: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  top_proposals_class = top_proposals // heatmap.shape[-1]
+/opt/bevfusion/mmdet3d/core/bbox/coders/transfusion_bbox_coder.py:96: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self.post_center_range = torch.tensor(
+/opt/venvs/bevfusion/lib/python3.8/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+/opt/bevfusion/mmdet3d/models/heads/bbox/transfusion.py:273: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  top_proposals_class = top_proposals // heatmap.shape[-1]
+/opt/bevfusion/mmdet3d/core/bbox/coders/transfusion_bbox_coder.py:96: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self.post_center_range = torch.tensor(
+GPU_SMOKE_TESTS_PASSED
+Pod deletion request HTTP 204
