@@ -32,4 +32,4 @@ job_dir="/workspace/results/deployment/bevfusion-$RUNPOD_POD_ID"
 mkdir -p "$job_dir"
 python3 -u /opt/deployment/bevfusion/job_guard.py --pod-id "$RUNPOD_POD_ID" \
   --key-file /root/.bevfusion-pod-key --state "$job_dir/job-state.json" \
-  -- bash /opt/deployment/bevfusion/run_job.sh > "$job_dir/guard.log" 2>&1
+  -- bash "/opt/deployment/bevfusion/${BEVFUSION_PHASE:-infer_gpu}.sh" > "$job_dir/guard.log" 2>&1
