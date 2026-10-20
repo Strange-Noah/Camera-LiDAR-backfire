@@ -36,8 +36,16 @@ cp -r /opt/management/environment/bevfusion /opt/deployment/
 job_dir="/workspace/results/deployment/bevfusion-$RUNPOD_POD_ID"
 mkdir -p "$job_dir"
 grace_seconds=30
-if [[ "${BEVFUSION_PHASE:-infer_gpu}" = infer_gpu ]]; then grace_seconds=0; fi
+guard_args=()
+if [[ "${BEVFUSION_PHASE:-infer_gpu}" = infer_gpu ]]; then
+  grace_seconds=0
+  guard_args=(--results-dir /home/bfbaseline/results --progress-file /home/bfbaseline/results/progress.json)
+  export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4
+else
+  export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2
+fi
 python3 -u /opt/deployment/bevfusion/job_guard.py --pod-id "$RUNPOD_POD_ID" \
   --key-file /root/.bevfusion-pod-key --state "$job_dir/job-state.json" \
   --grace-seconds "$grace_seconds" \
+  "${guard_args[@]}" \
   -- bash "/opt/deployment/bevfusion/${BEVFUSION_PHASE:-infer_gpu}.sh" > "$job_dir/guard.log" 2>&1

@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "checks": [
+    "matching tokens",
+    "finite coordinates",
+    "positive box dimensions",
+    "valid class indices",
+    "scores in [0,1]"
+  ],
+  "models": {
+    "fusion": {
+      "tokens": [
+        "3e8750f331d7499e9b5123e9eb70f2e2",
+        "3950bd41f74548429c0f7700ff3d8269",
+        "c5f58c19249d4137ae063b0e9ecd8b8e",
+        "700c1a25559b4433be532de3475e58a9",
+        "747aa46b9a4641fe90db05d97db2acea",
+        "f4f86af4da3b49e79497deda5c5f223a",
+        "6832e717621341568c759151b5974512",
+        "c59e60042a8643e899008da2e446acca"
+      ],
+      "boxes_per_sample": [
+        200,
+        198,
+        198,
+        197,
+        200,
+        200,
+        200,
+        200
+      ],
+      "score_ge_0_3": [
+        17,
+        21,
+        30,
+        36,
+        29,
+        32,
+        32,
+        33
+      ]
+    },
+    "lidar": {
+      "tokens": [
+        "3e8750f331d7499e9b5123e9eb70f2e2",
+        "3950bd41f74548429c0f7700ff3d8269",
+        "c5f58c19249d4137ae063b0e9ecd8b8e",
+        "700c1a25559b4433be532de3475e58a9",
+        "747aa46b9a4641fe90db05d97db2acea",
+        "f4f86af4da3b49e79497deda5c5f223a",
+        "6832e717621341568c759151b5974512",
+        "c59e60042a8643e899008da2e446acca"
+      ],
+      "boxes_per_sample": [
+        200,
+        199,
+        200,
+        198,
+        200,
+        200,
+        200,
+        200
+      ],
+      "score_ge_0_3": [
+        11,
+        25,
+        27,
+        37,
+        29,
+        30,
+        31,
+        34
+      ]
+    }
+  }
+}

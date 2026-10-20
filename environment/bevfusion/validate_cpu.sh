@@ -14,4 +14,14 @@ runuser -u bfbaseline -- /usr/local/bin/project-experiment-shell -c '
  python /opt/deployment/bevfusion/validate_inputs_cpu.py
 '
 cp /home/bfbaseline/input-validation.json /workspace/cache/bevfusion-runtime/input-validation.json
+for model in fusion lidar; do
+  runuser -u bfbaseline -- env PROJECT_OUTPUT_MODE=local PROJECT_CUDA_SANDBOX=1 \
+    PATH="$PATH" PYTHONPATH=/opt/bevfusion \
+    /usr/bin/python3 /usr/local/lib/camera-lidar/run_readonly_experiment.py -- \
+    /opt/venvs/bevfusion/bin/python /opt/deployment/bevfusion/smoke.py \
+      --model "$model" --limit 8 --preflight-only \
+      --data-view /workspace/cache/bevfusion-runtime/mini-view \
+      --output "/home/bfbaseline/preflight-$model"
+  cp "/home/bfbaseline/preflight-$model/acceptance.json" "/workspace/cache/bevfusion-runtime/runner-preflight-$model.json"
+done
 echo 'MINIMAL_CPU_RUNTIME_VALIDATION_PASSED'

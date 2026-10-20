@@ -1,0 +1,33 @@
+{
+  "status": "preflight_passed",
+  "model": "lidar",
+  "completed": 8,
+  "code_commit": "db75150717a9462cb60241e36ba28d65f6908607",
+  "torch": "1.10.1+cu113",
+  "cuda": "11.3",
+  "mmcv": "1.4.0",
+  "checkpoint_sha256": "7f3f1f83754752ea2091543d010a87109d724dc48512a6258c31ef6545619a0e",
+  "infos_sha256": "1c105428af773678582ebefa360ffe4973915ac5aa0f395290b404f75754c62c",
+  "requested": 8,
+  "full_split_count": 81,
+  "batch_size": 1,
+  "workers": 0,
+  "coordinate_frame": "LiDAR at keyframe; boxes.tensor uses bottom-center origin",
+  "classes": [
+    "car",
+    "truck",
+    "construction_vehicle",
+    "bus",
+    "trailer",
+    "barrier",
+    "motorcycle",
+    "bicycle",
+    "pedestrian",
+    "traffic_cone"
+  ],
+  "checkpoint_load": "strict",
+  "gpu": "CPU",
+  "gpu_inference_executed": false,
+  "wall_seconds": 7.598364941775799,
+  "process_peak_rss_kib": 696836
+}

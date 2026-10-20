@@ -50,6 +50,8 @@ def main():
                     if not artifacts_saved:
                         paths = ['/workspace/cache/bevfusion-runtime/model-loads-cpu.json',
                                  '/workspace/cache/bevfusion-runtime/input-validation.json',
+                                 '/workspace/cache/bevfusion-runtime/runner-preflight-fusion.json',
+                                 '/workspace/cache/bevfusion-runtime/runner-preflight-lidar.json',
                                  '/workspace/cache/bevfusion-runtime/runtime.sha256',
                                  '/workspace/cache/bevfusion-runtime/installed.freeze.txt']
                         artifacts = {}
@@ -58,6 +60,7 @@ def main():
                                                   text=True, timeout=15)
                             if item.returncode == 0:
                                 artifacts[path] = item.stdout
+                                write_state(a.config.parent / (cfg['pod_id'] + '.artifacts.json'), artifacts)
                         write_state(a.config.parent / (cfg['pod_id'] + '.artifacts.json'), artifacts)
                         artifacts_saved = True
                 elif state['heartbeat'] != last_heartbeat:

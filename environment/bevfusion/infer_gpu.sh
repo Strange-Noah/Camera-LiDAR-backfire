@@ -24,14 +24,13 @@ finalize() {
   exit "$status"
 }
 trap finalize EXIT
-runuser -u bfbaseline -- /usr/local/bin/project-experiment-shell -c '
- export PATH=/opt/venvs/bevfusion/bin:$PATH PYTHONPATH=/opt/bevfusion
- for count in 8; do
-  for model in fusion lidar; do
-   python /opt/deployment/bevfusion/smoke.py --model "$model" --limit "$count" --raw-only \
+for model in fusion lidar; do
+  runuser -u bfbaseline -- env PROJECT_OUTPUT_MODE=local PROJECT_CUDA_SANDBOX=1 \
+    BEVFUSION_PROGRESS_FILE=/home/bfbaseline/results/progress.json \
+    PATH="$PATH" PYTHONPATH=/opt/bevfusion \
+    /usr/bin/python3 /usr/local/lib/camera-lidar/run_readonly_experiment.py -- \
+    /opt/venvs/bevfusion/bin/python /opt/deployment/bevfusion/smoke.py --model "$model" --limit 8 --raw-only \
     --data-view /workspace/cache/bevfusion-runtime/mini-view \
-    --output /home/bfbaseline/results/"$model"-"$count" || exit $?
-  done
- done
-'
+    --output /home/bfbaseline/results/"$model"-8
+done
 echo 'GPU_SMOKE_TESTS_PASSED'

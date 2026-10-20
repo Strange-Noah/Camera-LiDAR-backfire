@@ -1,121 +1,111 @@
-# BEVFusion mini inference: prepared, not GPU-validated
+# BEVFusion / TransFusion-L mini inference
 
-This environment is independent of `environment/metadata`. Do not install these
-packages into Python 3.12. No training, finetuning, corruption, dataset migration,
-full trainval download, or billable provisioning is performed by these files.
+Both official detectors completed 8/8 identical mini-val samples on RTX 4090 on
+2026-10-20. Checkpoints loaded strictly; no OOM, extension or data-loading errors.
+See `docs/bevfusion_deployment_report.md` and `results/deployment/bevfusion/`.
+This is inference smoke acceptance, not full nuScenes validation replication.
 
-## Source decision
+## Reproducible runtime
 
-`upstream.json` pins official code to `db75150717a9462cb60241e36ba28d65f6908607`,
-the parent of the BEVFusion-R integration (`d0152cf`). Current archived HEAD
-`326653dc06e0938edf1aae7d01efcd158ba83de5` introduces Radar into the shared
-detection config and converter. Using it unchanged would silently add a third
-sensor data dependency. Current HEAD's download script supplies the refreshed
-official URLs. Weight compatibility with the selected revision is **unverified**
-until `smoke.py` completes a strict state-dict load and inference.
+Official upstream is pinned in `upstream.json` to
+`db75150717a9462cb60241e36ba28d65f6908607`, before the Radar integration.
+No upstream source patch is applied. The archived newer HEAD adds Radar to the
+shared pipeline, so it is not used for this two-modality baseline.
 
-No upstream source patch is applied. Runtime config overrides are recorded:
-batch size 1, zero loader workers for the first smoke test, mini infos path,
-removal of unused `LoadBEVSegmentation` and `gt_masks_bev` collection, and disabling
-backbone initialization download because the full detector checkpoint supplies it.
-All image/LiDAR preprocessing stays intact: six views resized to 256x704, current
-LiDAR frame plus nine sweeps, official calibration and pose transforms.
+Accepted runtime: Python 3.8, PyTorch 1.10.1+cu113, torchvision 0.11.2,
+MMCV-full 1.4.0, MMDetection 2.20.0, CUDA toolkit 11.3.1, Ubuntu 20.04.
+Full package freeze and the built runtime archive hash are recorded under
+`results/deployment/bevfusion/`. The Dockerfile is an unbuilt alternative;
+the accepted deployment uses the pinned NVIDIA CUDA base image plus a CPU-built
+runtime archive. Keep this environment separate from metadata Python 3.12.
 
-## Build candidate
+## CPU preparation, brief GPU inference, local analysis
 
-From repository root on a Linux x86_64 Docker builder:
+1. On Linux x86_64 CPU, `prepare_cpu.sh` builds the environment and custom CUDA
+   extensions with FORCE_CUDA, prepares mini infos, validates strict model loading
+   and archives `/opt/venvs/bevfusion` plus `/opt/bevfusion`. CUDA toolkit is needed
+   for compilation; a GPU is not. Existing artifacts can be reused by hash.
+2. `validate_cpu.sh` restores the archive in the minimal deployment image, verifies
+   imports, weights, eight real data-pipeline items and the actual runner using
+   `smoke.py --preflight-only`. Both processes must exit successfully.
+3. Set `BEVFUSION_PHASE=infer_gpu` on a GPU Pod. Use `/bin/bash` as entrypoint and
+   `/workspace/cache/bevfusion-runtime/management/environment/bevfusion/bootstrap.sh`
+   as its single command. `infer_gpu.sh` restores the archive, imports CUDA ops,
+   runs each detector once on eight samples and persists raw predictions. It does
+   no model download, package compilation, infos generation, plotting or metrics.
+4. Delete the GPU automatically, then analyze the small prediction JSON locally.
+   Linux-only dependencies or operations over remote raw data can use a CPU Pod.
+   Evaluation, figures, report writing and code development require no paid GPU.
 
-```bash
-docker build -f environment/bevfusion/Dockerfile -t camera-lidar-bevfusion:db751507 .
-```
+Every new Pod must mount volume `p6vb29fmlu` in EU-RO-1 at `/workspace`. Refresh
+stock and price before provisioning. The successful 4090 was $0.89/h. Startup,
+archive extraction and runtime imports still occupy billed GPU time; a future
+prebuilt accepted image can reduce that overhead. Do not leave GPU Pods idle.
 
-This workstation has no Docker builder. The Dockerfile has **not** been built.
-Alternatively start the official CUDA base as the Runpod container, bootstrap the
-same OS prerequisites and Python 3.8 venv, then run `setup.sh` inside that container.
-Do not assume nested Docker is available on a Pod. Container registry digest,
-OS package manifest and complete pip freeze must be captured after a successful
-build. Current runtime.txt pins are candidates, not an accepted lock.
+## Shared storage and raw data protection
 
-Base: CUDA 11.3.1 Ubuntu 20.04, PyTorch 1.10.1+cu113, torchvision 0.11.2,
-MMCV-full 1.4.0 (provides `mmcv`), MMDetection 2.20.0, Python 3.8.
-The official Dockerfile's floating Miniconda and Python packages are replaced
-with explicit primary pins. Installing both `mmcv` and `mmcv-full` is avoided.
-Ubuntu supplies OpenMPI (version must be captured); official README lists 4.0.4.
-The host driver must support CUDA 11.3 and the actual GPU. Runpod catalog CUDA
-versions describe host compatibility, not which toolkit to install in this image.
+- `/workspace/checkpoints/bevfusion/`: the two official checkpoints and manifest.
+- `/workspace/cache/bevfusion-runtime/runtime.tar.gz`: accepted CPU-built runtime.
+- `/workspace/cache/bevfusion-runtime/mini-view/`: symlinks to immutable raw files,
+  plus generated train/val infos (323/81 samples).
+- `/workspace/cache/bevfusion-runtime/management/`: explicitly staged deployment
+  scripts; stage reviewed changes here before creating the next Pod.
+- `/workspace/results/deployment/bevfusion-POD/`: logs, state and predictions.
 
-Upstream extensions explicitly emit sm_70/75/80/86. On Ada, sm_86 cubins are
-supported by NVIDIA; this does not prove every dependency or model kernel works.
-Do not set CUDA_FORCE_PTX_JIT=1 as an acceptance requirement: upstream extensions
-have compatible Ampere cubins without PTX. No Blackwell deployment is selected.
+Weights were rehashed after GPU deletion and remained unchanged. Never put model
+weights, raw data or runtime archives in Git. Check purchased-volume usage with
+`du`; shared-backend `df` is not the 50GB quota. Full trainval does not fit the
+current volume and requires separate storage planning.
 
-## Volume and permissions
+Raw dataset paths remain read-only. GPU inference runs as `bfbaseline` under
+Landlock, writing only to local `/home/bfbaseline/results`. The root supervisor
+copies outputs to the shared volume before deleting the Pod. GPU character nodes
+and the workload's own `/proc/self/task` write permissions are narrowly allowed
+for CUDA initialization and thread names. Do not wrap the final workload in an
+extra shell after Landlock; the proc rule must refer to the final Python PID.
 
-Confirm attached volume is `p6vb29fmlu`, EU-RO-1, 50 GB, mounted at `/workspace`.
-Run `du` before acquisition: `df` can show shared backend capacity rather than
-the purchased quota. Maintain at least 10 GB quota headroom for mini preparation
-and checkpoints; large build caches stay on the disposable container disk.
-The original dataset remains root-owned and read-only. Re-run the existing
-dataset protection verification and member setup on the new host. Require
-Landlock ABI >=3; stop if unavailable. Do not relax permissions to make a job run.
+## Runner and cache contract
 
-Maintenance/root downloads the two official checkpoints only:
+`smoke.py --model fusion|lidar --limit 8 --raw-only --data-view VIEW --output NEWDIR`
+uses batch size 1, zero loader workers and six 256x704 views with current LiDAR
+plus nine sweeps. Resolved configs record overrides removing unused map labels
+and disabling backbone download. Strict loading checks all detector tensors.
 
-```bash
-python environment/bevfusion/download_checkpoints.py
-```
+Single-rank Gloo supplies upstream world-size queries; inference uses one GPU
+without GPU collectives. The rendezvous directory must outlive group destruction.
+Reports record tokens, hashes, box frame, classes, timings, allocator peaks and
+process peak RSS. `nvidia-smi` memory also includes custom allocations and is much
+higher than PyTorch allocator statistics. Raw boxes use keyframe LiDAR coordinates
+with bottom-center origin, not nuScenes global export. CPU conversion/evaluation
+can follow later. Do not evaluate a partial split against full split ground truth.
 
-This writes `/workspace/checkpoints/bevfusion/{bevfusion-det.pth,lidar-only-det.pth}`
-and a manifest containing source URL, byte length, SHA256, config and code commit.
-The upstream does not publish a trusted hash in its download script: the recorded
-hash is an acquired-artifact identity, not independently authenticated content.
-Copy the small manifest to the feature branch after validation, never the weights.
+Reuse cached LiDAR-only predictions only if tokens, LiDAR points/sweeps/poses,
+preprocessing, configs, weights and code identities are unchanged. Cross-modal
+alignment changes and direct LiDAR corruption must have distinct identities.
 
-Run preprocessing/inference as an established project member through the existing
-protected experiment shell. Put the project checkout in a readable home location
-for this member (`/root` is normally inaccessible); keep the root management copy
-and `/opt/bevfusion` upstream separate. Example inside that shell, with `$USER`
-being the established member login:
+## Independent shutdown
 
-```bash
-export PATH=/opt/venvs/bevfusion/bin:$PATH
-export PYTHONPATH=/opt/bevfusion
-python environment/bevfusion/prepare_mini.py --output /workspace/staging/$USER/bevfusion-mini
-python environment/bevfusion/smoke.py --model fusion --limit 1 --data-view /workspace/staging/$USER/bevfusion-mini --output /workspace/results/$USER/fusion-one
-python environment/bevfusion/smoke.py --model lidar --limit 1 --data-view /workspace/staging/$USER/bevfusion-mini --output /workspace/results/$USER/lidar-one
-```
+`job_guard.py` runs inside the Pod independently of this chat, token budget or SSH.
+It supervises the whole job, copies results and requests Pod DELETE with no GPU
+grace delay. Failed jobs are also deleted. Explicit failed acceptance reports
+terminate a hung child; 300 seconds without a progress update also triggers cleanup.
+This is an inactivity detector, not a fixed total-runtime limit. Longer real jobs
+must emit progress updates. API transport failures retry every 15 seconds.
+`bootstrap.sh` also has an exit trap for supervisor/startup failures.
 
-Use new output directories for each run, then `--limit 8` for smoke tests and
-`--limit 0 --evaluate` for the entire mini_val split. Both models consume the same
-timestamp-sorted infos; compare the saved tokens before comparing predictions.
-Each model runs in a separate process. The custom runner initializes a one-rank
-NCCL process group for upstream normalization layers. The official CLI alternative
-is `torchpack dist-run -np 1 python tools/test.py CONFIG CHECKPOINT --out FILE`,
-but requires equivalent data/config overrides; do not pass eight GPU ranks.
+`arm_external_guard.py` starts an additional detached Mac watcher. It requires a
+live Pod-scoped credential and an awake, connected Mac. Very short successful runs
+can finish and revoke that credential before this watcher arms; that happened in
+the accepted run, whose Pod-side guard nevertheless deleted the Pod automatically.
+An account-level Runpod read returning 404 is the final deletion verification.
 
-`prepare_mini.py` calls the official converter, bypassing the training-only GT DB
-creation. Its symlink view contains the existing samples, sweeps, maps and mini
-metadata, while pickle outputs live outside the immutable dataset. No raw files
-are copied or modified. Mini metadata includes calibration, ego poses and labels.
-All referenced payload files still need runtime verification on the attached host.
+Token exhaustion does not stop an already-running Pod-side guard. This is not an
+absolute billing guarantee against provider/API outage, revoked credentials or
+host failure. The independent guards plus retries reduce that risk; delayed
+billing records are not evidence of zero spend. Network-volume storage rent
+continues after Pod deletion.
 
-## Acceptance and cache contract
-
-Capture `nvidia-smi`, `nvcc --version`, `pip freeze`, build log and imported ops.
-The runner strictly loads checkpoint tensors, executes the actual CUDA paths,
-and saves raw predictions, nuScenes global-coordinate export, resolved config,
-sample tokens, checkpoint/infos hashes, timings, GPU allocator peaks and process
-peak RSS. Use `nvidia-smi` sampling for total device memory in addition to allocator
-statistics. Process RSS with workers=0 covers the data-loading process; it is not
-host-wide RAM. Timings include transfer/model/postprocessing, exclude loader wait;
-wall time also includes setup. Inspect first-sample box sizes, axes, classes and
-scores against the sensor visualization before declaring Stage 3 passed.
-
-Any exception writes a failed report and exits nonzero. A successful load is not
-the same as a successful smoke test. Mini metrics are never reported as official
-full-val replication. Do not evaluate a partial split with the full split evaluator.
-
-Future cached LiDAR predictions may be reused only when sample tokens, LiDAR
-payloads/sweeps, LiDAR poses/transforms, preprocessing, weights and code/config
-identities are unchanged. Camera/extrinsic-only perturbation and LiDAR corruption
-must have different experiment identities. No corruption code is included here.
+Functional guard tests: `python3 -m unittest discover -s tests -p test_bevfusion_job_guard.py`.
+They run real independent processes with a simulated provider API, covering hung
+failure, inactivity and retry. The actual successful GPU run separately proves
+HTTP 204 deletion followed by account-level 404.

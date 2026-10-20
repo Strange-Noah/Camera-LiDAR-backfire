@@ -5,7 +5,6 @@ import json
 import os
 from pathlib import Path
 import resource
-import subprocess
 import tempfile
 import time
 import traceback
@@ -27,6 +26,7 @@ def main():
     p.add_argument('--limit', type=int, default=8, help='0 means all mini_val samples')
     p.add_argument('--evaluate', action='store_true')
     p.add_argument('--raw-only', action='store_true', help='Save predictions/metrics; defer plots and nuScenes formatting to CPU')
+    p.add_argument('--preflight-only', action='store_true', help='Exercise this runner through data loading and checkpoint matching on CPU')
     a = p.parse_args()
     if a.limit < 0 or (a.evaluate and a.limit != 0):
         p.error('Evaluation requires the complete split: --limit 0')
@@ -39,6 +39,14 @@ def main():
     a.output.mkdir(parents=True, exist_ok=False)
     report = {'status': 'failed', 'model': a.model, 'completed': 0}
     started = time.perf_counter()
+    rendezvous = None
+    def progress(stage, completed=0):
+        path = os.environ.get('BEVFUSION_PROGRESS_FILE')
+        if path:
+            target = Path(path)
+            temporary = target.with_suffix('.tmp')
+            temporary.write_text(json.dumps(dict(model=a.model, stage=stage, completed=completed)))
+            temporary.replace(target)
     try:
         import mmcv
         import torch
@@ -54,13 +62,11 @@ def main():
         import mmdet3d.ops
 
         spec = json.loads(Path(__file__).with_name('upstream.json').read_text())
-        commit = subprocess.check_output(['git', '-C', '/opt/bevfusion', 'rev-parse', 'HEAD'], text=True).strip()
+        # setup.sh checks out a detached pinned revision. Reading its HEAD
+        # avoids executing Git configuration from a root-owned working tree.
+        commit = Path('/opt/bevfusion/.git/HEAD').read_text().strip()
         assert commit == spec['commit'], 'Unexpected upstream revision'
-        assert torch.cuda.is_available()
-        torch.cuda.set_device(0)
-        # Some upstream norm layers query world_size even in eval mode.
-        with tempfile.TemporaryDirectory() as dist_dir:
-            torch.distributed.init_process_group('nccl', init_method='file://' + dist_dir + '/init', rank=0, world_size=1)
+        progress('configuration')
         set_random_seed(0, deterministic=True)
         torch.backends.cudnn.benchmark = False
         model_spec = spec['models'][a.model]
@@ -81,7 +87,7 @@ def main():
         for stage in ds_cfg.pipeline:
             if stage['type'] == 'Collect3D':
                 stage['keys'] = [key for key in stage['keys'] if key != 'gt_masks_bev']
-        cfg.dump(str(a.output / 'resolved_config.py'))
+        (a.output / 'resolved_config.py').write_text(cfg.pretty_text)
         dataset = build_dataset(ds_cfg)
         full_count = len(dataset)
         if a.limit:
@@ -98,17 +104,33 @@ def main():
         # Strict loading fails on unexplained missing/unexpected keys and shape mismatches.
         model.load_state_dict(state, strict=True)
         del raw, state
+        report.update(code_commit=commit, torch=torch.__version__, cuda=torch.version.cuda,
+                      mmcv=mmcv.__version__,
+                      checkpoint_sha256=sha256(checkpoint), infos_sha256=sha256(ds_cfg.ann_file),
+                      requested=len(dataset), full_split_count=full_count, batch_size=1, workers=0,
+                      coordinate_frame='LiDAR at keyframe; boxes.tensor uses bottom-center origin',
+                      classes=list(dataset.CLASSES), checkpoint_load='strict')
+        # Exercise the same single-rank CPU rendezvous in preflight and GPU runs.
+        rendezvous = tempfile.TemporaryDirectory()
+        torch.distributed.init_process_group('gloo', init_method='file://' + rendezvous.name + '/init', rank=0, world_size=1)
+        if a.preflight_only:
+            for i, data in enumerate(loader):
+                assert data is not None
+                report['completed'] = i + 1
+            report.update(status='preflight_passed', gpu='CPU', gpu_inference_executed=False)
+            return
+        assert torch.cuda.is_available()
+        torch.cuda.set_device(0)
+        # World size is queried by upstream eval normalization. A one-rank Gloo
+        # group is sufficient; single-GPU eval performs no GPU collectives.
         if cfg.get('fp16') is not None:
             wrap_fp16_model(model)
         model = MMDataParallel(model.cuda(), device_ids=[0]).eval()
         torch.cuda.reset_peak_memory_stats()
         predictions, times, records = [], [], []
-        report.update(code_commit=commit, torch=torch.__version__, cuda=torch.version.cuda,
-                      mmcv=mmcv.__version__, gpu=torch.cuda.get_device_name(0),
-                      checkpoint_sha256=sha256(checkpoint), infos_sha256=sha256(ds_cfg.ann_file),
-                      requested=len(dataset), full_split_count=full_count, batch_size=1, workers=0,
-                      coordinate_frame='LiDAR at keyframe; boxes.tensor uses bottom-center origin',
-                      classes=list(dataset.CLASSES), checkpoint_load='strict')
+        report.update(gpu=torch.cuda.get_device_name(0), distributed_backend='gloo',
+                      torch_cpu_threads=torch.get_num_threads())
+        progress('inference')
         with torch.no_grad():
             for i, data in enumerate(loader):
                 torch.cuda.synchronize()
@@ -124,6 +146,7 @@ def main():
                 records.append(dict(token=dataset.data_infos[i]['token'], boxes=boxes.tolist(),
                                     labels=item['labels_3d'].tolist(), scores=scores.tolist()))
                 report['completed'] = i + 1
+                progress('inference', i + 1)
         mmcv.dump(predictions, str(a.output / 'predictions.pkl'))
         (a.output / 'predictions.json').write_text(json.dumps(records))
         if not a.raw_only:
@@ -143,6 +166,10 @@ def main():
         report.update(wall_seconds=time.perf_counter()-started,
                       process_peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         (a.output / 'acceptance.json').write_text(json.dumps(report, indent=2) + '\n')
+        if 'torch' in locals() and torch.distributed.is_initialized():
+            torch.distributed.destroy_process_group()
+        if rendezvous is not None:
+            rendezvous.cleanup()
 
 
 if __name__ == '__main__':

@@ -55,6 +55,15 @@ def main():
             try:
                 rule=PathRule(1<<1,pathfd); syscall(445,fd,1,ctypes.byref(rule),0)
             finally: os.close(pathfd)
+        if os.environ.get('PROJECT_CUDA_SANDBOX') == '1':
+            # CUDA names its own threads through procfs during cuInit. Pin only
+            # this final workload PID's task subtree, never all of /proc.
+            # The caller must exec the workload directly, without a later fork.
+            pathfd=os.open('/proc/self/task',os.O_PATH|os.O_CLOEXEC)
+            try:
+                rule=PathRule((1<<1)|(1<<14),pathfd)
+                syscall(445,fd,1,ctypes.byref(rule),0)
+            finally: os.close(pathfd)
         if libc.prctl(38,1,0,0,0)!=0: raise OSError(ctypes.get_errno(),'PR_SET_NO_NEW_PRIVS')
         syscall(446,fd,0)
     finally: os.close(fd)
