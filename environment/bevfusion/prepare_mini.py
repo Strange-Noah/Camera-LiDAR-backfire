@@ -30,6 +30,21 @@ def main():
     from data_converter.nuscenes_converter import create_nuscenes_infos
     # Invoking the converter directly avoids unnecessary training GT database writes.
     create_nuscenes_infos(str(output), 'nuscenes', version='v1.0-mini', max_sweeps=10)
+    # Make infos portable across CPU/GPU mount user namespaces. Raw paths in
+    # the generated records must point at the canonical dataset, not this view.
+    import mmcv
+    def canonicalize(value):
+        if isinstance(value, str) and value.startswith(str(output) + '/'):
+            return str(source) + value[len(str(output)):]
+        if isinstance(value, dict):
+            return {key: canonicalize(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [canonicalize(item) for item in value]
+        if isinstance(value, tuple):
+            return tuple(canonicalize(item) for item in value)
+        return value
+    for path in output.glob('nuscenes_infos_*.pkl'):
+        mmcv.dump(canonicalize(mmcv.load(str(path))), str(path))
 
 
 if __name__ == '__main__':

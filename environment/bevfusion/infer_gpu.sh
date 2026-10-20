@@ -15,10 +15,10 @@ monitor_pid=$!
 trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
 runuser -u bfbaseline -- /usr/local/bin/project-experiment-shell -c '
  export PATH=/opt/venvs/bevfusion/bin:$PATH PYTHONPATH=/opt/bevfusion
- for count in 1 8; do
+ for count in 8; do
   for model in fusion lidar; do
-   python /opt/deployment/bevfusion/smoke.py --model "$model" --limit "$count" \
-    --data-view /workspace/staging/bfbaseline/bevfusion-mini \
+   python /opt/deployment/bevfusion/smoke.py --model "$model" --limit "$count" --raw-only \
+    --data-view /workspace/cache/bevfusion-runtime/mini-view \
     --output /workspace/results/bfbaseline/bevfusion-'"$RUNPOD_POD_ID"'-"$model"-"$count" || exit $?
   done
  done

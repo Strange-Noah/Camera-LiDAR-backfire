@@ -26,9 +26,12 @@ def main():
     p.add_argument('--output', required=True, type=Path)
     p.add_argument('--limit', type=int, default=8, help='0 means all mini_val samples')
     p.add_argument('--evaluate', action='store_true')
+    p.add_argument('--raw-only', action='store_true', help='Save predictions/metrics; defer plots and nuScenes formatting to CPU')
     a = p.parse_args()
     if a.limit < 0 or (a.evaluate and a.limit != 0):
         p.error('Evaluation requires the complete split: --limit 0')
+    if a.raw_only and a.evaluate:
+        p.error('Evaluation belongs to the CPU postprocessing phase')
     if os.geteuid() == 0:
         p.error('Run through the existing protected non-root experiment shell')
     if os.environ.get('PROJECT_DATASET_WRITE_GUARD') != 'landlock':
@@ -123,24 +126,8 @@ def main():
                 report['completed'] = i + 1
         mmcv.dump(predictions, str(a.output / 'predictions.pkl'))
         (a.output / 'predictions.json').write_text(json.dumps(records))
-        import numpy as np
-        import matplotlib
-        matplotlib.use('Agg')
-        import matplotlib.pyplot as plt
-        points = np.fromfile(dataset.data_infos[0]['lidar_path'], dtype=np.float32).reshape(-1, 5)
-        fig, ax = plt.subplots(figsize=(8, 8))
-        ax.scatter(points[::3, 0], points[::3, 1], s=0.1, c='gray', alpha=0.5)
-        first = predictions[0]
-        for corners, score in zip(first['boxes_3d'].corners.numpy(), first['scores_3d'].numpy()):
-            if score >= 0.3:
-                polygon = corners[[0, 3, 7, 4, 0], :2]
-                ax.plot(polygon[:, 0], polygon[:, 1], color='tab:red', linewidth=0.8)
-        ax.set(xlim=(-54, 54), ylim=(-54, 54), xlabel='LiDAR x (m)', ylabel='LiDAR y (m)',
-               title=a.model + ' clean predictions (score >= 0.3)')
-        ax.set_aspect('equal')
-        fig.savefig(str(a.output / 'first-sample-bev.png'), dpi=140)
-        plt.close(fig)
-        dataset.format_results(predictions, jsonfile_prefix=str(a.output / 'nuscenes'))
+        if not a.raw_only:
+            dataset.format_results(predictions, jsonfile_prefix=str(a.output / 'nuscenes'))
         if a.evaluate:
             report['mini_metrics_not_full_validation'] = dataset.evaluate(
                 predictions, metric='bbox', jsonfile_prefix=str(a.output / 'evaluation'))

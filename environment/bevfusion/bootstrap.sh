@@ -25,9 +25,13 @@ ssh-keygen -A
 umask 077
 printf '%s' "$RUNPOD_API_KEY" > /root/.bevfusion-pod-key
 umask 022
-git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=90 clone --depth 1 \
-  --branch feat/bevfusion-mini-deployment \
-  https://github.com/Strange-Noah/Camera-LiDAR-backfire.git /opt/management
+if [[ -d /workspace/cache/bevfusion-runtime/management ]]; then
+  cp -a /workspace/cache/bevfusion-runtime/management /opt/management
+else
+  git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=90 clone --depth 1 \
+    --branch feat/bevfusion-mini-deployment \
+    https://github.com/Strange-Noah/Camera-LiDAR-backfire.git /opt/management
+fi
 cp -r /opt/management/environment/bevfusion /opt/deployment/
 job_dir="/workspace/results/deployment/bevfusion-$RUNPOD_POD_ID"
 mkdir -p "$job_dir"
