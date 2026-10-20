@@ -35,11 +35,14 @@ def main():
     parser.add_argument('--pod-id', required=True)
     parser.add_argument('--key-file', required=True, type=Path)
     parser.add_argument('--state', required=True, type=Path)
+    parser.add_argument('--grace-seconds', type=float, default=30)
     parser.add_argument('command', nargs=argparse.REMAINDER)
     a = parser.parse_args()
     command = a.command[1:] if a.command[:1] == ['--'] else a.command
     if not command:
         parser.error('Missing job command')
+    if a.grace_seconds < 0:
+        parser.error('Grace period cannot be negative')
     key = a.key_file.read_text().strip()
     status, info = request(a.pod_id, key)
     if status != 200 or info['id'] != a.pod_id:
@@ -56,7 +59,7 @@ def main():
                  exit_code=child.returncode, finished_at=time.time())
     write_state(a.state, state)
     os.sync()
-    time.sleep(30)
+    time.sleep(a.grace_seconds)
     while True:
         try:
             status, _ = request(a.pod_id, key, 'DELETE')

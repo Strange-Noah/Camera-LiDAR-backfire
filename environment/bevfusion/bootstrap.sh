@@ -15,7 +15,7 @@ cleanup() {
 trap cleanup EXIT
 apt-get update
 apt-get install -y --no-install-recommends openssh-server ca-certificates curl python3 git \
-  libgl1 libglib2.0-0 libopenmpi3
+  libgl1 libglib2.0-0 libopenmpi3 python3-lib2to3 python3-distutils
 mkdir -p /run/sshd /root/.ssh /opt/deployment
 chmod 700 /root/.ssh
 printf '%s\n' "$PUBLIC_KEY" > /root/.ssh/authorized_keys
@@ -35,6 +35,9 @@ fi
 cp -r /opt/management/environment/bevfusion /opt/deployment/
 job_dir="/workspace/results/deployment/bevfusion-$RUNPOD_POD_ID"
 mkdir -p "$job_dir"
+grace_seconds=30
+if [[ "${BEVFUSION_PHASE:-infer_gpu}" = infer_gpu ]]; then grace_seconds=0; fi
 python3 -u /opt/deployment/bevfusion/job_guard.py --pod-id "$RUNPOD_POD_ID" \
   --key-file /root/.bevfusion-pod-key --state "$job_dir/job-state.json" \
+  --grace-seconds "$grace_seconds" \
   -- bash "/opt/deployment/bevfusion/${BEVFUSION_PHASE:-infer_gpu}.sh" > "$job_dir/guard.log" 2>&1

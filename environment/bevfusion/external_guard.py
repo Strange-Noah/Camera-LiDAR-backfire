@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import subprocess
 import time
-from job_guard import request
+from job_guard import request, write_state
 
 
 def main():
@@ -22,6 +22,7 @@ def main():
     deleting = False
     last_heartbeat = None
     terminal_seen = None
+    artifacts_saved = False
     while True:
         try:
             code, pod = request(cfg['pod_id'], key)
@@ -40,11 +41,25 @@ def main():
             if result.returncode == 0:
                 state = json.loads(result.stdout)
                 assert state['pod_id'] == cfg['pod_id']
+                write_state(a.config.parent / (cfg['pod_id'] + '.observed-state.json'), state)
                 armed = True
                 if state['status'] in ('completed', 'failed'):
                     if terminal_seen is None:
                         terminal_seen = time.monotonic()
                     deleting = time.monotonic() >= terminal_seen + 30
+                    if not artifacts_saved:
+                        paths = ['/workspace/cache/bevfusion-runtime/model-loads-cpu.json',
+                                 '/workspace/cache/bevfusion-runtime/input-validation.json',
+                                 '/workspace/cache/bevfusion-runtime/runtime.sha256',
+                                 '/workspace/cache/bevfusion-runtime/installed.freeze.txt']
+                        artifacts = {}
+                        for path in paths:
+                            item = subprocess.run(cfg['ssh'] + ['cat ' + path], capture_output=True,
+                                                  text=True, timeout=15)
+                            if item.returncode == 0:
+                                artifacts[path] = item.stdout
+                        write_state(a.config.parent / (cfg['pod_id'] + '.artifacts.json'), artifacts)
+                        artifacts_saved = True
                 elif state['heartbeat'] != last_heartbeat:
                     last_heartbeat = state['heartbeat']
                     last_healthy = time.monotonic()

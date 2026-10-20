@@ -1,0 +1,21 @@
+[
+  {
+    "exit_code": 0,
+    "grace_seconds": 30.001967191696167,
+    "delete_attempts": 2,
+    "passed": true
+  },
+  {
+    "exit_code": 1,
+    "grace_seconds": 30.003717184066772,
+    "delete_attempts": 1,
+    "passed": true
+  },
+  {
+    "exit_code": 1,
+    "grace_seconds": 0.0014081001281738281,
+    "delete_attempts": 1,
+    "configured_grace": 0,
+    "passed": true
+  }
+]

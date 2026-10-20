@@ -1,0 +1,14 @@
+[
+  {
+    "model": "fusion",
+    "status": "passed",
+    "strict": true,
+    "tensors": 582
+  },
+  {
+    "model": "lidar",
+    "status": "passed",
+    "strict": true,
+    "tensors": 306
+  }
+]
