@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "owner-topic-date-run",
+  "owner": "replace-me",
+  "dataset": {
+    "name": "nuScenes",
+    "version": "v1.0-trainval",
+    "split": "val",
+    "scope": "explicit-selected-sample-subset",
+    "root_env": "NUSCENES_ROOT",
+    "sample_tokens_manifest": "path-or-artifact-id",
+    "infos_sha256": "record-after-preparation"
+  },
+  "model": {
+    "name": "replace-me",
+    "upstream_commit": "record-exact-commit",
+    "checkpoint_sha256": "record-exact-hash",
+    "resolved_config": "path-or-artifact-id"
+  },
+  "runtime": {
+    "project_commit": "record-exact-commit",
+    "environment_lock": "path-or-artifact-id",
+    "platform": "record-os-and-architecture",
+    "gpu": "record-model-or-CPU",
+    "driver": "record-version-or-not-applicable",
+    "cuda_toolkit": "record-build-version-or-not-applicable",
+    "seed": 0
+  },
+  "result": {
+    "status": "not-run",
+    "artifact_location": "outside-git",
+    "accuracy_claim": "none-for-smoke-test"
+  }
+}
