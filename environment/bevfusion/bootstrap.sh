@@ -13,13 +13,23 @@ cleanup() {
   done
 }
 trap cleanup EXIT
-apt-get update
-apt-get install -y --no-install-recommends openssh-server ca-certificates curl python3 git \
-  libgl1 libglib2.0-0 libopenmpi3 python3-lib2to3 python3-distutils
+if [[ "${BEVFUSION_USE_OS_CACHE:-0}" = 1 ]]; then
+  sha256sum -c /workspace/cache/bevfusion-runtime/os-runtime.sha256
+  tar -C / -xzf /workspace/cache/bevfusion-runtime/os-runtime.tar.gz
+else
+  apt-get -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
+  apt-get -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install -y --no-install-recommends \
+    openssh-server ca-certificates curl python3 git libgl1 libglib2.0-0 libopenmpi3 \
+    python3-lib2to3 python3-distutils
+fi
 mkdir -p /run/sshd /root/.ssh /opt/deployment
 chmod 700 /root/.ssh
 printf '%s\n' "$PUBLIC_KEY" > /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
+# Package payload restoration does not run the openssh postinst user creation.
+if ! id -u sshd >/dev/null 2>&1; then
+  useradd --system --home-dir /run/sshd --shell /usr/sbin/nologin sshd
+fi
 ssh-keygen -A
 /usr/sbin/sshd
 umask 077

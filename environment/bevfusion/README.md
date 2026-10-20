@@ -109,3 +109,27 @@ Functional guard tests: `python3 -m unittest discover -s tests -p test_bevfusion
 They run real independent processes with a simulated provider API, covering hung
 failure, inactivity and retry. The actual successful GPU run separately proves
 HTTP 204 deletion followed by account-level 404.
+
+## One-frame official trainval acceptance
+
+`prepare_trainval_subset.py` selects `scene-0003` and one official val frame outside
+mini, streams the official first blob shard and retains only its six images plus
+current LiDAR and ten preceding LiDAR files. It never edits the existing mini root.
+The separate root is `/workspace/datasets/nuscenes-trainval-smoke`. The metadata
+subset is explicitly partial; it must not be evaluated as full validation.
+
+`prepare_trainval_cpu.sh` performs acquisition, selected-file hash/format checks,
+the pinned converter and a fusion-only CPU preflight. `prepare_os_cache_cpu.sh`
+additionally caches installed public runtime package payloads and generated SSH/PAM
+configuration, then prepares CPU dataset figures. The optional `BEVFUSION_USE_OS_CACHE=1`
+bootstrap path restores this cache instead of running apt. Validate it in a fresh
+CPU Pod with phase `validate_trainval_cpu` before using it on GPU. The cache is tied
+to the pinned Ubuntu20.04 base; its package database is not restored and it is not
+a general substitute for building a container image.
+
+For the minimal GPU job set `BEVFUSION_MODELS=fusion`, `BEVFUSION_LIMIT=1`,
+`BEVFUSION_DATA_VIEW=/workspace/datasets/nuscenes-trainval-smoke`,
+`BEVFUSION_PHASE=infer_gpu`, and the validated OS-cache flag. Defaults remain both
+models/eight mini samples for older callers. Results retain dataset version and
+infos identity. No data download, package installation, compilation, figures or
+metrics belong in this GPU phase when both caches are ready.

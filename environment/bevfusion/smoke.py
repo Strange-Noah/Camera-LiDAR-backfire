@@ -23,9 +23,9 @@ def main():
     p.add_argument('--model', required=True, choices=['fusion', 'lidar'])
     p.add_argument('--data-view', required=True, type=Path)
     p.add_argument('--output', required=True, type=Path)
-    p.add_argument('--limit', type=int, default=8, help='0 means all mini_val samples')
+    p.add_argument('--limit', type=int, default=8, help='0 means all samples in the supplied validation infos')
     p.add_argument('--evaluate', action='store_true')
-    p.add_argument('--raw-only', action='store_true', help='Save predictions/metrics; defer plots and nuScenes formatting to CPU')
+    p.add_argument('--raw-only', action='store_true', help='Save raw predictions; defer plots and nuScenes formatting to CPU')
     p.add_argument('--preflight-only', action='store_true', help='Exercise this runner through data loading and checkpoint matching on CPU')
     a = p.parse_args()
     if a.limit < 0 or (a.evaluate and a.limit != 0):
@@ -108,6 +108,7 @@ def main():
                       mmcv=mmcv.__version__,
                       checkpoint_sha256=sha256(checkpoint), infos_sha256=sha256(ds_cfg.ann_file),
                       requested=len(dataset), full_split_count=full_count, batch_size=1, workers=0,
+                      dataset_version=dataset.version, data_view=str(a.data_view.resolve()),
                       coordinate_frame='LiDAR at keyframe; boxes.tensor uses bottom-center origin',
                       classes=list(dataset.CLASSES), checkpoint_load='strict')
         # Exercise the same single-rank CPU rendezvous in preflight and GPU runs.

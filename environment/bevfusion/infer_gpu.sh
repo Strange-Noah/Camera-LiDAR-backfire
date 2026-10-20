@@ -24,13 +24,17 @@ finalize() {
   exit "$status"
 }
 trap finalize EXIT
-for model in fusion lidar; do
+models=${BEVFUSION_MODELS:-"fusion lidar"}
+limit=${BEVFUSION_LIMIT:-8}
+data_view=${BEVFUSION_DATA_VIEW:-/workspace/cache/bevfusion-runtime/mini-view}
+for model in $models; do
+  [[ "$model" = fusion || "$model" = lidar ]] || { echo "Invalid model selection" >&2; exit 1; }
   runuser -u bfbaseline -- env PROJECT_OUTPUT_MODE=local PROJECT_CUDA_SANDBOX=1 \
     BEVFUSION_PROGRESS_FILE=/home/bfbaseline/results/progress.json \
     PATH="$PATH" PYTHONPATH=/opt/bevfusion \
     /usr/bin/python3 /usr/local/lib/camera-lidar/run_readonly_experiment.py -- \
-    /opt/venvs/bevfusion/bin/python /opt/deployment/bevfusion/smoke.py --model "$model" --limit 8 --raw-only \
-    --data-view /workspace/cache/bevfusion-runtime/mini-view \
-    --output /home/bfbaseline/results/"$model"-8
+    /opt/venvs/bevfusion/bin/python /opt/deployment/bevfusion/smoke.py --model "$model" --limit "$limit" --raw-only \
+    --data-view "$data_view" \
+    --output /home/bfbaseline/results/"$model"-"$limit"
 done
 echo 'GPU_SMOKE_TESTS_PASSED'

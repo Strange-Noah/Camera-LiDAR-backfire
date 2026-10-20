@@ -48,12 +48,19 @@ def main():
                         terminal_seen = time.monotonic()
                     deleting = time.monotonic() >= terminal_seen + 30
                     if not artifacts_saved:
-                        paths = ['/workspace/cache/bevfusion-runtime/model-loads-cpu.json',
+                        paths = ['/workspace/results/deployment/trainval-cpu-' + cfg['pod_id'] + '/preflight.json',
+                                 '/workspace/results/deployment/trainval-cpu-' + cfg['pod_id'] + '/input-check.json',
+                                 '/workspace/results/deployment/trainval-cold-cpu-' + cfg['pod_id'] + '/preflight.json',
+                                 '/workspace/cache/bevfusion-runtime/model-loads-cpu.json',
                                  '/workspace/cache/bevfusion-runtime/input-validation.json',
                                  '/workspace/cache/bevfusion-runtime/runner-preflight-fusion.json',
                                  '/workspace/cache/bevfusion-runtime/runner-preflight-lidar.json',
                                  '/workspace/cache/bevfusion-runtime/runtime.sha256',
-                                 '/workspace/cache/bevfusion-runtime/installed.freeze.txt']
+                                 '/workspace/cache/bevfusion-runtime/installed.freeze.txt',
+                                 cfg['state_file'].rsplit('/',1)[0] + '/guard.log',
+                                 '/workspace/results/deployment/trainval-cpu-' + cfg['pod_id'] + '/preparation.log',
+                                 '/workspace/datasets/nuscenes-trainval-smoke/subset-manifest.json',
+                                 '/workspace/cache/bevfusion-runtime/os-runtime-manifest.json']
                         artifacts = {}
                         for path in paths:
                             item = subprocess.run(cfg['ssh'] + ['cat ' + path], capture_output=True,
