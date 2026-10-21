@@ -1,4 +1,4 @@
-# Official validation preparation (CPU only)
+# Official validation baseline
 
 Current continuation: the user expanded the existing volume to 90 GB and
 authorized CPU acquisition/preflight, a representative GPU pilot, full inference
@@ -6,6 +6,59 @@ for both models, CPU evaluation and automatic Pod deletion. Never expand beyond
 90 GB. Keep at least 5 GB free. No training, corruption or changes to main/the
 teammate branch are authorized. Full baseline results are still NOT_RUN until
 actual inference and evaluation complete.
+
+Latest verified milestone (2026-10-21): all 94,522 clean sensor files are
+available and verified. Both original pipelines passed all 6,019 frames with
+strict checkpoint loading, four workers, and identical per-token LiDAR input
+records. Readiness is PASS. A 200-frame pilot per model completed on RTX 4090;
+all 400 durable predictions passed a separate CPU checksum/input audit after
+the GPU Pod deleted itself (account-level GET returned 404). Full inference and
+official accuracy evaluation remain NOT_RUN. Resume from the pilot, rather
+than repeating acquisition or the completed full CPU preflight.
+
+The completed manifest SHA256 is
+`a0e22d8997c745a24d6b1491106926c98dcb96e1344e67e2ad1b91e03198b8ad`.
+Its earlier audit snapshot `bc68...` below is historical and remains preserved.
+Measured volume usage before the pilot was 66,802,286,592 bytes against the
+90,000,000,000-byte quota; no further expansion is required for clean validation.
+
+## Unattended GPU execution
+
+Submit `bootstrap_gpu.sh` as the container entrypoint command, with
+`VALIDATION_PHASE=full`, the pinned CUDA 11.3.1 Ubuntu 20.04 image, and the
+existing volume mounted at `/workspace`. Source, OS/runtime caches, weights,
+data, readiness report and pilot records must already exist on that volume.
+The entrypoint starts the job; SSH and the local agent are optional observers.
+
+`infer_gpu.sh` restores the prebuilt runtime, runs the two models sequentially,
+and maintains an independent root persistence worker. Each completed sample
+has an atomic prediction and checksum/identity marker; the root worker verifies
+and atomically publishes it to the Network Volume every three seconds. The
+job waits for the final persistence pass and sync before exiting. A persistence
+failure stops inference and triggers one bounded salvage pass. Verified cached
+pilot predictions are reused; incomplete or incompatible records are rejected.
+
+`job_guard.py` owns the complete process group and saves exit state on the
+volume. It requests Pod deletion on success or failure and retries transport
+failures. The bootstrap EXIT trap provides another deletion path. There is no
+total-runtime limit. The 900-second watchdog measures lack of actual progress,
+not total duration, and the GPU completion grace is zero seconds. Do not add
+CPU report-receipt waiting to this GPU job. A local external guard is optional;
+the successful pilot demonstrated deletion without arming that extra observer.
+
+This removes dependence on an agent turn, tokens, or an SSH connection. It
+cannot promise successful computation through host failure, exhausted storage,
+or a provider control-plane outage. Such failures must retain completed durable
+samples for resume; account-level GET 404 is the final cleanup proof. Do not
+interpret Pod-scoped credential rejection alone as proof of deletion.
+
+Use `inspect_pilot_cpu.py <gpu-pod-id>` on a CPU Pod for pilot acceptance and
+cost/memory review. After full inference and account-level GPU cleanup, use
+`assemble_cpu.py --cleanup-proof <proof.json>` in the pinned CPU runtime for
+ordered merge, official formatting/evaluation, and acceptance. Never evaluate
+or install/build dependencies while paying for a GPU.
+
+## Historical preparation milestone
 
 Previous preparation milestone: all ten archive audits passed; official infos cover 6019
 samples; strict loading and the original full pipeline passed on 163 complete
@@ -100,11 +153,10 @@ Raw canonical inputs remain `/workspace/datasets/nuscenes/` (unchanged).
 Derived val view: `/workspace/datasets/nuscenes-validation/`.
 Management copy: `/workspace/cache/validation-baseline-preparation/management/`.
 
-All ten archives have completed. Their summaries/indexes and the final manifest
+All ten archive audits have completed. Their summaries/indexes and the initial manifest
 are persisted; the full manifest was independently checked locally against SHA256
 `bc68c7dd7a3509354750c30de63ba5c772547e91d09ae852b1bee9bd90fd4982`.
-Do not repeat the completed storage audit. With resize authorization received, acquire
-only missing clean members on CPU. If an archive audit ever needs recovery,
+Do not repeat the completed storage audit or acquisition. If an archive audit ever needs recovery,
 completed summary + index pairs
 skip network transfer. A failed/incomplete archive restarts from its beginning;
 already extracted keyframes are inventoried and not duplicated. Keep failed
