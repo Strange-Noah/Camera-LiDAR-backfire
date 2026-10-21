@@ -5,11 +5,16 @@ import os
 from pathlib import Path
 import tarfile
 import time
+import argparse
 
 ROOT = Path('/workspace/results/validation-baseline-preparation')
 
 
-def main():
+def main(job_exit_code=0):
+    if job_exit_code:
+        # Never ship a stale success after a failed merge/evaluation attempt.
+        (ROOT/'baseline-results.json').write_text(json.dumps(dict(status='BASELINE_INCOMPLETE',
+            cpu_job_exit_code=job_exit_code,reason='CPU merge/evaluation failed; preserve diagnostics and inspect coverage/logs.'))+'\n')
     result = json.loads((ROOT/'baseline-results.json').read_text())
     # A metrics mismatch is an explicit scientific outcome, not a reason to
     # discard evidence or leave the CPU Pod running.
@@ -50,4 +55,7 @@ def main():
     print(json.dumps(receipt), flush=True)
 
 
-if __name__ == '__main__':main()
+if __name__ == '__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--job-exit-code',type=int,default=0)
+    main(parser.parse_args().job_exit_code)
