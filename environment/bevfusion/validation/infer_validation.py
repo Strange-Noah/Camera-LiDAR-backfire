@@ -97,7 +97,7 @@ def main():
         if a.phase == 'pilot':
             # One middle frame per official val scene: 150 scenes and lighting/motion conditions.
             chosen = set(json.loads((ROOT/'pilot-sample-tokens.json').read_text()))
-            assert len(chosen) == 150
+            assert 150 <= len(chosen) <= 200 and chosen.issubset(all_tokens)
         reused = []
         for token in list(chosen):
             directory = PERSISTED/a.model/token

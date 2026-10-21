@@ -32,7 +32,6 @@ def main():
         scenes.setdefault(sample['scene_token'], []).append(sample['token'])
     pilot_tokens = [items[len(items)//2] for items in scenes.values()]
     assert len(pilot_tokens) == len(set(pilot_tokens)) == 150
-    (ROOT/'pilot-sample-tokens.json').write_text(json.dumps(pilot_tokens))
     (ROOT/'validation-sample-tokens.json').write_text(json.dumps(tokens))
     pipelines = {}
     inputs = {}
@@ -48,6 +47,18 @@ def main():
         inputs[model] = {r['token']:r for r in map(json.loads,lines)}
         assert len(lines) == len(inputs[model]) == 6019 and set(inputs[model]) == set(tokens)
     assert inputs['fusion'] == inputs['lidar']
+    selected = set(pilot_tokens)
+    for record in sorted(inputs['fusion'].values(), key=lambda r: (-r['points_shape'][0], r['token'])):
+        if record['token'] not in selected:
+            pilot_tokens.append(record['token'])
+            selected.add(record['token'])
+        if len(pilot_tokens) == 200:
+            break
+    assert len(pilot_tokens) == 200 and selected.issubset(tokens)
+    (ROOT/'pilot-sample-tokens.json').write_text(json.dumps(pilot_tokens))
+    (ROOT/'pilot-selection-report.json').write_text(json.dumps(dict(samples=200,scenes=150,
+        policy='One middle frame per official val scene, plus highest preprocessed LiDAR point counts until 200 unique samples',
+        token_file_sha256=digest(ROOT/'pilot-sample-tokens.json')),indent=2)+'\n')
     real = read('real-prediction-evaluator-selftest/report.json')
     assert real['status'] == 'PASS' and real['sample_tokens'] == 6019 and real['nonempty_samples'] > 0
     assert not real['baseline_accuracy_result']
