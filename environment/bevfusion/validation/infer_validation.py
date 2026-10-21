@@ -57,6 +57,8 @@ def main():
         # This is the flag explicitly set in the pinned official tools/test.py.
         torch.backends.cudnn.benchmark = True
         spec = json.loads(Path(__file__).parent.parent.joinpath('upstream.json').read_text())
+        readiness = json.loads((ROOT/'baseline-preflight-report.json').read_text())
+        assert readiness['status'] == 'PASS' and readiness['full_gpu_admission']
         assert Path('/opt/bevfusion/.git/HEAD').read_text().strip() == spec['commit']
         item = spec['models'][a.model]
         checkpoint = Path('/workspace/checkpoints/bevfusion') / item['file']
@@ -86,6 +88,9 @@ def main():
             input_protocol_source_sha256=digest(Path(__file__).with_name('input_protocol.py')),
             input_protocol=POLICY, cudnn_benchmark=True, deterministic=False, batch_size=1,
             parallel='MMDataParallel, one-rank Gloo group; official transforms and fp16 retained')
+        assert identity['manifest_sha256'] == readiness['manifest_sha256']
+        assert identity['infos_sha256'] == readiness['official_infos_sha256']
+        assert identity['checkpoint_sha256'] == readiness['checkpoint_sha256'][a.model]
         all_tokens = [info['token'] for info in dataset.data_infos]
         assert len(set(all_tokens)) == 6019
         chosen = set(all_tokens)

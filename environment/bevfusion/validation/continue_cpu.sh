@@ -30,3 +30,4 @@ done
 python /opt/deployment/bevfusion/validation/test_acceptance.py >"$out/acceptance-tests.log" 2>&1
 du -sx --block-size=1 /workspace > "$out/post-acquisition-volume-usage.txt"
 echo FULL_CPU_PREPARATION_COMPLETE
+python -u /opt/deployment/bevfusion/validation/readiness_cpu.py
