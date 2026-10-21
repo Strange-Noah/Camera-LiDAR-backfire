@@ -184,6 +184,12 @@ def main():
             velocity=[0.,0.], detection_name='car', detection_score=.01, attribute_name='vehicle.parked')]
         synthetic.write_text(json.dumps(dict(meta=dict(use_camera=model=='fusion',use_lidar=True,
             use_radar=False,use_map=False,use_external=False), results=results)))
+        previous_evaluation = OUT / ('evaluator-selftest-'+model) / 'evaluation-report.json'
+        if previous_evaluation.exists():
+            previous = json.loads(previous_evaluation.read_text())
+            if previous.get('purpose') == 'SOFTWARE_SELF_TEST' and previous.get('prediction_sha256') == sha(synthetic):
+                tick('official_evaluator_software_test_cache_verified', model=model)
+                continue
         tick('official_evaluator_software_test', model=model)
         subprocess.run([sys.executable, str(Path(__file__).with_name('evaluate_cpu.py')),
             '--model', model, '--predictions', str(synthetic), '--dataroot', str(VIEW),

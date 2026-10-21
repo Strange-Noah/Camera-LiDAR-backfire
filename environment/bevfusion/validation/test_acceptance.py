@@ -31,7 +31,7 @@ class AcceptanceTest(unittest.TestCase):
                 sample_tokens_sha256=artifacts['sample_tokens']['sha256'],
                 formatted_sha256=artifacts['nuscenes_predictions']['sha256']))
             artifacts['raw_validation'] = dict(path=str(validation), sha256=gate.sha(validation))
-            execution = dict(model=model, strict_checkpoint_load=True, exit_code=0, completed_samples=6019,
+            execution = dict(model=model, strict_checkpoint_load=True, exit_code=0, gpu_cleanup_verified=True, completed_samples=6019,
                 manifest_sha256=gate.sha(self.manifest), dataset_version='v1.0-trainval', split='val',
                 unhandled_errors=[], unexplained_deviations=[],
                 checkpoint_sha256={'fusion': 'ee0a389213922343508db40dff0ec04767b36d8f512da34b093939c37aaf2122',
@@ -66,6 +66,10 @@ class AcceptanceTest(unittest.TestCase):
 
     def test_unclean_exit_rejected(self):
         self.mutate('lidar', 0, lambda x: x.update(exit_code=1))
+        self.assertEqual(gate.accept(self.manifest, self.records)['status'], 'BASELINE_FAILED')
+
+    def test_unverified_gpu_cleanup_rejected(self):
+        self.mutate('fusion', 0, lambda x: x.update(gpu_cleanup_verified=False))
         self.assertEqual(gate.accept(self.manifest, self.records)['status'], 'BASELINE_FAILED')
 
     def test_synthetic_eval_cannot_claim_accuracy(self):

@@ -1,12 +1,19 @@
 # Official validation preparation (CPU only)
 
-Status on 2026-10-21: all ten archive audits passed; official infos cover 6019
+Current continuation: the user expanded the existing volume to 90 GB and
+authorized CPU acquisition/preflight, a representative GPU pilot, full inference
+for both models, CPU evaluation and automatic Pod deletion. Never expand beyond
+90 GB. Keep at least 5 GB free. No training, corruption or changes to main/the
+teammate branch are authorized. Full baseline results are still NOT_RUN until
+actual inference and evaluation complete.
+
+Previous preparation milestone: all ten archive audits passed; official infos cover 6019
 samples; strict loading and the original full pipeline passed on 163 complete
 real val samples for each model. All 8420 available clean files passed payload
 checks; 86102 required files are still missing. Both official evaluator software
 tests, a 135-box coordinate round-trip and 10 acceptance tests passed. The CPU
 worker and final guard exited 0; deletion was verified through account-level 404.
-No GPU was rented and the 50 GB volume was not resized. Full GPU admission stays
+No GPU was rented at that milestone and the then-50 GB volume was not resized. Full GPU admission stays
 BLOCKED_MISSING_PAYLOAD. Full-val model results are NOT_RUN.
 
 This directory is isolated from the previously validated mini/single-frame
@@ -14,6 +21,34 @@ deployment. Local branch: `feat/validation-baseline-preparation`. Preserve both
 existing draft PRs, main and the teammate's Windows setup branch.
 
 ## Files
+
+- `acquire_clean.py`: resume only missing A files from the audited official
+  archives, stream without retaining tgz files, atomically publish members,
+  verify archive CRC/HTTP byte count, and enforce the 90 GB quota/5 GB reserve.
+- `input_protocol.py`: unmodified random-nine-of-ten upstream sweep loader,
+  token-derived RNG seeds, actual selected paths and final LiDAR tensor hashes.
+  Both CPU and GPU runs must match the same per-token input identity. This is a
+  declared single-rank/token-seeded RNG convention, not exact eight-rank RNG parity.
+- `test_real_evaluator_cpu.py`: real saved smoke boxes plus legal empty outputs
+  for the other official val tokens; software acceptance only.
+- `readiness_cpu.py`: full 94522-file, 6019-frame, two-model strict-load,
+  input-identity, evaluator, runtime and quota gate before any GPU pilot.
+- `infer_validation.py`, `infer_gpu.sh`, `persist_gpu.py`: pilot/full single-GPU
+  forward, strict checkpoint load, original complete test transforms, fp16 and
+  official cuDNN benchmark flag; atomic per-token persistence and resume.
+- `assemble_cpu.py`: verify all raw records, token order and cleanup proof;
+  combine/format/evaluate on CPU, then run the acceptance gates.
+- `test_persistence.py`: incomplete outputs, checksum failures, idempotent
+  replay and overwrite rejection at the durable handoff boundary.
+
+Persistent raw predictions: `/workspace/results/validation-baseline-preparation/clean-predictions/{fusion,lidar}/{sample_token}/`.
+CPU merged predictions/metrics: `baseline-{fusion,lidar}/` under the same root.
+Run summaries/configs: `clean-predictions/runs/`. GPU bootstrap must use the
+independent Pod-side guard, a zero-second completion grace and a 900-second
+no-progress watchdog; never use the CPU report-receipt wait on a GPU.
+After the CPU task completes, execute `readiness_cpu.py` in the restored CPU
+runtime and verify its PASS report before provisioning the pilot. Pilot deletion
+must be verified through the account control plane before the full GPU job.
 
 - `audit_manifest.py`: Python 3.12 + ijson 3.3.0. Read original full metadata;
   select official 150 val scenes / 6019 samples from installed devkit splits;
@@ -68,7 +103,7 @@ Management copy: `/workspace/cache/validation-baseline-preparation/management/`.
 All ten archives have completed. Their summaries/indexes and the final manifest
 are persisted; the full manifest was independently checked locally against SHA256
 `bc68c7dd7a3509354750c30de63ba5c772547e91d09ae852b1bee9bd90fd4982`.
-Do not repeat the completed storage audit. After resize authorization, acquire
+Do not repeat the completed storage audit. With resize authorization received, acquire
 only missing clean members on CPU. If an archive audit ever needs recovery,
 completed summary + index pairs
 skip network transfer. A failed/incomplete archive restarts from its beginning;
@@ -91,8 +126,8 @@ Measured clean payload is 45,914,302,890 bytes (40,601,279,434 missing). B is
 71,477,025,411 bytes (65,468,874,208 missing). Fresh existing usage is
 26,082,533,888 bytes. With temporary/output budgets and margin, A recommends
 90 GB (+$2.80/month); B recommends 110 GB (+$4.20/month), STANDARD $0.07/GB/month.
-Resize authorization remains pending. Do not resize or launch a GPU on the basis
-of this README alone.
+The user has now expanded the volume to 90 GB and authorized the full baseline
+sequence, subject to CPU/pilot gates. No further resize is authorized.
 
 ## Execution report contract
 

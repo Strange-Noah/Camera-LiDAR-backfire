@@ -54,6 +54,7 @@ def accept(manifest_path, records, tolerance=.01):
         check(execution.get('model') == model, 'Model identity mismatch')
         check(execution.get('strict_checkpoint_load') is True, 'Checkpoint not strictly loaded')
         check(execution.get('exit_code') == 0, 'Process did not exit cleanly')
+        check(execution.get('gpu_cleanup_verified') is True, 'GPU deletion not independently verified')
         check(execution.get('completed_samples') == 6019, 'Incomplete execution count')
         check(execution.get('manifest_sha256') == sha(manifest_path), 'Manifest hash mismatch')
         check(execution.get('dataset_version') == 'v1.0-trainval' and execution.get('split') == 'val', 'Wrong dataset/split')

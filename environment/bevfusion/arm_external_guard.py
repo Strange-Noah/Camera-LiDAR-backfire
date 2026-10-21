@@ -12,6 +12,7 @@ p = argparse.ArgumentParser()
 p.add_argument('--pod-id', required=True)
 p.add_argument('--host', required=True)
 p.add_argument('--port', required=True, type=int)
+p.add_argument('--state-file', help='Explicit persistent state path for a non-smoke job')
 a = p.parse_args()
 root = Path(__file__).resolve().parents[2]
 local = root / '.local' / 'bevfusion-runtime'
@@ -28,7 +29,7 @@ key.chmod(0o600)
 code, pod = request(a.pod_id, key.read_text().strip())
 assert code == 200 and pod['id'] == a.pod_id, 'Pod identity check failed'
 cfg = dict(pod_id=a.pod_id, key_file=str(key),
-           state_file='/workspace/results/deployment/bevfusion-' + a.pod_id + '/job-state.json',
+           state_file=a.state_file or '/workspace/results/deployment/bevfusion-' + a.pod_id + '/job-state.json',
            ssh=['ssh'] + common + ['-p', str(a.port), 'root@' + a.host])
 config = local / (a.pod_id + '.json')
 config.write_text(json.dumps(cfg)); config.chmod(0o600)
