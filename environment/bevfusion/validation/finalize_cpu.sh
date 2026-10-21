@@ -19,6 +19,19 @@ sha256sum -c /workspace/cache/bevfusion-runtime/runtime.sha256
 tar -C / -xzf /workspace/cache/bevfusion-runtime/runtime.tar.gz
 export PATH=/opt/venvs/bevfusion/bin:$PATH PYTHONPATH=/opt/bevfusion
 python -c 'import torch,mmcv,mmdet3d.ops; assert not torch.cuda.is_available(); print("CPU_EVALUATION_RUNTIME_READY",flush=True)'
+python3 - <<'PY'
+from pathlib import Path
+import json
+root=Path('/workspace/results/validation-baseline-preparation')
+tokens={json.loads(line)['token'] for line in (root/'validation-full-preflight-fusion/input-selection.jsonl').read_text().splitlines()}
+assert len(tokens)==6019
+coverage={}
+for model in ['fusion','lidar']:
+    actual={p.parent.name for p in (root/'clean-predictions'/model).glob('*/complete.json')}
+    coverage[model]=dict(expected=6019,complete=len(actual),missing=sorted(tokens-actual),extra=sorted(actual-tokens))
+(root/'prediction-coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
+print('DURABLE_RAW_COVERAGE',json.dumps(coverage),flush=True)
+PY
 python -u /opt/deployment/bevfusion/validation/assemble_cpu.py \
  --cleanup-proof "$out/gpu-cleanup-proof.json"
 sync

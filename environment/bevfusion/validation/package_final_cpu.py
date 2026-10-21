@@ -20,7 +20,7 @@ def main(job_exit_code=0):
     # discard evidence or leave the CPU Pod running.
     assert result['status'] in ['BASELINE_REPRODUCED', 'BASELINE_EXECUTED_BUT_NOT_REPRODUCED',
                                 'BASELINE_FAILED', 'BASELINE_INCOMPLETE']
-    names = ['baseline-results.json', 'baseline-preflight-report.json', 'gpu-cleanup-proof.json',
+    names = ['baseline-results.json', 'baseline-preflight-report.json', 'gpu-cleanup-proof.json', 'prediction-coverage.json',
              'pilot-review.json', 'pilot-selection-report.json', 'gpu-compatibility-audit.json',
              'management-source-identity.json', 'evaluation-source-identity.json']
     for model in ['fusion', 'lidar']:
