@@ -4,17 +4,26 @@ Current continuation: the user expanded the existing volume to 90 GB and
 authorized CPU acquisition/preflight, a representative GPU pilot, full inference
 for both models, CPU evaluation and automatic Pod deletion. Never expand beyond
 90 GB. Keep at least 5 GB free. No training, corruption or changes to main/the
-teammate branch are authorized. Full baseline results are still NOT_RUN until
-actual inference and evaluation complete.
+teammate branch are authorized. The clean baseline is now complete; reuse its
+saved predictions and metrics rather than renting a GPU to repeat finished work.
 
-Latest verified milestone (2026-10-21): all 94,522 clean sensor files are
+Latest verified milestone (2026-10-22, Asia/Shanghai): **BASELINE_REPRODUCED**.
+Official val metrics (0–1 scale): BEVFusion mAP 0.6854641315 / NDS
+0.7139845833; TransFusion-L mAP 0.6466466635 / NDS 0.6925096837. All four
+differences from the official references are below 0.01. Both models have
+6,019 verified raw predictions and official CPU evaluation. All temporary Pods
+were independently verified deleted through account-level GET 404.
+
+All 94,522 clean sensor files are
 available and verified. Both original pipelines passed all 6,019 frames with
 strict checkpoint loading, four workers, and identical per-token LiDAR input
 records. Readiness is PASS. A 200-frame pilot per model completed on RTX 4090;
 all 400 durable predictions passed a separate CPU checksum/input audit after
-the GPU Pod deleted itself (account-level GET returned 404). Full inference and
-official accuracy evaluation remain NOT_RUN. Resume from the pilot, rather
-than repeating acquisition or the completed full CPU preflight.
+the GPU Pod deleted itself (account-level GET returned 404). Full inference used
+RTX 4090; 414 LiDAR-only outputs lost at an old mirror completion boundary were
+recovered on L4. The GPU runner/input protocol hashes were unchanged. Local
+reports and the Network Volume retain the original incomplete run and recovery
+evidence. No metrics, NMS or model settings were tuned to reach the references.
 
 The completed manifest SHA256 is
 `a0e22d8997c745a24d6b1491106926c98dcb96e1344e67e2ad1b91e03198b8ad`.
@@ -35,8 +44,16 @@ and maintains an independent root persistence worker. Each completed sample
 has an atomic prediction and checksum/identity marker; the root worker verifies
 and atomically publishes it to the Network Volume every three seconds. The
 job waits for the final persistence pass and sync before exiting. A persistence
-failure stops inference and triggers one bounded salvage pass. Verified cached
+failure stops inference and triggers one bounded salvage pass. Once STOP is
+observed, it performs an additional full scan after producer completion; a
+regression test covers STOP arriving midway through an older directory scan.
+The five persistence tests and eleven acceptance tests passed. Verified cached
 pilot predictions are reused; incomplete or incompatible records are rejected.
+`VALIDATION_MODELS=lidar` can restrict a recovery Pod to an incomplete modality;
+the default remains both models. Do not start a recovery Pod for an already
+complete modality. The default shared-volume source cache is pinned to
+`fb3641a23e7331a0f6e43918124339a09f766846` and includes this fix; its preceding
+cache is retained separately for provenance.
 
 `job_guard.py` owns the complete process group and saves exit state on the
 volume. It requests Pod deletion on success or failure and retries transport
@@ -58,6 +75,14 @@ cost/memory review. After full inference and account-level GPU cleanup, use
 ordered merge, official formatting/evaluation, and acceptance. Never evaluate
 or install/build dependencies while paying for a GPU.
 
+`bootstrap_evaluate_cpu.sh` and `finalize_cpu.sh` run merge/evaluation on CPU,
+package success or failure diagnostics, sync, and exit without waiting for a
+local receipt. The CPU guard deletes after a 30-second grace. The small packet
+can be copied during that grace; all results remain on the Network Volume if
+the local receiver is absent. `assemble_cpu.py` reports every GPU contributing
+raw samples, including cached/recovered outputs, and requires account cleanup
+proof for all of them.
+
 ## Historical preparation milestone
 
 Previous preparation milestone: all ten archive audits passed; official infos cover 6019
@@ -66,8 +91,9 @@ real val samples for each model. All 8420 available clean files passed payload
 checks; 86102 required files are still missing. Both official evaluator software
 tests, a 135-box coordinate round-trip and 10 acceptance tests passed. The CPU
 worker and final guard exited 0; deletion was verified through account-level 404.
-No GPU was rented at that milestone and the then-50 GB volume was not resized. Full GPU admission stays
-BLOCKED_MISSING_PAYLOAD. Full-val model results are NOT_RUN.
+No GPU was rented at that milestone and the then-50 GB volume was not resized.
+At that historical point admission was BLOCKED_MISSING_PAYLOAD and full-val
+results were NOT_RUN; both conditions were subsequently resolved as above.
 
 This directory is isolated from the previously validated mini/single-frame
 deployment. Local branch: `feat/validation-baseline-preparation`. Preserve both
