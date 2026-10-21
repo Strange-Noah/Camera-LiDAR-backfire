@@ -48,10 +48,12 @@ def main():
         combined.mkdir(exist_ok=True)
         raw = []
         identity = None
+        producing_pods = set()
         for index, token in enumerate(tokens):
             marker = markers[token]
             record = json.loads(marker.read_text())
             assert record['pod_id'] in verified_pods
+            producing_pods.add(record['pod_id'])
             assert record['token'] == token and record['input'] == expected[token]
             if identity is None:
                 identity = record['identity']
@@ -87,7 +89,7 @@ def main():
             checkpoint_sha256=identity['checkpoint_sha256'],upstream_commit=identity['upstream_commit'],
             resolved_config_sha256=identity['resolved_config_sha256'],runtime_sha256=identity['runtime_sha256'],
             started_at=min(r['started_at'] for r in run_records),finished_at=max(r['finished_at'] for r in run_records),
-            artifacts=artifacts,input_protocol=identity['input_protocol'],gpu_pod_ids=sorted({r['pod_id'] for r in run_records}),
+            artifacts=artifacts,input_protocol=identity['input_protocol'],gpu_pod_ids=sorted(producing_pods),
             cleanup_proof_sha256=digest(a.cleanup_proof),gpu_execution_runs=[dict(path=str(path),sha256=digest(path)) for path in runs],
             declared_operational_differences=['Single rank instead of README eight ranks; four official loader workers retained.',
                 'Token-derived RNG states; original random-nine-of-ten loader unchanged; LiDAR tensor hashes match across modalities.',

@@ -30,7 +30,12 @@ finish() {
  exit "$status"
 }
 trap finish EXIT
-for model in fusion lidar; do
+read -r -a models <<< "${VALIDATION_MODELS:-fusion lidar}"
+test "${#models[@]}" -gt 0
+for model in "${models[@]}"; do
+ case "$model" in fusion|lidar) ;; *) echo "Invalid model selection" >&2; exit 2;; esac
+done
+for model in "${models[@]}"; do
  kill -0 "$mirror"
  runuser -u bfbaseline -- env -u RUNPOD_API_KEY PROJECT_OUTPUT_MODE=local PROJECT_CUDA_SANDBOX=1 \
   PATH="$PATH" PYTHONPATH=/opt/bevfusion \
