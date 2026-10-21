@@ -61,6 +61,10 @@ def synchronize():
 while True:
     synchronize()
     if STOP.exists():
+        # STOP may have appeared while the preceding directory iterator was
+        # still scanning an older snapshot. The producer is now finished;
+        # rescan once with no concurrent producer before acknowledging exit.
+        synchronize()
         break
     time.sleep(3)
 print('GPU_OUTPUT_PERSISTENCE_COMPLETE', flush=True)
