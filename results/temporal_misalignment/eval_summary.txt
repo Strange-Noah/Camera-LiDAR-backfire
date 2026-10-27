@@ -1,12 +1,23 @@
-T1 temporal misalignment — paired same-eligible-subset evaluation (2026-10-27)
-Command: python /root/subset_eval.py <clean_fusion> <k1> <k2> <lidar_only>
-COMMON_SUBSET 5869
+T1 temporal misalignment — paired same-eligible-subset evaluation (2026-10-27, k=1..5)
+Command: python /root/subset_eval.py <clean_fusion> <k1> <k2> <k3> <k4> <k5> <lidar_only>
+COMMON_SUBSET 5863   (k5 eligibility caps the common subset; k5 eligible = 5863, k1-k4 eligible = 5869)
 
-[fusion_cumulative]   SUBSET_N=5869 mAP=0.6855 NDS=0.7154 mATE=0.2786 mASE=0.2544 mAOE=0.2987 mAVE=0.2577 mAAE=0.1843
-[k1_cumulative]       SUBSET_N=5869 mAP=0.6810 NDS=0.7130 mATE=0.2828 mASE=0.2543 mAOE=0.2980 mAVE=0.2561 mAAE=0.1840
-[k2_cumulative]       SUBSET_N=5869 mAP=0.6699 NDS=0.7066 mATE=0.2881 mASE=0.2546 mAOE=0.3010 mAVE=0.2544 mAAE=0.1856
-[lidar_cumulative]    SUBSET_N=5869 mAP=0.6479 NDS=0.6969 mATE=0.2834 mASE=0.2521 mAOE=0.2914 mAVE=0.2599 mAAE=0.1839
+[fusion_cumulative]   SUBSET_N=5863 mAP=0.6856 NDS=0.7155 mATE=0.2783 mASE=0.2543 mAOE=0.2980 mAVE=0.2578 mAAE=0.1842
+[k1_cumulative]       SUBSET_N=5863 mAP=0.6810 NDS=0.7131 mATE=0.2825 mASE=0.2542 mAOE=0.2978 mAVE=0.2561 mAAE=0.1839
+[k2_cumulative]       SUBSET_N=5863 mAP=0.6700 NDS=0.7067 mATE=0.2879 mASE=0.2546 mAOE=0.3007 mAVE=0.2544 mAAE=0.1855
+[k3_cumulative]       SUBSET_N=5863 mAP=0.6628 NDS=0.7026 mATE=0.2898 mASE=0.2548 mAOE=0.3024 mAVE=0.2542 mAAE=0.1865
+[k4_cumulative]       SUBSET_N=5863 mAP=0.6580 NDS=0.7001 mATE=0.2880 mASE=0.2550 mAOE=0.3044 mAVE=0.2551 mAAE=0.1862
+[k5_cumulative]       SUBSET_N=5863 mAP=0.6545 NDS=0.6983 mATE=0.2874 mASE=0.2550 mAOE=0.3047 mAVE=0.2563 mAAE=0.1863
+[lidar_cumulative]    SUBSET_N=5863 mAP=0.6481 NDS=0.6970 mATE=0.2831 mASE=0.2520 mAOE=0.2913 mAVE=0.2599 mAAE=0.1838
 
-Measured misalignment delays (n = 5869 samples x 6 cams = 35,214):
-k=1: mean 77.3 ms, median 100.0 ms, min 43.3 ms, max 252.0 ms
-k=2: mean 168.4 ms, median 150.0 ms, min 140.1 ms, max 400.0 ms
+Measured misalignment delays (current ts - historical ts, ms):
+k=1: n=35214 mean=77.3  median=100.0 min=43.3  max=252.0
+k=2: n=35214 mean=168.4 median=150.0 min=140.1 max=400.0
+k=3: n=35214 mean=254.4 median=250.0 min=238.5 max=500.0
+k=4: n=35214 mean=331.8 median=350.0 min=295.2 max=600.0
+k=5: n=35178 mean=422.5 median=400.0 min=394.9 max=750.0
+
+Degradation vs clean (mAP, pt):  k1 -0.46 | k2 -1.56 | k3 -2.28 | k4 -2.76 | k5 -3.11 | lidar -3.75
+Gap to LiDAR-only (mAP, pt):    k1 +3.29 | k2 +2.19 | k3 +1.47 | k4 +0.99 | k5 +0.64
+Note: mATE peaks at k3 (0.2898) then regresses toward the LiDAR-only level (0.2831) at k4/k5,
+while mAOE keeps rising (0.2980 -> 0.3047) — very stale images contribute little beyond LiDAR signal.
