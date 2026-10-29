@@ -1,67 +1,35 @@
 {
-  "experiment": "T1 temporal misalignment (stale image + current alignment), k=1..8 complete, k9/10 in progress",
-  "date_updated": "2026-10-29",
-  "author_github": "jhe-sudo",
-  "runner": "@heejoe (Yangzhang He)",
-  "platform": "AutoDL instance, RTX 4090 D, PyTorch 2.1.0 / CUDA 12.1 / Python 3.10 (conda env bevfusion)",
-  "dataset": "nuScenes v1.0-trainval, val split, 6019 keyframe samples",
-  "model": {
-    "config": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d.py",
-    "checkpoint": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-5239b1af.pth",
-    "checkpoint_md5_prefix": "5873a41f"
-  },
-  "definition": {
-    "k": [1, 2, 3, 4, 5, 6, 7, 8],
-    "substitution": "6 camera images replaced by real historical frames k steps back along sample_data.prev; calibration, poses, LiDAR and GT of the current sample kept unchanged",
-    "key_fact": "one prev-chain step is only ~50-100ms (chain walks all camera frames at 12-20Hz), so integer k gives ~100ms granularity",
-    "eligible_samples": {"k1": 5869, "k2": 5869, "k3": 5869, "k4": 5869, "k5": 5863, "k6": 5814, "k7": 5721, "k8": 5719, "k9": 5719, "k10": 5718},
-    "paired_common_subset": 5713,
-    "skipped_tokens": 6
-  },
-  "delays_ms_mean": {"k1": 77.3, "k2": 168.4, "k3": 254.4, "k4": 331.8, "k5": 422.5, "k6": 507.4, "k7": 585.5, "k8": 676.5},
-  "full_val_baseline_all_6019": {
-    "lidar_only": {"mAP": 0.6443, "NDS": 0.6923},
-    "fusion": {"mAP": 0.6830, "NDS": 0.7113}
-  },
-  "paired_subset_eval_n5713": {
-    "fusion_clean":  {"mAP": 0.6869, "NDS": 0.7163, "mATE": 0.2783, "mASE": 0.2540, "mAOE": 0.2986, "mAVE": 0.2572, "mAAE": 0.1838},
-    "fusion_k1":     {"delay_ms": 77,  "mAP": 0.6823, "NDS": 0.7138, "mATE": 0.2823, "mASE": 0.2539, "mAOE": 0.2979, "mAVE": 0.2557, "mAAE": 0.1836, "delta_mAP_vs_clean": -0.46},
-    "fusion_k2":     {"delay_ms": 168, "mAP": 0.6712, "NDS": 0.7075, "mATE": 0.2876, "mASE": 0.2542, "mAOE": 0.2999, "mAVE": 0.2540, "mAAE": 0.1853, "delta_mAP_vs_clean": -1.57},
-    "fusion_k3":     {"delay_ms": 254, "mAP": 0.6640, "NDS": 0.7034, "mATE": 0.2894, "mASE": 0.2543, "mAOE": 0.3024, "mAVE": 0.2538, "mAAE": 0.1862, "delta_mAP_vs_clean": -2.29},
-    "fusion_k4":     {"delay_ms": 332, "mAP": 0.6593, "NDS": 0.7010, "mATE": 0.2876, "mASE": 0.2546, "mAOE": 0.3039, "mAVE": 0.2546, "mAAE": 0.1859, "delta_mAP_vs_clean": -2.76},
-    "fusion_k5":     {"delay_ms": 423, "mAP": 0.6557, "NDS": 0.6990, "mATE": 0.2871, "mASE": 0.2546, "mAOE": 0.3046, "mAVE": 0.2559, "mAAE": 0.1859, "delta_mAP_vs_clean": -3.12},
-    "fusion_k6":     {"delay_ms": 507, "mAP": 0.6514, "NDS": 0.6967, "mATE": 0.2869, "mASE": 0.2545, "mAOE": 0.3062, "mAVE": 0.2560, "mAAE": 0.1863, "delta_mAP_vs_clean": -3.55},
-    "fusion_k7":     {"delay_ms": 586, "mAP": 0.6488, "NDS": 0.6955, "mATE": 0.2878, "mASE": 0.2549, "mAOE": 0.3057, "mAVE": 0.2552, "mAAE": 0.1854, "delta_mAP_vs_clean": -3.81},
-    "fusion_k8":     {"delay_ms": 677, "mAP": 0.6470, "NDS": 0.6945, "mATE": 0.2877, "mASE": 0.2550, "mAOE": 0.3067, "mAVE": 0.2552, "mAAE": 0.1855, "delta_mAP_vs_clean": -3.99},
-    "lidar_only_same_subset": {"mAP": 0.6496, "NDS": 0.6979, "mATE": 0.2829, "mASE": 0.2516, "mAOE": 0.2913, "mAVE": 0.2594, "mAAE": 0.1836}
+  "experiment": "T1 temporal misalignment (stale image + current alignment)",
+  "date_updated": "2026-10-30",
+  "platform": "AutoDL RTX 4090 D, PyTorch 2.1.0 / CUDA 12.1, mmdet3d v1.4.0",
+  "checkpoint": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-5239b1af.pth",
+  "common_subset_n": 5712,
+  "protocol": "nuScenes detection_cvpr_2019, paired same-token subset via subset_eval.py",
+  "delays_ms_mean": {"k1": 77.3, "k2": 168.4, "k3": 254.4, "k4": 331.8, "k5": 422.5, "k6": 507.4, "k7": 585.5, "k8": 676.5, "k9": 850.9, "k10": 957.9},
+  "delays_note": "k1-k8 driver-measured; k9/k10 camhist timestamp estimates (method matches k1-k5 within ~5 ms)",
+  "eligible": {"k1": 5869, "k2": 5869, "k3": 5869, "k4": 5869, "k5": 5863, "k6": 5814, "k7": 5721, "k8": 5719, "k9": 5719, "k10": 5718},
+  "completed": {"k6": 5808, "k7": 5715, "k8": 5713, "k9": 5719, "k10": 5718},
+  "results": {
+    "fusion_clean": {"mAP": 0.6869, "NDS": 0.7163, "mATE": 0.2783, "mASE": 0.2540, "mAOE": 0.2986, "mAVE": 0.2572, "mAAE": 0.1838},
+    "k1":  {"delay_ms": 77,  "mAP": 0.6823, "NDS": 0.7138, "mATE": 0.2823, "mASE": 0.2539, "mAOE": 0.2979, "mAVE": 0.2557, "mAAE": 0.1836},
+    "k2":  {"delay_ms": 168, "mAP": 0.6712, "NDS": 0.7075, "mATE": 0.2876, "mASE": 0.2542, "mAOE": 0.3000, "mAVE": 0.2540, "mAAE": 0.1853},
+    "k3":  {"delay_ms": 254, "mAP": 0.6640, "NDS": 0.7034, "mATE": 0.2894, "mASE": 0.2543, "mAOE": 0.3024, "mAVE": 0.2538, "mAAE": 0.1862},
+    "k4":  {"delay_ms": 332, "mAP": 0.6593, "NDS": 0.7010, "mATE": 0.2876, "mASE": 0.2546, "mAOE": 0.3039, "mAVE": 0.2546, "mAAE": 0.1859},
+    "k5":  {"delay_ms": 423, "mAP": 0.6557, "NDS": 0.6990, "mATE": 0.2871, "mASE": 0.2546, "mAOE": 0.3046, "mAVE": 0.2559, "mAAE": 0.1860},
+    "k6":  {"delay_ms": 507, "mAP": 0.6515, "NDS": 0.6967, "mATE": 0.2869, "mASE": 0.2545, "mAOE": 0.3062, "mAVE": 0.2560, "mAAE": 0.1863},
+    "k7":  {"delay_ms": 586, "mAP": 0.6488, "NDS": 0.6955, "mATE": 0.2878, "mASE": 0.2549, "mAOE": 0.3057, "mAVE": 0.2552, "mAAE": 0.1854},
+    "k8":  {"delay_ms": 677, "mAP": 0.6470, "NDS": 0.6945, "mATE": 0.2877, "mASE": 0.2550, "mAOE": 0.3067, "mAVE": 0.2552, "mAAE": 0.1855},
+    "k9":  {"delay_ms": 851, "mAP": 0.6448, "NDS": 0.6932, "mATE": 0.2875, "mASE": 0.2546, "mAOE": 0.3081, "mAVE": 0.2556, "mAAE": 0.1858},
+    "k10": {"delay_ms": 958, "mAP": 0.6432, "NDS": 0.6924, "mATE": 0.2879, "mASE": 0.2547, "mAOE": 0.3076, "mAVE": 0.2558, "mAAE": 0.1854},
+    "lidar_only": {"mAP": 0.6496, "NDS": 0.6979, "mATE": 0.2829, "mASE": 0.2516, "mAOE": 0.2913, "mAVE": 0.2594, "mAAE": 0.1836}
   },
   "backfire": {
     "confirmed": true,
-    "crossover_estimate": "k ~ 7-8, i.e. ~0.6-0.7 s misalignment",
-    "k8_gap_vs_lidar_mAP_pt": -0.26,
-    "k8_gap_vs_lidar_NDS_pt": -0.34,
-    "k7_gap_vs_lidar_mAP_pt": -0.08
-  },
-  "conclusions": [
-    "mAP degrades monotonically 0.6869 -> 0.6470 (k1..k8) with shrinking per-step decay; fusion converges to LiDAR-only behaviour.",
-    "BACKFIRE CONFIRMED: at k=8 (mean 677ms) fusion mAP 0.6470 < LiDAR-only 0.6496 (-0.26pt), NDS -0.34pt. k=7 is within noise of the crossover.",
-    "mATE peaks at k=3 then regresses toward LiDAR-only; mAOE keeps rising past crossover (0.3067 vs 0.2913) — stale images actively mislead orientation estimation.",
-    "k=9/10 running (eligible 5719/5718) to quantify negative-gain depth past the crossover."
-  ],
-  "known_limitations": [
-    "6 tokens (0.1%) skipped: lidar files unrecoverable from official blobs.",
-    "33 historical camera files absent from official blobs affect 38 k6 samples (k7/k8 unaffected).",
-    "Single GPU/environment (AutoDL RTX 4090 D); cross-GPU reproducibility comparison pending other members' runs."
-  ],
-  "large_artifacts_not_in_git": {
-    "note": "GitHub 100MB per-file limit; predictions kept on AutoDL instance + local mirror",
-    "remote_autodl": [
-      "/root/autodl-tmp/preds_temporal/k1..k8_cumulative.json",
-      "/root/autodl-tmp/sub_table8.json (k=1..8 substitution table)",
-      "/root/autodl-tmp/preds/fusion_cumulative.json",
-      "/root/autodl-tmp/preds/lidar_cumulative.json"
-    ],
-    "local_mirror": "D:\\Camera-LIDAR\\results\\remote_pull\\ (k1-k8 .json.gz gzip-verified)",
-    "team_storage_layout": "/workspace/results/jhe-sudo/temporal-misalignment/run-2026-10-27/"
+    "first_k_below_lidar_mAP": 8,
+    "crossover_estimate": "linear fit: 650-660 ms (k3-k10 / k1-k10); measured: k7 ties LiDAR-only, k8 falls below",
+    "gap_vs_lidar_mAP_pt": {"k7": -0.08, "k8": -0.26, "k9": -0.48, "k10": -0.64},
+    "decay_per_100ms_pt": 0.29,
+    "negative_gain_deepens": true,
+    "no_convergence_to_lidar_only": true
   }
 }
