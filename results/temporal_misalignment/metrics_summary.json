@@ -1,9 +1,9 @@
 {
-  "experiment": "T1 temporal misalignment (stale image + current alignment), k=1..5",
-  "date": "2026-10-27",
+  "experiment": "T1 temporal misalignment (stale image + current alignment), k=1..8 complete, k9/10 in progress",
+  "date_updated": "2026-10-29",
   "author_github": "jhe-sudo",
   "runner": "@heejoe (Yangzhang He)",
-  "platform": "AutoDL instance, RTX 3090, PyTorch 2.1.0 / CUDA 12.1 / Python 3.10 (conda env bevfusion)",
+  "platform": "AutoDL instance, RTX 4090 D, PyTorch 2.1.0 / CUDA 12.1 / Python 3.10 (conda env bevfusion)",
   "dataset": "nuScenes v1.0-trainval, val split, 6019 keyframe samples",
   "model": {
     "config": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d.py",
@@ -11,56 +11,57 @@
     "checkpoint_md5_prefix": "5873a41f"
   },
   "definition": {
-    "k": [1, 2, 3, 4, 5],
+    "k": [1, 2, 3, 4, 5, 6, 7, 8],
     "substitution": "6 camera images replaced by real historical frames k steps back along sample_data.prev; calibration, poses, LiDAR and GT of the current sample kept unchanged",
-    "eligible_samples": {"k1": 5869, "k2": 5869, "k3": 5869, "k4": 5869, "k5": 5863},
-    "ineligible_samples": "scene-first frames without k predecessors in scene",
-    "note": "eligible sets k1-k4 identical; k5 loses 6 more samples (scenes too short). Paired common subset across all settings = 5863."
+    "key_fact": "one prev-chain step is only ~50-100ms (chain walks all camera frames at 12-20Hz), so integer k gives ~100ms granularity",
+    "eligible_samples": {"k1": 5869, "k2": 5869, "k3": 5869, "k4": 5869, "k5": 5863, "k6": 5814, "k7": 5721, "k8": 5719, "k9": 5719, "k10": 5718},
+    "paired_common_subset": 5713,
+    "skipped_tokens": 6
   },
-  "delays_ms": {
-    "k1": {"n": 35214, "mean": 77.3, "median": 100.0, "min": 43.3, "max": 252.0},
-    "k2": {"n": 35214, "mean": 168.4, "median": 150.0, "min": 140.1, "max": 400.0},
-    "k3": {"n": 35214, "mean": 254.4, "median": 250.0, "min": 238.5, "max": 500.0},
-    "k4": {"n": 35214, "mean": 331.8, "median": 350.0, "min": 295.2, "max": 600.0},
-    "k5": {"n": 35178, "mean": 422.5, "median": 400.0, "min": 394.9, "max": 750.0}
-  },
+  "delays_ms_mean": {"k1": 77.3, "k2": 168.4, "k3": 254.4, "k4": 331.8, "k5": 422.5, "k6": 507.4, "k7": 585.5, "k8": 676.5},
   "full_val_baseline_all_6019": {
     "lidar_only": {"mAP": 0.6443, "NDS": 0.6923},
     "fusion": {"mAP": 0.6830, "NDS": 0.7113}
   },
-  "paired_subset_eval_n5863": {
-    "fusion_clean":  {"mAP": 0.6856, "NDS": 0.7155, "mATE": 0.2783, "mASE": 0.2543, "mAOE": 0.2980, "mAVE": 0.2578, "mAAE": 0.1842},
-    "fusion_k1":     {"mAP": 0.6810, "NDS": 0.7131, "mATE": 0.2825, "mASE": 0.2542, "mAOE": 0.2978, "mAVE": 0.2561, "mAAE": 0.1839, "delta_mAP_vs_clean": -0.46},
-    "fusion_k2":     {"mAP": 0.6700, "NDS": 0.7067, "mATE": 0.2879, "mASE": 0.2546, "mAOE": 0.3007, "mAVE": 0.2544, "mAAE": 0.1855, "delta_mAP_vs_clean": -1.56},
-    "fusion_k3":     {"mAP": 0.6628, "NDS": 0.7026, "mATE": 0.2898, "mASE": 0.2548, "mAOE": 0.3024, "mAVE": 0.2542, "mAAE": 0.1865, "delta_mAP_vs_clean": -2.28},
-    "fusion_k4":     {"mAP": 0.6580, "NDS": 0.7001, "mATE": 0.2880, "mASE": 0.2550, "mAOE": 0.3044, "mAVE": 0.2551, "mAAE": 0.1862, "delta_mAP_vs_clean": -2.76},
-    "fusion_k5":     {"mAP": 0.6545, "NDS": 0.6983, "mATE": 0.2874, "mASE": 0.2550, "mAOE": 0.3047, "mAVE": 0.2563, "mAAE": 0.1863, "delta_mAP_vs_clean": -3.11},
-    "lidar_only_same_subset": {"mAP": 0.6481, "NDS": 0.6970, "mATE": 0.2831, "mASE": 0.2520, "mAOE": 0.2913, "mAVE": 0.2599, "mAAE": 0.1838}
+  "paired_subset_eval_n5713": {
+    "fusion_clean":  {"mAP": 0.6869, "NDS": 0.7163, "mATE": 0.2783, "mASE": 0.2540, "mAOE": 0.2986, "mAVE": 0.2572, "mAAE": 0.1838},
+    "fusion_k1":     {"delay_ms": 77,  "mAP": 0.6823, "NDS": 0.7138, "mATE": 0.2823, "mASE": 0.2539, "mAOE": 0.2979, "mAVE": 0.2557, "mAAE": 0.1836, "delta_mAP_vs_clean": -0.46},
+    "fusion_k2":     {"delay_ms": 168, "mAP": 0.6712, "NDS": 0.7075, "mATE": 0.2876, "mASE": 0.2542, "mAOE": 0.2999, "mAVE": 0.2540, "mAAE": 0.1853, "delta_mAP_vs_clean": -1.57},
+    "fusion_k3":     {"delay_ms": 254, "mAP": 0.6640, "NDS": 0.7034, "mATE": 0.2894, "mASE": 0.2543, "mAOE": 0.3024, "mAVE": 0.2538, "mAAE": 0.1862, "delta_mAP_vs_clean": -2.29},
+    "fusion_k4":     {"delay_ms": 332, "mAP": 0.6593, "NDS": 0.7010, "mATE": 0.2876, "mASE": 0.2546, "mAOE": 0.3039, "mAVE": 0.2546, "mAAE": 0.1859, "delta_mAP_vs_clean": -2.76},
+    "fusion_k5":     {"delay_ms": 423, "mAP": 0.6557, "NDS": 0.6990, "mATE": 0.2871, "mASE": 0.2546, "mAOE": 0.3046, "mAVE": 0.2559, "mAAE": 0.1859, "delta_mAP_vs_clean": -3.12},
+    "fusion_k6":     {"delay_ms": 507, "mAP": 0.6514, "NDS": 0.6967, "mATE": 0.2869, "mASE": 0.2545, "mAOE": 0.3062, "mAVE": 0.2560, "mAAE": 0.1863, "delta_mAP_vs_clean": -3.55},
+    "fusion_k7":     {"delay_ms": 586, "mAP": 0.6488, "NDS": 0.6955, "mATE": 0.2878, "mASE": 0.2549, "mAOE": 0.3057, "mAVE": 0.2552, "mAAE": 0.1854, "delta_mAP_vs_clean": -3.81},
+    "fusion_k8":     {"delay_ms": 677, "mAP": 0.6470, "NDS": 0.6945, "mATE": 0.2877, "mASE": 0.2550, "mAOE": 0.3067, "mAVE": 0.2552, "mAAE": 0.1855, "delta_mAP_vs_clean": -3.99},
+    "lidar_only_same_subset": {"mAP": 0.6496, "NDS": 0.6979, "mATE": 0.2829, "mASE": 0.2516, "mAOE": 0.2913, "mAVE": 0.2594, "mAAE": 0.1836}
   },
-  "gap_to_lidar_mAP_pt": {"k1": 3.29, "k2": 2.19, "k3": 1.47, "k4": 0.99, "k5": 0.64},
+  "backfire": {
+    "confirmed": true,
+    "crossover_estimate": "k ~ 7-8, i.e. ~0.6-0.7 s misalignment",
+    "k8_gap_vs_lidar_mAP_pt": -0.26,
+    "k8_gap_vs_lidar_NDS_pt": -0.34,
+    "k7_gap_vs_lidar_mAP_pt": -0.08
+  },
   "conclusions": [
-    "Monotonic mAP/NDS degradation with misalignment: 0.6856 -> 0.6810 -> 0.6700 -> 0.6628 -> 0.6580 -> 0.6545 (k1..k5).",
-    "No backfire yet, but the fusion-vs-lidar gap closes to +0.64pt mAP / +0.13pt NDS at k5 (mean 423ms); linear trend suggests crossover around k~7 (+/-2), i.e. ~0.6-0.9s misalignment.",
-    "mATE peaks at k3 (0.2898) then regresses toward the LiDAR-only level at k4/k5; mAOE keeps rising — very stale images stop adding usable geometric signal and behave increasingly like LiDAR-only.",
-    "Next round should probe k=6..8 (and maybe 10) to locate the actual backfire threshold."
+    "mAP degrades monotonically 0.6869 -> 0.6470 (k1..k8) with shrinking per-step decay; fusion converges to LiDAR-only behaviour.",
+    "BACKFIRE CONFIRMED: at k=8 (mean 677ms) fusion mAP 0.6470 < LiDAR-only 0.6496 (-0.26pt), NDS -0.34pt. k=7 is within noise of the crossover.",
+    "mATE peaks at k=3 then regresses toward LiDAR-only; mAOE keeps rising past crossover (0.3067 vs 0.2913) — stale images actively mislead orientation estimation.",
+    "k=9/10 running (eligible 5719/5718) to quantify negative-gain depth past the crossover."
   ],
   "known_limitations": [
-    "k3/k4 cumulative predictions cover 5865 tokens (4 tokens short of the 5869 eligible) because the backfill pass required k5-eligibility; the paired table is unaffected since k5 caps the common subset at 5863.",
-    "Single GPU/environment (AutoDL RTX 3090); cross-GPU reproducibility comparison pending other members' runs."
+    "6 tokens (0.1%) skipped: lidar files unrecoverable from official blobs.",
+    "33 historical camera files absent from official blobs affect 38 k6 samples (k7/k8 unaffected).",
+    "Single GPU/environment (AutoDL RTX 4090 D); cross-GPU reproducibility comparison pending other members' runs."
   ],
   "large_artifacts_not_in_git": {
-    "note": "GitHub 100MB per-file limit; predictions and substitution table kept on AutoDL instance + local mirror",
+    "note": "GitHub 100MB per-file limit; predictions kept on AutoDL instance + local mirror",
     "remote_autodl": [
-      "/root/autodl-tmp/preds_temporal/k1_cumulative.json (5869 tokens)",
-      "/root/autodl-tmp/preds_temporal/k2_cumulative.json (5869 tokens)",
-      "/root/autodl-tmp/preds_temporal/k3_cumulative.json (5865 tokens)",
-      "/root/autodl-tmp/preds_temporal/k4_cumulative.json (5865 tokens)",
-      "/root/autodl-tmp/preds_temporal/k5_cumulative.json (5863 tokens)",
-      "/root/autodl-tmp/sub_table5.json (k=1..5 substitution table)",
+      "/root/autodl-tmp/preds_temporal/k1..k8_cumulative.json",
+      "/root/autodl-tmp/sub_table8.json (k=1..8 substitution table)",
       "/root/autodl-tmp/preds/fusion_cumulative.json",
       "/root/autodl-tmp/preds/lidar_cumulative.json"
     ],
-    "local_mirror": "D:\\Camera-LIDAR\\results\\remote_pull\\ (k1-k5 .json.gz gzip-verified)",
+    "local_mirror": "D:\\Camera-LIDAR\\results\\remote_pull\\ (k1-k8 .json.gz gzip-verified)",
     "team_storage_layout": "/workspace/results/jhe-sudo/temporal-misalignment/run-2026-10-27/"
   }
 }
