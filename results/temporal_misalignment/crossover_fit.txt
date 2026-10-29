@@ -1,27 +1,35 @@
-mAP(delay) decay fit and backfire crossover point
+FINAL: mAP(delay) decay fit and backfire crossover point
 BEVFusion camera-LiDAR fusion, temporal misalignment T1 (stale camera frames)
+Paired common subset n=5712 (clean, k1-k10, LiDAR-only evaluated on identical samples)
 
-== Paired subset n=1198 (k1-k10, LiDAR-only mAP=0.6479) ==
-Linear fit (k1-k10):    crossover=688 ms  R2=0.9294  (mAP=0.677100 - 4.243e-05*d)
-Linear fit (k3-k10):    crossover=681 ms  R2=0.9699
-Quadratic fit (k1-k10): crossover=1392 ms  R2=0.9823 (curve flattening is extrapolated; not supported by k9/k10 data)
+Linear fit (k1-k10):    crossover=660 ms  R2=0.8661  (mAP=0.676414 - 4.063e-05*d)
+Linear fit (k3-k10):    crossover=650 ms  R2=0.9153  (decay 0.29 mAP points per 100 ms)
+Quadratic fit (k1-k10): crossover=1170 ms  R2=0.9905 (curve flattening is extrapolated; not supported by k9/k10 data)
 
-== Full k1-k8 n=5713 (driver-measured delays, LiDAR-only mAP=0.6496) ==
-Linear fit (k1-k8):     crossover=562 ms  R2=0.9334
-Quadratic fit (k1-k8):  crossover=874 ms  R2=0.9947 (dominated by small-k curvature; optimistic extrapolation)
+Measured points (delay ms, mAP, NDS):
+  k1    77.0  0.6823  0.7138
+  k2   168.0  0.6712  0.7075
+  k3   254.0  0.6640  0.7034
+  k4   332.0  0.6593  0.7010
+  k5   423.0  0.6557  0.6990
+  k6   507.4  0.6515  0.6967
+  k7   585.5  0.6488  0.6955
+  k8   676.5  0.6470  0.6945
+  k9   850.9  0.6448  0.6932 (camhist estimate)
+  k10  957.9  0.6432  0.6924 (camhist estimate)
+  LiDAR-only: mAP=0.6496 NDS=0.6979 (no latency)
 
 Notes:
 - Safe latency budget: ~0.6-0.7 s. The mAP(delay) curve crosses the LiDAR-only
-  baseline at 0.56-0.69 s depending on series/fit; most robust single number: ~0.65 s,
-  conservatively 0.6 s. Consistent with measured points (k7 ~0.59 s ties LiDAR-only;
-  k8 ~0.68 s falls -0.28 pt below).
-- Decay rate in the linear regime: ~0.42 mAP points per 100 ms of camera latency.
-- Past the crossover the negative gain DEEPENS monotonically (k9 -0.64 pt, k10 -0.80 pt
+  baseline at ~0.65-0.66 s on both linear fits; a quadratic fit extrapolates 1.17 s
+  but its flattening is not supported by the k9/k10 measurements. Most robust single
+  number: ~0.65 s, conservatively 0.6 s. Consistent with measured points (k7 ~0.59 s
+  ties LiDAR-only; k8 ~0.68 s falls -0.26 pt below).
+- Decay rate in the linear regime: ~0.29 mAP points per 100 ms of camera latency.
+- Past the crossover the negative gain DEEPENS monotonically (k9 -0.48 pt, k10 -0.64 pt
   below LiDAR-only); the curve shows no sign of converging back to the LiDAR-only level:
   a stale camera does not merely become useless, it keeps actively degrading fusion.
-- mAOE at k10 (0.3210) remains far above LiDAR-only (0.2927): stale camera images keep
-  corrupting orientation at ~0.85-0.95 s (mATE 0.2887 vs 0.2823 as well).
-- Delays for k1-k8 of the full series are driver-measured; k9/k10 delays are
-  camhist timestamp estimates (same method that matches k1-k5 within ~5 ms).
-- The n=1198 subset is interim; final numbers will use the ~5,700-token common subset
-  once k9/k10 inference completes.
+- mAOE at k9/k10 (0.3081/0.3076) remains far above LiDAR-only (0.2913): stale camera
+  images keep corrupting orientation at ~0.85-0.95 s (mATE 0.2875/0.2879 vs 0.2823).
+- k9/k10 delays are camhist timestamp estimates (method matches k1-k5 driver
+  measurements within ~5 ms); k1-k8 delays are driver-measured.
