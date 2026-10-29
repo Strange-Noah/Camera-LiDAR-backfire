@@ -1,23 +1,21 @@
-T1 temporal misalignment — paired same-eligible-subset evaluation (2026-10-27, k=1..5)
-Command: python /root/subset_eval.py <clean_fusion> <k1> <k2> <k3> <k4> <k5> <lidar_only>
-COMMON_SUBSET 5863   (k5 eligibility caps the common subset; k5 eligible = 5863, k1-k4 eligible = 5869)
+Temporal Misalignment (T1) paired subset evaluation — common subset N = 5713
+BEVFusion fusion checkpoint ...-5239b1af.pth | nuScenes val | official detection_cvpr_2019 protocol
+Raw output: results/remote_pull/subeval_k18.out | Updated: 2026-10-29 (k=1..8 complete; k9/10 in progress)
 
-[fusion_cumulative]   SUBSET_N=5863 mAP=0.6856 NDS=0.7155 mATE=0.2783 mASE=0.2543 mAOE=0.2980 mAVE=0.2578 mAAE=0.1842
-[k1_cumulative]       SUBSET_N=5863 mAP=0.6810 NDS=0.7131 mATE=0.2825 mASE=0.2542 mAOE=0.2978 mAVE=0.2561 mAAE=0.1839
-[k2_cumulative]       SUBSET_N=5863 mAP=0.6700 NDS=0.7067 mATE=0.2879 mASE=0.2546 mAOE=0.3007 mAVE=0.2544 mAAE=0.1855
-[k3_cumulative]       SUBSET_N=5863 mAP=0.6628 NDS=0.7026 mATE=0.2898 mASE=0.2548 mAOE=0.3024 mAVE=0.2542 mAAE=0.1865
-[k4_cumulative]       SUBSET_N=5863 mAP=0.6580 NDS=0.7001 mATE=0.2880 mASE=0.2550 mAOE=0.3044 mAVE=0.2551 mAAE=0.1862
-[k5_cumulative]       SUBSET_N=5863 mAP=0.6545 NDS=0.6983 mATE=0.2874 mASE=0.2550 mAOE=0.3047 mAVE=0.2563 mAAE=0.1863
-[lidar_cumulative]    SUBSET_N=5863 mAP=0.6481 NDS=0.6970 mATE=0.2831 mASE=0.2520 mAOE=0.2913 mAVE=0.2599 mAAE=0.1838
+setting          delay    mAP     dMAP    NDS     mATE    mASE    mAOE    mAVE    mAAE
+fusion_clean     -        0.6869  -       0.7163  0.2783  0.2540  0.2986  0.2572  0.1838
+k1               77ms     0.6823  -0.46pt 0.7138  0.2823  0.2539  0.2979  0.2557  0.1836
+k2               168ms    0.6712  -1.57pt 0.7075  0.2876  0.2542  0.2999  0.2540  0.1853
+k3               254ms    0.6640  -2.29pt 0.7034  0.2894  0.2543  0.3024  0.2538  0.1862
+k4               332ms    0.6593  -2.76pt 0.7010  0.2876  0.2546  0.3039  0.2546  0.1859
+k5               423ms    0.6557  -3.12pt 0.6990  0.2871  0.2546  0.3046  0.2559  0.1859
+k6               507ms    0.6514  -3.55pt 0.6967  0.2869  0.2545  0.3062  0.2560  0.1863
+k7               586ms    0.6488  -3.81pt 0.6955  0.2878  0.2549  0.3057  0.2552  0.1854
+k8               677ms    0.6470  -3.99pt 0.6945  0.2877  0.2550  0.3067  0.2552  0.1855
+lidar_only       -        0.6496  -3.73pt 0.6979  0.2829  0.2516  0.2913  0.2594  0.1836
 
-Measured misalignment delays (current ts - historical ts, ms):
-k=1: n=35214 mean=77.3  median=100.0 min=43.3  max=252.0
-k=2: n=35214 mean=168.4 median=150.0 min=140.1 max=400.0
-k=3: n=35214 mean=254.4 median=250.0 min=238.5 max=500.0
-k=4: n=35214 mean=331.8 median=350.0 min=295.2 max=600.0
-k=5: n=35178 mean=422.5 median=400.0 min=394.9 max=750.0
-
-Degradation vs clean (mAP, pt):  k1 -0.46 | k2 -1.56 | k3 -2.28 | k4 -2.76 | k5 -3.11 | lidar -3.75
-Gap to LiDAR-only (mAP, pt):    k1 +3.29 | k2 +2.19 | k3 +1.47 | k4 +0.99 | k5 +0.64
-Note: mATE peaks at k3 (0.2898) then regresses toward the LiDAR-only level (0.2831) at k4/k5,
-while mAOE keeps rising (0.2980 -> 0.3047) — very stale images contribute little beyond LiDAR signal.
+BACKFIRE CONFIRMED: k8 mAP 0.6470 < lidar_only 0.6496 (-0.26pt); NDS 0.6945 < 0.6979 (-0.34pt)
+Crossover at k ~ 7-8 (~0.6-0.7s misalignment). k7 within noise of crossover (-0.08pt mAP).
+mAOE keeps worsening past crossover (0.3067 vs lidar 0.2913): stale images actively mislead orientation.
+Delays (mean ms): k6=507.4 k7=585.5 k8=676.5; eligible: k6=5814 k7=5721 k8=5719; skipped 6 tokens (unrecoverable lidar files, 0.1%).
+Previous k=1..5 paired table (n=5863) in git history: 0.6856 -> 0.6810 -> 0.6700 -> 0.6628 -> 0.6580 -> 0.6545, lidar 0.6481.
