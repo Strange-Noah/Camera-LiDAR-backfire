@@ -8,6 +8,7 @@ Date: 2026-10-30 · Dataset: nuScenes v1.0-trainval (val split) · Common subset
 2. **4 classes never backfire**: truck, bus, trailer, and construction_vehicle stay above LiDAR-only even at k10 (+0.4 ~ +2.6 pt). Large vehicles have enough LiDAR returns; stale camera features do little damage.
 3. **Scene split**: backfire occurs in day and at intersections, but **not at night** (k10 still +0.3 pt above LiDAR-only). At night the camera contributes little anyway, so there is little for misalignment to corrupt.
 4. **Spatial split**: degradation concentrates at **30–60 m**; close range (<20 m) is essentially unaffected. E.g. car recall@2m at 40–60 m: clean 0.939 / k8 0.897 / LiDAR-only 0.908 — k8 is already below LiDAR-only there.
+5. **Closing the loop with the T1 fit (v2)**: the exponential asymptote of the overall mAP(delay) curve (0.6409) sits ~0.9 pt **below** LiDAR-only — the corruption is *permanent*; E1 shows the corruption lands exactly on small/dynamic objects at 30–60 m (the band where the model needs the camera most). The two evidence chains reinforce each other.
 
 ## 1. Per-class AP (mean over the 4 distance thresholds, common subset n=5712)
 
@@ -62,11 +63,11 @@ Key observations:
 ## 4. Mechanism summary — where is the backfire point?
 
 1. **Class axis**: backfire concentrates on small/dynamic, camera-reliant classes (cone, motorcycle, pedestrian, bicycle, car, barrier); LiDAR-dominant large vehicles (truck/bus/trailer/construction vehicle) are safe throughout.
-2. **Time axis**: class-level backfire starts at ~500 ms (k6), earlier than the overall mAP crossover (~570 ms, exp fit v2).
+2. **Time axis**: class-level backfire starts at ~500 ms (k6), earlier than the overall mAP crossover (~570 ms, exp fit v2); and the asymptote of the overall curve (0.6409) sits **permanently below** LiDAR-only by ~0.9 pt — early local backfires at the class level accumulate into a permanent negative offset that never recovers.
 3. **Scene axis**: day and intersections are the hot spots; at night, misalignment cannot be worse than not using the camera at all.
 4. **Range axis**: backfire concentrates at 30–60 m — the LiDAR-sparse band where the model leans on the camera most; close range is unaffected.
 
-**One sentence**: temporal misalignment feeds corrupted camera features exactly into the region where the model needs the camera most — small objects at long range — so fusion ends up worse than LiDAR-only precisely there.
+**One sentence**: temporal misalignment feeds corrupted camera features exactly into the region where the model needs the camera most — small objects at long range — so fusion ends up worse than LiDAR-only precisely there; and these local damages accumulate into an overall curve that settles permanently below the LiDAR-only floor (asymptote −0.9 pt), never recovering.
 
 ## 5. Method & limitations
 
