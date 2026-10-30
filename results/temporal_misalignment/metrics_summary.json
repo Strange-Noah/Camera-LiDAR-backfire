@@ -1,6 +1,6 @@
 {
   "experiment": "T1 temporal misalignment (stale image + current alignment)",
-  "date_updated": "2026-10-30",
+  "date_updated": "2026-10-30 (fit v2: exponential model)",
   "platform": "AutoDL RTX 4090 D, PyTorch 2.1.0 / CUDA 12.1, mmdet3d v1.4.0",
   "checkpoint": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-5239b1af.pth",
   "common_subset_n": 5712,
@@ -25,10 +25,14 @@
   },
   "backfire": {
     "confirmed": true,
-    "first_k_below_lidar_mAP": 8,
-    "crossover_estimate": "linear fit: 650-660 ms (k3-k10 / k1-k10); measured: k7 ties LiDAR-only, k8 falls below",
+    "first_k_below_lidar_mAP": 7,
+    "fit_v2_exponential": "mAP = 0.6409 + 0.0523*exp(-d/317 ms), R2=0.999; concave decay (local rate 1.22 -> 0.15 pt/100ms)",
+    "crossover_ms": {"exp_model": 568, "piecewise_measured_bracket_k6_k7": 562},
+    "safe_latency_budget": "0.55-0.57 s",
+    "asymptote": {"mAP": 0.6409, "vs_lidar_only": -0.87, "interpretation": "permanent penalty; stale camera never converges back to LiDAR-only level"},
     "gap_vs_lidar_mAP_pt": {"k7": -0.08, "k8": -0.26, "k9": -0.48, "k10": -0.64},
-    "decay_per_100ms_pt": 0.29,
+    "v1_linear_fit": "RETRACTED (crossover 660ms / decay 0.29pt per 100ms overestimated the safe budget: straight line through concave data crosses the baseline too late)",
+    "decay_per_100ms_note": "not constant; 1.22 pt at ~100ms decaying to 0.15 pt at ~900ms",
     "negative_gain_deepens": true,
     "no_convergence_to_lidar_only": true
   }
