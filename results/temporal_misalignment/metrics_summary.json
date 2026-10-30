@@ -1,0 +1,39 @@
+{
+  "experiment": "T1 temporal misalignment (stale image + current alignment)",
+  "date_updated": "2026-10-30 (fit v2: exponential model)",
+  "platform": "AutoDL RTX 4090 D, PyTorch 2.1.0 / CUDA 12.1, mmdet3d v1.4.0",
+  "checkpoint": "bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-5239b1af.pth",
+  "common_subset_n": 5712,
+  "protocol": "nuScenes detection_cvpr_2019, paired same-token subset via subset_eval.py",
+  "delays_ms_mean": {"k1": 77.3, "k2": 168.4, "k3": 254.4, "k4": 331.8, "k5": 422.5, "k6": 507.4, "k7": 585.5, "k8": 676.5, "k9": 850.9, "k10": 957.9},
+  "delays_note": "k1-k8 driver-measured; k9/k10 camhist timestamp estimates (method matches k1-k5 within ~5 ms)",
+  "eligible": {"k1": 5869, "k2": 5869, "k3": 5869, "k4": 5869, "k5": 5863, "k6": 5814, "k7": 5721, "k8": 5719, "k9": 5719, "k10": 5718},
+  "completed": {"k6": 5808, "k7": 5715, "k8": 5713, "k9": 5719, "k10": 5718},
+  "results": {
+    "fusion_clean": {"mAP": 0.6869, "NDS": 0.7163, "mATE": 0.2783, "mASE": 0.2540, "mAOE": 0.2986, "mAVE": 0.2572, "mAAE": 0.1838},
+    "k1":  {"delay_ms": 77,  "mAP": 0.6823, "NDS": 0.7138, "mATE": 0.2823, "mASE": 0.2539, "mAOE": 0.2979, "mAVE": 0.2557, "mAAE": 0.1836},
+    "k2":  {"delay_ms": 168, "mAP": 0.6712, "NDS": 0.7075, "mATE": 0.2876, "mASE": 0.2542, "mAOE": 0.3000, "mAVE": 0.2540, "mAAE": 0.1853},
+    "k3":  {"delay_ms": 254, "mAP": 0.6640, "NDS": 0.7034, "mATE": 0.2894, "mASE": 0.2543, "mAOE": 0.3024, "mAVE": 0.2538, "mAAE": 0.1862},
+    "k4":  {"delay_ms": 332, "mAP": 0.6593, "NDS": 0.7010, "mATE": 0.2876, "mASE": 0.2546, "mAOE": 0.3039, "mAVE": 0.2546, "mAAE": 0.1859},
+    "k5":  {"delay_ms": 423, "mAP": 0.6557, "NDS": 0.6990, "mATE": 0.2871, "mASE": 0.2546, "mAOE": 0.3046, "mAVE": 0.2559, "mAAE": 0.1860},
+    "k6":  {"delay_ms": 507, "mAP": 0.6515, "NDS": 0.6967, "mATE": 0.2869, "mASE": 0.2545, "mAOE": 0.3062, "mAVE": 0.2560, "mAAE": 0.1863},
+    "k7":  {"delay_ms": 586, "mAP": 0.6488, "NDS": 0.6955, "mATE": 0.2878, "mASE": 0.2549, "mAOE": 0.3057, "mAVE": 0.2552, "mAAE": 0.1854},
+    "k8":  {"delay_ms": 677, "mAP": 0.6470, "NDS": 0.6945, "mATE": 0.2877, "mASE": 0.2550, "mAOE": 0.3067, "mAVE": 0.2552, "mAAE": 0.1855},
+    "k9":  {"delay_ms": 851, "mAP": 0.6448, "NDS": 0.6932, "mATE": 0.2875, "mASE": 0.2546, "mAOE": 0.3081, "mAVE": 0.2556, "mAAE": 0.1858},
+    "k10": {"delay_ms": 958, "mAP": 0.6432, "NDS": 0.6924, "mATE": 0.2879, "mASE": 0.2547, "mAOE": 0.3076, "mAVE": 0.2558, "mAAE": 0.1854},
+    "lidar_only": {"mAP": 0.6496, "NDS": 0.6979, "mATE": 0.2829, "mASE": 0.2516, "mAOE": 0.2913, "mAVE": 0.2594, "mAAE": 0.1836}
+  },
+  "backfire": {
+    "confirmed": true,
+    "first_k_below_lidar_mAP": 7,
+    "fit_v2_exponential": "mAP = 0.6409 + 0.0523*exp(-d/317 ms), R2=0.999; concave decay (local rate 1.22 -> 0.15 pt/100ms)",
+    "crossover_ms": {"exp_model": 568, "piecewise_measured_bracket_k6_k7": 562},
+    "safe_latency_budget": "0.55-0.57 s",
+    "asymptote": {"mAP": 0.6409, "vs_lidar_only": -0.87, "interpretation": "permanent penalty; stale camera never converges back to LiDAR-only level"},
+    "gap_vs_lidar_mAP_pt": {"k7": -0.08, "k8": -0.26, "k9": -0.48, "k10": -0.64},
+    "v1_linear_fit": "RETRACTED (crossover 660ms / decay 0.29pt per 100ms overestimated the safe budget: straight line through concave data crosses the baseline too late)",
+    "decay_per_100ms_note": "not constant; 1.22 pt at ~100ms decaying to 0.15 pt at ~900ms",
+    "negative_gain_deepens": true,
+    "no_convergence_to_lidar_only": true
+  }
+}

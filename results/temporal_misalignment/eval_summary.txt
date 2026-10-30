@@ -1,0 +1,31 @@
+Temporal Misalignment (T1) paired subset evaluation — common subset N = 5712
+BEVFusion fusion checkpoint ...-5239b1af.pth | nuScenes val | official detection_cvpr_2019 protocol
+Raw output: results/remote_pull/subeval_k110_final.out | Generated: 2026-10-30 (final, k1-k10 complete)
+
+setting          delay    mAP     dMAP    NDS     mATE    mASE    mAOE    mAVE    mAAE
+fusion_clean     -        0.6869  -       0.7163  0.2783  0.2540  0.2986  0.2572  0.1838
+k1               77ms     0.6823  -0.46pt 0.7138  0.2823  0.2539  0.2979  0.2557  0.1836
+k2               168ms    0.6712  -1.57pt 0.7075  0.2876  0.2542  0.3000  0.2540  0.1853
+k3               254ms    0.6640  -2.29pt 0.7034  0.2894  0.2543  0.3024  0.2538  0.1862
+k4               332ms    0.6593  -2.76pt 0.7010  0.2876  0.2546  0.3039  0.2546  0.1859
+k5               423ms    0.6557  -3.12pt 0.6990  0.2871  0.2546  0.3046  0.2559  0.1860
+k6               507ms    0.6515  -3.54pt 0.6967  0.2869  0.2545  0.3062  0.2560  0.1863
+k7               586ms    0.6488  -3.81pt 0.6955  0.2878  0.2549  0.3057  0.2552  0.1854
+k8               677ms    0.6470  -3.99pt 0.6945  0.2877  0.2550  0.3067  0.2552  0.1855
+k9               851ms*   0.6448  -4.21pt 0.6932  0.2875  0.2546  0.3081  0.2556  0.1858
+k10              958ms*   0.6432  -4.37pt 0.6924  0.2879  0.2547  0.3076  0.2558  0.1854
+lidar_only       -        0.6496  -3.73pt 0.6979  0.2829  0.2516  0.2913  0.2594  0.1836
+(* k9/k10 delays are camhist timestamp estimates; k1-k8 are driver-measured)
+
+BACKFIRE CONFIRMED, FIT v2 (EXPONENTIAL, 2026-10-30):
+- mAP(delay) is CONCAVE, not linear. Local decay: 1.22 pt/100ms (~100ms) -> 0.15 pt/100ms (~900ms).
+  Exp-approach model: mAP = 0.6409 + 0.0523*exp(-d/317 ms), R2=0.999 (linear fit R2=0.87 rejected:
+  it overestimates the safe budget by fitting a straight line through concave data).
+- Crossover with LiDAR-only (0.6496): 568 ms (exp model); 562 ms (piecewise interpolation of the
+  measured k6 [507ms, 0.6515] - k7 [586ms, 0.6488] bracket). Headline safe latency budget: 0.55-0.57 s.
+- Asymptote 0.6409 is ~0.9 pt BELOW LiDAR-only: the stale camera imposes a PERMANENT penalty;
+  measured negative gain keeps deepening (k8 -0.26pt, k9 -0.48pt, k10 -0.64pt) with no convergence.
+- mAOE keeps worsening past crossover (k9 0.3081, k10 0.3076 vs lidar 0.2913):
+  stale images actively mislead orientation.
+- v1 linear-fit numbers (660ms crossover, 0.29pt/100ms decay) are RETRACTED.
+- Fit details + figure: results/temporal_misalignment/crossover_fit.{txt,svg,png}
