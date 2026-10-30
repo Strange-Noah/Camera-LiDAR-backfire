@@ -27,7 +27,7 @@ Date: 2026-10-30 · Dataset: nuScenes v1.0-trainval (val split) · Common subset
 Key observations:
 
 - **Backfire is class-selective.** The 6 backfiring classes are camera-dependent and small/dynamic; the 4 "large vehicle" classes remain safe because LiDAR geometry alone sustains them.
-- **Onset is early.** At k6 (~500 ms) car (0.8662 < 0.8724), motorcycle (0.6886 < 0.7053) and bicycle (0.5573 < 0.5584) are already below LiDAR-only — earlier than the overall mAP crossover (~650 ms). **The aggregate metric hides early, local backfires.**
+- **Onset is early.** At k6 (~500 ms) car (0.8662 < 0.8724), motorcycle (0.6886 < 0.7053) and bicycle (0.5573 < 0.5584) are already below LiDAR-only — earlier than the overall mAP crossover (~570 ms, exponential fit v2; see the T1 report). **The aggregate metric hides early, local backfires.**
 - Trailer is a special case: clean fusion only gains +3.2 pt over LiDAR-only, and misalignment barely hurts it (k10 0.4820), because LiDAR dominates this class.
 
 ## 2. Scene split (mAP within the common subset)
@@ -62,7 +62,7 @@ Key observations:
 ## 4. Mechanism summary — where is the backfire point?
 
 1. **Class axis**: backfire concentrates on small/dynamic, camera-reliant classes (cone, motorcycle, pedestrian, bicycle, car, barrier); LiDAR-dominant large vehicles (truck/bus/trailer/construction vehicle) are safe throughout.
-2. **Time axis**: class-level backfire starts at ~500 ms (k6), earlier than the overall mAP crossover (~650 ms).
+2. **Time axis**: class-level backfire starts at ~500 ms (k6), earlier than the overall mAP crossover (~570 ms, exp fit v2).
 3. **Scene axis**: day and intersections are the hot spots; at night, misalignment cannot be worse than not using the camera at all.
 4. **Range axis**: backfire concentrates at 30–60 m — the LiDAR-sparse band where the model leans on the camera most; close range is unaffected.
 
