@@ -7,18 +7,18 @@
 
 You do **not** need a GPU, CUDA, or matching PyTorch versions for this. All conditional analysis runs on the **prediction JSONs** we already produced — evaluation is pure-CPU (`nuscenes-devkit` + numpy), works on any laptop. Matching our training/inference environment only matters if you later re-run inference (e.g. E2); the full environment fingerprint is in `baseline_full_val_2026-10-26_en.md`.
 
-## What to download
+## Download
+
+All files are GitHub Release assets: **https://github.com/Strange-Noah/Camera-LiDAR-backfire/releases/tag/predictions-v1** (sha256 digests shown on the release page match the uploaded bytes, so downloads are integrity-checked).
 
 | File | Size | Content |
 |---|---|---|
 | `fusion_cumulative.json.gz` | ~101 MB | clean fusion predictions, full val 6,019 samples |
-| `lidar_cumulative.json.gz` | ~96 MB | LiDAR-only predictions (reference floor) |
+| `lidar_cumulative.json` | ~347 MB | LiDAR-only predictions (reference floor), **not gzipped** |
 | `k{1..10}_cumulative.json.gz` | ~97–109 MB each | T1 misaligned predictions (stale camera, k prev-chain steps back) |
-| `gt_common.json.gz` | ~4.6 MB | GT boxes (class/xyz/size/rotation) for the 5,712-sample common subset |
-| `metrics_summary.json`, `eval_summary.txt` | <100 KB | all headline numbers, delays, fit parameters |
-| `breakdown_k15.json`, `E1_backfire_breakdown_2026-10-30.md` | <100 KB | per-class AP k1–k5; class/scene/range breakdown |
-
-Prediction JSONs exceed GitHub's 100 MB repo-file limit, so they are **not in the repository** — they are distributed as release assets / shared storage (link in the Lark group; the raw files also sit on the AutoDL instance `/root/autodl-tmp/preds{,_temporal}/` while it is running).
+| `gt_common.json` | ~18.6 MB | GT boxes (class/xyz/size/rotation) for the 5,712-sample common subset, **not gzipped** |
+| `metrics_summary.json`, `eval_summary.txt` | <100 KB | all headline numbers, delays, fit parameters (in the repo) |
+| `breakdown_k15.json`, `E1_backfire_breakdown_2026-10-30.md` | <100 KB | per-class AP k1–k5; class/scene/range breakdown (in the repo) |
 
 ## Key facts to build on
 
@@ -37,7 +37,8 @@ Prediction JSONs exceed GitHub's 100 MB repo-file limit, so they are **not in th
 
 ## Gotchas
 
-- Prediction files are large; decompress with `gunzip` before the devkit eval.
+- Decompress the `*.json.gz` files with `gunzip` before the devkit eval; `lidar_cumulative.json` and `gt_common.json` are already plain JSON.
+- Prediction files are large — download with `wget <asset-url>` or aria2 if the browser struggles.
 - Sample eligibility shrinks with k (scene-first frames have no history) — that is why the paired 5,712 exists; do not compare raw full-set numbers against it.
 - k9/k10 delays are camhist-timestamp estimates (~±5 ms vs driver measurement), k1–k8 are driver-measured.
 - The 6 tokens missing from the common subset had unrecoverable LiDAR files in the official tars — ignore them.
