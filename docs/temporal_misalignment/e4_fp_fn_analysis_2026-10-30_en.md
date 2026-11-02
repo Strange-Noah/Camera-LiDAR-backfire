@@ -1,6 +1,6 @@
 # E4 — Error-Type Decomposition of the Camera–LiDAR Backfire (FP vs FN)
 
-**Date:** 2026-10-30 · **FN definition corrected 2026-11-03** (see note below) · **Setting:** BEVFusion camera+LiDAR fusion, nuScenes val common subset (n = 5712 samples, 131,527 GT boxes) · **Method:** greedy score-ordered matching, ground-plane center distance < 2 m, predictions with score < 0.1 excluded from matching and counted as low-score noise; **FN = every unmatched GT box** (unconditional)
+**Date:** 2026-10-30 · **FN definition corrected 2026-11-03** (see note below) · **Setting:** BEVFusion camera+LiDAR fusion, nuScenes val common subset (n = 5712 samples, 116,027 GT boxes) · **Method:** greedy score-ordered matching, ground-plane center distance < 2 m, predictions with score < 0.1 excluded from matching and counted as low-score noise; **FN = every unmatched GT box** (unconditional)
 
 > **Correction note (2026-11-03).** The original script only counted a class's FN when the sample contained at least one same-class prediction ≥ 0.1, silently skipping GT boxes in samples where the model missed the whole class. That selection effect grows as the model degrades and biased the FN growth downward (reported +38%, corrected +40.4%). FP counts are unaffected. Credit to @heyz for catching this. The corrected numbers below supersede the original table; all headline conclusions are unchanged and the class-level backfire is strictly stronger.
 
@@ -45,4 +45,4 @@ The T1 v2 fit (mAP = 0.6409 + 0.0523·e^(−d/317 ms), R² = 0.999) shows the de
 ## Reproduce
 
 - E3 remote eval (per-class AP k1–k5 + GT dump): `scripts/temporal/e3_eval.py` → `results/backfire_breakdown/breakdown_k15.json` (+ remote-only `gt_common.json`)
-- E4 local analysis (zero GPU): `scripts/temporal/e4_fp_fn_local.py` (corrected FN definition) / `scripts/temporal/e4_fp_fn_fixed.py` (old-vs-new A/B) → `results/e4_fp_fn.json` / `results/e4_fp_fn_fixed.json`, `results/temporal_misalignment/e4_fp_fn.svg`
+- E4 local analysis (zero GPU): `scripts/temporal/e4_fp_fn_local.py` (corrected FN definition) / `scripts/temporal/e4_fp_fn_fixed.py` (old-vs-new A/B) → `results/e4_fp_fn.json` / `results/temporal_misalignment/e4_fp_fn_fixed.json`, `results/temporal_misalignment/e4_fp_fn.svg`

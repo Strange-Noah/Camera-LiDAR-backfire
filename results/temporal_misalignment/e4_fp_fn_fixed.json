@@ -1,50 +1,626 @@
 {
  "fusion_clean": {
-  "car": {"gt": 28131, "fn": 2467, "fp": 9251},
-  "truck": {"gt": 3837, "fn": 864, "fp": 1131},
-  "bus": {"gt": 1724, "fn": 247, "fp": 572},
-  "trailer": {"gt": 1132, "fn": 380, "fp": 1698},
-  "construction_vehicle": {"gt": 1009, "fn": 534, "fp": 791},
-  "pedestrian": {"gt": 18120, "fn": 1617, "fp": 3190},
-  "motorcycle": {"gt": 778, "fn": 179, "fp": 310},
-  "bicycle": {"gt": 1904, "fn": 659, "fp": 361},
-  "traffic_cone": {"gt": 9192, "fn": 1336, "fp": 1065},
-  "barrier": {"gt": 13500, "fn": 1958, "fp": 7338}
+  "car": {
+   "gt": 50509,
+   "fn": 4453,
+   "fp": 7376
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1979,
+   "fp": 2207
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 280,
+   "fp": 202
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 746,
+   "fp": 579
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 767,
+   "fp": 410
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 1999,
+   "fp": 6594
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 406,
+   "fp": 182
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 606,
+   "fp": 415
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1455,
+   "fp": 4073
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2201,
+   "fp": 3869
+  }
  },
  "k1": {
-  "car": {"gt": 28131, "fn": 2544, "fp": 9134},
-  "truck": {"gt": 3837, "fn": 896, "fp": 1121},
-  "bus": {"gt": 1724, "fn": 259, "fp": 566},
-  "trailer": {"gt": 1132, "fn": 388, "fp": 1681},
-  "construction_vehicle": {"gt": 1009, "fn": 553, "fp": 756},
-  "pedestrian": {"gt": 18120, "fn": 1663, "fp": 3148},
-  "motorcycle": {"gt": 778, "fn": 187, "fp": 304},
-  "bicycle": {"gt": 1904, "fn": 685, "fp": 355},
-  "traffic_cone": {"gt": 9192, "fn": 1409, "fp": 1023},
-  "barrier": {"gt": 13500, "fn": 1996, "fp": 7246}
+  "car": {
+   "gt": 50509,
+   "fn": 4541,
+   "fp": 7378
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1976,
+   "fp": 2263
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 289,
+   "fp": 202
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 752,
+   "fp": 597
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 768,
+   "fp": 399
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2118,
+   "fp": 6518
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 413,
+   "fp": 181
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 632,
+   "fp": 400
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1618,
+   "fp": 3917
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2234,
+   "fp": 3897
+  }
+ },
+ "k2": {
+  "car": {
+   "gt": 50509,
+   "fn": 5044,
+   "fp": 7235
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2043,
+   "fp": 2338
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 300,
+   "fp": 206
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 739,
+   "fp": 581
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 781,
+   "fp": 373
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2308,
+   "fp": 6332
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 464,
+   "fp": 184
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 675,
+   "fp": 379
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1941,
+   "fp": 3658
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2283,
+   "fp": 3863
+  }
+ },
+ "k3": {
+  "car": {
+   "gt": 50509,
+   "fn": 5481,
+   "fp": 7114
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2098,
+   "fp": 2394
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 311,
+   "fp": 205
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 753,
+   "fp": 589
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 799,
+   "fp": 374
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2468,
+   "fp": 6265
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 494,
+   "fp": 165
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 706,
+   "fp": 372
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2134,
+   "fp": 3427
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2324,
+   "fp": 3847
+  }
+ },
+ "k4": {
+  "car": {
+   "gt": 50509,
+   "fn": 5798,
+   "fp": 6999
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2140,
+   "fp": 2392
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 307,
+   "fp": 208
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 755,
+   "fp": 587
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 812,
+   "fp": 378
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2569,
+   "fp": 6144
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 526,
+   "fp": 165
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 718,
+   "fp": 348
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2296,
+   "fp": 3299
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2332,
+   "fp": 3847
+  }
+ },
+ "k5": {
+  "car": {
+   "gt": 50509,
+   "fn": 6085,
+   "fp": 6934
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2180,
+   "fp": 2386
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 318,
+   "fp": 203
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 758,
+   "fp": 578
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 822,
+   "fp": 369
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2646,
+   "fp": 5966
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 541,
+   "fp": 163
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 730,
+   "fp": 348
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2454,
+   "fp": 3217
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2368,
+   "fp": 3802
+  }
+ },
+ "k6": {
+  "car": {
+   "gt": 50509,
+   "fn": 6320,
+   "fp": 6909
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2233,
+   "fp": 2377
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 329,
+   "fp": 202
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 761,
+   "fp": 584
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 829,
+   "fp": 357
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2725,
+   "fp": 5885
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 561,
+   "fp": 169
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 743,
+   "fp": 332
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2514,
+   "fp": 3111
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2422,
+   "fp": 3804
+  }
+ },
+ "k7": {
+  "car": {
+   "gt": 50509,
+   "fn": 6462,
+   "fp": 6857
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2244,
+   "fp": 2378
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 342,
+   "fp": 209
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 781,
+   "fp": 585
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 827,
+   "fp": 346
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2810,
+   "fp": 5808
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 573,
+   "fp": 171
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 748,
+   "fp": 327
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2589,
+   "fp": 3055
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2469,
+   "fp": 3764
+  }
+ },
+ "k8": {
+  "car": {
+   "gt": 50509,
+   "fn": 6708,
+   "fp": 6804
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2287,
+   "fp": 2372
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 347,
+   "fp": 208
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 778,
+   "fp": 581
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 836,
+   "fp": 340
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2831,
+   "fp": 5709
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 567,
+   "fp": 164
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 757,
+   "fp": 310
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2708,
+   "fp": 2941
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2483,
+   "fp": 3771
+  }
+ },
+ "k9": {
+  "car": {
+   "gt": 50509,
+   "fn": 6839,
+   "fp": 6768
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2318,
+   "fp": 2414
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 346,
+   "fp": 209
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 774,
+   "fp": 574
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 834,
+   "fp": 343
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2921,
+   "fp": 5694
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 580,
+   "fp": 165
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 780,
+   "fp": 305
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2729,
+   "fp": 2908
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2506,
+   "fp": 3742
+  }
  },
  "k10": {
-  "car": {"gt": 28131, "fn": 3997, "fp": 8614},
-  "truck": {"gt": 3837, "fn": 1235, "fp": 1352},
-  "bus": {"gt": 1724, "fn": 307, "fp": 577},
-  "trailer": {"gt": 1132, "fn": 413, "fp": 1689},
-  "construction_vehicle": {"gt": 1009, "fn": 602, "fp": 729},
-  "pedestrian": {"gt": 18120, "fn": 2540, "fp": 2224},
-  "motorcycle": {"gt": 778, "fn": 358, "fp": 291},
-  "bicycle": {"gt": 1904, "fn": 853, "fp": 247},
-  "traffic_cone": {"gt": 9192, "fn": 2669, "fp": 881},
-  "barrier": {"gt": 13500, "fn": 2269, "fp": 7193}
+  "car": {
+   "gt": 50509,
+   "fn": 6983,
+   "fp": 6739
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2350,
+   "fp": 2428
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 348,
+   "fp": 207
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 779,
+   "fp": 570
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 835,
+   "fp": 348
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2922,
+   "fp": 5628
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 585,
+   "fp": 163
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 784,
+   "fp": 301
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2788,
+   "fp": 2889
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2529,
+   "fp": 3724
+  }
  },
  "lidar_only": {
-  "car": {"gt": 28131, "fn": 3126, "fp": 10466},
-  "truck": {"gt": 3837, "fn": 1071, "fp": 1564},
-  "bus": {"gt": 1724, "fn": 314, "fp": 601},
-  "trailer": {"gt": 1132, "fn": 390, "fp": 1989},
-  "construction_vehicle": {"gt": 1009, "fn": 563, "fp": 987},
-  "pedestrian": {"gt": 18120, "fn": 1807, "fp": 4052},
-  "motorcycle": {"gt": 778, "fn": 220, "fp": 394},
-  "bicycle": {"gt": 1904, "fn": 773, "fp": 501},
-  "traffic_cone": {"gt": 9192, "fn": 1734, "fp": 1204},
-  "barrier": {"gt": 13500, "fn": 2401, "fp": 8368}
+  "car": {
+   "gt": 50509,
+   "fn": 5583,
+   "fp": 8134
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2457,
+   "fp": 2768
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 355,
+   "fp": 202
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 765,
+   "fp": 649
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 808,
+   "fp": 433
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2249,
+   "fp": 6916
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 500,
+   "fp": 275
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 711,
+   "fp": 483
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1893,
+   "fp": 4283
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2694,
+   "fp": 4003
+  }
  }
 }
