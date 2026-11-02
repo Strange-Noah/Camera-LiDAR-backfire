@@ -8,10 +8,17 @@ Method: greedy score-ordered matching per (sample_token, class) with a 2 m
 ground-plane center distance threshold on the common 5712-sample subset.
 - Predictions with score < SCORE_MIN are not matched; they are counted as
   fp_below (low-score noise, not actionable).
-- FN = GT boxes with no matched prediction (score >= SCORE_MIN)
+- FN = EVERY unmatched GT box (corrected 2026-11-03, see note below)
 - FP = unmatched predictions with score >= SCORE_MIN, binned by score.
 
 Settings: fusion_clean, k1..k10, lidar_only. Output: results/e4_fp_fn.json
+
+Correction note (2026-11-03, credit @heyz): the original loop only visited
+classes with >=1 prediction >= SCORE_MIN in the sample, silently skipping GT
+boxes in samples where the model missed the whole class. That selection effect
+grows with degradation and biased the FN growth clean->k10 from +40.4% down
+to +38.0%. FN now counts every unmatched GT box unconditionally; FP logic is
+unchanged. `e4_fp_fn_fixed.py` reproduces the old vs new numbers side by side.
 """
 import json, gzip, os
 import numpy as np
@@ -32,11 +39,15 @@ CLASSES = ['car', 'truck', 'bus', 'trailer', 'construction_vehicle',
 # ---- cache GT xy arrays per (token, class) once ----
 GT_XY = {}   # (token, class) -> (n,2) array
 GT_N = {c: 0 for c in CLASSES}
+TOK_GT_CLASSES = {}  # token -> set of classes with GT boxes
 for t in TOKENS:
+    cs = set()
     for g in GT[t]:
         c = g['name']
         if c in CLASSES:
             GT_XY.setdefault((t, c), []).append((g['translation'][0], g['translation'][1]))
+            cs.add(c)
+    TOK_GT_CLASSES[t] = cs
 for k, v in GT_XY.items():
     GT_XY[k] = np.array(v, dtype=np.float32)
     GT_N[k[1]] += len(v)
@@ -55,8 +66,10 @@ def match_setting(preds):
                     out[c]['fp_below'] += 1
                 else:
                     by_c.setdefault(c, []).append(p)
-        for c, pc in by_c.items():
+        # corrected FN: visit every class present in GT, even with no prediction
+        for c in (set(by_c) | TOK_GT_CLASSES[t]):
             gxy = GT_XY.get((t, c))
+            pc = by_c.get(c, [])
             if gxy is None:
                 out[c]['fp'] += len(pc)
                 for p in pc:
@@ -64,6 +77,10 @@ def match_setting(preds):
                     if s < 0.2: out[c]['fp_low'] += 1
                     elif s < 0.5: out[c]['fp_mid'] += 1
                     else: out[c]['fp_high'] += 1
+                continue
+            if not pc:
+                # whole-class miss in this sample: every GT box is a FN
+                out[c]['fn'] += len(gxy)
                 continue
             pc.sort(key=lambda p: -p['detection_score'])
             matched = np.zeros(len(gxy), dtype=bool)

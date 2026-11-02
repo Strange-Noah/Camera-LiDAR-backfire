@@ -1,0 +1,50 @@
+{
+ "fusion_clean": {
+  "car": {"gt": 28131, "fn": 2467, "fp": 9251},
+  "truck": {"gt": 3837, "fn": 864, "fp": 1131},
+  "bus": {"gt": 1724, "fn": 247, "fp": 572},
+  "trailer": {"gt": 1132, "fn": 380, "fp": 1698},
+  "construction_vehicle": {"gt": 1009, "fn": 534, "fp": 791},
+  "pedestrian": {"gt": 18120, "fn": 1617, "fp": 3190},
+  "motorcycle": {"gt": 778, "fn": 179, "fp": 310},
+  "bicycle": {"gt": 1904, "fn": 659, "fp": 361},
+  "traffic_cone": {"gt": 9192, "fn": 1336, "fp": 1065},
+  "barrier": {"gt": 13500, "fn": 1958, "fp": 7338}
+ },
+ "k1": {
+  "car": {"gt": 28131, "fn": 2544, "fp": 9134},
+  "truck": {"gt": 3837, "fn": 896, "fp": 1121},
+  "bus": {"gt": 1724, "fn": 259, "fp": 566},
+  "trailer": {"gt": 1132, "fn": 388, "fp": 1681},
+  "construction_vehicle": {"gt": 1009, "fn": 553, "fp": 756},
+  "pedestrian": {"gt": 18120, "fn": 1663, "fp": 3148},
+  "motorcycle": {"gt": 778, "fn": 187, "fp": 304},
+  "bicycle": {"gt": 1904, "fn": 685, "fp": 355},
+  "traffic_cone": {"gt": 9192, "fn": 1409, "fp": 1023},
+  "barrier": {"gt": 13500, "fn": 1996, "fp": 7246}
+ },
+ "k10": {
+  "car": {"gt": 28131, "fn": 3997, "fp": 8614},
+  "truck": {"gt": 3837, "fn": 1235, "fp": 1352},
+  "bus": {"gt": 1724, "fn": 307, "fp": 577},
+  "trailer": {"gt": 1132, "fn": 413, "fp": 1689},
+  "construction_vehicle": {"gt": 1009, "fn": 602, "fp": 729},
+  "pedestrian": {"gt": 18120, "fn": 2540, "fp": 2224},
+  "motorcycle": {"gt": 778, "fn": 358, "fp": 291},
+  "bicycle": {"gt": 1904, "fn": 853, "fp": 247},
+  "traffic_cone": {"gt": 9192, "fn": 2669, "fp": 881},
+  "barrier": {"gt": 13500, "fn": 2269, "fp": 7193}
+ },
+ "lidar_only": {
+  "car": {"gt": 28131, "fn": 3126, "fp": 10466},
+  "truck": {"gt": 3837, "fn": 1071, "fp": 1564},
+  "bus": {"gt": 1724, "fn": 314, "fp": 601},
+  "trailer": {"gt": 1132, "fn": 390, "fp": 1989},
+  "construction_vehicle": {"gt": 1009, "fn": 563, "fp": 987},
+  "pedestrian": {"gt": 18120, "fn": 1807, "fp": 4052},
+  "motorcycle": {"gt": 778, "fn": 220, "fp": 394},
+  "bicycle": {"gt": 1904, "fn": 773, "fp": 501},
+  "traffic_cone": {"gt": 9192, "fn": 1734, "fp": 1204},
+  "barrier": {"gt": 13500, "fn": 2401, "fp": 8368}
+ }
+}
