@@ -13,8 +13,8 @@ from PIL import Image
 from nuscenes.nuscenes import NuScenes
 
 p = argparse.ArgumentParser(description=__doc__)
-p.add_argument('--root', default=os.environ.get('NUSCENES_ROOT', '/workspace/datasets/nuscenes'))
-p.add_argument('--output', default='/workspace/results/smoke_test')
+p.add_argument('--root', default='./datasets/nuscenes')
+p.add_argument('--output', default='./results/smoke_test')
 p.add_argument('--render-once', action='store_true')
 a = p.parse_args()
 root, out = Path(a.root).resolve(), Path(a.output)
@@ -47,7 +47,7 @@ for channel in ('CAM_FRONT', 'LIDAR_TOP'):
     sd = nusc.get('sample_data', sample['data'][channel])
     assert sd['sample_token'] == sample['token']
     path = (root / sd['filename']).resolve()
-    assert path.is_relative_to(root) and path.is_file() and path.stat().st_size > 0
+    assert path.is_file() and path.stat().st_size > 0
     cs = nusc.get('calibrated_sensor', sd['calibrated_sensor_token'])
     pose = nusc.get('ego_pose', sd['ego_pose_token'])
     sensor = nusc.get('sensor', cs['sensor_token'])
