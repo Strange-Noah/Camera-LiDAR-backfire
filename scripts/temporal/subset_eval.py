@@ -1,39 +1,58 @@
-# 同资格子集评测:clean fusion vs k1 vs k2 在完全相同的样本集合上算官方指标
-# 用法: subset_eval.py <pred.json> [<pred.json> ...]   (每个 json 出一套子集指标)
-# 共同子集 = 所有传入 json 的 results 键集合的交集(且属于 val 6019)
-import json, os, sys
+# Same-eligibility subset eval: clean fusion vs k1 vs k2 ... on the exact same
+# sample set, using the official nuScenes detection metrics.
+# Usage: subset_eval.py <pred.json> [<pred.json> ...]   (one subset metric set per json)
+# Common subset = intersection of the results-key sets of all input jsons
+# (restricted to the 6019 val samples).
+# 2026-11-03 patch: transparently reads .gz when <path>.gz exists but <path> does not;
+# deletes each transient padded json right after DetectionEval loads it (disk safety).
+import json, os, sys, gzip
 from nuscenes import NuScenes
 from nuscenes.eval.detection.config import config_factory
 from nuscenes.eval.detection.evaluate import DetectionEval
 
 EVALROOT = '/root/autodl-tmp/evalroot'
-CLEAN_FULL = '/root/autodl-tmp/preds/fusion_cumulative.json'  # 仅用于取 val 全量 token 做 padding
+CLEAN_FULL = '/root/autodl-tmp/preds/fusion_cumulative.json'  # only used to fetch full val tokens for padding
 OUTROOT = '/root/autodl-tmp/subeval'
+
+def resolve(p):
+    if not os.path.exists(p) and os.path.exists(p + '.gz'):
+        return p + '.gz'
+    return p
+
+def jload(p):
+    p = resolve(p)
+    if p.endswith('.gz'):
+        with gzip.open(p, 'rt') as f:
+            return json.load(f)
+    with open(p) as f:
+        return json.load(f)
 
 paths = sys.argv[1:]
 sets = []
 for p in paths:
-    r = json.load(open(p))
+    r = jload(p)
     sets.append(set(r['results'].keys()))
 common = set.intersection(*sets)
 print('COMMON_SUBSET', len(common))
 
-# val 全量 token(用 clean full 的键,应与 GT 完全一致)
-full_tokens = set(json.load(open(CLEAN_FULL))['results'].keys())
+# Full val tokens (keys of the clean full prediction; should match GT exactly)
+full_tokens = set(jload(CLEAN_FULL)['results'].keys())
 cfg = config_factory('detection_cvpr_2019')
 nusc = NuScenes(version='v1.0-trainval', dataroot=EVALROOT, verbose=False)
 
 for p in paths:
-    name = os.path.basename(p).replace('.json', '')
-    res = json.load(open(p))
-    # padding:补齐缺失 token 为空结果,满足 devkit 的样本集合断言
+    name = os.path.basename(resolve(p)).replace('.json.gz', '').replace('.json', '')
+    res = jload(p)
+    # Padding: fill missing tokens with empty results to satisfy the devkit's sample-set assertion
     for t in full_tokens:
         res['results'].setdefault(t, [])
     padded = f'{OUTROOT}/{name}_padded.json'
     os.makedirs(OUTROOT, exist_ok=True)
-    json.dump(res, open(padded, 'w'))
+    with open(padded, 'w') as f:
+        json.dump(res, f)
     ev = DetectionEval(nusc, cfg, padded, 'val', output_dir=f'{OUTROOT}/{name}', verbose=False)
-    # 子集过滤:GT 与预测都限制在共同子集
+    os.remove(padded)  # transient; DetectionEval has fully loaded it
+    # Subset filter: restrict both GT and predictions to the common subset
     for attr in ('gt_boxes', 'pred_boxes'):
         b = getattr(ev, attr)
         b.boxes = {t: v for t, v in b.boxes.items() if t in common}
