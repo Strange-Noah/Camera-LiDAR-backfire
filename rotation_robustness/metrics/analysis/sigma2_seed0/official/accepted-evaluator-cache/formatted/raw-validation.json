@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "samples": 6019,
+  "boxes": 1203521,
+  "raw_predictions_sha256": "463d981353fed5cd4a0d5c810472e14a8946cf47ab97e7d02a3cb6557a67fdd1",
+  "sample_tokens_sha256": "a67af6d7b767d28ee20b7f1021c845b417c966e294819dfa74186cc43f1e3e9f",
+  "infos_sha256": "b58c90ad6b8067df115be7d97b397f7c81d4a6aac2ed887384928ae88dce464c",
+  "formatted_sha256": "fc63228d9f0735cba4f712b2e1855c6c631dff51128a2350c715860244a3ed39",
+  "checks": [
+    "token_order",
+    "raw_count",
+    "raw_finite_boxes_scores",
+    "positive_dimensions",
+    "class_ids_0_to_9"
+  ]
+}

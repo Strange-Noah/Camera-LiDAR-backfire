@@ -1,0 +1,134 @@
+{
+  "NDS": 0.6925096836986329,
+  "TP_errors": {
+    "attr_err": 0.18579335820078086,
+    "orient_err": 0.313704789140681,
+    "scale_err": 0.25293697353955047,
+    "trans_err": 0.2917430388198806,
+    "vel_err": 0.2639583208737576
+  },
+  "condition_id": null,
+  "evaluator": {
+    "config": {
+      "class_range": {
+        "barrier": 30,
+        "bicycle": 40,
+        "bus": 50,
+        "car": 50,
+        "construction_vehicle": 50,
+        "motorcycle": 40,
+        "pedestrian": 40,
+        "traffic_cone": 30,
+        "trailer": 50,
+        "truck": 50
+      },
+      "dist_fcn": "center_distance",
+      "dist_th_tp": 2.0,
+      "dist_ths": [
+        0.5,
+        1.0,
+        2.0,
+        4.0
+      ],
+      "max_boxes_per_sample": 500,
+      "mean_ap_weight": 5,
+      "min_precision": 0.1,
+      "min_recall": 0.1
+    },
+    "formatter_sha256": "7bc5ee44d16d131b88f898c6e0734979ecd5b134d19a079342b9d42e7276c745",
+    "numpy": "1.19.5",
+    "nuscenes_devkit": "1.1.9",
+    "python": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+    "torch": "1.10.1+cu113"
+  },
+  "mAP": 0.646646663512196,
+  "metrics_reused": true,
+  "name": "lidar_only",
+  "per_class_AP": {
+    "barrier": 0.6963783820154573,
+    "bicycle": 0.5605393135879805,
+    "bus": 0.7242277207664244,
+    "car": 0.8685060028057895,
+    "construction_vehicle": 0.2716069630735819,
+    "motorcycle": 0.7180513592194093,
+    "pedestrian": 0.8654868236750111,
+    "traffic_cone": 0.7329035675040851,
+    "trailer": 0.4171826841346489,
+    "truck": 0.6115838183395718
+  },
+  "per_class_TP": {
+    "barrier": {
+      "attr_err": null,
+      "orient_err": 0.057337244426029346,
+      "scale_err": 0.2778503282365362,
+      "trans_err": 0.1867065077891305,
+      "vel_err": null
+    },
+    "bicycle": {
+      "attr_err": 0.016682791820221095,
+      "orient_err": 0.44639673787534273,
+      "scale_err": 0.25546584977364123,
+      "trans_err": 0.16571555236547897,
+      "vel_err": 0.21010926884481518
+    },
+    "bus": {
+      "attr_err": 0.2524498617644398,
+      "orient_err": 0.0565678528730928,
+      "scale_err": 0.1845727893031911,
+      "trans_err": 0.3483840339724959,
+      "vel_err": 0.4475035703012328
+    },
+    "car": {
+      "attr_err": 0.187373941084385,
+      "orient_err": 0.08349932719259037,
+      "scale_err": 0.15099899070038486,
+      "trans_err": 0.17533640227244887,
+      "vel_err": 0.2715637428583372
+    },
+    "construction_vehicle": {
+      "attr_err": 0.31008261583153596,
+      "orient_err": 0.9038645074112289,
+      "scale_err": 0.4242471809240823,
+      "trans_err": 0.7256390697702548,
+      "vel_err": 0.11779880810130847
+    },
+    "motorcycle": {
+      "attr_err": 0.25439427785916924,
+      "orient_err": 0.20536513243289184,
+      "scale_err": 0.2502951418619066,
+      "trans_err": 0.19129467410425244,
+      "vel_err": 0.3988470766372009
+    },
+    "pedestrian": {
+      "attr_err": 0.09100070366604289,
+      "orient_err": 0.3793535403435797,
+      "scale_err": 0.2837885267097947,
+      "trans_err": 0.135461469944523,
+      "vel_err": 0.21507451516186682
+    },
+    "traffic_cone": {
+      "attr_err": null,
+      "orient_err": null,
+      "scale_err": 0.3216516925139874,
+      "trans_err": 0.12970307953974913,
+      "vel_err": null
+    },
+    "trailer": {
+      "attr_err": 0.14531240264799958,
+      "orient_err": 0.6042548237624342,
+      "scale_err": 0.19771658104588757,
+      "trans_err": 0.5304571704244977,
+      "vel_err": 0.21710312067824217
+    },
+    "truck": {
+      "attr_err": 0.2290502709324533,
+      "orient_err": 0.08670393594893885,
+      "scale_err": 0.1827826543260928,
+      "trans_err": 0.3287324280159757,
+      "vel_err": 0.2336664644070571
+    }
+  },
+  "seed": null,
+  "sigma": null,
+  "status": "COMPLETE"
+}

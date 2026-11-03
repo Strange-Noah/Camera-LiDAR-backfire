@@ -1,0 +1,74 @@
+{
+  "model": "lidar",
+  "strict_checkpoint_load": true,
+  "exit_code": 0,
+  "completed_samples": 6019,
+  "manifest_sha256": "a0e22d8997c745a24d6b1491106926c98dcb96e1344e67e2ad1b91e03198b8ad",
+  "dataset_version": "v1.0-trainval",
+  "split": "val",
+  "unhandled_errors": [],
+  "unexplained_deviations": [],
+  "gpu_cleanup_verified": true,
+  "checkpoint_sha256": "7f3f1f83754752ea2091543d010a87109d724dc48512a6258c31ef6545619a0e",
+  "upstream_commit": "db75150717a9462cb60241e36ba28d65f6908607",
+  "resolved_config_sha256": "dbaf8a1ae0a5c37b52bbb7e90e480ed60ab4dc6d46c67c21f6c1f93ee8ec2387",
+  "runtime_sha256": "5d803136dbf26b68baedaf307e55ef55e9956feec590b7b8e940caf78684a3e7",
+  "started_at": 1792584499.4453945,
+  "finished_at": 1792599896.3779213,
+  "artifacts": {
+    "raw_predictions": {
+      "path": "/workspace/results/validation-baseline-preparation/baseline-lidar/raw-predictions.pkl",
+      "sha256": "0d9b754c262af8e1a5fd990b3f19f78494a2cedec4604efee8455f0c207e3413"
+    },
+    "sample_tokens": {
+      "path": "/workspace/results/validation-baseline-preparation/baseline-lidar/sample-tokens.json",
+      "sha256": "71e415dc09f429e87c777c93125c26569e0f394e3d8cb93a3ab5c853f5ead0a3"
+    },
+    "resolved_config": {
+      "path": "/workspace/results/validation-baseline-preparation/clean-predictions/runs/lidar-full-aongp5ikweoba9/resolved_config.py",
+      "sha256": "dbaf8a1ae0a5c37b52bbb7e90e480ed60ab4dc6d46c67c21f6c1f93ee8ec2387"
+    },
+    "nuscenes_predictions": {
+      "path": "/workspace/results/validation-baseline-preparation/baseline-lidar/evaluation/formatted/results_nusc.json",
+      "sha256": "cf136dc61df255e5f8d4fcf649ad621dcfbd3a9a2c552bb117e496f851a5590f"
+    },
+    "raw_validation": {
+      "path": "/workspace/results/validation-baseline-preparation/baseline-lidar/evaluation/formatted/raw-validation.json",
+      "sha256": "3f13ceb1f788c6c7e4566a483ec40fbd3285b506088a73deaf582e5dc34f8c34"
+    }
+  },
+  "input_protocol": {
+    "base_seed": 0,
+    "workers_per_gpu": 4,
+    "ranks": 1,
+    "seed_algorithm": "uint32 little-endian first four SHA256 bytes of clean-val-v1:0:<sample_token>",
+    "sweep_selection": "Unmodified upstream loader: all available if <=9, otherwise np.random.choice(n,9,replace=False)",
+    "upstream_source_modified": false,
+    "difference_from_readme": "Token-local RNG streams replace eight-rank/worker-dependent RNG streams; sampling distribution and transforms unchanged"
+  },
+  "gpu_pod_ids": [
+    "aongp5ikweoba9",
+    "aqx1f4i9vom99l",
+    "vml8bo9ignawgl"
+  ],
+  "cleanup_proof_sha256": "4b71cefe7b8ed6af299896d9df2de64baa6ab3188b997f4a983520e8b5158618",
+  "gpu_execution_runs": [
+    {
+      "path": "/workspace/results/validation-baseline-preparation/clean-predictions/runs/lidar-full-aongp5ikweoba9/execution.json",
+      "sha256": "6b23b1cd9bacfd68c8528f6403fa36514b5ea9506a6de61abbb544c120e2e39b"
+    },
+    {
+      "path": "/workspace/results/validation-baseline-preparation/clean-predictions/runs/lidar-full-vml8bo9ignawgl/execution.json",
+      "sha256": "3fe79bed6989929512ff203c5049c00d836966183c88bedc92e2838a7fde729d"
+    },
+    {
+      "path": "/workspace/results/validation-baseline-preparation/clean-predictions/runs/lidar-pilot-aqx1f4i9vom99l/execution.json",
+      "sha256": "885e8db7d65343b5abc2b67f22aefe0d01753832dfcc9e471dcecc8b6978f7e4"
+    }
+  ],
+  "declared_operational_differences": [
+    "Single rank instead of README eight ranks; four official loader workers retained.",
+    "Token-derived RNG states; original random-nine-of-ten loader unchanged; LiDAR tensor hashes match across modalities.",
+    "MMDataParallel with one-rank Gloo instead of MMDistributedDataParallel; fp16, model, NMS and evaluation unchanged."
+  ]
+}

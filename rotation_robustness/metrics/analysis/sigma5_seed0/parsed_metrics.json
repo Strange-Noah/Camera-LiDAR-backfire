@@ -1,0 +1,142 @@
+{
+  "NDS": 0.6889916255601828,
+  "TP_errors": {
+    "attr_err": 0.1846746729705292,
+    "orient_err": 0.3210860918697052,
+    "scale_err": 0.256075945184871,
+    "trans_err": 0.3009633157831717,
+    "vel_err": 0.2609271737264829
+  },
+  "condition_id": "e47946659c701b16f128ea9bfe3755e6491b09bbd4ca60852fd214874d8676e1",
+  "evaluator": {
+    "config": {
+      "class_range": {
+        "barrier": 30,
+        "bicycle": 40,
+        "bus": 50,
+        "car": 50,
+        "construction_vehicle": 50,
+        "motorcycle": 40,
+        "pedestrian": 40,
+        "traffic_cone": 30,
+        "trailer": 50,
+        "truck": 50
+      },
+      "dist_fcn": "center_distance",
+      "dist_th_tp": 2.0,
+      "dist_ths": [
+        0.5,
+        1.0,
+        2.0,
+        4.0
+      ],
+      "max_boxes_per_sample": 500,
+      "mean_ap_weight": 5,
+      "min_precision": 0.1,
+      "min_recall": 0.1
+    },
+    "formatter_sha256": "7bc5ee44d16d131b88f898c6e0734979ecd5b134d19a079342b9d42e7276c745",
+    "numpy": "1.19.5",
+    "nuscenes_devkit": "1.1.9",
+    "python": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+    "torch": "1.10.1+cu113"
+  },
+  "formatted_sha256": "f0aa90e68607a203ea4bf2bb2fbb0594132bff5de51448dbeee39bf39c0b7171",
+  "input_archive_identity": {
+    "archive_id": "d8e71fa1e02ede10103570c6f1a419100886c01cac0f07b510590825c5819918",
+    "index_sha256": "c642582429fbb330b3c9ffa162a0db49b7342edc309524a8920a1507665f08e7",
+    "receipt_sha256": "6aa356793ee57ab8e9354accb2f3d3910e91c4b2649b68538fe9b7eee1769412",
+    "shard_hashes_verified": true
+  },
+  "mAP": 0.6427286910273177,
+  "metrics_reused": false,
+  "name": "sigma5_seed0",
+  "official_evaluation_seconds": 113.90359830856323,
+  "per_class_AP": {
+    "barrier": 0.6987376422158831,
+    "bicycle": 0.5545923617066729,
+    "bus": 0.7332956859958127,
+    "car": 0.8523023735256796,
+    "construction_vehicle": 0.2595591414335098,
+    "motorcycle": 0.7050414839124635,
+    "pedestrian": 0.8572018093450872,
+    "traffic_cone": 0.7389071280007378,
+    "trailer": 0.41411968720384995,
+    "truck": 0.613529596933479
+  },
+  "per_class_TP": {
+    "barrier": {
+      "attr_err": null,
+      "orient_err": 0.056241452578842076,
+      "scale_err": 0.27936475679743483,
+      "trans_err": 0.21557186686755928,
+      "vel_err": null
+    },
+    "bicycle": {
+      "attr_err": 0.011536063733491964,
+      "orient_err": 0.49924502656554515,
+      "scale_err": 0.25605336892465325,
+      "trans_err": 0.17931033680730515,
+      "vel_err": 0.2006710700875708
+    },
+    "bus": {
+      "attr_err": 0.2711117927190171,
+      "orient_err": 0.050811375169559844,
+      "scale_err": 0.19184666372880668,
+      "trans_err": 0.3335601069356602,
+      "vel_err": 0.45682072957322006
+    },
+    "car": {
+      "attr_err": 0.18803794201092955,
+      "orient_err": 0.08236483462503792,
+      "scale_err": 0.15083326992891485,
+      "trans_err": 0.18642764159323502,
+      "vel_err": 0.27864018646644356
+    },
+    "construction_vehicle": {
+      "attr_err": 0.30827763112751205,
+      "orient_err": 0.8399527198253606,
+      "scale_err": 0.4364483243843725,
+      "trans_err": 0.7765527617011444,
+      "vel_err": 0.11065230530869614
+    },
+    "motorcycle": {
+      "attr_err": 0.23882709794560444,
+      "orient_err": 0.24401765974957274,
+      "scale_err": 0.2505917710921464,
+      "trans_err": 0.19565922793026178,
+      "vel_err": 0.3631929871242471
+    },
+    "pedestrian": {
+      "attr_err": 0.098222059838246,
+      "orient_err": 0.39256338982911215,
+      "scale_err": 0.28517576269606937,
+      "trans_err": 0.1382102628376019,
+      "vel_err": 0.21684707175778553
+    },
+    "traffic_cone": {
+      "attr_err": null,
+      "orient_err": null,
+      "scale_err": 0.3222874929588063,
+      "trans_err": 0.13424073438504827,
+      "vel_err": null
+    },
+    "trailer": {
+      "attr_err": 0.1409193874155602,
+      "orient_err": 0.6195051658548835,
+      "scale_err": 0.20320939098806395,
+      "trans_err": 0.5176471117326004,
+      "vel_err": 0.21241424880524817
+    },
+    "truck": {
+      "attr_err": 0.22046540897387223,
+      "orient_err": 0.10507320262943304,
+      "scale_err": 0.18494865034944216,
+      "trans_err": 0.3324531070413002,
+      "vel_err": 0.2481787906886518
+    }
+  },
+  "seed": 0,
+  "sigma": 5,
+  "status": "COMPLETE"
+}

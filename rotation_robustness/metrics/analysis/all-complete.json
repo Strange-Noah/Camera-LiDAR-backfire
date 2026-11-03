@@ -1,0 +1,9 @@
+{
+  "conditions": 27,
+  "epoch": 1793680474.0198085,
+  "index_sha256": "73dc19bc4f22e90a9f407e2b51117930214a770dcaeb32a3659dd47613599e95",
+  "newly_scored": 24,
+  "reused": 3,
+  "rotation_conditions": 25,
+  "status": "COMPLETE"
+}
