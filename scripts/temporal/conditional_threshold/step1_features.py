@@ -10,6 +10,9 @@ Feature definitions follow the metadata audit (src/metadata_audit):
   - v_rel = v_obj - v_ego; radial = v_rel . r_hat (positive = receding); lateral = |r_hat x v_rel|
   - distance_xy: horizontal ego-to-box distance; width = size[0]
   - r500 = lateral relative speed * 0.5 s / width (body-widths shifted in 0.5 s); r_k* use each k's delay
+  - r500_ego = same, but in the rotating ego frame: |signed lateral - ego_yaw_rate * distance| * 0.5 / width.
+    Under a pinhole model the image shift relative to the object's pixel width is (v_perp * dt) / W, independent of
+    distance for translation; ego rotation adds yaw_rate * dt * Z / W, which grows with distance.
   - night / intersection / rain: keywords in the scene description (as in E1)
 Difference from the audit: ego pose is taken at the key-frame LiDAR (not interpolated over all sweeps).
 """
@@ -107,9 +110,15 @@ def main(a):
     obj['relative_speed'] = np.linalg.norm(rel, axis=1)
     obj['relative_radial_velocity'] = radial
     obj['relative_lateral_velocity'] = np.abs(lateral)
+    obj['relative_lateral_velocity_signed'] = lateral                       # = bearing rate x range (CCW positive)
+    # Apparent lateral velocity in the rotating ego/camera frame: the camera also turns with the ego yaw rate,
+    # which shifts every object's bearing by yaw_rate * dt, i.e. by yaw_rate * range in lateral metres.
+    obj['apparent_lateral_velocity'] = np.abs(lateral - obj.ego_yaw_rate * obj.distance_xy)
     obj['abs_ego_yaw_rate'] = obj.ego_yaw_rate.abs()
     w_ok = np.isfinite(obj.width) & (obj.width > 0)
     obj['r500'] = np.where(w_ok, obj.relative_lateral_velocity * 0.5 / obj.width, np.nan)
+    # r500 including ego rotation (body-widths shifted in the image in 0.5 s under a pinhole model)
+    obj['r500_ego'] = np.where(w_ok, obj.apparent_lateral_velocity * 0.5 / obj.width, np.nan)
     for k in range(1, 11):
         obj[f'r_k{k}'] = np.where(w_ok, obj.relative_lateral_velocity * DELAY_MS[f'k{k}'] / 1000 / obj.width, np.nan)
     loc = {x['token']: x['location'] for x in log_tab}
@@ -126,9 +135,10 @@ def main(a):
     gt['key'] = key(gt, 'x', 'y', 'z')
     obj_u = obj.drop_duplicates('key')
     feat = ['annotation_token', 'instance_token', 'scene_token', 'scene_name', 'category', 'distance_xy', 'object_speed',
-            'ego_speed', 'relative_speed', 'relative_radial_velocity', 'relative_lateral_velocity', 'abs_ego_yaw_rate',
+            'ego_speed', 'relative_speed', 'relative_radial_velocity', 'relative_lateral_velocity', 'relative_lateral_velocity_signed',
+            'apparent_lateral_velocity', 'ego_yaw_rate', 'abs_ego_yaw_rate',
             'visibility', 'num_lidar_pts', 'num_radar_pts', 'width', 'attrs', 'night', 'intersection', 'rain', 'location',
-            'r500'] + [f'r_k{k}' for k in range(1, 11)]
+            'r500', 'r500_ego'] + [f'r_k{k}' for k in range(1, 11)]
     gtf = gt.merge(obj_u[['key'] + feat], on='key', how='left', validate='many_to_one').drop(columns='key')
     gtf = gtf.sort_values('box_id').reset_index(drop=True)
     save_csv(gtf, os.path.join(a.out, 'gt_features.csv.gz'), index=False)
