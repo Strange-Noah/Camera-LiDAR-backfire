@@ -1,0 +1,19 @@
+{
+  "reference_degrees": 5,
+  "q_definition": "radians(5) * accepted ground-plane ego distance / physical transverse box span",
+  "physical_width_convention": "Full 3D GT box span projected onto the horizontal unit direction perpendicular to the LIDAR_TOP ego-position-to-GT ground-plane ray; includes length/width orientation and any height contribution under roll/pitch. nuScenes size=[width,length,height], local x=length, y=width, z=height.",
+  "q_edges": [0.1, 0.5, 1.0],
+  "q_labels": ["<0.1", "0.1–0.5", "0.5–1", "≥1"],
+  "other_bins": "unchanged published distance, pixel-width and fixed r_rot5 bins",
+  "support": {"objects_min": 200, "scenes_min": 10},
+  "replicates": 500,
+  "scene_seed": 20261104,
+  "seed_sensitivity_seed": 20261106,
+  "cv_seed": 20261107,
+  "primary_curve_summary": "arithmetic average of D at sigma1..5; each grid scale equally weighted; not a continuous-dose integral",
+  "contrasts": "All supported adjacent risk-ordered bins plus prespecified high-risk versus low-risk endpoints within each conditioning stratum; inverse width and positive q/r/distance order.",
+  "trend": "Strict monotonic D ordering across all supported bins; one- and zero-cell strata are not testable. Report all sigma and curve average, not only 5 degrees.",
+  "crossover": "Retain original observed upward brackets; supplemental first positive observed sigma that stays positive through sigma5. Clean benefit must be positive. Never-positive is right-censored beyond5, not a measured sigma6. Bootstrap earlier/tie/later shares reported conditional on both clean benefits positive.",
+  "sensitivity": "Same paired scene draws plus 5 seed indices sampled with replacement independently per sigma, shared across all cells/variables within each replicate. Conditional on only five observed realizations; not full perturbation-distribution uncertainty.",
+  "incremental": "Five scene-held-out folds. OLS main effects of five distance bins versus distance plus four fixed indicator bins; distance+q+r included to test incremental r beyond q. Same common valid objects, folds and five-dimensional D targets averaged over seeds. Score per-object squared error averaged across sigma. No interactions, regularization or tuning. Paired scene bootstrap of fixed out-of-fold loss differences; no refitting inside bootstrap. This assesses D, not crossover prediction."
+}
