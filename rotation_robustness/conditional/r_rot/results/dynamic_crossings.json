@@ -1,0 +1,322 @@
+[
+  {
+    "distance_bin": 0,
+    "r_bin": 0,
+    "upward_brackets": [
+      [
+        3,
+        4
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "4a80d8bd101ee96e2d00a5483f96cc899f545bf389544276439a5660e930f5a9",
+      "f9edd5e2c638b79e6b0480804968ccb2307aca00975b2e14e61427e228b4f61a",
+      "a34e54b7f2d2de5e393374822f017d9b79013339494582a3ed03817cec4a3e75",
+      "de6eada4e63ae0db94194d0e97d811c099d392c128808f7dfe75c61c62d56bea",
+      "3a8e0e594fd775cc23d7b4a4e594c64080f8b1308d45132b3c07fc855970fe74"
+    ]
+  },
+  {
+    "distance_bin": 0,
+    "r_bin": 1,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "bb8024999121cacddb9d0add6e9e148c43b1ad8368e4938b5da21be154a25d87",
+      "e05d34712b06d6141e18678dceec167319d986cc5aa920ab9bafa88912e8aeb5",
+      "751ce66afb1b8888f44a0c94a512fe0821ac82667c00eb10bd9e59151915e02b",
+      "39ffa81ed2a9be13e439b8ea8f2f5daa6066c6b589a3f27795bdab0dd7eda004",
+      "9244eddade846e2e40878924417e4ab0478b0201d5fd2fedbca5d59ffe9e10c4"
+    ]
+  },
+  {
+    "distance_bin": 0,
+    "r_bin": 2,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bb8024999121cacddb9d0add6e9e148c43b1ad8368e4938b5da21be154a25d87"
+    ]
+  },
+  {
+    "distance_bin": 0,
+    "r_bin": 3,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 1,
+    "r_bin": 0,
+    "upward_brackets": [
+      [
+        1,
+        2
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "1c3d9867e401e88a3ad097ac617085adfc1bd3ae3cbe628c795328ec7a047683",
+      "5afc15f61be25ced84d6dbaa313b414f3a273e96a241ceb13e55163f4f334170",
+      "3ba07714788dee6449e6a0c7b987af96a3e3b2fc750e9a443a6fb7fd9fd689cb",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 1,
+    "r_bin": 1,
+    "upward_brackets": [
+      [
+        3,
+        4
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "921565038cd0437a7f2e80aeacc13de83bfbba16d959bd092b8cc43d34a9be7c",
+      "472e53911024cd6f125c696d7be444adf3a8e7bd68cd29adf7aaec9ea2fc9926",
+      "22b8b2333287a7f68edd27aa5d4351fe276cb91731cbd463f8ebf4457536d565",
+      "ab0b5fbe38fc7a6bf2ade16b3661ad25e8db9035ace58b779580ef27ea73e1ca",
+      "1c3d9867e401e88a3ad097ac617085adfc1bd3ae3cbe628c795328ec7a047683"
+    ]
+  },
+  {
+    "distance_bin": 1,
+    "r_bin": 2,
+    "upward_brackets": [
+      [
+        2,
+        3
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cea5344ae268be0c3d09195228b7204035af22bab4710652a09666131117c1de",
+      "3b48f6591f2a6a277f0c63e4aeee87fe4862b83856a2814e0bcf09a9adbd9f9f",
+      "e5a44583e6020f9492d7cf1c94d6447a081f83232b56b6908136ae79b6e1994d",
+      "f7ef548140f16462f017ca5546dfd5a9d269a828faafcbbd38cf9f0eaf5b308d"
+    ]
+  },
+  {
+    "distance_bin": 1,
+    "r_bin": 3,
+    "upward_brackets": [
+      [
+        4,
+        5
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cea5344ae268be0c3d09195228b7204035af22bab4710652a09666131117c1de",
+      "40b08bcd166924c077349499523ffcbfc11d94d5310ae663e7d9915cc2eeb5cf"
+    ]
+  },
+  {
+    "distance_bin": 2,
+    "r_bin": 0,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "b368bde107668aef7e2f856ccae339e00a0a3ffd90f43f50caedcaa996e28467",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 2,
+    "r_bin": 1,
+    "upward_brackets": [
+      [
+        2,
+        3
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "3333ec0391a9c1c3632569d53c7c8567b7f64ba5fbd47249e6da1c68125a75f6",
+      "4fd19474446b22885c7cedad39cbddfc31b613af577bc5c381d8f465fe89db85",
+      "50e7f3b4fa2836f3c73bbfd42d0554068d20b35d9b16645895175e1d2af6b7ec",
+      "d7e6cc595e5bf4233b22b9e3a5e9402485d716826b50c5eeb38450d3df41f10f",
+      "b368bde107668aef7e2f856ccae339e00a0a3ffd90f43f50caedcaa996e28467"
+    ]
+  },
+  {
+    "distance_bin": 2,
+    "r_bin": 2,
+    "upward_brackets": [
+      [
+        1,
+        2
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "7d2ed08027569c6f88e22653d3c0c26f3f30f360178e9109ee0de3e2b7bb4c2d",
+      "94031b987fe03f85a41448b0f10024e78a9974faa7a89b9ed1d8d22076bd5f09",
+      "8d5ae61bf766f74ca2a5504321107c54987db1b8755dbc1d96149a79b86ad34e",
+      "2e0bbcf8d3742fece39fbc4a2de37faa8d833bd2b5287a0b92b36aaea2b33a04",
+      "7bf33908dd992b8885630cf662ef6aee1ffed56254d1706929ee1a15f7c1c616"
+    ]
+  },
+  {
+    "distance_bin": 2,
+    "r_bin": 3,
+    "upward_brackets": [
+      [
+        2,
+        3
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "7d2ed08027569c6f88e22653d3c0c26f3f30f360178e9109ee0de3e2b7bb4c2d",
+      "31e438f65a34c7359c9f6b700e5f3b03d6348bda486ec5b9d5d1e0eaabb68f50",
+      "d27860d2c1bc672d9efab72bad95588d1c4e374097cf874191cfe0c2f3dc9a93",
+      "61e516c8e7fd2bade425c3ec346d68d178eb70c846a31911e6f9833402952783"
+    ]
+  },
+  {
+    "distance_bin": 3,
+    "r_bin": 0,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 3,
+    "r_bin": 1,
+    "upward_brackets": [
+      [
+        1,
+        2
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "b35794e87cccfe0b0ef340f6697f0c9bc0d30bbdb356d1aa7d1f605a4d1ce2f6",
+      "9ff9198bcbde89f90f07600561603729e1bbd6aeccf5cfd7ee4b0fe534be60af",
+      "a8561b597dff9252a376671a647a011e854a1ed098617fd52029941c22df243b",
+      "80ad6e92231643ba9cfe8d35875376cd29350597ab144d4124f22d10b14c350a",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 3,
+    "r_bin": 2,
+    "upward_brackets": [
+      [
+        2,
+        3
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "7e9fe7ecfdc672a73680bc36a3ac3a5fe2a9fb705d8555014d424fe99625b3f8",
+      "d2dbf12ff5effe40fd2c13f6e65543bc994652e0572a6f980606b23ed831755f",
+      "da4cef812a2cd762e78bc159050da1f9db068ce58641404a5ea3b852b6cb621b",
+      "d5b8e5c27999cc25c809b3c89b38b896d45d7518417be64aaf6fe2d68956876f",
+      "fb011be2e6d5111a9371b365ccef9d71bfae299afe18e6188d0a29402330949d"
+    ]
+  },
+  {
+    "distance_bin": 3,
+    "r_bin": 3,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "7e9fe7ecfdc672a73680bc36a3ac3a5fe2a9fb705d8555014d424fe99625b3f8",
+      "a726dd09d696597456a333da8dd8453500bcd382458c959023d335c4dc375c1c",
+      "4ba64c6b1e1357e97a29e657be3812ddf9ddd0251e744c68a4625f67a2f21658",
+      "188284ee961e6bddc31f0780e8c32bb9864396753c50ff726c815a4b5de0189a"
+    ]
+  },
+  {
+    "distance_bin": 4,
+    "r_bin": 0,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 4,
+    "r_bin": 1,
+    "upward_brackets": [
+      [
+        1,
+        2
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "4920f857d4e7d3c6c59b696085ae85a692af930849c782df86a73334581a2073",
+      "3f00e4eeadf34278ece54f11679f6db82653ff6006511af0106e86ee79c4db35",
+      "9a32ccac00bc5d97b1dda0712893ad9839f980274c920bf287e2bf3e881fb3ea",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ]
+  },
+  {
+    "distance_bin": 4,
+    "r_bin": 2,
+    "upward_brackets": [
+      [
+        1,
+        2
+      ]
+    ],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "45e4edd89f1f5b4d49197a2e8c07e017855e94054cfd6f0ba3badcd275fd4283",
+      "7aff6d8ff5ad7913424429b1c92e97616986a66a98b5f29e0e4804a671868898",
+      "0202ca49133aa51a76e231b5ec92c7d25ac6c75aea0096acc80cfcb639b0516a",
+      "3f00e4eeadf34278ece54f11679f6db82653ff6006511af0106e86ee79c4db35",
+      "34c4fec741176815b24a479e023fb95b6b7c18112ae9560b384cce8f8f48dd51"
+    ]
+  },
+  {
+    "distance_bin": 4,
+    "r_bin": 3,
+    "upward_brackets": [],
+    "interpretation": "descriptive, subgroup composition changes across sigma",
+    "denominator_hashes": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "45e4edd89f1f5b4d49197a2e8c07e017855e94054cfd6f0ba3badcd275fd4283",
+      "5e7c8c1e2952a0c36cc13801b2749e2ee02d54783c86a195e71ce1a79dfd5a0d",
+      "36daf04a14d545146c39634ee3fd4f3ee54b9dcdf80744b52e929f8def63c515",
+      "59d20a04786a1603fcdcc6bc1233916b1964a912c6b7871e1b74b66e761c765d"
+    ]
+  }
+]
