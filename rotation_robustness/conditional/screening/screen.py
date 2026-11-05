@@ -105,9 +105,9 @@ def heatmaps(result,out):
  for key in ['B','D_mean','G_mean']:arrays.append(np.array([[np.nan if not g['N'] else g[key] if key=='B' else g[key][-1] for g in row] for row in grid]))
  lim=max(np.nanmax(np.abs(v)) for v in arrays);fig,axs=plt.subplots(1,3,figsize=(15,6))
  for ax,v,title in zip(axs,arrays,['Initial benefit B','Degradation D at σ=5°','Backfire G at σ=5°']):
-  im=ax.imshow(v,cmap='RdBu_r',vmin=-lim,vmax=lim,aspect='auto');ax.set_xticks(range(len(result['right_labels'])),result['right_labels'],rotation=30,ha='right');ax.set_yticks(range(len(result['left_labels'])),result['left_labels']);ax.set(title=title,xlabel=result['pair'][1],ylabel=result['pair'][0]);fig.colorbar(im,ax=ax,label='percentage points')
+  im=ax.imshow(v,cmap='RdBu_r',vmin=-lim,vmax=lim,aspect='auto');ax.set_xticks(range(len(result['right_labels'])),[{'CAM_FRONT':'F','CAM_FRONT_RIGHT':'FR','CAM_FRONT_LEFT':'FL','CAM_BACK':'B','CAM_BACK_LEFT':'BL','CAM_BACK_RIGHT':'BR'}.get(v,v) for v in result['right_labels']],rotation=0 if result['pair'][1]=='camera' else 30,ha='center' if result['pair'][1]=='camera' else 'right');ax.set_yticks(range(len(result['left_labels'])),result['left_labels']);ax.set(title=title,xlabel=result['pair'][1],ylabel=result['pair'][0]);fig.colorbar(im,ax=ax,label='percentage points')
   for i in range(len(grid)):
-   for j,g in enumerate(grid[i]):ax.text(j,i,'empty' if not g['N'] else '%.1f\nN=%d%s'%(v[i,j],g['N'],'' if g['supported'] else '*'),ha='center',va='center',fontsize=7)
+   for j,g in enumerate(grid[i]):ax.text(j,i,'empty' if not g['N'] else '%.1f\nN=%d%s'%(v[i,j],g['N'],'' if g['supported'] else '*'),ha='center',va='center',fontsize=6 if result['pair'][1]=='camera' else 7)
  fig.suptitle('Fixed GT groups; * N<200 or fewer than 10 scenes');fig.tight_layout()
  for ext in ['png','pdf','svg']:fig.savefig(out/('benefit_degradation.'+ext),dpi=180)
  plt.close(fig)

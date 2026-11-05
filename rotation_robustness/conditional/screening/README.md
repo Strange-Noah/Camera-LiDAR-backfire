@@ -8,6 +8,12 @@ Eight locally available Car diagnostics were screened before new pair selection:
 
 Distance and LiDAR support separate degradation most strongly in this descriptive screen. r_rot and projected width also stratify risk. Scene motion proxies mostly separate initial camera benefit or show little degradation ordering. An early crossover alone is not evidence of a large misalignment effect.
 
+## Phase B and synthesis
+
+Two new pairs were completed sequentially: [fixed r_rot × LiDAR support](phase_b/rrot_lidar/FINDINGS.md), then [Distance × selected camera](phase_b/distance_camera/FINDINGS.md). [Cumulative findings and stopping decision](TWO_DIMENSIONAL_FINDINGS.md) combine these with the two reused prior controls.
+
+Point support remains informative inside high-r groups; direction differences remain within distance strata but lack a universal ranking. These descriptive controls leave residual composition effects. GT diagnostics suggest future reliability proxies, whose inference-time availability and intervention benefit remain untested. This closes the exploratory phase without beginning model development.
+
 ## Method and scope
 
 Reuse the accepted 6,019-sample validation cohort, 53,043 Car annotation identities and 27 original hit/miss conditions. No inference, matching or official scoring is repeated. All groups remain fixed across σ and seeds. Three hundred seventy-nine observations lacking the prior clean projection are an explicit missing group for geometric diagnostics.
@@ -25,6 +31,10 @@ Use the original accepted object/hit cache and r_rot geometry cache. The scene t
 ```sh
 python screen.py --labels ACCEPTED_EXTRACTION --geometry ACCEPTED_GEOMETRY.json.gz --scenes SCENE_SUPPORT.csv --output fresh-phase-a
 python screen.py --regenerate phase_a/summary.json --output regenerated-figures
+# Run a selected pair only after Phase A findings are saved; use a fresh output directory.
+python screen.py --labels ACCEPTED_EXTRACTION --geometry ACCEPTED_GEOMETRY.json.gz --scenes SCENE_SUPPORT.csv --phase-a phase_a --pair r_rot5,lidar_points --output fresh-rrot-lidar
+python screen.py --labels ACCEPTED_EXTRACTION --geometry ACCEPTED_GEOMETRY.json.gz --scenes SCENE_SUPPORT.csv --phase-a phase_a --pair distance,camera --output fresh-distance-camera
+python screen.py --regenerate phase_b/distance_camera/summary.json --output regenerated-camera-figures
 ```
 
 `screen.py` only groups existing labels. Per-object data and private audit records are not distributed. This phase uses local CPU only. No model training or robustness intervention is part of the task.
