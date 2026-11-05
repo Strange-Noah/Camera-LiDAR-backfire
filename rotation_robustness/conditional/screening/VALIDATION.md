@@ -13,3 +13,5 @@
 - No paid resources, new scientific predictions, official scoring, training or rare-class recovery.
 
 These are exploratory descriptive comparisons. Different binnings/group counts prevent interpreting the range table as calibrated feature importance. Scene-only intervals do not cover seed-population variability. No multiple-testing or causal claim is made.
+
+Phase B pair 1 (fixed r_rot × LiDAR support): PASS. All cells plus missing groups sum to 53,043; fixed masks and all 27 rates/seed values retained; sparse cells flagged.
