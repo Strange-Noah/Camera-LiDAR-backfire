@@ -1,0 +1,1 @@
+{"phase": "A", "objects": 53043, "samples": 6019, "conditions": 27, "variables": ["distance", "r_rot5", "projected_width", "off_axis_angle", "lidar_points", "camera", "scene_mean_ego_speed", "scene_max_ego_yaw_rate"]}

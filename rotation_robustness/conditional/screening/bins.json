@@ -1,0 +1,10 @@
+{
+  "distance": {"edges": [10,20,30,40], "labels": ["0–10 m","10–20 m","20–30 m","30–40 m","≥40 m"]},
+  "r_rot5": {"edges": [0.1,0.5,1], "labels": ["<0.1","0.1–0.5","0.5–1","≥1"]},
+  "projected_width": {"edges": [50,100,200], "labels": ["<50 px","50–100 px","100–200 px","≥200 px"]},
+  "off_axis_angle": {"edges": [10,20], "labels": ["<10°","10–20°","≥20°"]},
+  "lidar_points": {"edges": [2.5,10.5], "labels": ["0–2","3–10",">10"]},
+  "camera": {"categories": ["CAM_FRONT","CAM_FRONT_RIGHT","CAM_FRONT_LEFT","CAM_BACK","CAM_BACK_LEFT","CAM_BACK_RIGHT"]},
+  "scene_mean_ego_speed": {"edges": [3,7], "labels": ["<3 m/s","3–7 m/s","≥7 m/s"]},
+  "scene_max_ego_yaw_rate": {"edges": [0.1,0.3], "labels": ["<0.1 rad/s","0.1–0.3 rad/s","≥0.3 rad/s"]}
+}
