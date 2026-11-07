@@ -11,11 +11,11 @@
 
 We perturbed the temporal alignment between BEVFusion's two sensor branches along two independent axes — **camera-frame staleness** (replace the current 6-camera keyframe with the k-th past keyframe) and **LiDAR staleness** (use the k-th past 20 Hz sweep as the main cloud) — in both *naive* form (data swapped, calibration/poses left at the current frame) and *ego-consistent* form (stale data delivered with its own capture-time calibration, or ego-motion compensated into the current frame). Across single-modality, joint, naive, and compensated settings, five findings are robust:
 
-1. **Fusion backfires below its LiDAR-only fallback well before either modality "looks bad" in absolute terms.** Every stale-LiDAR setting backfires (naive: already at ~50 ms; compensated: between 50 and 100 ms). Stale camera backfires only at ~700–800 ms (naive) or ~1.2 s in miss-rate (ego-consistent).
+1. **Fusion backfires below its LiDAR-only fallback well before either modality "looks bad" in absolute terms.** Every stale-LiDAR setting backfires (naive: already at ~50 ms; compensated: between 50 and 100 ms). Stale camera backfires only at ~700–800 ms (naive); ego-consistent camera delivery shows no backfire in either mAP or miss rate out to the tested ~1.0 s.
 2. **LiDAR freshness is the binding constraint; the camera budget is ~an order of magnitude more generous.** Ego-consistent camera staleness up to ~800 ms costs <1 mAP point when LiDAR is current.
 3. **Ego-motion consistency is worth a lot but cannot fix stale dynamic content.** Ego-consistent delivery roughly halves the camera penalty (E6 → E6B camera columns) and rescues +16.6 mAP in the worst joint cell — yet compensated stale LiDAR still backfires, because moving objects sit at wrong positions in the stale sweep no matter how well the static geometry is warped.
 4. **The mechanism is gradual recall erosion, then ghosting.** Camera staleness adds FN quietly (FP flat); moderate LiDAR staleness adds FN (moving classes first); deep LiDAR staleness (300 ms) additionally explodes FP — fusion hallucinates objects.
-5. **Pedestrian is the canary.** It is the first class to lose fusion value in every analysis (T1B-FN, E4, E6B-FN), backfiring in miss rate even when overall metrics are above floor.
+5. **Pedestrian is the canary.** It is the first class to lose fusion value in every analysis (T1B-FN, E4, E6B-FN); in the joint grid it backfires in miss rate even when overall metrics are above floor, and in the camera-only line its margin over LiDAR-only is the thinnest of all classes (−0.07 pp at ~1 s, not yet a cross).
 
 **Deployment law:** if the LiDAR sweep is older than ~50 ms, drop it and fall back to LiDAR-only (or run per-object temporal prediction/correction) regardless of ego-motion compensation; if LiDAR is current, camera frames up to ~1 s are usable as long as they arrive with their own calibration.
 
@@ -31,7 +31,7 @@ We perturbed the temporal alignment between BEVFusion's two sensor branches alon
 | E5 | LiDAR stale k1–k9, camera clean | ego-motion compensated | 5856 | `e5_motion_comp_report_EN.md` |
 | E6 | joint 3×3 (cam k2/5/8 × lid k1/3/6) | both naive | 5719 | `e6_joint_misalignment_report_EN.md` |
 | **E6B** | joint 3×3 | camera T1B + LiDAR E5 (both consistent) | 5719 | `e6b_joint_compensated_report_en.md` |
-| T1B-FN | FN/FP of T1B series | E4 protocol | 5712 | `t1b_fn_analysis_en.md` |
+| T1B-FN | FN/FP of T1B series | E4 protocol | 5623 | `t1b_fn_analysis_en.md` (v2, corrected) |
 | **E6B-FN** | FN/FP of E6B grid | E4 protocol | 5712 | `e6b_fn_analysis_en.md` |
 
 All "subset n" values are paired common subsets on which every number in that row is directly comparable. Cross-row comparisons are approximate (different subsets). Delay mapping: camera keyframe ≈100 ms/step; LiDAR sweep ≈50 ms/step (20 Hz).
@@ -40,12 +40,12 @@ All "subset n" values are paired common subsets on which every number in that ro
 
 ### 3.1 Camera-only staleness (T1 vs T1B, n = 5623; floor = LiDAR-only 0.6501, clean 0.6875)
 
-| delay | 200 ms | 500 ms | 800 ms | 1000 ms | 1200 ms |
+| delay (nominal; measured T1B: 167/420/672/834/1010 ms) | ~200 ms | ~500 ms | ~800 ms | ~1000 ms | ~1200 ms |
 |---|---|---|---|---|---|
 | T1 naive | 0.6716 | 0.6562 | **0.6476 ↓** | 0.6439 | 0.6395 |
 | T1B ego-consistent | 0.6860 | 0.6820 | 0.6789 | 0.6778 | 0.6762 |
 
-Naive camera staleness backfires at ~700–800 ms; ego-consistent delivery stays above the floor out to 1.2 s in mAP and costs <1 point over 200→800 ms. **FN-decomposition caveat (T1B-FN, n = 5712):** the miss rate crosses above LiDAR-only at k12 (15.69% vs 15.53%), led by pedestrian (+1.6 pp) and car (+1.1 pp) — mAP says "safe", miss rate says "backfired"; the extra misses are low-confidence boxes, but for a safety stack the miss-rate statement is the operational one.
+Naive camera staleness backfires at ~700–800 ms; ego-consistent delivery stays above the floor out to the measured k12 ≈ 1010 ms in mAP and costs <1 point over 200→800 ms. **FN decomposition (T1B-FN v2, n = 5623 common samples / 114,232 GT; corrected 2026-11-07 after coverage audit):** the miss rate erodes monotonically and does **not** cross LiDAR-only even at k12 (14.37% vs 15.53%, gap −1.16 pp; per-class gaps all negative, car −0.14 pp and pedestrian −0.07 pp the thinnest). An earlier version of this analysis reported a k12 cross (15.69%), which was an artifact of counting GT boxes from 89 samples missing from the k12 prediction file as misses; on the common population both mAP and miss rate agree: monotone erosion, no knee, no backfire for ego-consistent camera staleness out to the measured k12 delay of ~1010 ms (measured: k2 167 ms, k5 420 ms, k8 672 ms, k10 834 ms, k12 1010 ms).
 
 ### 3.2 LiDAR-only staleness, camera clean (E2 vs E5, n = 5856; floor = 0.6480, clean 0.6855)
 
@@ -73,9 +73,9 @@ mAP, camera k_c ∈ {2,5,8} (~200/500/800 ms) × LiDAR k_l ∈ {1,3,6} (~50/151/
 ## 4. Cross-cutting findings
 
 1. **Decay is monotone and roughly linear in delay** once past a modality-specific knee; the knees are the deployment-relevant numbers.
-2. **Backfire thresholds** (mAP, fusion vs LiDAR-only fallback): naive LiDAR <50 ms; compensated LiDAR 50–100 ms; naive camera ~700–800 ms; ego-consistent camera >1.2 s (mAP) / ~1.2 s (miss rate).
+2. **Backfire thresholds** (mAP, fusion vs LiDAR-only fallback): naive LiDAR <50 ms; compensated LiDAR 50–100 ms; naive camera ~700–800 ms; ego-consistent camera >1.0 s (measured k12 ≈ 1010 ms; mAP and miss rate agree, no cross).
 3. **Per-class ordering is stable across every analysis**: pedestrian → car/motorcycle → bicycle/trailer → large static classes. This is the temporal-side counterpart of the spatial team's distance finding and the input for the conditional-threshold work.
-4. **Metric divergence**: camera-only staleness separates mAP (lenient) from miss rate (strict); stale LiDAR degrades both simultaneously. Both metrics, plus FP/FN decomposition, should be reported for fusion-robustness claims.
+4. **Metric agreement**: for ego-consistent camera staleness, mAP and miss rate tell the same story (monotone erosion, no backfire out to ~1.0 s). An apparent mAP/miss-rate divergence reported in T1B-FN v1 was a sample-coverage artifact and is retracted in v2. As methodological practice, both metrics plus FP/FN decomposition should still be reported for fusion-robustness claims, since a coverage or population shift can otherwise masquerade as a metric effect.
 5. **Ego-consistency is the cheapest robustness upgrade available**: delivering stale frames with their own calibration requires no model change and halves the camera penalty; ego-motion compensation of LiDAR is worth ~50 ms of budget but cannot substitute for fresh LiDAR on dynamic content — per-object temporal prediction/correction (the team's robustness direction) is the remaining lever.
 
 ## 5. Limitations
@@ -92,4 +92,4 @@ mAP, camera k_c ∈ {2,5,8} (~200/500/800 ms) × LiDAR k_l ∈ {1,3,6} (~50/151/
 - **Eval logs:** `t1b2_subset_eval.out`, `e5_subset_eval.out`, `e6_subset_eval.out`, `e6b_subset_eval.out`.
 - **FN/FP data:** `e4_fp_fn.json`, `e4_t1b_fn_summary.json`, `e4_e6b_fn_summary.json` (+ caches).
 - **Drivers:** `scripts/temporal/` (`cycle_e5.py`, `cycle_e6.py`, `cycle_e6b.py`, `accum_*.py`, `e4_*.py`, `gen_condition_table.py`).
-- **Condition table** for conditional analysis: 183,892 rows / GT box, delivered to @wangYilia (`results/remote_pull/condition_table.jsonl` locally).
+- **Condition table** for conditional analysis: 183,892 rows / GT box. v2 (2026-11-07) adds the missing k10/k12 geometry columns (per-field merge of both substitution tables; k10 covers all rows, k12 covers 182,548) — delivered to @wangYilia; local copy `results/remote_pull/condition_table_v2.jsonl`.
