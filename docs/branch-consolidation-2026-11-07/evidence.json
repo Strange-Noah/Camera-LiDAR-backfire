@@ -319,5 +319,11 @@
     "refs/heads/nuo-ft-conditional-threshold": "0e39ba8e12d2e3b1686c937113f0a402ce5eb4af",
     "refs/heads/refactor/windows-local-setup": "b40336c44a3c8ad6eb08972b83bbde1e6b859d97"
   },
-  "cleanup": "PASS: seven audited source heads removed after independent remote tag, target and ancestry verification"
+  "cleanup": "PASS: seven audited source heads removed after independent remote tag, target and ancestry verification",
+  "retained_local_exception": {
+    "branch": "feat/rotation-local-preflight",
+    "sha": "08d5b3f61ce70137b798d4991174645f95f977b7",
+    "commits_not_in_either_target": 9,
+    "decision": "Preserved unchanged: local-only source outside the seven named branches, with unique historical content; inclusion/deletion is not assumed."
+  }
 }

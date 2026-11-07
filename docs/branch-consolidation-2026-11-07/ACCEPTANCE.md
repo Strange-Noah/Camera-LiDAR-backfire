@@ -37,3 +37,5 @@ Restore any source with `git fetch origin --tags` followed by `git branch ORIGIN
 See [BRANCH_POLICY.md](../../BRANCH_POLICY.md) for future routing. No per-task branches or automatic experiment-to-baseline merges.
 
 Final cleanup: **PASS**. All seven audited source heads were removed only after independent remote verification. The remote now contains exactly the two personal target heads, main and the three unchanged teammate heads. Exact protected post-cleanup SHAs are in evidence.json. Current local work is bound to noah/robustness-experiments; pre-existing uncommitted work remains intact.
+
+Local-only exception: `feat/rotation-local-preflight` at `08d5b3f61ce70137b798d4991174645f95f977b7` has nine commits absent from both targets. It was discovered in the final local-head inventory and remains unchanged. It was not one of the seven named sources; its content is not assumed redundant or safe to merge. The remote has exactly two personal work heads; the local repository retains this additional historical head pending explicit inclusion review. No complete-local-consolidation claim is made.
