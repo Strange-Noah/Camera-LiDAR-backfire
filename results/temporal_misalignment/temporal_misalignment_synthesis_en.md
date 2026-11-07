@@ -5,7 +5,7 @@
 **Model:** BEVFusion camera–LiDAR fusion, official `bevfusion_lidar-cam_voxel0075` checkpoint, nuScenes val
 **Owner:** @heyz (temporal misalignment line)
 
-![overview](chart_temporal_overview.svg)
+![overview](chart_temporal_overview.png)
 
 ## 1. Executive summary
 
