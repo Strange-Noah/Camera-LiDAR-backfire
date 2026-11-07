@@ -49,7 +49,7 @@ The heatmap remains striped horizontally, and the regime boundaries barely move 
 - **l3 row (~151 ms): 0.602–0.607, ALL THREE cells backfire ~4.4–4.8 points below LiDAR-only (0.6497).**
 - l6 row (~301 ms): 0.516–0.524, ~13 points below floor.
 
-The **"compensate both branches and fusion is immune" hypothesis is rejected.** Ego-motion compensation fixes the *static* geometry of a stale LiDAR sweep, but the stale sweep still contains **dynamic content (moving objects) at wrong positions**; fusing it corrupts the shared BEV anchor that the camera branch depends on. This is fully consistent with E5 single-modality: compensated stale LiDAR alone backfired already at ~75 ms (E5 k3 ≈ 0.6106, n = 5856 — remarkably close to the E6B l3 row ~0.602–0.607 measured on n = 5719).
+The **"compensate both branches and fusion is immune" hypothesis is rejected.** Ego-motion compensation fixes the *static* geometry of a stale LiDAR sweep, but the stale sweep still contains **dynamic content (moving objects) at wrong positions**; fusing it corrupts the shared BEV anchor that the camera branch depends on. This is fully consistent with E5 single-modality: on the E5 series (camera clean + compensated stale LiDAR, n = 5856, floor = LiDAR-only 0.6480), k1 (~50 ms) = 0.6686 stays above the floor but **k2 (~100 ms) = 0.6405 is already below it** — the compensated single-modality backfire threshold lies between 50 and 100 ms, not at ~151 ms. (E5 k3 = 0.6106 is remarkably close to the E6B l3 row ~0.602–0.607 measured on n = 5719.)
 
 **3.3 Compensation massively rescues the naive collapse, but cannot push it above the floor.**
 Same cell, naive (E6) vs compensated (E6B): c2_l3 = 0.4410 → **0.6070 (+16.6 points)**; the entire l3 row rises from ~0.41–0.44 to ~0.60–0.61. Compensation recovers a huge amount of mAP — it just recovers it to a level that is *still below LiDAR-only*. I.e. stale-LiDAR fusion with compensation is much better than naive stale-LiDAR fusion, but still worse than simply dropping the stale LiDAR.
@@ -61,9 +61,9 @@ mAVE rises from 0.257 (clean) to 0.43–0.51 on the l3/l6 rows (vs 0.66–0.77 f
 
 Bringing E2 (naive LiDAR), E5 (compensated LiDAR, single-modality), E6 (joint naive), E6B (joint compensated) and T1/T1B (camera-only) together:
 
-1. **LiDAR freshness is the binding constraint, and ego-motion compensation does not relax it enough.** With compensation, the stale-LiDAR fusion backfire threshold moves from ~50 ms (E2 naive) to somewhere between 50 ms and ~151 ms (E6B: l1 above floor, l3 below). Compensation is worth ~100 ms of extra LiDAR budget — helpful, not sufficient.
+1. **LiDAR freshness is the binding constraint, and ego-motion compensation does not relax it enough.** The stale-LiDAR fusion backfire threshold with compensation is between 50 ms and 100 ms: E5 k1 (~50 ms) = 0.6686 above the 0.6480 floor, E5 k2 (~100 ms) = 0.6405 already below (n = 5856); the joint E6B grid shows the same bracket (l1 row above floor, and the E5 k2 point puts the joint threshold below 100 ms too). Compensation is worth roughly 50+ ms of extra LiDAR budget compared to the naive E2 line, where even k1 (~50 ms) already backfires (0.6247) — helpful, not sufficient.
 2. **The camera branch is robust once delivered ego-consistently.** Geometrically consistent stale camera frames (own calibration) cost <1 point up to ~800 ms. The camera latency budget is therefore ~an order of magnitude more generous than the LiDAR one.
-3. **Practical rule:** if the LiDAR sweep is older than ~50–75 ms, **drop it and fall back to LiDAR-only** (or run a per-object temporal prediction / correction stage to refresh the dynamic content — directly connects to the team's robustness direction) rather than fusing a stale sweep, *regardless of compensation*. If LiDAR is current, camera frames up to ~1 s can be used as-is provided they arrive with their own calibration.
+3. **Practical rule:** if the LiDAR sweep is older than ~50 ms, **drop it and fall back to LiDAR-only** (or run a per-object temporal prediction / correction stage to refresh the dynamic content — directly connects to the team's robustness direction) rather than fusing a stale sweep, *regardless of compensation*. If LiDAR is current, camera frames up to ~1 s can be used as-is provided they arrive with their own calibration.
 
 ## 5. Caveats
 
@@ -74,6 +74,6 @@ Bringing E2 (naive LiDAR), E5 (compensated LiDAR, single-modality), E6 (joint na
 
 ## 6. Artifacts
 
-- Raw eval log: `results/temporal_misalignment/e6b_subset_eval.out`
+- Raw eval log: `results/temporal_misalignment/e6b_subset_eval.out` (E6B) / `results/temporal_misalignment/e5_subset_eval.out` (E2/E5 series)
 - Drivers: `scripts/temporal/cycle_e6b.py`, `scripts/temporal/accum_e6b.py`
 - Prediction files: on the experiment machine (`/root/autodl-tmp/preds_temporal/e6b_c{2,5,8}_l{1,3,6}_cumulative.json`)
