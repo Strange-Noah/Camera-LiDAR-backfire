@@ -1,0 +1,304 @@
+{
+  "sources": {
+    "noah/rotation-robustness-results": {
+      "sha": "f3fa506580e227c82fd264df8628dfe4f76cbce6",
+      "backup_tag": "archive/consolidation-2026-11-07/noah/rotation-robustness-results",
+      "unique_commits_relative_to_other_six": [
+        "f3fa506580e227c82fd264df8628dfe4f76cbce6"
+      ],
+      "new_commits_from_main": [
+        "f3fa506580e227c82fd264df8628dfe4f76cbce6 Strange-Noah <mathewzhz@outlook.com> Preserve project workspace and establish persistent agent operating rules",
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9 Strange-Noah <mathewzhz@outlook.com> Publish completed rotation robustness pipeline and official evaluation results"
+      ]
+    },
+    "noah/spatial-rrot-analysis": {
+      "sha": "62cbe9dc83f61a5dd71b8661b7ea13d00227eac9",
+      "backup_tag": "archive/consolidation-2026-11-07/noah/spatial-rrot-analysis",
+      "unique_commits_relative_to_other_six": [],
+      "new_commits_from_main": [
+        "62cbe9dc83f61a5dd71b8661b7ea13d00227eac9 Strange-Noah <mathewzhz@outlook.com> Publish fixed-normalization spatial rotational displacement analysis",
+        "afa2b8228ce1f28d876ef6783e5380d05f6aee8d Strange-Noah <mathewzhz@outlook.com> Publish spatial conditional backfire analysis from retained rotation predictions",
+        "02a7926bfac7e3403ad024e78c5eb676fc141006 Strange-Noah <mathewzhz@outlook.com> Preserve project workspace and establish persistent agent operating rules",
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9 Strange-Noah <mathewzhz@outlook.com> Publish completed rotation robustness pipeline and official evaluation results"
+      ]
+    },
+    "noah/spatial-conditional-backfire": {
+      "sha": "afa2b8228ce1f28d876ef6783e5380d05f6aee8d",
+      "backup_tag": "archive/consolidation-2026-11-07/noah/spatial-conditional-backfire",
+      "unique_commits_relative_to_other_six": [],
+      "new_commits_from_main": [
+        "afa2b8228ce1f28d876ef6783e5380d05f6aee8d Strange-Noah <mathewzhz@outlook.com> Publish spatial conditional backfire analysis from retained rotation predictions",
+        "02a7926bfac7e3403ad024e78c5eb676fc141006 Strange-Noah <mathewzhz@outlook.com> Preserve project workspace and establish persistent agent operating rules",
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9 Strange-Noah <mathewzhz@outlook.com> Publish completed rotation robustness pipeline and official evaluation results"
+      ]
+    },
+    "noah/spatial-conditional-screening": {
+      "sha": "2b68b92c620f11626242caa178626c8ed39bb718",
+      "backup_tag": "archive/consolidation-2026-11-07/noah/spatial-conditional-screening",
+      "unique_commits_relative_to_other_six": [
+        "2b68b92c620f11626242caa178626c8ed39bb718",
+        "9e2cbba656b8e387f9031b134b4549af52f5dc96",
+        "9ac7c38f7c5923b0a372fa6109b587a50dda66ff",
+        "3e56c55ffa5c42e4122ffead2a6319780b4796e2",
+        "3bc7b8db3506a3513a72ea762f4421fe1696cc9f"
+      ],
+      "new_commits_from_main": [
+        "2b68b92c620f11626242caa178626c8ed39bb718 Strange-Noah <mathewzhz@outlook.com> Compare width, physical rotation proxy and Jacobian sensitivity with paired uncertainty",
+        "9e2cbba656b8e387f9031b134b4549af52f5dc96 Strange-Noah <mathewzhz@outlook.com> Add focused distance versus projected-width conditional analysis",
+        "9ac7c38f7c5923b0a372fa6109b587a50dda66ff Strange-Noah <mathewzhz@outlook.com> Publish distance-camera control and close spatial conditional screening",
+        "3e56c55ffa5c42e4122ffead2a6319780b4796e2 Strange-Noah <mathewzhz@outlook.com> Publish r_rot and LiDAR-support conditional control",
+        "3bc7b8db3506a3513a72ea762f4421fe1696cc9f Strange-Noah <mathewzhz@outlook.com> Publish fixed-membership one-dimensional spatial backfire screening",
+        "62cbe9dc83f61a5dd71b8661b7ea13d00227eac9 Strange-Noah <mathewzhz@outlook.com> Publish fixed-normalization spatial rotational displacement analysis",
+        "afa2b8228ce1f28d876ef6783e5380d05f6aee8d Strange-Noah <mathewzhz@outlook.com> Publish spatial conditional backfire analysis from retained rotation predictions",
+        "02a7926bfac7e3403ad024e78c5eb676fc141006 Strange-Noah <mathewzhz@outlook.com> Preserve project workspace and establish persistent agent operating rules",
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9 Strange-Noah <mathewzhz@outlook.com> Publish completed rotation robustness pipeline and official evaluation results"
+      ]
+    },
+    "feat/bevfusion-mini-deployment": {
+      "sha": "24764baafda8aa48ede2cc9f3138b883f8482520",
+      "backup_tag": "archive/consolidation-2026-11-07/feat/bevfusion-mini-deployment",
+      "unique_commits_relative_to_other_six": [],
+      "new_commits_from_main": [
+        "24764baafda8aa48ede2cc9f3138b883f8482520 Strange-Noah <mathewzhz@outlook.com> Validate real trainval inputs and restore GPU system dependencies from CPU cache",
+        "47e3f5bb71834a58048252df112be5f1eb864475 Strange-Noah <mathewzhz@outlook.com> Validate both mini detectors and make GPU jobs self-cleaning",
+        "ea665349b39f064494e5b1f4ecfc2963193b486c Strange-Noah <mathewzhz@outlook.com> Harden independent cleanup and isolate GPU output from FUSE ownership",
+        "a1d08a9f214897f83ab0a26625cf91b4f88e6397 Strange-Noah <mathewzhz@outlook.com> Validate models on CPU and defer postprocessing until GPU release",
+        "6d62565b08427478bded0488b5201add86fa47c1 Strange-Noah <mathewzhz@outlook.com> Restore minimal shared runtime libraries during cold start",
+        "184662611eea1055d2c22f1822282f0ae40e0e5a Strange-Noah <mathewzhz@outlook.com> Move environment build and mini preparation to CPU before GPU smoke",
+        "7ebb6de9dd0ce752af0bfbce27c90666e04f1dfe Strange-Noah <mathewzhz@outlook.com> Start cleanup at container bootstrap and create FUSE outputs as member",
+        "e8dff0c392ae89c979698a66a941c16276462605 Strange-Noah <mathewzhz@outlook.com> Add supervised jobs with automatic Pod cleanup and persistent weight downloads",
+        "a3de0e894947483f3ffea83cd2744e74bbdfe192 Strange-Noah <mathewzhz@outlook.com> Prepare pinned BEVFusion mini inference environment and GPU preflight"
+      ]
+    },
+    "feat/validation-baseline-preparation": {
+      "sha": "823d8a69a0c6c3032a13f6af269656f27f4dbfca",
+      "backup_tag": "archive/consolidation-2026-11-07/feat/validation-baseline-preparation",
+      "unique_commits_relative_to_other_six": [
+        "823d8a69a0c6c3032a13f6af269656f27f4dbfca",
+        "fb3641a23e7331a0f6e43918124339a09f766846",
+        "c55615344da0eeaa8cc388ae43c75bd3b58b5314",
+        "05178591b3a8209f62b67505f3ac09127aac9144",
+        "92787c7599bc9c8a4c6da852546fc495de11d943",
+        "f995e7b20528a7672b10cba09f63f7bd236dd2ed",
+        "ef9bdebc3e5b1ef252c2cdefe5a8a25ac71b0df2",
+        "2ef6ec7eadf867ec52c757e1eb2c6fd6cc74dd22",
+        "c1429790740d879ca588cd31b7b798aada32b937",
+        "0470a82e725239533c4e016f48f398a3b44170ad",
+        "a3baf1848065bf3520d4d562b18579897f7dfb1f",
+        "6cd2f0756bb44f8a6b39a10103da248cf93034e2"
+      ],
+      "new_commits_from_main": [
+        "823d8a69a0c6c3032a13f6af269656f27f4dbfca Strange-Noah <mathewzhz@outlook.com> Record reproduced clean baselines and unattended lifecycle evidence",
+        "fb3641a23e7331a0f6e43918124339a09f766846 Strange-Noah <mathewzhz@outlook.com> Recover only incomplete modality and retain raw producer provenance",
+        "c55615344da0eeaa8cc388ae43c75bd3b58b5314 Strange-Noah <mathewzhz@outlook.com> Record exact durable prediction coverage before evaluation",
+        "05178591b3a8209f62b67505f3ac09127aac9144 Strange-Noah <mathewzhz@outlook.com> Preserve CPU diagnostics on evaluation failure",
+        "92787c7599bc9c8a4c6da852546fc495de11d943 Strange-Noah <mathewzhz@outlook.com> Rescan final outputs when completion arrives during persistence",
+        "f995e7b20528a7672b10cba09f63f7bd236dd2ed Strange-Noah <mathewzhz@outlook.com> Run official evaluation as a self-cleaning CPU job",
+        "ef9bdebc3e5b1ef252c2cdefe5a8a25ac71b0df2 Strange-Noah <mathewzhz@outlook.com> Record audited pilot and unattended inference lifecycle",
+        "2ef6ec7eadf867ec52c757e1eb2c6fd6cc74dd22 Strange-Noah <mathewzhz@outlook.com> Cover all val scenes and dense LiDAR inputs in the 200-frame pilot",
+        "c1429790740d879ca588cd31b7b798aada32b937 Strange-Noah <mathewzhz@outlook.com> Tolerate transient progress reads without a false CPU stall",
+        "0470a82e725239533c4e016f48f398a3b44170ad Strange-Noah <mathewzhz@outlook.com> Require complete CPU readiness before validation forwarding",
+        "a3baf1848065bf3520d4d562b18579897f7dfb1f Strange-Noah <mathewzhz@outlook.com> Prepare resumable official validation inference and input identity gates",
+        "6cd2f0756bb44f8a6b39a10103da248cf93034e2 Strange-Noah <mathewzhz@outlook.com> Prepare official validation manifests and CPU acceptance gates",
+        "24764baafda8aa48ede2cc9f3138b883f8482520 Strange-Noah <mathewzhz@outlook.com> Validate real trainval inputs and restore GPU system dependencies from CPU cache",
+        "47e3f5bb71834a58048252df112be5f1eb864475 Strange-Noah <mathewzhz@outlook.com> Validate both mini detectors and make GPU jobs self-cleaning",
+        "ea665349b39f064494e5b1f4ecfc2963193b486c Strange-Noah <mathewzhz@outlook.com> Harden independent cleanup and isolate GPU output from FUSE ownership",
+        "a1d08a9f214897f83ab0a26625cf91b4f88e6397 Strange-Noah <mathewzhz@outlook.com> Validate models on CPU and defer postprocessing until GPU release",
+        "6d62565b08427478bded0488b5201add86fa47c1 Strange-Noah <mathewzhz@outlook.com> Restore minimal shared runtime libraries during cold start",
+        "184662611eea1055d2c22f1822282f0ae40e0e5a Strange-Noah <mathewzhz@outlook.com> Move environment build and mini preparation to CPU before GPU smoke",
+        "7ebb6de9dd0ce752af0bfbce27c90666e04f1dfe Strange-Noah <mathewzhz@outlook.com> Start cleanup at container bootstrap and create FUSE outputs as member",
+        "e8dff0c392ae89c979698a66a941c16276462605 Strange-Noah <mathewzhz@outlook.com> Add supervised jobs with automatic Pod cleanup and persistent weight downloads",
+        "a3de0e894947483f3ffea83cd2744e74bbdfe192 Strange-Noah <mathewzhz@outlook.com> Prepare pinned BEVFusion mini inference environment and GPU preflight"
+      ]
+    },
+    "chore/independent-compute-workflow": {
+      "sha": "9c4c32a3224d6338ce7df21416214fe979652465",
+      "backup_tag": "archive/consolidation-2026-11-07/chore/independent-compute-workflow",
+      "unique_commits_relative_to_other_six": [
+        "9c4c32a3224d6338ce7df21416214fe979652465"
+      ],
+      "new_commits_from_main": [
+        "9c4c32a3224d6338ce7df21416214fe979652465 Strange-Noah <mathewzhz@outlook.com> Document shared contracts for collaborators using independent GPUs"
+      ]
+    }
+  },
+  "merge_bases": [
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "noah/spatial-rrot-analysis",
+      "bases": [
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9"
+      ]
+    },
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "noah/spatial-conditional-backfire",
+      "bases": [
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9"
+      ]
+    },
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "noah/spatial-conditional-screening",
+      "bases": [
+        "5fc9a80e2e7e85a5e8dc37c8a228690db7d366e9"
+      ]
+    },
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "feat/bevfusion-mini-deployment",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "feat/validation-baseline-preparation",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/rotation-robustness-results",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-rrot-analysis",
+      "b": "noah/spatial-conditional-backfire",
+      "bases": [
+        "afa2b8228ce1f28d876ef6783e5380d05f6aee8d"
+      ]
+    },
+    {
+      "a": "noah/spatial-rrot-analysis",
+      "b": "noah/spatial-conditional-screening",
+      "bases": [
+        "62cbe9dc83f61a5dd71b8661b7ea13d00227eac9"
+      ]
+    },
+    {
+      "a": "noah/spatial-rrot-analysis",
+      "b": "feat/bevfusion-mini-deployment",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-rrot-analysis",
+      "b": "feat/validation-baseline-preparation",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-rrot-analysis",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-backfire",
+      "b": "noah/spatial-conditional-screening",
+      "bases": [
+        "afa2b8228ce1f28d876ef6783e5380d05f6aee8d"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-backfire",
+      "b": "feat/bevfusion-mini-deployment",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-backfire",
+      "b": "feat/validation-baseline-preparation",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-backfire",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-screening",
+      "b": "feat/bevfusion-mini-deployment",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-screening",
+      "b": "feat/validation-baseline-preparation",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "noah/spatial-conditional-screening",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "feat/bevfusion-mini-deployment",
+      "b": "feat/validation-baseline-preparation",
+      "bases": [
+        "24764baafda8aa48ede2cc9f3138b883f8482520"
+      ]
+    },
+    {
+      "a": "feat/bevfusion-mini-deployment",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    },
+    {
+      "a": "feat/validation-baseline-preparation",
+      "b": "chore/independent-compute-workflow",
+      "bases": [
+        "bd6625e292995418e96490dd001dd7f3e01af4a9"
+      ]
+    }
+  ],
+  "groups": {
+    "noah/robustness-experiments": {
+      "integration_sha": "3c7239bbf9866a1d5b5fc352c7ad9b83126c6158",
+      "tree": "d079c3ff37c4e3fc2e4738f36c82d2d5ac0b054a",
+      "merge_history": [
+        "3c7239bbf9866a1d5b5fc352c7ad9b83126c6158 2b68b92c620f11626242caa178626c8ed39bb718 f3fa506580e227c82fd264df8628dfe4f76cbce6 Merge remote-tracking branch 'origin/noah/rotation-robustness-results' into noah/robustness-experiments"
+      ],
+      "source_tips_ancestors": true,
+      "delta_from_latest_source": "",
+      "conflicts": []
+    },
+    "noah/environment-baseline": {
+      "integration_sha": "78901cbe634e5e7f3d5138a039dab1de75731030",
+      "tree": "87ee7afe7ba56cfcea5ee1723ffb0fd41da36d6b",
+      "merge_history": [
+        "78901cbe634e5e7f3d5138a039dab1de75731030 823d8a69a0c6c3032a13f6af269656f27f4dbfca 9c4c32a3224d6338ce7df21416214fe979652465 Merge remote-tracking branch 'origin/chore/independent-compute-workflow' into noah/environment-baseline"
+      ],
+      "source_tips_ancestors": true,
+      "delta_from_latest_source": "A\tCONTRIBUTING.md\nA\tconfigs/experiment-record.example.json\nA\tdocs/repository_layout.md",
+      "conflicts": [],
+      "published_sha": "f9acebc5b39076138b656315476a667f339d6109"
+    }
+  },
+  "protected_before": {
+    "refs/heads/jhe-sudo/temporal-misalignment": "2ab301c6fc1ba7530119441b2f530ab6932d3dbc",
+    "refs/heads/main": "bd6625e292995418e96490dd001dd7f3e01af4a9",
+    "refs/heads/nuo-ft-conditional-threshold": "0e39ba8e12d2e3b1686c937113f0a402ce5eb4af",
+    "refs/heads/refactor/windows-local-setup": "b40336c44a3c8ad6eb08972b83bbde1e6b859d97"
+  },
+  "verification_note": "An initial every-source-blob equality check rejected three intentionally superseded historical files. Corrected verification uses ancestry for historical versions and exact latest-source tree plus independent branch delta for active content. No content was manually resolved or changed."
+}
