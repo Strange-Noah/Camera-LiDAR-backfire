@@ -35,3 +35,5 @@ Remote main, jhe-sudo/temporal-misalignment, nuo-ft-conditional-threshold and re
 Restore any source with `git fetch origin --tags` followed by `git branch ORIGINAL_NAME archive/consolidation-2026-11-07/ORIGINAL_NAME`; push that branch normally if remote restoration is needed. Backup tags must never be moved or deleted. The SHA column also allows exact recovery independent of a branch name.
 
 See [BRANCH_POLICY.md](../../BRANCH_POLICY.md) for future routing. No per-task branches or automatic experiment-to-baseline merges.
+
+Final cleanup: **PASS**. All seven audited source heads were removed only after independent remote verification. The remote now contains exactly the two personal target heads, main and the three unchanged teammate heads. Exact protected post-cleanup SHAs are in evidence.json. Current local work is bound to noah/robustness-experiments; pre-existing uncommitted work remains intact.

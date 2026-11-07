@@ -300,5 +300,24 @@
     "refs/heads/nuo-ft-conditional-threshold": "0e39ba8e12d2e3b1686c937113f0a402ce5eb4af",
     "refs/heads/refactor/windows-local-setup": "b40336c44a3c8ad6eb08972b83bbde1e6b859d97"
   },
-  "verification_note": "An initial every-source-blob equality check rejected three intentionally superseded historical files. Corrected verification uses ancestry for historical versions and exact latest-source tree plus independent branch delta for active content. No content was manually resolved or changed."
+  "verification_note": "An initial every-source-blob equality check rejected three intentionally superseded historical files. Corrected verification uses ancestry for historical versions and exact latest-source tree plus independent branch delta for active content. No content was manually resolved or changed.",
+  "verified_target_heads_before_cleanup": {
+    "noah/robustness-experiments": "38005f3b2b9e6a9babe7e14fb61e2481d780ff0d",
+    "noah/environment-baseline": "f9acebc5b39076138b656315476a667f339d6109"
+  },
+  "protected_after": {
+    "refs/heads/jhe-sudo/temporal-misalignment": "2ab301c6fc1ba7530119441b2f530ab6932d3dbc",
+    "refs/heads/main": "bd6625e292995418e96490dd001dd7f3e01af4a9",
+    "refs/heads/nuo-ft-conditional-threshold": "0e39ba8e12d2e3b1686c937113f0a402ce5eb4af",
+    "refs/heads/refactor/windows-local-setup": "b40336c44a3c8ad6eb08972b83bbde1e6b859d97"
+  },
+  "remote_heads_after_cleanup": {
+    "refs/heads/jhe-sudo/temporal-misalignment": "2ab301c6fc1ba7530119441b2f530ab6932d3dbc",
+    "refs/heads/main": "bd6625e292995418e96490dd001dd7f3e01af4a9",
+    "refs/heads/noah/environment-baseline": "f9acebc5b39076138b656315476a667f339d6109",
+    "refs/heads/noah/robustness-experiments": "38005f3b2b9e6a9babe7e14fb61e2481d780ff0d",
+    "refs/heads/nuo-ft-conditional-threshold": "0e39ba8e12d2e3b1686c937113f0a402ce5eb4af",
+    "refs/heads/refactor/windows-local-setup": "b40336c44a3c8ad6eb08972b83bbde1e6b859d97"
+  },
+  "cleanup": "PASS: seven audited source heads removed after independent remote tag, target and ancestry verification"
 }
