@@ -1,7 +1,6 @@
-# Long-lived personal branch policy
+# OCaMo branch policy
 
-Use `noah/environment-baseline` for environment/adapters, reproduction of published calibration methods, original unweighted OCaMo/LTO baseline, BEVFusion calibration-correction integration, baseline regression/reproducibility and reports. These are ownership boundaries, not claims that future implementations already exist.
+- noah/ocamo-baseline: dependencies, faithful official reproduction, nuScenes adapter, persistent unweighted online estimates, convergence and correction export.
+- noah/ocamo-experiments: reserved for later explicitly authorized weighting and robustness experiments. No weighting is implemented or authorized now.
 
-Use `noah/robustness-experiments` for preserved spatial/conditional analyses, proposed Conditional Backfire-aware weighting, weighted calibration, spatial/temporal robustness extensions, ablations and final experiment reports.
-
-Do not create a branch per task unless explicitly authorized. Verify baseline updates independently before intentional integration into experiments. Never automatically integrate experiments into baseline. Preserve main and teammate branches. No OCaMo implementation is authorized by this consolidation.
+The baseline foundation is f9acebc5b39076138b656315476a667f339d6109. Existing environment-baseline, robustness-experiments, main, teammate branches and the closed local preflight branch are read-only. No new task branches, rebases, resets, force-pushes or automatic experimental back-merges. Integrate verified baseline updates deliberately with recorded SHAs and regression evidence.
