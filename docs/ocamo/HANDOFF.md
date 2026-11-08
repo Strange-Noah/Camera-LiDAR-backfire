@@ -9,7 +9,7 @@ Development branch: noah/ocamo-baseline. The exact checkpoint is the commit cont
 - Built isolated Python3.12.3 CPU venv; installed imports passed and exact lock retained. BEVFusion environment untouched.
 - Ran unchanged pinned official OCaMo and LTO drift,1500 observations each, repeated each exactly. Trajectory arrays match exactly. Both monitoring examples,200 observations each, are finite.
 - Implemented a separate real nuScenes adapter,3 fixed scenes ×2 seeds ×40 keyframes.240 finite sequential estimates, genuine chronology, reset/burn-in checks and exact repeated estimates. Ring-aware feature ordering and projection are explicit adaptations; original optimizer and unweighted objective formula are preserved.
-- Exported real correction records, verified SO(3), composition, unchanged translation, independent residuals and exact inverse oracle. Remote clean overlays exist, but have not been independently visually reviewed on the Mac.
+- Exported real correction records, verified SO(3), composition, unchanged translation, independent residuals and exact inverse oracle. Remote clean overlays exist; the latest diagnostic milestone below records inspection of the improving and diverging scene overlays.
 - Stopped the authorized Pod and independently confirmed EXITED; other Pod stayed EXITED; persistent volume retained. Approximately24.80min elapsed, estimated compute0.02480USD excluding storage; not final billing. No new Pod, GPU, or active workload remains.
 
 ## Scientific outcome and blockers

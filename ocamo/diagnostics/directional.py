@@ -55,7 +55,7 @@ def direction(a):
                 best=int(np.argmin(loss));rows.append(dict(scene='scene-'+str(sid),frame=index,direction=name,angle_degrees=.5,loss_corrupt=loss[0],loss_clean=loss[-1],clean_minus_corrupt=loss[-1]-loss[0],minimum_alpha=best/20,clean_preferred=loss[-1]<loss[0],minimum_at_clean=best==20,**counts))
             print('FRAME_COMPLETE',sid,index,flush=True)
     (a.output/'summary.json').write_text(json.dumps(rows,indent=2)+'\n')
-    with (a.output/'paths.csv').open('w') as f:wri=csv.DictWriter(f,fieldnames=list(paths[0]));wri.writeheader();wri.writerows(paths)
+    with (a.output/'paths.csv').open('w') as f:wri=csv.DictWriter(f,fieldnames=list(paths[0]),lineterminator="\n");wri.writeheader();wri.writerows(paths)
     import matplotlib;matplotlib.use('Agg');import matplotlib.pyplot as plt
     for scene in ['scene-2','scene-3']:
         fig,axs=plt.subplots(2,3,figsize=(15,8))
