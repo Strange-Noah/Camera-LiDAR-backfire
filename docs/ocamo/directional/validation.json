@@ -1,0 +1,11 @@
+{
+  "paths": 84,
+  "evaluations": 1764,
+  "fixed_magnitude_degrees": 0.5,
+  "grid_positions": 21,
+  "table_endpoint_delta_and_minimum_checks": "PASS",
+  "remote_direct_matrix_point_and_loss_equivalence_assertions": "PASS",
+  "visual_review": "two existing frozen overlays inspected; overlays private, not published",
+  "no_optimization": true,
+  "checker_note": "Initial exact float grid equality was corrected to 1e-12 tolerance for linspace representations; diagnostic values unchanged"
+}

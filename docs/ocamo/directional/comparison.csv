@@ -1,0 +1,7 @@
+scene,frame,clean_preferred,minimum_at_clean,minimum_at_corrupt,minimum_interior,corners,edges,projected_count_min,projected_count_max
+scene-2,0,8,7,4,3,2665,21121,178,184
+scene-2,19,8,7,3,4,2630,22045,218,223
+scene-2,39,11,6,1,7,1856,31029,211,213
+scene-3,0,7,5,5,4,2579,228018,274,276
+scene-3,19,7,5,4,5,2434,243236,257,263
+scene-3,39,7,7,6,1,2901,140641,303,305
