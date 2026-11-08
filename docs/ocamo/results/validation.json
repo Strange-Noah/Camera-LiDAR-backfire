@@ -1,0 +1,14 @@
+{
+  "ocamo_repeated_trajectory": "byte-exact arrays",
+  "lto_repeated_trajectory": "byte-exact arrays",
+  "nuscenes_repeated_estimates": "exact",
+  "genuine_scenes": 3,
+  "independent_seeds": 2,
+  "total_updates": 240,
+  "per_sequence_observations": 40,
+  "scene_reset_burn_in_and_chronology": "PASS",
+  "correction_composition_SO3_and_residual_recalculation": "PASS",
+  "oracle_and_projection_composition": "PASS",
+  "final_improved_sequences": 3,
+  "calibration_reliability": "NOT ESTABLISHED: mixed convergence; no threshold tuning"
+}

@@ -1,4 +1,4 @@
-# Proposed direct dependencies from official imports; installation and version lock pending.
+# Direct CPU imports; use requirements-cpu.lock.txt for the tested environment.
 numpy
 scipy
 matplotlib

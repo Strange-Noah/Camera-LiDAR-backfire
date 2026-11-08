@@ -1,0 +1,27 @@
+{
+  "script": "lto_drift_tracking",
+  "upstream_commit": "1ac55de3c0eabb02f155cd44f7481117536c9526",
+  "seed": 42,
+  "elapsed_seconds": 148.90232236497104,
+  "arrays": {
+    "dec_all": [
+      6,
+      1500
+    ],
+    "allTh": [
+      3,
+      1500
+    ]
+  },
+  "finite": true,
+  "status": "EXECUTED",
+  "official_source_modified": false,
+  "observations": 1500,
+  "burn_in_observations": 0,
+  "post_burn_mean_residual_degrees": 0.08518562865360302,
+  "post_burn_RMS_residual_degrees": 0.10074904457997699,
+  "post_burn_mean_uncorrected_degrees": 0.583420369390069,
+  "final_residual_degrees": 0.0496195633735871,
+  "mean_seconds_per_observation": 0.09926874411059544,
+  "trajectory_sha256": "f6c4880a4f06041c813a8cf0793436bddd9ec1c8a0dd717d178be48a1fe2d5a3"
+}

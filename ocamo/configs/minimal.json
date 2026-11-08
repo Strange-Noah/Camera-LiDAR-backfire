@@ -1,0 +1,21 @@
+{
+  "official_commit": "1ac55de3c0eabb02f155cd44f7481117536c9526",
+  "official_seed": 42,
+  "official_drift_observations": 1500,
+  "official_monitoring_observations": 200,
+  "nuscenes_root": "/workspace/datasets/nuscenes-validation",
+  "scene_selection": "first 3 lexicographically sorted scene tokens in the existing validation metadata view; independent of calibration outcomes",
+  "camera": "CAM_FRONT",
+  "observations": "all physically available paired camera/LiDAR keyframes sorted by actual camera timestamps",
+  "seeds": [0, 1],
+  "sigma_degrees_per_axis": 0.5,
+  "perturbation": "one camera-local isotropic Gaussian rotation per scene/camera/seed, held fixed across frames; camera-to-LiDAR R_corrupt=R_clean@Q, translation unchanged",
+  "optimizer": "unchanged official SGDSchaul",
+  "burn_in": 10,
+  "bandwidth_px": 9,
+  "neighbors": 10,
+  "weights": "none; no weighted implementation or equivalence study",
+  "translation_estimation": false,
+  "lidar_features": "official get_corners per ring after stable azimuth ordering; exclude five points at each seam/end",
+  "results_remote": "/workspace/results/ocamo/2026-11-09-first-baseline"
+}

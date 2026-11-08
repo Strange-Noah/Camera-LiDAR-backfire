@@ -1,0 +1,178 @@
+{
+  "status": "EXECUTED_NOT_AUTOMATICALLY_CONVERGED",
+  "sigma_degrees_per_axis": 0.5,
+  "seeds": [
+    0,
+    1
+  ],
+  "sequences": [
+    {
+      "scene": "scene-1",
+      "seed": 0,
+      "observations": 40,
+      "initial_error_degrees": 0.36178312072502095,
+      "final_error_degrees": 0.7092243690084726,
+      "post_burn_mean_error_degrees": 0.45879611933430114,
+      "final_improved": false,
+      "elapsed_acquisition_seconds": 19.4,
+      "missing_frames": 0
+    },
+    {
+      "scene": "scene-1",
+      "seed": 1,
+      "observations": 40,
+      "initial_error_degrees": 0.7001109754008632,
+      "final_error_degrees": 0.6507125499724302,
+      "post_burn_mean_error_degrees": 0.41848278443433773,
+      "final_improved": true,
+      "elapsed_acquisition_seconds": 19.4,
+      "missing_frames": 0
+    },
+    {
+      "scene": "scene-2",
+      "seed": 0,
+      "observations": 40,
+      "initial_error_degrees": 0.6736204345621357,
+      "final_error_degrees": 0.6560783312803324,
+      "post_burn_mean_error_degrees": 0.6617977413725935,
+      "final_improved": true,
+      "elapsed_acquisition_seconds": 19.4,
+      "missing_frames": 0
+    },
+    {
+      "scene": "scene-2",
+      "seed": 1,
+      "observations": 40,
+      "initial_error_degrees": 0.8002844983457765,
+      "final_error_degrees": 0.3423939965554319,
+      "post_burn_mean_error_degrees": 0.6702768100326199,
+      "final_improved": true,
+      "elapsed_acquisition_seconds": 19.4,
+      "missing_frames": 0
+    },
+    {
+      "scene": "scene-3",
+      "seed": 0,
+      "observations": 40,
+      "initial_error_degrees": 0.25420778120330334,
+      "final_error_degrees": 2.140673064227915,
+      "post_burn_mean_error_degrees": 1.0371774900571753,
+      "final_improved": false,
+      "elapsed_acquisition_seconds": 19.550003,
+      "missing_frames": 0
+    },
+    {
+      "scene": "scene-3",
+      "seed": 1,
+      "observations": 40,
+      "initial_error_degrees": 0.6620983933330346,
+      "final_error_degrees": 2.313563302075135,
+      "post_burn_mean_error_degrees": 1.1024695877648214,
+      "final_improved": false,
+      "elapsed_acquisition_seconds": 19.550003,
+      "missing_frames": 0
+    }
+  ],
+  "geometry_checks": [
+    {
+      "scene": "scene-1",
+      "seed": 0,
+      "local_loss_grid": [
+        -861.2128387372384,
+        -858.5154956969188,
+        -861.5275834498887,
+        -867.2502923978132,
+        -838.7031195392336,
+        -864.4489467173331
+      ],
+      "projection_composition_max_abs": 3.552713678800501e-13,
+      "oracle_matrix_max_abs": 1.1102230246251565e-16,
+      "loss_corrupt": -868.9746909147636,
+      "loss_clean_oracle": -869.6004705709463
+    },
+    {
+      "scene": "scene-1",
+      "seed": 1,
+      "local_loss_grid": [
+        -861.2404492951716,
+        -858.5693615214645,
+        -861.508279733421,
+        -867.2218273946103,
+        -838.698860973233,
+        -864.453385292212
+      ],
+      "projection_composition_max_abs": 3.552713678800501e-13,
+      "oracle_matrix_max_abs": 2.220446049250313e-16,
+      "loss_corrupt": -737.4186292167622,
+      "loss_clean_oracle": -869.6004705709463
+    },
+    {
+      "scene": "scene-2",
+      "seed": 0,
+      "local_loss_grid": [
+        -623.041697519553,
+        -605.5460157771557,
+        -615.3998145337647,
+        -603.803115345526,
+        -564.5203178727488,
+        -633.8818788931801
+      ],
+      "projection_composition_max_abs": 4.670873063328251e-13,
+      "oracle_matrix_max_abs": 2.220446049250313e-16,
+      "loss_corrupt": -559.2594033510827,
+      "loss_clean_oracle": -612.1912458227938
+    },
+    {
+      "scene": "scene-2",
+      "seed": 1,
+      "local_loss_grid": [
+        -623.2381991995201,
+        -605.2251115183517,
+        -615.3768442834097,
+        -603.8964661626084,
+        -564.5940776337227,
+        -633.8133834489836
+      ],
+      "projection_composition_max_abs": 4.670873063328251e-13,
+      "oracle_matrix_max_abs": 1.1102230246251565e-16,
+      "loss_corrupt": -619.0301824066587,
+      "loss_clean_oracle": -612.1912458227933
+    },
+    {
+      "scene": "scene-3",
+      "seed": 0,
+      "local_loss_grid": [
+        -2112.7836075412883,
+        -2090.913148716193,
+        -2097.1801956717577,
+        -2126.7331758716823,
+        -2102.3034191158818,
+        -2093.2319627035495
+      ],
+      "projection_composition_max_abs": 8.652124156016683e-13,
+      "oracle_matrix_max_abs": 2.220446049250313e-16,
+      "loss_corrupt": -2112.757603395118,
+      "loss_clean_oracle": -2113.674798515817
+    },
+    {
+      "scene": "scene-3",
+      "seed": 1,
+      "local_loss_grid": [
+        -2112.798260793951,
+        -2090.91978457403,
+        -2097.190596679671,
+        -2126.7139587623533,
+        -2102.277507234732,
+        -2093.16535797485
+      ],
+      "projection_composition_max_abs": 8.652124156016683e-13,
+      "oracle_matrix_max_abs": 4.440892098500626e-16,
+      "loss_corrupt": -2039.1831100756829,
+      "loss_clean_oracle": -2113.674798515817
+    }
+  ],
+  "elapsed_seconds": 19.352081161225215,
+  "feature_adaptation": "within-ring stable azimuth ordering; official get_corners per ring; exclude five seam/end points",
+  "objective_adaptation": "only real K/image bounds/extrinsic projection with centered LiDAR coordinates; original unnormalized Gaussian kNN sum, sigma9 k10; SGDSchaul source unchanged",
+  "cadence": "genuine keyframes sorted by camera timestamps; not full-frequency sweeps"
+}

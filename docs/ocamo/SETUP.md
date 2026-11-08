@@ -1,25 +1,39 @@
-# Minimal remote-first execution path
+# Verified remote-first CPU execution
 
-**Not executed.** Dependencies below are a proposal, not a tested version lock. Keep the established BEVFusion environment unchanged. A separate remote Python3.12 CPU venv is the preferred starting candidate once an execution channel is authorized and available. The official examples do not require PyTorch.
+The tested runtime is Ubuntu24.04 / Python3.12.3 on2vCPU/4GB, with dependencies pinned in `ocamo/requirements-cpu.lock.txt`. Neither CARLA, nuScenes nor checkpoints are copied to the Mac. Do not change the BEVFusion environment.
 
-One setup command, only after authorization, from the repository root:
-
-```sh
-python3.12 -m venv .venv-ocamo && .venv-ocamo/bin/python -m pip install -r ocamo/requirements-cpu.in
-```
-
-Then record `python -V`, `pip freeze`, platform and import checks; retain a tested exact dependency lock after successful execution. Do not install now simply to make an audit pass.
-
-Pin official source to https://github.com/moravecj/OCaMo commit `1ac55de3c0eabb02f155cd44f7481117536c9526`. Preserve the original directory layout and example paths. Set OCAMO_ROOT to that checkout and OCAMO_PYTHON to the absolute isolated interpreter in the remote workspace. With author data extracted under `$OCAMO_ROOT/example/carla_example`, the intended first commands are:
+On an explicitly authorized remote CPU environment, the setup is:
 
 ```sh
-cd "$OCAMO_ROOT/python/inference"
-MPLBACKEND=Agg "$OCAMO_PYTHON" ocamo_drift_tracking.py
-MPLBACKEND=Agg "$OCAMO_PYTHON" lto_drift_tracking.py
+python3 -m venv /workspace/staging/ocamo/venv-cpu
+/workspace/staging/ocamo/venv-cpu/bin/python -m pip install -r ocamo/requirements-cpu.lock.txt
 ```
 
-These commands are source-derived, not verified runs. Upstream calls plt.show without exporting numerical trajectories: a clearly isolated execution wrapper will be needed to persist original arrays and plots, without changing objective/update behavior. Monitoring follows only after both drift examples succeed. No numerical tolerance has yet been validated against author outputs.
+Official source: https://github.com/moravecj/OCaMo pinned to `1ac55de3c0eabb02f155cd44f7481117536c9526`, respecting its CC BY-NC4.0 license and paper attribution. Place it under `/workspace/staging/ocamo/official` and retain its original layout. Its CARLA archive is now present remotely at `/workspace/staging/ocamo/carla_example.zip` (722112251 bytes), extracted under `official/example/carla_example` (400 files,961343167 uncompressed bytes). Check before downloading again. This session's download was explicitly authorized; future large downloads still require approval.
 
-Author-linked CARLA download: https://cmp.felk.cvut.cz/~moravj34/data/carla_example.zip — HEAD200, Content-Length722112251 bytes (about689MiB). First check persistent storage for an existing archive/extracted copy. If absent, request permission to download exactly once remotely to `/workspace/staging/ocamo/carla_example.zip`; extract to a versioned remote source checkout's `example/carla_example`. Neither archive nor sensors may be downloaded to the Mac. The archive's uncompressed size is currently unknown, so do not claim a total storage requirement. No archive download is authorized or performed.
+Execute from this repository using fresh output paths:
 
-Previously documented data locations to verify, not asserted currently readable: `/workspace/datasets/nuscenes`, `/workspace/checkpoints`, `/workspace/results`, `/workspace/staging`. Use actual sample_data filenames/timestamps once access is available. Do not assume keyframe-only coverage implies sweeps exist, or confuse metadata presence with sensor availability. Do not copy checkpoints into this repository.
+```sh
+export PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg MPLCONFIGDIR=/tmp/ocamo-mpl OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+P=/workspace/staging/ocamo/venv-cpu/bin/python
+U=/workspace/staging/ocamo/official
+R=/workspace/results/ocamo/YOUR-FRESH-RUN-ID
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/ocamo-drift-1" --script ocamo_drift_tracking
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/lto-drift-1" --script lto_drift_tracking
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/ocamo-monitoring-1" --script ocamo_monitoring
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/lto-monitoring-1" --script lto_monitoring
+$P ocamo/tools/nuscenes_minimal.py --upstream "$U" --dataroot /workspace/datasets/nuscenes-validation --output "$R/nuscenes-3scenes-2seeds" --scenes 3 --seeds 0 1 --sigma .5
+# Exact-repeat evidence uses fresh sibling directories:
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/ocamo-drift-2" --script ocamo_drift_tracking
+$P ocamo/tools/run_official.py --upstream "$U" --output "$R/lto-drift-2" --script lto_drift_tracking
+$P ocamo/tools/nuscenes_minimal.py --upstream "$U" --dataroot /workspace/datasets/nuscenes-validation --output "$R/nuscenes-repeat" --scenes 3 --seeds 0 1 --sigma .5
+$P ocamo/tools/check_run.py --results "$R"
+```
+
+`run_official.py` runs original files with runpy from their required working directory. It changes only figure output and progress logging of unchanged MAT reads. No loss, feature extractor, random seed, parameters or optimizer rules are altered. Official arrays and plots are saved; SGDSchaul burn-in is10, LTO has no burn-in. Python demonstration performance is not full MATLAB/paper benchmark reproduction.
+
+The validation root contains genuine samples, sweeps and metadata. The initial adapter uses only camera/LiDAR keyframes, sorted by real camera timestamps, not high-frequency sweeps. First3 lexicographically sorted scene tokens are fixed independent of outcomes; each has40 usable keyframes. Scenes and seed selection must not be retuned to hide failures. Original larger data and checkpoints remain in their existing remote directories.
+
+The completed checkpoint is `/workspace/results/ocamo/2026-11-09-first-baseline`; do not overwrite it. Its saved run directories are `ocamo-drift-1`, `ocamo-drift-2`, `lto-drift-1`, `lto-drift-2`, `ocamo-monitoring-1`, `lto-monitoring-1`, `nuscenes-3scenes-2seeds`, and `nuscenes-repeat`. Raw trajectories, projections and correction matrices stay remote. Small aggregate reports and line graphs may be published. Run `check_run.py --results "$R"` there to validate saved paired results; it does not run experiments.
+
+Resource limits belong to each explicit authorization. Do not start or create resources from these commands, and do not assume a previous spend authorization still applies. No GPU inference or weighting is part of this baseline.

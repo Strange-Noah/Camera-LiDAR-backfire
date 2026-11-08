@@ -1,0 +1,31 @@
+{
+  "script": "lto_monitoring",
+  "upstream_commit": "1ac55de3c0eabb02f155cd44f7481117536c9526",
+  "seed": 42,
+  "elapsed_seconds": 32.87320279004052,
+  "arrays": {
+    "allTh": [
+      27,
+      200
+    ],
+    "allTh_dec": [
+      27,
+      200
+    ],
+    "v_lto1": [
+      200
+    ],
+    "v_lto2": [
+      200
+    ]
+  },
+  "finite": true,
+  "status": "EXECUTED",
+  "official_source_modified": false,
+  "validity_summary": {
+    "observations": 200,
+    "clean_mean": 0.9960461377238103,
+    "decalibrated_window_mean": 0.03141478449683923,
+    "outside_decalibrated_window_mean": 0.9943916847146246
+  }
+}

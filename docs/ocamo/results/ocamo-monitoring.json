@@ -1,0 +1,31 @@
+{
+  "script": "ocamo_monitoring",
+  "upstream_commit": "1ac55de3c0eabb02f155cd44f7481117536c9526",
+  "seed": 42,
+  "elapsed_seconds": 19.60120199713856,
+  "arrays": {
+    "allTh": [
+      3,
+      200
+    ],
+    "allTh_dec": [
+      3,
+      200
+    ],
+    "p1": [
+      200
+    ],
+    "p2": [
+      200
+    ]
+  },
+  "finite": true,
+  "status": "EXECUTED",
+  "official_source_modified": false,
+  "validity_summary": {
+    "observations": 200,
+    "clean_mean": 0.9762047256505465,
+    "decalibrated_window_mean": 0.08278069721418183,
+    "outside_decalibrated_window_mean": 0.926102922546352
+  }
+}
