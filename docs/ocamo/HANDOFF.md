@@ -1,4 +1,4 @@
-# OCaMo handoff — 2026-11-08
+# OCaMo handoff — 2026-11-09
 
 ## State and recovery decision
 
@@ -30,10 +30,24 @@ Current Mac interpreter was Python3.14.7 with NumPy/SciPy/Matplotlib/OpenCV/PyTo
 4. Correction export/oracle: NOT RUN; no detection recovery claim.
 5. Conditional Weighting: not implemented; prohibited pending baseline and agreed mapping. Likely future insertion point is per-feature Gaussian contributions before their sum in estimate_kernel_correlation, without implementing weights now.
 
-## Smallest next action and authorization
+## Remote CPU choice — read-only milestone 2026-11-09
 
-Provide/configure an existing Runpod S3 read-only access path via the Console's S3 credentials, without posting secrets into chat, or an already-running authorized project execution channel. A regular Runpod API credential is not an S3 credential. Do not create credentials or restart stopped Pods automatically. First list the documented data/checkpoint/staging prefixes and check whether CARLA and a usable CPU runtime already exist.
+S3 is optional, not a prerequisite. The next requirement is an explicitly authorized executable CPU environment. No resource has been started or created.
 
-S3 access can verify storage without launching compute but cannot run OCaMo. If no running environment is available, actual execution may require additional paid compute; that needs a separate explicit proposal/authorization. No new paid compute is currently authorized. CARLA remote download also needs explicit approval after checking for an existing copy. Proposed remote archive destination and minimal dependency setup are in [SETUP.md](SETUP.md).
+Fresh authenticated Pod GETs show both existing project Pods EXITED, actions include start, and both still mount the original persistent volume at /workspace in the same data center. Both use runpod/base:1.0.2-ubuntu2404, expose22/tcp, have an SSH public-key setting and empty custom startup arguments. The smaller permissions-check Pod is CPU-only,2vCPU/4GB,10GB container disk, current Pod cost field0.06USD/hour. The preaudit Pod is CPU-only,4vCPU/16GB,20GB container disk, cost field0.16USD/hour. No GPU is requested by either existing configuration. No custom experiment entry command is present in the returned configuration. Historical system-log GETs timed out after bounded reads, so prior boot behavior and current filesystem health remain unverified.
+
+Current CPU catalog GETs (AVAILABILITY,POD,vcpuCount2) report HIGH availability in the volume's data center for cpu3c and cpu3g. cpu3c is0.03USD/vCPU-hour,2GB/vCPU,min2vCPU; cpu3g is0.04USD/vCPU-hour,4GB/vCPU,min2vCPU. Thus a fresh2vCPU/4GB compute-optimized Pod quotes0.06USD/hour, and2vCPU/8GB general-purpose quotes0.08USD/hour. A fresh Pod would need explicit creation, same-volume placement, SSH configuration and boot verification; capacity is time-sensitive and not a guarantee for any particular stopped Pod's original host. Quoted compute rates exclude separate existing persistent-storage charges; no new volume is proposed. No storage-price estimate is invented.
+
+**Preferred authorization proposal:** resume only the existing2vCPU/4GB permissions-check Pod, leaving the larger preaudit Pod stopped. This is the cheapest practical initial configuration for the unchanged per-frame CPU demonstration, subject to measuring actual peak memory and runtime. Same image/volume avoids unnecessary recreation, but stopped container-disk software must not be assumed intact. Build a minimal isolated environment on persistent storage after checking for an existing usable one. Ubuntu24.04 is a reasonable Python3.12 setup candidate, not yet verified runtime compatibility. If that Pod cannot resume or access the volume, report the exact error rather than silently starting another resource. A fresh2vCPU/8GB CPU Pod is the explicit-authorization fallback for more memory/clean placement;4vCPU/16GB costs more and is unnecessary as the first attempt.
+
+For a proposed bounded initial session,2hours of the smaller Pod is0.12USD compute at the quoted rate, plus applicable storage charges. This is a proposal, not spending authorization or an enforced shutdown timer. The execution duration, spend ceiling and stop/cleanup behavior should be explicit in the user's go-ahead. CARLA download remains separately gated.
+
+## Next action after explicit resource authorization
+
+1. Start only the approved Pod; confirm running state, actual SSH connectivity and existing /workspace mount without modifying old experiments.
+2. Check existing nuScenes sensor files, checkpoints, CARLA archive/extracted data and persistent CPU environments. Contents remain UNVERIFIED until these checks; local absence/access failure does not establish missing volume data.
+3. Only if CARLA is absent, request separate authorization for the author archive to the remote staging destination documented in SETUP.md. No Mac data copy.
+4. Reuse or install a small isolated NumPy/SciPy/OpenCV/Matplotlib CPU environment without altering BEVFusion; run unchanged official OCaMo drift first, then LTO, save outcomes and investigate actual failures.
+5. Proceed to the clean chronological nuScenes adapter only after official reproduction. No additional S3 setup or audit framework is needed.
 
 Keep raw access responses and local diagnostics in the project's private local reports area; do not publish resource identifiers, credentials, private host paths or internal checkpoint records. A previous detailed audit publication was rejected by automatic approval review for sensitive egress. This handoff deliberately contains only redacted access conclusions, public upstream facts and user-specified logical deployment paths. No experimental implementation or result is claimed.
