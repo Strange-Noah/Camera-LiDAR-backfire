@@ -1,5 +1,8 @@
 # OCaMo handoff — 2026-11-09 executed checkpoint
 
+Latest status: **Gate A FAIL; Gate B NOT RUN; authorized CPU GET-confirmed EXITED**.
+Read FULL_METHOD_RESULTS.md and the final milestone below before continuing.
+
 Development branch: noah/ocamo-baseline. The exact checkpoint is the commit containing this document (`git log -1 --format=%H -- docs/ocamo/HANDOFF.md`); the final handoff provides its direct commit link. Foundation:f9acebc5b39076138b656315476a667f339d6109. noah/ocamo-experiments remains reserved at its initial95c3fa452a749a4d88a788413ea8af1ac137a517; no automatic integration or weighting work occurred. Protected historical branches remain unchanged.
 
 ## Completed and verified
@@ -74,3 +77,49 @@ plots. Stop on invalidating checks, missing required populations, degenerate
 training or unreliable convergence. Record the actual result commit. Do not run
 Gate B merely because trajectories are finite. Historical branches, frozen minimal
 code and original scientific results remain untouched.
+
+## Latest Gate A execution/result milestone — 2026-11-09
+
+Actual remote source:1e6b7a1915ed5c2b47bc40aeff41c205ba6f8ea9, following the
+reviewable implementation d75ac5855bef43d5fa8fa1bb3637c01ed99c0f4b. Final report
+and reporting fix are in the commit containing this section (`git log -1
+--format=%H -- docs/ocamo/FULL_METHOD_RESULTS.md`). Raw source hashes/results
+preserve the execution identity; no experimental rerun followed the reporting fix.
+
+Official1500-frame CARLA regression exactly matches accepted arrays. Eight runtime
+tests and six fixed real-frame matrix/brute-kNN checks PASS; six private overlays
+were inspected with limited structural correspondence and noisy-return caveats.
+The old minimal replay matches240 accepted observations to1.86e-11 degrees.
+
+Scene-disjoint LogitBoost training96 frames/12 scenes; threshold validation32/4.
+Classifier accuracy54.17% in scene folds and43.75% on validation, both below their
+majority-label references. Fixed six-scene/two-seed comparison produced1446 rows:
+minimal6/12 improved, full/no-preselection9/12, full/preselection8/12 with2/12
+no-update cases. Mean final errors0.832587/0.516814/0.540137 degrees from shared
+mean initial0.692569. Preselection has0–28 valid updates; only4/12 reach20, and
+median final/initial.830451 fails the predeclared.75 bound. Gate A FAIL; no high
+sigma, Conditional Weighting, optimizer tuning or BEVFusion recovery followed.
+
+All evaluation scenes have40–41 genuine observations over19.4–19.75s. LiDAR
+sweeps exist but non-keyframe camera files are absent in the three inspected roots;
+no high-frequency repetition/download was substituted. Prefixes use original
+trajectories. More acquisition time is unavailable here and cannot be assumed to
+resolve observed drift. Current reconstruction is not an accepted full-paper model.
+
+Preserved raw summary incorrectly marked two held-state roundoff differences as
+improvements. Final CSV/report classify NO_VALID_UPDATE; future summary code now
+requires a real update and1e-8-degree reduction. Current local tests9 PASS; runtime
+scientific source/tests remain the recorded8-test version. Actual values unchanged.
+
+The authorized CPU was stopped/GET-confirmed EXITED after at most795.35 seconds,
+estimated compute upper0.01326USD at0.06/hour, excluding storage/not final invoice.
+Original network volume retained. No resource/config replacement or dependency
+install. Private access/cleanup logs and overlays stay local, outside Git. Remote
+raw results remain /workspace/results/ocamo/2026-11-09-full-method-gate-a; published
+small artifacts are docs/ocamo/full_method/executed. Old results unchanged.
+
+Next smallest scope: validate reconstructed42-D features/LogitBoost on independent
+training/validation data before calibration changes; resolve existing high-frequency
+camera availability separately if needed. Do not tune on final scenes, start Gate B,
+resume compute or download data without a new agreed scope/required authorization.
+All historical/main/teammate/ocamo-experiments branches remain untouched.

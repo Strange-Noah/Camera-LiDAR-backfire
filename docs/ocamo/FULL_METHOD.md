@@ -1,5 +1,9 @@
 # Full-method OCaMo — implementation checkpoint, Gate A pending
 
+**Superseded execution status:** [completed Gate A results](FULL_METHOD_RESULTS.md):
+Gate A FAIL, Gate B NOT RUN. The checklist and protocol below preserve the
+pre-execution implementation milestone; its pending statements are historical.
+
 2026-11-09. Continue from `f338b966a272a8fd89e3973e5402d5a08947285e`.
 This is an implementation and local-test milestone, **not an accepted full-method
 reproduction or a new convergence result**. Gate A is UNVERIFIED; Gate B is NOT RUN.

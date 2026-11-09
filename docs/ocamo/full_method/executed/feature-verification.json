@@ -1,0 +1,168 @@
+{
+  "checks": [
+    {
+      "scene": "01e4fcbe6e49483293ce45727152b36e",
+      "index": 0,
+      "corners": 4744,
+      "projected": 276,
+      "edge_count": 19090,
+      "feature_counts": {
+        "range": 2527,
+        "intensity": 2686,
+        "gap": 296
+      },
+      "radial_quantiles": [
+        2.5966191572534093e-05,
+        0.050885718648366114,
+        1.001175851821598,
+        25.38347950785843,
+        98.35933077849276
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.17042651152745059,
+        21.725121020480433,
+        85.7730999326009,
+        214.21824171085282
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    },
+    {
+      "scene": "01e4fcbe6e49483293ce45727152b36e",
+      "index": 19,
+      "corners": 5606,
+      "projected": 491,
+      "edge_count": 20220,
+      "feature_counts": {
+        "range": 2598,
+        "intensity": 3811,
+        "gap": 82
+      },
+      "radial_quantiles": [
+        2.3328951249043908e-05,
+        0.0713219629617754,
+        6.018819059328553,
+        17.18645168850651,
+        59.43373647204282
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.06379026342754637,
+        36.167775450815164,
+        131.7442908375751,
+        230.0663569851808
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    },
+    {
+      "scene": "01e4fcbe6e49483293ce45727152b36e",
+      "index": 39,
+      "corners": 4574,
+      "projected": 452,
+      "edge_count": 28718,
+      "feature_counts": {
+        "range": 1819,
+        "intensity": 3395,
+        "gap": 78
+      },
+      "radial_quantiles": [
+        2.1451586907120338e-05,
+        0.6546094688746652,
+        6.9819895501410585,
+        18.83145317715304,
+        100.41402253122267
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.19150792712974377,
+        20.710213521069143,
+        81.41931204599096,
+        154.1205136188273
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    },
+    {
+      "scene": "034dee1695304630b0692da8c1f153fc",
+      "index": 0,
+      "corners": 5316,
+      "projected": 544,
+      "edge_count": 149693,
+      "feature_counts": {
+        "range": 2575,
+        "intensity": 3621,
+        "gap": 72
+      },
+      "radial_quantiles": [
+        5.420901968438108e-05,
+        0.10873150466903242,
+        5.6194972296145265,
+        20.04556226204641,
+        62.45673350264736
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.04641213572028353,
+        2.5456807583079417,
+        31.640822652455345,
+        179.66791730157274
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    },
+    {
+      "scene": "034dee1695304630b0692da8c1f153fc",
+      "index": 19,
+      "corners": 5268,
+      "projected": 564,
+      "edge_count": 170157,
+      "feature_counts": {
+        "range": 2423,
+        "intensity": 3629,
+        "gap": 46
+      },
+      "radial_quantiles": [
+        6.051784046745072e-05,
+        0.05826025060017256,
+        6.241912016617965,
+        18.144363088357387,
+        94.41871443436858
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.08305751362460385,
+        1.9414126617035654,
+        50.57663755694442,
+        115.62961264318115
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    },
+    {
+      "scene": "034dee1695304630b0692da8c1f153fc",
+      "index": 39,
+      "corners": 5608,
+      "projected": 580,
+      "edge_count": 91355,
+      "feature_counts": {
+        "range": 2910,
+        "intensity": 3692,
+        "gap": 54
+      },
+      "radial_quantiles": [
+        0.00030736075916267067,
+        0.18760338222277426,
+        5.020521200140229,
+        16.479074848749786,
+        57.74081071805708
+      ],
+      "clean_nearest_edge_quantiles_px": [
+        0.03426128703697839,
+        5.683636630561775,
+        36.100392644832226,
+        111.40119863543165
+      ],
+      "matrix_objective_checks": "PASS",
+      "physical_overlay_review": "PENDING"
+    }
+  ],
+  "physical_review": "PENDING",
+  "gate_a": "UNVERIFIED"
+}

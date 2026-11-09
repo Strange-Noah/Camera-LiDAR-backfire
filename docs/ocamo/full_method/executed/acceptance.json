@@ -1,0 +1,125 @@
+{
+  "gate_a": "FAIL",
+  "gate_b": "NOT_RUN",
+  "executed_source_commit": "1e6b7a1915ed5c2b47bc40aeff41c205ba6f8ea9",
+  "frozen_minimal_commit": "d8b86b5df9bd19deb08a726b8000487acbc7ee3e",
+  "aggregates": {
+    "minimal": {
+      "outcomes": {
+        "DEGRADED": 6,
+        "IMPROVED": 6
+      },
+      "n": 12,
+      "mean_initial_degrees": 0.6925687479068259,
+      "mean_final_degrees": 0.8325865923385386,
+      "median_final_initial_ratio": 0.9893017692548973,
+      "accepted_total": 482,
+      "rejected_total": 0,
+      "valid_updates_total": 362,
+      "trajectories_at_least20_updates": 12,
+      "post_burn_sequences_available": 12,
+      "severe_final_failures": 2
+    },
+    "full_no_preselection": {
+      "outcomes": {
+        "DEGRADED": 3,
+        "IMPROVED": 9
+      },
+      "n": 12,
+      "mean_initial_degrees": 0.6925687479068259,
+      "mean_final_degrees": 0.5168142330208453,
+      "median_final_initial_ratio": 0.7632180759237475,
+      "accepted_total": 482,
+      "rejected_total": 0,
+      "valid_updates_total": 362,
+      "trajectories_at_least20_updates": 12,
+      "post_burn_sequences_available": 12,
+      "severe_final_failures": 0
+    },
+    "full_preselection": {
+      "outcomes": {
+        "DEGRADED": 2,
+        "IMPROVED": 8,
+        "NO_VALID_UPDATE": 2
+      },
+      "n": 12,
+      "mean_initial_degrees": 0.6925687479068259,
+      "mean_final_degrees": 0.5401371653249805,
+      "median_final_initial_ratio": 0.8304514897884385,
+      "accepted_total": 300,
+      "rejected_total": 182,
+      "valid_updates_total": 189,
+      "trajectories_at_least20_updates": 4,
+      "post_burn_sequences_available": 10,
+      "severe_final_failures": 0
+    }
+  },
+  "predeclared_convergence_checks": {
+    "at_least9_of12_meaningfully_improved": false,
+    "median_ratio_at_most075": false,
+    "no_severe_final_failure": true,
+    "all12_have20_valid_updates": false
+  },
+  "classification_tolerance_degrees": 1e-08,
+  "raw_reporting_issue": "Two zero-update cases had negative differences of 5.55e-17 and 1.11e-16 degrees, so raw strict flags incorrectly counted them as improved. Raw files preserved; no trajectory or calibration rerun.",
+  "numeric_geometry_objective": "PASS",
+  "physical_features": "ADAPTATION_LIMITED; six private overlays inspected; recognizable objects plus noisy/noncorresponding returns; no tuning",
+  "official_regression": "exact accepted-array match",
+  "minimal_replay_max_abs_degrees": 1.8573087512407938e-11,
+  "runtime_tests_passed": 8,
+  "training_labels": {
+    "train": {
+      "observations": 96,
+      "suitable": 29,
+      "scenes": 12
+    },
+    "validation": {
+      "observations": 32,
+      "suitable": 15,
+      "scenes": 4
+    }
+  },
+  "cv_confusion": {
+    "tp": 6,
+    "tn": 46,
+    "fp": 21,
+    "fn": 23
+  },
+  "cv_accuracy": 0.5416666666666666,
+  "cv_majority_baseline_accuracy": 0.6979166666666666,
+  "validation_metrics": {
+    "tp": 8,
+    "tn": 6,
+    "fp": 11,
+    "fn": 7,
+    "accuracy": 0.4375,
+    "suitable_precision": 0.42105263157894735,
+    "suitable_recall": 0.5333333333333333
+  },
+  "validation_majority_baseline_accuracy": 0.53125,
+  "actual_validation_data_loss": 0.40625,
+  "physical_seconds_range": [
+    19.4,
+    19.75
+  ],
+  "sensor_observations_per_trajectory_range": [
+    40,
+    41
+  ],
+  "trajectory_rows": 1446,
+  "update_status_counts": {
+    "BURN_IN": 351,
+    "REJECTED": 182,
+    "UPDATED": 913
+  },
+  "cleanup": {
+    "status": "EXITED",
+    "elapsed_upper_seconds": 795.3440370559692,
+    "compute_rate_usd_hour": 0.06,
+    "compute_upper_estimate_usd": 0.01325573395093282,
+    "within_90_minutes": true,
+    "within_009_usd": true,
+    "network_volume_retained": true,
+    "billing_note": "rate-based upper estimate excluding storage; not final invoice"
+  }
+}

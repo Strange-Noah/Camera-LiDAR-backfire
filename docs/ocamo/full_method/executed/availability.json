@@ -1,0 +1,446 @@
+{
+  "populations": {
+    "train": [
+      "04219bfdc9004ba2af16d3079ecc4353",
+      "07aed9dae37340a997535ad99138e243",
+      "080a52cb8f59489b9cddc7b721808088",
+      "0ac05652a4c44374998be876ba5cd6fd",
+      "0dae482684ce4cd69a7258f55bc98d73",
+      "0e7ede02718341558414865d5c604745",
+      "112ca771e318478a88cfa692f61ffcac",
+      "16be583c31a2403caa6c158bb55ae616",
+      "16e50a63b809463099cb4c378fe0641e",
+      "197a7e4d3de84e57af17b3d65fcb3893",
+      "19d97841d6f64eba9f6eb9b6e8c257dc",
+      "1aa633b683174280b243e0a9a7ad9171"
+    ],
+    "validation": [
+      "201b7c65a61f4bc1a2333ea90ba9a932",
+      "2086743226764f268fe8d4b0b7c19590",
+      "21a7ba093614493b83838b9656b3558d",
+      "223096a415cc45bf8ecd4c3a42251fd7"
+    ],
+    "evaluation_previous": [
+      "01452fbfbf4543af8acdfd3e8a1ee806",
+      "01e4fcbe6e49483293ce45727152b36e",
+      "034dee1695304630b0692da8c1f153fc"
+    ],
+    "evaluation_heldout": [
+      "265f002f02d447ad9074813292eef75e",
+      "26a6b03c8e2f4e6692f174a7074e54ff",
+      "2abb3f3517c64446a5768df5665da49d"
+    ]
+  },
+  "scenes": {
+    "21a7ba093614493b83838b9656b3558d": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 239,
+        "lidar_records": 397,
+        "missing_files": 198,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      }
+    },
+    "112ca771e318478a88cfa692f61ffcac": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 239,
+        "lidar_records": 399,
+        "missing_files": 198,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      }
+    },
+    "16e50a63b809463099cb4c378fe0641e": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.85,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 239,
+        "lidar_records": 398,
+        "missing_files": 198,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.85,
+        "pairs": 41
+      }
+    },
+    "080a52cb8f59489b9cddc7b721808088": {
+      "keyframes": {
+        "camera_records": 39,
+        "lidar_records": 39,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.2,
+        "pairs": 39
+      },
+      "higher_frequency": {
+        "camera_records": 228,
+        "lidar_records": 383,
+        "missing_files": 189,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.2,
+        "pairs": 39
+      }
+    },
+    "19d97841d6f64eba9f6eb9b6e8c257dc": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 233,
+        "lidar_records": 391,
+        "missing_files": 193,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      }
+    },
+    "201b7c65a61f4bc1a2333ea90ba9a932": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 232,
+        "lidar_records": 388,
+        "missing_files": 192,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      }
+    },
+    "223096a415cc45bf8ecd4c3a42251fd7": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 237,
+        "lidar_records": 398,
+        "missing_files": 196,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      }
+    },
+    "1aa633b683174280b243e0a9a7ad9171": {
+      "keyframes": {
+        "camera_records": 39,
+        "lidar_records": 39,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 39
+      },
+      "higher_frequency": {
+        "camera_records": 233,
+        "lidar_records": 384,
+        "missing_files": 194,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 39
+      }
+    },
+    "16be583c31a2403caa6c158bb55ae616": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.55,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 235,
+        "lidar_records": 390,
+        "missing_files": 195,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.55,
+        "pairs": 40
+      }
+    },
+    "26a6b03c8e2f4e6692f174a7074e54ff": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.75,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 235,
+        "lidar_records": 393,
+        "missing_files": 194,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.75,
+        "pairs": 41
+      }
+    },
+    "01e4fcbe6e49483293ce45727152b36e": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 233,
+        "lidar_records": 388,
+        "missing_files": 193,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      }
+    },
+    "2abb3f3517c64446a5768df5665da49d": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 229,
+        "lidar_records": 390,
+        "missing_files": 189,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      }
+    },
+    "2086743226764f268fe8d4b0b7c19590": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.950014,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 238,
+        "lidar_records": 400,
+        "missing_files": 197,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.950014,
+        "pairs": 41
+      }
+    },
+    "0dae482684ce4cd69a7258f55bc98d73": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.549896,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 236,
+        "lidar_records": 391,
+        "missing_files": 196,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.549896,
+        "pairs": 40
+      }
+    },
+    "04219bfdc9004ba2af16d3079ecc4353": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 238,
+        "lidar_records": 397,
+        "missing_files": 197,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.9,
+        "pairs": 41
+      }
+    },
+    "265f002f02d447ad9074813292eef75e": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.499998,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 230,
+        "lidar_records": 389,
+        "missing_files": 190,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.499998,
+        "pairs": 40
+      }
+    },
+    "0e7ede02718341558414865d5c604745": {
+      "keyframes": {
+        "camera_records": 41,
+        "lidar_records": 41,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.75,
+        "pairs": 41
+      },
+      "higher_frequency": {
+        "camera_records": 236,
+        "lidar_records": 395,
+        "missing_files": 195,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.75,
+        "pairs": 41
+      }
+    },
+    "01452fbfbf4543af8acdfd3e8a1ee806": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 230,
+        "lidar_records": 388,
+        "missing_files": 190,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.4,
+        "pairs": 40
+      }
+    },
+    "034dee1695304630b0692da8c1f153fc": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.550003,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 235,
+        "lidar_records": 390,
+        "missing_files": 195,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.550003,
+        "pairs": 40
+      }
+    },
+    "0ac05652a4c44374998be876ba5cd6fd": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.55,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 235,
+        "lidar_records": 392,
+        "missing_files": 195,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.55,
+        "pairs": 40
+      }
+    },
+    "07aed9dae37340a997535ad99138e243": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 233,
+        "lidar_records": 391,
+        "missing_files": 193,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      }
+    },
+    "197a7e4d3de84e57af17b3d65fcb3893": {
+      "keyframes": {
+        "camera_records": 40,
+        "lidar_records": 40,
+        "missing_files": 0,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      },
+      "higher_frequency": {
+        "camera_records": 233,
+        "lidar_records": 390,
+        "missing_files": 193,
+        "unmatched": 0,
+        "elapsed_acquisition_seconds": 19.5,
+        "pairs": 40
+      }
+    }
+  },
+  "higher_frequency": "unavailable in the inspected roots because non-keyframe camera JPEGs are absent; lidar sweeps do exist",
+  "other_roots_checked": [
+    "/workspace/datasets/nuscenes",
+    "/workspace/datasets/nuscenes-trainval-smoke"
+  ],
+  "example_check": {
+    "fixed_first_scene_nonkey_camera_records": 190,
+    "found_counts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "point_deskew": "no additional deskew; no invented per-point time"
+}

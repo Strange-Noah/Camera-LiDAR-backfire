@@ -1,5 +1,9 @@
 # OCaMo full-method reconstruction
 
+Executed status: [Gate A FAIL; Gate B not run](../../docs/ocamo/FULL_METHOD_RESULTS.md).
+The source has now run on the fixed nuScenes population. Original protocol and
+historical implementation status follow; execution is not convergence acceptance.
+
 Read [method checklist and limitations](../../docs/ocamo/FULL_METHOD.md) first.
 This clean path leaves `ocamo/tools/nuscenes_minimal.py` frozen. It is implemented
 and synthetically tested, not yet real-data accepted. No GPU or new dependencies.

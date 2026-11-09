@@ -7,7 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 import numpy as np
-from core import (PaperTracker, automatic_label, camera_edges, camera_points,
+from core import (PaperTracker, automatic_label, camera_edges, camera_points, classify_final,
                   exp_rotation, extract_corners, loss, quality_features, rotation_error)
 from data import load_inventory, perturbation
 from preselection import scores, train_scene_disjoint
@@ -187,7 +187,9 @@ def evaluate(inventory, root, model, baseline, upstream, out):
                                       'initial_degrees': initial, 'final_degrees': final,
                                       'post_burn_mean_degrees': float(np.mean(post)) if post else None,
                                       'elapsed_seconds': records[-1]['elapsed_seconds'],
-                                      'final_improved': final < initial,
+                                      'final_improved': classify_final(initial, final, records[-1]['valid_updates']) == 'IMPROVED',
+                                      'final_outcome': classify_final(initial, final, records[-1]['valid_updates']),
+                                      'final_comparison_tolerance_degrees': 1e-8,
                                       'prefixes': [dict(observed=n, residual_degrees=records[n-1]['residual_degrees'],
                                                         accepted=records[n-1]['accepted_count'],
                                                         seconds=records[n-1]['elapsed_seconds'])

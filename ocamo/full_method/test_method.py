@@ -2,7 +2,7 @@
 import copy
 import unittest
 import numpy as np
-from core import (PaperTracker, automatic_label, camera_points, exp_rotation,
+from core import (PaperTracker, automatic_label, camera_points, classify_final, exp_rotation,
                   extract_corners, project, quality_features, rigid, rotation_error)
 from preselection import fit, scores, train_scene_disjoint
 from data import perturbation
@@ -77,6 +77,12 @@ class Features(unittest.TestCase):
 
 
 class Learning(unittest.TestCase):
+    def test_final_classification_does_not_count_roundoff_or_held_state(self):
+        self.assertEqual(classify_final(.5, .5-1e-16, 0), 'NO_VALID_UPDATE')
+        self.assertEqual(classify_final(.5, .5-1e-16, 20), 'UNCHANGED')
+        self.assertEqual(classify_final(.5, .4, 20), 'IMPROVED')
+        self.assertEqual(classify_final(.5, .6, 20), 'DEGRADED')
+
     def test_logitboost_and_scene_leakage_guard(self):
         x = np.zeros((20, 42)); x[:, 0] = np.arange(20); y = (x[:, 0] > 9).astype(int)
         model = fit(x, y, 10)

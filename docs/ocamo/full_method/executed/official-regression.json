@@ -1,0 +1,27 @@
+{
+  "script": "ocamo_drift_tracking",
+  "upstream_commit": "1ac55de3c0eabb02f155cd44f7481117536c9526",
+  "seed": 42,
+  "elapsed_seconds": 121.49556459393352,
+  "arrays": {
+    "dec_all": [
+      6,
+      1500
+    ],
+    "allTh": [
+      3,
+      1500
+    ]
+  },
+  "finite": true,
+  "status": "EXECUTED",
+  "official_source_modified": false,
+  "observations": 1500,
+  "burn_in_observations": 10,
+  "post_burn_mean_residual_degrees": 0.12641070578619526,
+  "post_burn_RMS_residual_degrees": 0.1481393597042939,
+  "post_burn_mean_uncorrected_degrees": 0.5865860893900164,
+  "final_residual_degrees": 0.044476999756264714,
+  "mean_seconds_per_observation": 0.08099764438796167,
+  "trajectory_sha256": "0e494d11738a72771e844714897fa6170b2a44c1e5ee2afe313fd0ee2373513f"
+}

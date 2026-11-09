@@ -6,6 +6,15 @@ Dataset conventions and unpublished choices are recorded in FULL_METHOD.md.
 import numpy as np
 
 
+def classify_final(initial, final, valid_updates, tolerance=1e-8):
+    """A roundoff-sized change or a held estimate is not calibration recovery."""
+    if valid_updates == 0:
+        return 'NO_VALID_UPDATE'
+    if abs(final-initial) <= tolerance:
+        return 'UNCHANGED'
+    return 'IMPROVED' if final < initial else 'DEGRADED'
+
+
 def exp_rotation(v):
     v = np.asarray(v, dtype=float)
     angle = np.linalg.norm(v)

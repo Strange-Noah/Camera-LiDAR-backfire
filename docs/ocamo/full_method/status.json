@@ -1,10 +1,9 @@
 {
-  "local_synthetic_tests": "PASS",
-  "tests": 8,
-  "syntax": "PASS",
-  "source_checkpoint": "f338b966a272a8fd89e3973e5402d5a08947285e",
-  "real_sensor_execution": "NOT_RUN",
-  "gate_a": "UNVERIFIED",
+  "implementation_checkpoint": "d75ac5855bef43d5fa8fa1bb3637c01ed99c0f4b",
+  "executed_source": "1e6b7a1915ed5c2b47bc40aeff41c205ba6f8ea9",
+  "runtime_tests": "8 PASS",
+  "gate_a": "FAIL",
   "gate_b": "NOT_RUN",
-  "paid_compute_started": false
+  "cpu_final_status": "EXITED",
+  "details": "executed/acceptance.json"
 }
