@@ -16,7 +16,7 @@ Development branch: noah/ocamo-baseline. The exact checkpoint is the commit cont
 
 Official OCaMo mean post-burn residual0.126411°, LTO all-frame mean0.085186°; signs/curves qualitatively follow authors' examples. Exact author numeric comparison and full paper benchmark reproduction are not established. On nuScenes3/6 final estimates improve and3 worsen, with clear drift on one scene. Mean initial0.575351° becomes1.135441° final. Finite execution is accepted; stable general convergence is not. Do not use a favorable early checkpoint to override final results.
 
-The remaining blockers are scientific reliability and independent visual review of the remote projection overlays, not S3 configuration or an asserted missing dataset. No further optimizer/loss changes, feature redesign, weighting or GPU recovery run was made to hide failures. Future weighting insertion is the individual Gaussian contributions before summation, but remains unimplemented and requires an agreed observable-feature mapping.
+The remaining blocker is scientific reliability; the directional milestone below completed the limited improving/diverging overlay inspection. No baseline optimizer/loss change, feature redesign, weighting or GPU recovery run was made to hide those failures. Future weighting remains unimplemented and requires an agreed observable-feature mapping.
 
 ## Reproduction and retained artifacts
 
@@ -26,7 +26,7 @@ Private local execution/access logs and cleanup evidence stay in the existing lo
 
 ## Next permitted action
 
-Review the mixed convergence and retained remote projection overlays. Any new paid session needs explicit authorization; do not restart automatically. Do not introduce an alternative calibration method, tune this baseline or implement Conditional Weighting without a new agreed scope. No S3 infrastructure is a prerequisite. Preserve existing results and the two OCaMo branches; no task branches or back-merges.
+The latest full-method scope below supersedes the earlier review-only next step. Any new paid session needs explicit authorization; do not restart automatically. No S3 infrastructure is a prerequisite. Preserve existing results and the two OCaMo branches; no task branches or back-merges.
 
 ## Latest code-first/directional milestone — 2026-11-09
 
@@ -37,3 +37,40 @@ After essential geometry checks, fixed0.5° directions (6 signed axes+8 diagonal
 One authorized30-minute CPU resume session was used; initial400 was followed by one successful retry. Stopped and GET-confirmed EXITED within6.48 minutes; volume retained. Estimated compute upper0.00648USD excluding storage, not final billing. No resources remain running from this task. Raw remote diagnostics are under /workspace/results/ocamo/2026-11-09-directional; old runs unchanged. Public artifacts omit sensor overlays and resource/account identifiers. No new branches or experiment-branch merge.
 
 Next: review feature/crop/noisy-edge mechanisms before proposing modifications; if a focused update diagnosis is requested, use recorded states rather than changing optimizer rules. Fresh paid execution needs authorization. Do not automatically launch feature changes, weighting, a different optimizer or calibration architecture.
+
+## Latest full-method implementation milestone — 2026-11-09
+
+New user scope: faithful Gate A reproduction before any high-sigma Gate B.
+Continue from the commit containing this section (`git log -1 --format=%H --
+docs/ocamo/HANDOFF.md`); prior verified diagnostic source/results remain
+f338b966a272a8fd89e3973e5402d5a08947285e. Read FULL_METHOD.md for the paper-to-code
+checklist, fixed populations, explicit MATLAB/Python differences and pending gates.
+
+Separate code is under ocamo/full_method. It reconstructs range/intensity/gap
+corners, physical camera-local right corrections, the paper kernel objective,
+MATLAB-style averaged burn-in/adaptive updates, 42 quality features, automatic
+labels and binary LogitBoost. Training ranks3..14, validation15..18, previous
+evaluation0..2 and held-out19..21 are fixed before new losses. Seeds0/1, sigma.5
+per-axis reuse prior perturbations. True higher-frequency samples are used only
+if sensor files exist; no artificial repetition or scene concatenation.
+
+Eight focused local NumPy tests PASS. Real Canny/KDTree checks, physical corner
+inspection, official CARLA regression, new labels/model and convergence execution
+are not run. Exact original preselector assets/settings are absent in the pinned
+public source; reconstruction choices are documented, not called numerical identity.
+Gate A UNVERIFIED; Gate B NOT RUN. No new convergence figures exist yet.
+
+Only a read-only resource check occurred: existing2vCPU/4GB CPU remains EXITED,
+rate0.06USD/hour, original network volume still mounted at /workspace. Proposed
+next authorization is at most90 minutes /0.09USD compute excluding existing
+storage, with stop/readback on completion or failure. Reuse original data, CARLA,
+official checkout and CPU venv. No new dependency, download or resource is needed
+by this implementation; do not start without a fresh explicit authorization.
+
+After authorization: unchanged official regression; runtime tests and six-frame
+feature/oracle/KDTree checks with private overlays; inspect fixed inventory; train
+scene-disjoint preselector; run paired three-method Gate A comparison and prefix
+plots. Stop on invalidating checks, missing required populations, degenerate
+training or unreliable convergence. Record the actual result commit. Do not run
+Gate B merely because trajectories are finite. Historical branches, frozen minimal
+code and original scientific results remain untouched.

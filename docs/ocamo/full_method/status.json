@@ -1,0 +1,10 @@
+{
+  "local_synthetic_tests": "PASS",
+  "tests": 8,
+  "syntax": "PASS",
+  "source_checkpoint": "f338b966a272a8fd89e3973e5402d5a08947285e",
+  "real_sensor_execution": "NOT_RUN",
+  "gate_a": "UNVERIFIED",
+  "gate_b": "NOT_RUN",
+  "paid_compute_started": false
+}

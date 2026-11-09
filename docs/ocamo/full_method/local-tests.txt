@@ -1,0 +1,13 @@
+test_quality_42_and_flat_labels (test_method.Features.test_quality_42_and_flat_labels) ... ok
+test_range_corner_nearer_surface_and_permutation (test_method.Features.test_range_corner_nearer_surface_and_permutation) ... ok
+test_reflectance_gap_and_no_seam_artifact (test_method.Features.test_reflectance_gap_and_no_seam_artifact) ... ok
+test_common_random_vectors (test_method.Geometry.test_common_random_vectors) ... ok
+test_physical_camera_correction_and_moving_pose (test_method.Geometry.test_physical_camera_correction_and_moving_pose) ... ok
+test_quaternion_and_visibility (test_method.Geometry.test_quaternion_and_visibility) ... ok
+test_burn_in_rejection_and_descent (test_method.Learning.test_burn_in_rejection_and_descent) ... ok
+test_logitboost_and_scene_leakage_guard (test_method.Learning.test_logitboost_and_scene_leakage_guard) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.039s
+
+OK
