@@ -46,6 +46,10 @@ Definitions (mAP deltas relative to clean fusion, all on the same 5,869-token su
 
 (Rows sum exactly: e.g. −0.0090 − 0.0229 − 0.0430 = −0.0749.)
 
+### Per-class view (AP at 2 m, pp)
+
+Density alone mostly hurts small two-wheelers (bicycle −2.2 / −7.5, motorcycle −2.8 / −6.7 at kl=3/6); staleness alone spreads damage across pedestrian (−2.9 / −5.0), car (−1.6 / −2.8) and motorcycle (−3.3 / −4.9). The kl=6 interaction, however, concentrates on fast rigid vehicles: car **−23.1**, bus **−19.5**, motorcycle −16.2, truck −12.9 pp, while pedestrian interaction is only −1.2 pp. This is consistent with the motion-anchoring mechanism: pedestrians move little between frames (~300 ms), so a stale main cloud plus reduced history barely degrades them, whereas vehicles displace far and lose both their temporal anchor and their motion fallback simultaneously.
+
 ### Replica validation
 
 L3 = 0.6106 and L6 = 0.5254 reproduce the originally published E5 subset numbers (0.6106 / 0.5254 on the 5,856-token E5 subset) **exactly**, confirming the E7 implementation is a faithful replica of the original stale-LiDAR pipeline.
@@ -68,4 +72,4 @@ L3 = 0.6106 and L6 = 0.5254 reproduce the originally published E5 subset numbers
 - Data: nuScenes v1.0-trainval, val split, 6,019 keyframe tokens; 5,860 have 9 lidar sweeps, 9 have 8, 150 have 0 (excluded by sweep availability). Paired subset = 5,869 tokens present in all eight prediction files.
 - Model: BEVFusion camera–LiDAR (`bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d`), official checkpoint, full-val inference per variant.
 - Metrics: official nuScenes detection evaluation (detection_cvpr_2019 config), every setting restricted to the same 5,869-token subset.
-- Prediction files: `e7_{D3,D6,S3,S6,L3,L6}_cumulative.json` (remote `preds_temporal/`); per-class AP evaluation in progress.
+- Prediction files: `e7_{D3,D6,S3,S6,L3,L6}_cumulative.json` (remote `preds_temporal/`); per-class AP per setting in `e7_perclass_results_mapped.md`.
