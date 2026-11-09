@@ -72,9 +72,10 @@ class MinimalReference:
     """Replay frozen minimal feature/objective/SGDSchaul conventions, no edits."""
     def __init__(self, baseline, upstream):
         frozen = baseline/'ocamo/tools/nuscenes_minimal.py'
-        expected = subprocess.check_output(['git', 'show',
-                    'd8b86b5df9bd19deb08a726b8000487acbc7ee3e:ocamo/tools/nuscenes_minimal.py'], cwd=baseline)
-        if hashlib.sha256(expected).digest() != hashlib.sha256(frozen.read_bytes()).digest():
+        # Hash of the immutable d8b86b5 source; also supports a file-only remote
+        # execution package without duplicating the repository's entire history.
+        expected = '4c851022ea71b06a50857ce26f32b15ff7d7a6188b29ffb89ec896f928225904'
+        if expected != hashlib.sha256(frozen.read_bytes()).hexdigest():
             raise ValueError('Frozen minimal source differs')
         spec = importlib.util.spec_from_file_location('frozen_minimal', frozen)
         self.module = importlib.util.module_from_spec(spec); spec.loader.exec_module(self.module)
