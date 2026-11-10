@@ -15,9 +15,10 @@ import pandas as pd
 # --------------------------------------------------------------------------------------
 # Experiment constants (T1: stale camera, current LiDAR)
 # --------------------------------------------------------------------------------------
-# Mean camera delay per setting in ms. k1-k8 measured; k9/k10 are estimates (+-5 ms).
+# Mean camera delay per setting in ms (heyz convention; T1 and T1B use identical replacement frames).
+# k9/k10 corrected from 851/958 (old estimates) to 758/834; k8 677 -> 672.
 DELAY_MS = {'fusion_clean': 0, 'k1': 77, 'k2': 168, 'k3': 254, 'k4': 332, 'k5': 423,
-            'k6': 507, 'k7': 586, 'k8': 677, 'k9': 851, 'k10': 958}
+            'k6': 507, 'k7': 586, 'k8': 672, 'k9': 758, 'k10': 834}
 FUSION_SETTINGS = list(DELAY_MS)
 SETTINGS = FUSION_SETTINGS + ['lidar_only']          # column order of every miss matrix
 DELAYS = np.array([DELAY_MS[s] for s in FUSION_SETTINGS], dtype=float)
