@@ -1,0 +1,1106 @@
+{
+ "fusion_clean": {
+  "car": {
+   "gt": 50509,
+   "fn": 4430,
+   "fp": 7376,
+   "fp_low": 4181,
+   "fp_mid": 2862,
+   "fp_high": 333,
+   "fp_below": 94707
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1677,
+   "fp": 2207,
+   "fp_low": 959,
+   "fp_mid": 871,
+   "fp_high": 377,
+   "fp_below": 40633
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 149,
+   "fp": 202,
+   "fp_low": 93,
+   "fp_mid": 85,
+   "fp_high": 24,
+   "fp_below": 4350
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 564,
+   "fp": 579,
+   "fp_low": 296,
+   "fp_mid": 202,
+   "fp_high": 81,
+   "fp_below": 13196
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 309,
+   "fp": 410,
+   "fp_low": 212,
+   "fp_mid": 152,
+   "fp_high": 46,
+   "fp_below": 8989
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 1821,
+   "fp": 6594,
+   "fp_low": 3908,
+   "fp_mid": 2303,
+   "fp_high": 383,
+   "fp_below": 285201
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 192,
+   "fp": 182,
+   "fp_low": 99,
+   "fp_mid": 66,
+   "fp_high": 17,
+   "fp_below": 12343
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 266,
+   "fp": 415,
+   "fp_low": 235,
+   "fp_mid": 161,
+   "fp_high": 19,
+   "fp_below": 29410
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1280,
+   "fp": 4073,
+   "fp_low": 2448,
+   "fp_mid": 1412,
+   "fp_high": 213,
+   "fp_below": 99862
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 1919,
+   "fp": 3869,
+   "fp_low": 1255,
+   "fp_mid": 1504,
+   "fp_high": 1110,
+   "fp_below": 16736
+  }
+ },
+ "k1": {
+  "car": {
+   "gt": 50509,
+   "fn": 4520,
+   "fp": 7378,
+   "fp_low": 4215,
+   "fp_mid": 2838,
+   "fp_high": 325,
+   "fp_below": 95063
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1673,
+   "fp": 2263,
+   "fp_low": 1017,
+   "fp_mid": 891,
+   "fp_high": 355,
+   "fp_below": 41157
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 154,
+   "fp": 202,
+   "fp_low": 92,
+   "fp_mid": 84,
+   "fp_high": 26,
+   "fp_below": 4410
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 571,
+   "fp": 597,
+   "fp_low": 309,
+   "fp_mid": 207,
+   "fp_high": 81,
+   "fp_below": 13242
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 308,
+   "fp": 399,
+   "fp_low": 204,
+   "fp_mid": 145,
+   "fp_high": 50,
+   "fp_below": 8974
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 1927,
+   "fp": 6518,
+   "fp_low": 3901,
+   "fp_mid": 2238,
+   "fp_high": 379,
+   "fp_below": 286300
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 194,
+   "fp": 181,
+   "fp_low": 97,
+   "fp_mid": 65,
+   "fp_high": 19,
+   "fp_below": 12490
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 274,
+   "fp": 400,
+   "fp_low": 238,
+   "fp_mid": 145,
+   "fp_high": 17,
+   "fp_below": 29416
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1384,
+   "fp": 3917,
+   "fp_low": 2380,
+   "fp_mid": 1337,
+   "fp_high": 200,
+   "fp_below": 99468
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 1942,
+   "fp": 3897,
+   "fp_low": 1288,
+   "fp_mid": 1531,
+   "fp_high": 1078,
+   "fp_below": 16832
+  }
+ },
+ "k2": {
+  "car": {
+   "gt": 50509,
+   "fn": 5015,
+   "fp": 7235,
+   "fp_low": 4191,
+   "fp_mid": 2740,
+   "fp_high": 304,
+   "fp_below": 97051
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1723,
+   "fp": 2338,
+   "fp_low": 1063,
+   "fp_mid": 916,
+   "fp_high": 359,
+   "fp_below": 42392
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 157,
+   "fp": 206,
+   "fp_low": 93,
+   "fp_mid": 90,
+   "fp_high": 23,
+   "fp_below": 4468
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 560,
+   "fp": 581,
+   "fp_low": 298,
+   "fp_mid": 204,
+   "fp_high": 79,
+   "fp_below": 13424
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 294,
+   "fp": 373,
+   "fp_low": 189,
+   "fp_mid": 135,
+   "fp_high": 49,
+   "fp_below": 9001
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2102,
+   "fp": 6332,
+   "fp_low": 3786,
+   "fp_mid": 2189,
+   "fp_high": 357,
+   "fp_below": 286539
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 212,
+   "fp": 184,
+   "fp_low": 108,
+   "fp_mid": 63,
+   "fp_high": 13,
+   "fp_below": 12681
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 265,
+   "fp": 379,
+   "fp_low": 234,
+   "fp_mid": 134,
+   "fp_high": 11,
+   "fp_below": 29309
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1596,
+   "fp": 3658,
+   "fp_low": 2258,
+   "fp_mid": 1207,
+   "fp_high": 193,
+   "fp_below": 98260
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 1993,
+   "fp": 3863,
+   "fp_low": 1282,
+   "fp_mid": 1562,
+   "fp_high": 1019,
+   "fp_below": 16965
+  }
+ },
+ "k3": {
+  "car": {
+   "gt": 50509,
+   "fn": 5442,
+   "fp": 7114,
+   "fp_low": 4142,
+   "fp_mid": 2675,
+   "fp_high": 297,
+   "fp_below": 98333
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1750,
+   "fp": 2394,
+   "fp_low": 1131,
+   "fp_mid": 908,
+   "fp_high": 355,
+   "fp_below": 43148
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 160,
+   "fp": 205,
+   "fp_low": 91,
+   "fp_mid": 97,
+   "fp_high": 17,
+   "fp_below": 4477
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 570,
+   "fp": 589,
+   "fp_low": 301,
+   "fp_mid": 208,
+   "fp_high": 80,
+   "fp_below": 13590
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 297,
+   "fp": 374,
+   "fp_low": 195,
+   "fp_mid": 132,
+   "fp_high": 47,
+   "fp_below": 9007
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2238,
+   "fp": 6265,
+   "fp_low": 3811,
+   "fp_mid": 2112,
+   "fp_high": 342,
+   "fp_below": 286127
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 217,
+   "fp": 165,
+   "fp_low": 94,
+   "fp_mid": 59,
+   "fp_high": 12,
+   "fp_below": 12880
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 269,
+   "fp": 372,
+   "fp_low": 231,
+   "fp_mid": 129,
+   "fp_high": 12,
+   "fp_below": 29414
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1704,
+   "fp": 3427,
+   "fp_low": 2102,
+   "fp_mid": 1144,
+   "fp_high": 181,
+   "fp_below": 97622
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2031,
+   "fp": 3847,
+   "fp_low": 1268,
+   "fp_mid": 1540,
+   "fp_high": 1039,
+   "fp_below": 17049
+  }
+ },
+ "k4": {
+  "car": {
+   "gt": 50509,
+   "fn": 5751,
+   "fp": 6999,
+   "fp_low": 4118,
+   "fp_mid": 2608,
+   "fp_high": 273,
+   "fp_below": 100127
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1800,
+   "fp": 2392,
+   "fp_low": 1120,
+   "fp_mid": 924,
+   "fp_high": 348,
+   "fp_below": 43898
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 154,
+   "fp": 208,
+   "fp_low": 102,
+   "fp_mid": 87,
+   "fp_high": 19,
+   "fp_below": 4515
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 576,
+   "fp": 587,
+   "fp_low": 305,
+   "fp_mid": 205,
+   "fp_high": 77,
+   "fp_below": 13491
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 289,
+   "fp": 378,
+   "fp_low": 206,
+   "fp_mid": 127,
+   "fp_high": 45,
+   "fp_below": 8962
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2340,
+   "fp": 6144,
+   "fp_low": 3693,
+   "fp_mid": 2127,
+   "fp_high": 324,
+   "fp_below": 285821
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 229,
+   "fp": 165,
+   "fp_low": 100,
+   "fp_mid": 54,
+   "fp_high": 11,
+   "fp_below": 13011
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 264,
+   "fp": 348,
+   "fp_low": 209,
+   "fp_mid": 130,
+   "fp_high": 9,
+   "fp_below": 29390
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1844,
+   "fp": 3299,
+   "fp_low": 2027,
+   "fp_mid": 1095,
+   "fp_high": 177,
+   "fp_below": 97604
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2040,
+   "fp": 3847,
+   "fp_low": 1257,
+   "fp_mid": 1559,
+   "fp_high": 1031,
+   "fp_below": 17049
+  }
+ },
+ "k5": {
+  "car": {
+   "gt": 50509,
+   "fn": 6035,
+   "fp": 6934,
+   "fp_low": 4112,
+   "fp_mid": 2552,
+   "fp_high": 270,
+   "fp_below": 100915
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1833,
+   "fp": 2386,
+   "fp_low": 1131,
+   "fp_mid": 912,
+   "fp_high": 343,
+   "fp_below": 43933
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 155,
+   "fp": 203,
+   "fp_low": 109,
+   "fp_mid": 73,
+   "fp_high": 21,
+   "fp_below": 4593
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 577,
+   "fp": 578,
+   "fp_low": 295,
+   "fp_mid": 207,
+   "fp_high": 76,
+   "fp_below": 13670
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 288,
+   "fp": 369,
+   "fp_low": 207,
+   "fp_mid": 119,
+   "fp_high": 43,
+   "fp_below": 9039
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2399,
+   "fp": 5966,
+   "fp_low": 3626,
+   "fp_mid": 2021,
+   "fp_high": 319,
+   "fp_below": 285621
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 230,
+   "fp": 163,
+   "fp_low": 97,
+   "fp_mid": 53,
+   "fp_high": 13,
+   "fp_below": 13146
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 273,
+   "fp": 348,
+   "fp_low": 218,
+   "fp_mid": 122,
+   "fp_high": 8,
+   "fp_below": 29575
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1927,
+   "fp": 3217,
+   "fp_low": 1974,
+   "fp_mid": 1072,
+   "fp_high": 171,
+   "fp_below": 97068
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2048,
+   "fp": 3802,
+   "fp_low": 1250,
+   "fp_mid": 1537,
+   "fp_high": 1015,
+   "fp_below": 17133
+  }
+ },
+ "k6": {
+  "car": {
+   "gt": 50509,
+   "fn": 6269,
+   "fp": 6909,
+   "fp_low": 4094,
+   "fp_mid": 2528,
+   "fp_high": 287,
+   "fp_below": 101669
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1864,
+   "fp": 2377,
+   "fp_low": 1094,
+   "fp_mid": 937,
+   "fp_high": 346,
+   "fp_below": 44289
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 162,
+   "fp": 202,
+   "fp_low": 103,
+   "fp_mid": 77,
+   "fp_high": 22,
+   "fp_below": 4571
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 580,
+   "fp": 584,
+   "fp_low": 295,
+   "fp_mid": 212,
+   "fp_high": 77,
+   "fp_below": 13669
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 293,
+   "fp": 357,
+   "fp_low": 197,
+   "fp_mid": 116,
+   "fp_high": 44,
+   "fp_below": 9031
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2463,
+   "fp": 5885,
+   "fp_low": 3589,
+   "fp_mid": 2004,
+   "fp_high": 292,
+   "fp_below": 285334
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 228,
+   "fp": 169,
+   "fp_low": 100,
+   "fp_mid": 58,
+   "fp_high": 11,
+   "fp_below": 13190
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 283,
+   "fp": 332,
+   "fp_low": 201,
+   "fp_mid": 122,
+   "fp_high": 9,
+   "fp_below": 29767
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1946,
+   "fp": 3111,
+   "fp_low": 1902,
+   "fp_mid": 1049,
+   "fp_high": 160,
+   "fp_below": 96730
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2107,
+   "fp": 3804,
+   "fp_low": 1214,
+   "fp_mid": 1578,
+   "fp_high": 1012,
+   "fp_below": 17148
+  }
+ },
+ "k7": {
+  "car": {
+   "gt": 50509,
+   "fn": 6403,
+   "fp": 6857,
+   "fp_low": 4074,
+   "fp_mid": 2490,
+   "fp_high": 293,
+   "fp_below": 102073
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1881,
+   "fp": 2378,
+   "fp_low": 1119,
+   "fp_mid": 906,
+   "fp_high": 353,
+   "fp_below": 44363
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 164,
+   "fp": 209,
+   "fp_low": 112,
+   "fp_mid": 74,
+   "fp_high": 23,
+   "fp_below": 4631
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 593,
+   "fp": 585,
+   "fp_low": 301,
+   "fp_mid": 209,
+   "fp_high": 75,
+   "fp_below": 13646
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 276,
+   "fp": 346,
+   "fp_low": 194,
+   "fp_mid": 111,
+   "fp_high": 41,
+   "fp_below": 8981
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2538,
+   "fp": 5808,
+   "fp_low": 3543,
+   "fp_mid": 1975,
+   "fp_high": 290,
+   "fp_below": 286201
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 226,
+   "fp": 171,
+   "fp_low": 107,
+   "fp_mid": 52,
+   "fp_high": 12,
+   "fp_below": 13176
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 270,
+   "fp": 327,
+   "fp_low": 209,
+   "fp_mid": 108,
+   "fp_high": 10,
+   "fp_below": 29792
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2017,
+   "fp": 3055,
+   "fp_low": 1847,
+   "fp_mid": 1050,
+   "fp_high": 158,
+   "fp_below": 96481
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2143,
+   "fp": 3764,
+   "fp_low": 1208,
+   "fp_mid": 1564,
+   "fp_high": 992,
+   "fp_below": 17222
+  }
+ },
+ "k8": {
+  "car": {
+   "gt": 50509,
+   "fn": 6651,
+   "fp": 6804,
+   "fp_low": 4066,
+   "fp_mid": 2470,
+   "fp_high": 268,
+   "fp_below": 102642
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1924,
+   "fp": 2372,
+   "fp_low": 1125,
+   "fp_mid": 893,
+   "fp_high": 354,
+   "fp_below": 44682
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 163,
+   "fp": 208,
+   "fp_low": 112,
+   "fp_mid": 78,
+   "fp_high": 18,
+   "fp_below": 4591
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 588,
+   "fp": 581,
+   "fp_low": 299,
+   "fp_mid": 204,
+   "fp_high": 78,
+   "fp_below": 13704
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 282,
+   "fp": 340,
+   "fp_low": 187,
+   "fp_mid": 108,
+   "fp_high": 45,
+   "fp_below": 9079
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2558,
+   "fp": 5709,
+   "fp_low": 3469,
+   "fp_mid": 1953,
+   "fp_high": 287,
+   "fp_below": 286378
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 215,
+   "fp": 164,
+   "fp_low": 98,
+   "fp_mid": 54,
+   "fp_high": 12,
+   "fp_below": 13299
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 272,
+   "fp": 310,
+   "fp_low": 193,
+   "fp_mid": 109,
+   "fp_high": 8,
+   "fp_below": 30135
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2079,
+   "fp": 2941,
+   "fp_low": 1779,
+   "fp_mid": 1005,
+   "fp_high": 157,
+   "fp_below": 96495
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2152,
+   "fp": 3771,
+   "fp_low": 1231,
+   "fp_mid": 1531,
+   "fp_high": 1009,
+   "fp_below": 17327
+  }
+ },
+ "k9": {
+  "car": {
+   "gt": 50509,
+   "fn": 6780,
+   "fp": 6768,
+   "fp_low": 4032,
+   "fp_mid": 2477,
+   "fp_high": 259,
+   "fp_below": 103417
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1940,
+   "fp": 2414,
+   "fp_low": 1163,
+   "fp_mid": 900,
+   "fp_high": 351,
+   "fp_below": 44701
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 168,
+   "fp": 209,
+   "fp_low": 109,
+   "fp_mid": 80,
+   "fp_high": 20,
+   "fp_below": 4657
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 585,
+   "fp": 574,
+   "fp_low": 292,
+   "fp_mid": 207,
+   "fp_high": 75,
+   "fp_below": 13674
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 274,
+   "fp": 343,
+   "fp_low": 194,
+   "fp_mid": 107,
+   "fp_high": 42,
+   "fp_below": 9034
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2652,
+   "fp": 5694,
+   "fp_low": 3456,
+   "fp_mid": 1949,
+   "fp_high": 289,
+   "fp_below": 285869
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 229,
+   "fp": 165,
+   "fp_low": 99,
+   "fp_mid": 54,
+   "fp_high": 12,
+   "fp_below": 13354
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 266,
+   "fp": 305,
+   "fp_low": 201,
+   "fp_mid": 95,
+   "fp_high": 9,
+   "fp_below": 30244
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2133,
+   "fp": 2908,
+   "fp_low": 1772,
+   "fp_mid": 983,
+   "fp_high": 153,
+   "fp_below": 96421
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2169,
+   "fp": 3742,
+   "fp_low": 1243,
+   "fp_mid": 1536,
+   "fp_high": 963,
+   "fp_below": 17276
+  }
+ },
+ "k10": {
+  "car": {
+   "gt": 50509,
+   "fn": 6919,
+   "fp": 6739,
+   "fp_low": 4020,
+   "fp_mid": 2447,
+   "fp_high": 272,
+   "fp_below": 103645
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 1965,
+   "fp": 2428,
+   "fp_low": 1176,
+   "fp_mid": 906,
+   "fp_high": 346,
+   "fp_below": 44885
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 175,
+   "fp": 207,
+   "fp_low": 99,
+   "fp_mid": 86,
+   "fp_high": 22,
+   "fp_below": 4639
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 597,
+   "fp": 570,
+   "fp_low": 293,
+   "fp_mid": 201,
+   "fp_high": 76,
+   "fp_below": 13702
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 281,
+   "fp": 348,
+   "fp_low": 193,
+   "fp_mid": 110,
+   "fp_high": 45,
+   "fp_below": 9039
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2660,
+   "fp": 5628,
+   "fp_low": 3425,
+   "fp_mid": 1921,
+   "fp_high": 282,
+   "fp_below": 286594
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 230,
+   "fp": 163,
+   "fp_low": 93,
+   "fp_mid": 58,
+   "fp_high": 12,
+   "fp_below": 13346
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 276,
+   "fp": 301,
+   "fp_low": 191,
+   "fp_mid": 101,
+   "fp_high": 9,
+   "fp_below": 30290
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 2136,
+   "fp": 2889,
+   "fp_low": 1745,
+   "fp_mid": 993,
+   "fp_high": 151,
+   "fp_below": 96262
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2161,
+   "fp": 3724,
+   "fp_low": 1230,
+   "fp_mid": 1538,
+   "fp_high": 956,
+   "fp_below": 17353
+  }
+ },
+ "lidar_only": {
+  "car": {
+   "gt": 50509,
+   "fn": 5545,
+   "fp": 8134,
+   "fp_low": 4796,
+   "fp_mid": 3058,
+   "fp_high": 280,
+   "fp_below": 97622
+  },
+  "truck": {
+   "gt": 8800,
+   "fn": 2146,
+   "fp": 2768,
+   "fp_low": 1418,
+   "fp_mid": 1060,
+   "fp_high": 290,
+   "fp_below": 49342
+  },
+  "bus": {
+   "gt": 1952,
+   "fn": 191,
+   "fp": 202,
+   "fp_low": 113,
+   "fp_mid": 74,
+   "fp_high": 15,
+   "fp_below": 3882
+  },
+  "trailer": {
+   "gt": 2217,
+   "fn": 574,
+   "fp": 649,
+   "fp_low": 320,
+   "fp_mid": 244,
+   "fp_high": 85,
+   "fp_below": 12879
+  },
+  "construction_vehicle": {
+   "gt": 1449,
+   "fn": 320,
+   "fp": 433,
+   "fp_low": 240,
+   "fp_mid": 146,
+   "fp_high": 47,
+   "fp_below": 11159
+  },
+  "pedestrian": {
+   "gt": 22419,
+   "fn": 2067,
+   "fp": 6916,
+   "fp_low": 4232,
+   "fp_mid": 2348,
+   "fp_high": 336,
+   "fp_below": 231094
+  },
+  "motorcycle": {
+   "gt": 1767,
+   "fn": 231,
+   "fp": 275,
+   "fp_low": 187,
+   "fp_mid": 77,
+   "fp_high": 11,
+   "fp_below": 14285
+  },
+  "bicycle": {
+   "gt": 1750,
+   "fn": 289,
+   "fp": 483,
+   "fp_low": 318,
+   "fp_mid": 150,
+   "fp_high": 15,
+   "fp_below": 25799
+  },
+  "traffic_cone": {
+   "gt": 10015,
+   "fn": 1602,
+   "fp": 4283,
+   "fp_low": 2567,
+   "fp_mid": 1525,
+   "fp_high": 191,
+   "fp_below": 118231
+  },
+  "barrier": {
+   "gt": 15149,
+   "fn": 2415,
+   "fp": 4003,
+   "fp_low": 1384,
+   "fp_mid": 1668,
+   "fp_high": 951,
+   "fp_below": 17109
+  }
+ }
+}
