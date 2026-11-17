@@ -1,0 +1,18 @@
+COMMON_SUBSET 5713
+[fusion_cumulative] mAP=0.6869 NDS=0.7163
+  PER_CLASS_AP_2m {"barrier": 75.61, "bicycle": 64.5, "bus": 88.6, "car": 92.75, "construction_vehicle": 39.31, "motorcycle": 79.65, "pedestrian": 88.65, "traffic_cone": 79.53, "trailer": 62.72, "truck": 72.46}
+[lidar_cumulative] mAP=0.6496 NDS=0.6979
+  PER_CLASS_AP_2m {"barrier": 73.86, "bicycle": 56.46, "bus": 85.94, "car": 90.65, "construction_vehicle": 34.66, "motorcycle": 73.37, "pedestrian": 87.22, "traffic_cone": 74.62, "trailer": 59.37, "truck": 67.5}
+[k2_cumulative] mAP=0.6712 NDS=0.7075
+  PER_CLASS_AP_2m {"barrier": 74.8, "bicycle": 61.07, "bus": 88.23, "car": 92.15, "construction_vehicle": 38.54, "motorcycle": 77.11, "pedestrian": 87.54, "traffic_cone": 76.56, "trailer": 62.52, "truck": 71.64}
+[k5_cumulative] mAP=0.6557 NDS=0.6990
+  PER_CLASS_AP_2m {"barrier": 74.6, "bicycle": 57.39, "bus": 87.55, "car": 90.7, "construction_vehicle": 37.05, "motorcycle": 73.15, "pedestrian": 86.61, "traffic_cone": 73.44, "trailer": 62.37, "truck": 70.14}
+[k8_cumulative] mAP=0.6470 NDS=0.6945
+  PER_CLASS_AP_2m {"barrier": 74.29, "bicycle": 56.23, "bus": 86.94, "car": 89.93, "construction_vehicle": 36.13, "motorcycle": 71.65, "pedestrian": 86.15, "traffic_cone": 72.22, "trailer": 61.6, "truck": 68.93}
+[t1b_k2_cumulative] mAP=0.6854 NDS=0.7159
+  PER_CLASS_AP_2m {"barrier": 75.57, "bicycle": 63.89, "bus": 88.67, "car": 92.65, "construction_vehicle": 40.49, "motorcycle": 78.72, "pedestrian": 88.45, "traffic_cone": 79.17, "trailer": 62.4, "truck": 72.5}
+[t1b_k5_cumulative] mAP=0.6814 NDS=0.7135
+  PER_CLASS_AP_2m {"barrier": 75.65, "bicycle": 63.12, "bus": 88.48, "car": 92.25, "construction_vehicle": 39.83, "motorcycle": 78.27, "pedestrian": 88.18, "traffic_cone": 78.61, "trailer": 62.34, "truck": 72.06}
+[t1b_k8_cumulative] mAP=0.6784 NDS=0.7119
+  PER_CLASS_AP_2m {"barrier": 75.53, "bicycle": 62.68, "bus": 88.11, "car": 91.8, "construction_vehicle": 40.18, "motorcycle": 77.38, "pedestrian": 87.92, "traffic_cone": 78.26, "trailer": 62.19, "truck": 71.7}
+PER_CLASS_EVAL_DONE
