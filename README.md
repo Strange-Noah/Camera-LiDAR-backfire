@@ -2,7 +2,7 @@
 
 Research on camera–LiDAR fusion robustness under sensor misalignment, with a focus on identifying conditions under which sensor fusion may perform worse than an individual sensor.
 
-**Current status: CONDITIONAL GO.** The official 850-scene nuScenes trainval metadata-only audit is complete. Separately, a BEVFusion MMCV 2.1/CUDA 12.8 Docker inference workflow and an exploratory temporal camera-misalignment study have been run. The temporal study has a candidate, operating-point-sensitive backfire result; it has not established a general threshold. MultiCorrupt integration, matched-precision evaluation, and independent confirmation remain future work.
+**Current status: CONDITIONAL GO for the metadata audit; calibration remains exploratory.** The official 850-scene nuScenes trainval metadata-only audit is complete. Separately, a BEVFusion MMCV 2.1/CUDA 12.8 Docker inference workflow and an exploratory temporal camera-misalignment study have been run. The temporal study has a candidate, operating-point-sensitive backfire result; it has not established a general threshold. MultiCorrupt integration, matched-precision evaluation, and independent confirmation remain future work.
 
 ---
 
@@ -15,6 +15,9 @@ Research on camera–LiDAR fusion robustness under sensor misalignment, with a f
 - [Docker, Dataset, and Temporal Experiment](#completed-mmcv-21-and-temporal-experiment-record)
 - [Full Metadata Audit Results](#full-metadata-audit-results)
 - [Temporal Inference Results](#aggregate-metrics-obtained)
+- [OCaMo Calibration Experiments](#cameralidar-calibration-experiments)
+  - [Frozen multi-camera consensus gate evaluation](#frozen-multi-camera-consensus-gate-evaluation)
+  - [Frozen score-curve gate evaluation](#frozen-score-curve-gate-evaluation)
 - [Object-Level Analysis and Backfire Findings](#object-level-findings-and-what-they-establish)
 - [Limitations and Next Steps](#what-this-does-and-does-not-show)
 - [Data and Git Policy](#data-and-git-policy)
@@ -542,6 +545,442 @@ A weaker exploratory candidate was bicycles at 1–5 m/s and 0–20 m: 56 object
 
 The project has established a working Docker MMCV 2.1/CUDA 12.8 inference workflow, timestamp-aware manifests, matched predictions for seven fusion conditions and LiDAR-only, aggregate evaluation, and exploratory object-level comparisons.
 
-Current scoped result: **fast, distant cars are a candidate conditional backfire group at fixed score cutoff 0.2 under the tested large shifts.** The overall matched-subset mAP/NDS remains higher for fusion than LiDAR-only, and the subgroup backfire does not persist at other tested cutoffs. No general or cutoff-independent temporal threshold is established. Many subgroups, offsets, and cutoffs were searched, so this is exploratory and the displayed bootstrap intervals are not adjusted for that search.
+Current scoped result: **fast, distant cars are a candidate conditional backfire group at fixed score cutoff 0.2 under the tested large shifts.** Overall matched-subset mAP/NDS remains higher for fusion than LiDAR-only, and the subgroup backfire does not persist at other tested cutoffs. No general or cutoff-independent temporal threshold is established. Many subgroups, offsets, and cutoffs were searched, so the displayed bootstrap intervals are exploratory and are not adjusted for that search.
 
-Next: choose a fair fusion-versus-LiDAR operating point, preferably recall at matched overall precision; selecting model-specific cutoffs requires counting false positives, which the per-GT file alone does not provide. Choose cutoffs on calibration scenes and compare subgroup recall on separate scenes. Keep shifted-vs-clean (temporal degradation) separate from shifted-vs-LiDAR (backfire). Only if the fast-car effect persists should you refine the shift bracket with intermediate manifests, checking actual offsets and distinct selected camera tokens before running expensive inference. Preserve and commit the manifests, predictions, evaluation files, and derived analysis outputs; keep the full dataset, checkpoints, and secrets outside Git.
+Next: choose a fair fusion-versus-LiDAR operating point, preferably recall at matched overall precision; selecting model-specific cutoffs requires counting false positives, which the per-GT file alone does not provide. Choose cutoffs on calibration scenes and compare subgroup recall on separate scenes. Keep shifted-versus-clean temporal degradation separate from shifted-versus-LiDAR backfire. Only if the fast-car effect persists should the shift bracket be refined with intermediate manifests, checking actual offsets and distinct selected camera tokens before running expensive inference. Preserve manifests, predictions, evaluation files, and derived analysis outputs; keep the full dataset, checkpoints, and secrets outside Git.
+
+## Camera–LiDAR Calibration Experiments
+
+This section records a separate OCaMo/LTO-inspired camera–LiDAR rotational-calibration study. It asks whether projected LiDAR edge structure can indicate and recover a known synthetic camera–LiDAR roll error. It does not measure temporal-offset recovery or object-level detection backfire.
+
+### OCaMo/LTO and nuScenes checks
+
+- Ran the released OCaMo/LTO monitoring and drift-tracking examples on their supplied CARLA snippet. They generated `img/ocamo_monitoring.png`, `img/ocamo_drift_tracking.png`, `img/lto_monitoring.png`, and `img/lto_drift_tracking.png`; `img/example_projection.png` shows the example projection. This verifies the example scripts execute, not nuScenes calibration.
+- Audited nuScenes metadata: 850 scenes, 34,149 samples, and 204,894 camera/LiDAR records.
+- A projection diagnostic processed 34,720 LiDAR points, found 32 ring IDs, extracted 9,232 OCaMo corners, and retained 711 inside the image. Median projected-corner distance to an image edge was 15.06 px; 21.1% were within 3 px and 29.0% within 5 px. These are geometry diagnostics, not calibration accuracy.
+- The inspected LiDAR scan had ring IDs 0–31. Adjacent azimuth steps had median 0.000734 rad and p95 1.401 rad; 12.0% exceeded 0.1 rad. Ring-wise corner ordering is approximate and scan discontinuities may affect the edge objective.
+- Fixed rotation-score sweeps tested roll, pitch, and yaw candidate perturbations. The score measures projected-corner/image-edge agreement; it is not detector performance or proof that the score peak is an unbiased calibration estimate.
+
+#### Reproduce the released examples and geometry checks
+
+The four released scripts use OCaMo's supplied CARLA example data. From the mounted OCaMo checkout:
+
+```bash
+cd /workspace/OCaMo/python/inference
+python3 -c "import numpy, scipy, cv2, matplotlib"
+python3 ocamo_monitoring.py
+python3 ocamo_drift_tracking.py
+python3 lto_monitoring.py
+python3 lto_drift_tracking.py
+```
+
+For the nuScenes projection diagnostics from the BEVFusion checkout:
+
+```bash
+cd /workspace/bevfusion
+python3 experiments/calibration_baseline/check_nuscenes_projection.py
+python3 experiments/calibration_baseline/check_projection_sequence.py
+python3 experiments/calibration_baseline/sweep_rotation_score.py
+```
+
+The image outputs and sweep CSVs are written below `results/calibration_baseline/`. The source currently selects a configured scene for the fixed-score sweep; consult the script if changing the scene.
+
+### Online roll tracker and experimental controls
+
+`experiments/calibration_baseline/run_online_roll_tracker.py` injects a synthetic rotation into the camera-from-LiDAR transform, extracts ring-ordered LiDAR corners, and estimates roll by comparing projected corners with an image-edge distance field. The tested injections are 0°, +0.5°, and −0.5°; the expected corrections are respectively 0°, −0.5°, and +0.5°. The inverse-transform checks were at floating-point precision (about 0–2.84e−14 m), validating transform composition arithmetic, not calibration accuracy.
+
+The tracker uses a short sequence of 40 frames for scenes 0001–0004 and 39 for scene 0005. Paired summaries use frames with `frame >= 10`, for 149 frames per condition across five scenes. Finite point/corner filtering was added; ring IDs are range-checked before conversion. GT moving-object filtering, when enabled, uses annotations and is an oracle. `USE_GT_MOVING_FILTER=0` disables that filter and skips loading the nuScenes info file for it.
+
+Support modes compared:
+
+| Mode | How support points are selected | GT/clean information used for support? |
+|---|---|---|
+| `clean` | Visible under the recorded clean transform | Clean transform is an oracle; GT filtering depends on the run setting. |
+| `runtime` | Visible under the perturbed starting transform | No clean transform for support selection; GT filtering depends on the run setting. |
+| `runtime_matched` | Seeded random subset of runtime support, downsampled to the search-stable count | No clean transform for support selection; count-matched control, one seed in the original comparison. |
+| `search_stable` | Runtime-visible points that remain visible across the correction search range (about ±0.951°, sampled at 0.05°) | No clean transform or GT labels for support selection. |
+
+The GT-filter ablation showed that enabling/disabling the moving-object filter had only a small, mixed effect; it did not account for the large difference between clean and runtime support. The runtime-matched control retained the same per-scene counts as search-stable support but recovered less accurately, suggesting support composition matters more than count alone. Runtime-matched was initially tested with one random seed; later seeded runs are described in the README’s experiment records where applicable.
+
+### Earlier four-way support and GT-filter ablation
+
+The first online-tracker ablation used five scenes, both support sources (`clean` and `runtime`), GT moving-object filtering on/off, and both injection signs. These are descriptive frame-paired results over 149 post-burn-in frames per condition. `Target beats zero` compares the target candidate correction score with a zero correction; `target grid winner` is the fraction of frames where the known target was the highest-scoring candidate on the tested grid.
+
+| Support | GT filter | Injection | Mean paired change (target) | MAE | Correct direction | Target beats zero | Target grid winner | Support mismatches vs clean |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Clean | On | +0.5° | −0.300° (−0.5°) | 0.201° | 100.0% | 82.6% | 21.5% | 0 / 149 |
+| Clean | On | −0.5° | +0.374° (+0.5°) | 0.148° | 97.3% | 87.2% | 17.4% | 0 / 149 |
+| Clean | Off | +0.5° | −0.291° (−0.5°) | 0.211° | 100.0% | 83.2% | 21.5% | 0 / 149 |
+| Clean | Off | −0.5° | +0.376° (+0.5°) | 0.153° | 96.0% | 87.2% | 18.1% | 0 / 149 |
+| Runtime | On | +0.5° | −0.190° (−0.5°) | 0.310° | 90.6% | 37.6% | 7.4% | 144 / 149 |
+| Runtime | On | −0.5° | +0.057° (+0.5°) | 0.443° | 59.1% | 38.9% | 3.4% | 140 / 149 |
+| Runtime | Off | +0.5° | −0.178° (−0.5°) | 0.322° | 92.6% | 38.3% | 7.4% | 142 / 149 |
+| Runtime | Off | −0.5° | +0.074° (+0.5°) | 0.426° | 72.5% | 38.3% | 4.0% | 140 / 149 |
+
+This ablation indicated that clean-transform support substantially outperformed runtime support. Turning GT moving-object filtering on/off had only a small, mixed effect compared with the support-selection difference. Clean-transform support is oracle-assisted and is not a deployable support strategy.
+### Five-scene support results
+
+For the kernel-sum objective, GT filter off, and paired post-burn-in frames, the equal-scene means were:
+
+| Support | Injection (target correction) | Mean paired change | MAE to target | Correct direction | Mean support corners |
+|---|---|---:|---:|---:|---:|
+| Runtime | +0.5° (−0.5°) | −0.203° | 0.297° | 93.3% | 163.4 |
+| Runtime-matched | +0.5° (−0.5°) | −0.215° | 0.285° | 97.3% | 152.1 |
+| Search-stable | +0.5° (−0.5°) | −0.360° | 0.142° | 100.0% | 152.1 |
+| Runtime | −0.5° (+0.5°) | +0.083° | 0.433° | 57.8% | 173.3 |
+| Runtime-matched | −0.5° (+0.5°) | +0.072° | 0.444° | 56.5% | 161.9 |
+| Search-stable | −0.5° (+0.5°) | +0.349° | 0.165° | 90.7% | 161.9 |
+
+
+For comparison, the robust-Chamfer objective with GT filtering off gave these five-scene equal-scene means:
+
+| Support | Injection (target correction) | Mean paired change | MAE to target | Correct direction | Mean support corners |
+|---|---|---:|---:|---:|---:|
+| Runtime | +0.5° (−0.5°) | −0.178° | 0.322° | 92.6% | 163.1 |
+| Search-stable | +0.5° (−0.5°) | −0.311° | 0.198° | 100.0% | 151.8 |
+| Runtime | −0.5° (+0.5°) | +0.074° | 0.426° | 72.5% | 172.9 |
+| Search-stable | −0.5° (+0.5°) | +0.257° | 0.251° | 81.9% | 161.6 |
+
+The improvement pattern therefore appeared under both robust-Chamfer and kernel-sum objectives, while effect sizes differed. The clean-state issue remains material.
+Search-stable support improved the synthetic injection response relative to runtime and runtime-matched support, especially for the negative injection. However, clean search-stable runs showed a positive bias: mean tracker estimate +0.205°, mean absolute estimate from zero 0.205°, and only 18.8% of score peaks within ±0.1° of zero. Runtime support had +0.035° mean estimate, 0.062° mean absolute estimate, and 40.3% of score peaks within ±0.1°. This clean-state behavior prevents a broad reliability claim from the five-scene test.
+
+#### Reproduce the five-scene kernel-sum support comparison
+
+Inside the prepared Docker container, from `/workspace/bevfusion`, the runtime and search-stable conditions were run for each scene and injection as follows:
+
+```bash
+cd /workspace/bevfusion
+
+for i in 0 1 2 3 4; do
+  for support in runtime search_stable; do
+    for injection in 0 0.5 -0.5; do
+      SCENE_INDEX=$i \
+      SUPPORT_MODE=$support \
+      USE_GT_MOVING_FILTER=0 \
+      OBJECTIVE_MODE=kernel_sum \
+      INJECTED_ROLL_DEG=$injection \
+        python3 experiments/calibration_baseline/run_online_roll_tracker.py
+    done
+  done
+done
+```
+
+The runtime-matched control used `SUPPORT_MODE=runtime_matched` with the same scene/injection loop. The main result CSVs are stored under `results/calibration_baseline/`; their filenames record objective, injection, support mode, filter setting, and scene.
+
+### Multi-camera selective correction gate
+
+The frozen six-camera gate and its additional scene evaluation are documented in [Frozen multi-camera consensus gate evaluation](#frozen-multi-camera-consensus-gate-evaluation). In brief, it smooths per-camera estimates, requires four-camera sign agreement, a minimum median magnitude, and three stable consecutive frames. It rejected every clean frame in the reported batches and had 100% correct direction among accepted synthetic-injection cases, but accepted only a minority of injected frames. The result supports selective correction under the tested synthetic ±0.5° roll settings, not a generally reliable calibration method.
+
+Earlier tracker commands, detailed ablations, and per-scene outputs are retained in the experiment record and generated CSVs under `results/calibration_baseline/`. The current calibration status and next steps are summarized below the latest gate results.
+
+### Frozen multi-camera consensus gate evaluation
+
+This is the latest calibration experiment. It applies a frozen, runtime-only consensus gate to the six per-camera roll estimates from the kernel-sum tracker. It is separate from the earlier single-camera support-selection ablations. The calibration harness injects synthetic roll for evaluation; support selection uses the perturbed starting transform and no ground-truth moving-object filter.
+
+The gate uses these fixed settings:
+
+- Median smooth each camera estimate over five frames.
+- Require at least four of six cameras to agree on the correction sign.
+- Require the six-camera median magnitude to be at least 0.336°.
+- Require the criteria to hold for three consecutive frame numbers; the three median estimates must share a sign and have a range no greater than 0.15°.
+- The aggregation explicitly checks consecutive frame numbers after aligning cameras by frame and sample token.
+
+An accepted estimate is a correction proposal. `accept_rate` is coverage. Direction accuracy, fraction within 0.10°, and MAE are computed only on accepted frames; they must be read together with coverage.
+
+#### Tracker run command
+
+The additional evaluation batch ran scene indices 30–49, all six cameras, and clean / +0.5° / −0.5° synthetic roll conditions. Run inside the prepared container from `/workspace/bevfusion`:
+
+```bash
+cd /workspace/bevfusion
+
+cameras=(
+  CAM_FRONT CAM_FRONT_RIGHT CAM_FRONT_LEFT
+  CAM_BACK CAM_BACK_LEFT CAM_BACK_RIGHT
+)
+
+for i in $(seq 30 49); do
+  for camera in "${cameras[@]}"; do
+    for injection in 0 0.5 -0.5; do
+      SCENE_INDEX=$i \
+      CAMERA_CHANNEL=$camera \
+      SUPPORT_MODE=search_stable \
+      USE_GT_MOVING_FILTER=0 \
+      OBJECTIVE_MODE=kernel_sum \
+      INJECTED_ROLL_DEG=$injection \
+        python3 experiments/calibration_baseline/run_online_roll_tracker.py \
+        || exit 1
+    done
+  done
+done
+```
+
+This is 360 tracker runs (20 scene indices × 6 cameras × 3 conditions). Scene indices do not map to consecutive scene-name suffixes. The selected indices map to `scene-0031` through `scene-0052` with gaps, as listed in `/workspace/nuscenes/v1.0-trainval/scene.json`. The aggregation must use those actual names rather than assume a continuous suffix range.
+
+#### Results
+
+The gate threshold was developed on scenes 0011–0020. Results from that development batch and the two later evaluation batches are summarized below. Values are equal-scene means; injected-condition accuracy columns are conditional on the gate accepting a correction.
+
+| Cohort | Condition | Clean false-correction rate | Acceptance / coverage | Correct direction among accepted | Within 0.10° among accepted | Accepted MAE |
+|---|---|---:|---:|---:|---:|---:|
+| Development, scenes 0011–0020 | Clean | 0.0% | 0.0% | — | — | — |
+| Development, scenes 0011–0020 | +0.5° injection | — | 46.3% | 100.0% | 60.4% | 0.087° |
+| Development, scenes 0011–0020 | −0.5° injection | — | 41.2% | 100.0% | 51.3% | 0.082° |
+| Evaluation, scenes 0021–0030 | Clean | 0.0% | 0.0% | — | — | — |
+| Evaluation, scenes 0021–0030 | +0.5° injection | — | 35.8% | 100.0% | 66.0% | 0.076° |
+| Evaluation, scenes 0021–0030 | −0.5° injection | — | 15.1% | 100.0% | 60.0% | 0.087° |
+| Follow-up, indices 30–49 (20 scenes) | Clean | 0.0% | 0.0% | — | — | — |
+| Follow-up, indices 30–49 (20 scenes) | +0.5° injection | — | 23.6% | 100.0% | 63.5% | 0.076° |
+| Follow-up, indices 30–49 (20 scenes) | −0.5° injection | — | 29.8% | 100.0% | 65.5% | 0.073° |
+
+For the latest batch, the mean camera spread was 0.899° clean, 0.791° for +0.5° injection, and 0.852° for −0.5° injection. The per-scene results include scenes with no accepted corrections; those scenes contribute zero coverage and have undefined conditional accuracy.
+
+The latest aggregation includes a requirement that the three gate frames have consecutive frame numbers. Its results were unchanged to the three decimal places shown compared with the prior aggregation. The output is:
+
+```text
+results/calibration_baseline/multicam_consensus_evaluation_scene_indices_30_49.csv
+```
+
+#### Interpretation and limitations
+
+The clean false-correction rate was zero in each reported cohort. In the newest 20-scene batch, the gate accepted 23.6% of +0.5° cases and 29.8% of −0.5° cases; every accepted correction had the expected direction. Among accepted corrections, 63.5% and 65.5%, respectively, were within 0.10° of the target. This supports a selective gate under the tested synthetic ±0.5° CAM roll perturbations. It does not show that the gate can correct most frames, handle natural calibration drift, generalize to pitch/yaw, or improve downstream detection. Frame-level confidence intervals have not yet been computed; future uncertainty estimates should resample whole scenes.
+
+### Frozen score-curve gate evaluation
+
+This is a separate experiment from the 0.336° multi-camera consensus gate above. It trains a Ridge regressor on the six cameras' kernel-sum score curves, then accepts a correction only when its predicted magnitude exceeds a frozen cutoff. The evaluation harness applies this saved model unchanged. It tests synthetic clean, +0.5°, and −0.5° roll conditions; it does not test natural calibration drift.
+
+#### Development and gate selection
+
+`score_curve_frozen_gate.py` was added with two modes: `fit` selects and saves one development gate, while `evaluate` applies that saved gate to an explicit scene list and rejects overlap with the saved development scenes. The selected model was fit on 79 scenes using grouped out-of-fold predictions. Its frozen settings are:
+
+| Setting | Value |
+|---|---:|
+| Objective | `kernel_sum` |
+| Ridge alpha | 1000 |
+| Output gain | 0.80 |
+| Acceptance cutoff | 0.47° |
+| Development OOF clean false-scene rate | 3.8% |
+| Minimum development OOF coverage across injection signs | 10.2% |
+| Mean accepted MAE used for screening | 0.076° |
+
+The model and settings were saved as `results/calibration_baseline/frozen_kernel_sum_gate.joblib` and `frozen_kernel_sum_gate.json`. The fit is development only; these metrics are not final held-out performance.
+
+#### Earlier ten-scene frozen evaluation
+
+An initial separate ten-scene evaluation used the saved gate without refitting:
+
+| Metric | +0.5° injection (target −0.5°) | −0.5° injection (target +0.5°) |
+|---|---:|---:|
+| Equal-scene coverage | 11.8% | 11.5% |
+| Correct direction among accepted scenes | 100% (8 accepting scenes) | 100% (9 accepting scenes) |
+| Within 0.10° among accepted scenes | 58.1% | 65.9% |
+| Accepted MAE | 0.086° | 0.083° |
+
+There were 0 clean false-trigger scenes out of 10. The one-sided exact 95% upper bound for the clean false-trigger probability was 25.9%. Scene-bootstrap 95% intervals were wide: coverage was 5.4–19.1% for +0.5° and 5.0–19.5% for −0.5°; accepted MAE intervals were 0.058–0.121° and 0.046–0.134°, respectively. This ten-scene batch is a pilot, not adequate evidence for a low clean false-trigger rate or stable coverage.
+
+#### 27-scene frozen-gate evaluation
+
+The frozen gate was applied unchanged to 27 scenes that were not in the 79-scene development set. This is the final calibration evaluation completed for this project phase. Results:
+
+| Metric | +0.5° injection (target −0.5°) | −0.5° injection (target +0.5°) |
+|---|---:|---:|
+| Mean scene coverage | 3.6% (95% scene-bootstrap CI 1.8–5.8%) | 9.0% (3.4–15.9%) |
+| Clean false-trigger scenes | 0/27 | — |
+| One-sided exact 95% upper bound after 0/27 clean events | 10.5% | — |
+| Correct direction among accepting scenes | 100% (13 scenes) | 100% (15 scenes) |
+| Within 0.10° among accepting scenes | 92.9% (85.3–100.0%) | 79.6% (62.0–94.5%) |
+| Accepted MAE | 0.036° (0.021–0.054°) | 0.065° (0.039–0.095°) |
+
+The 27-scene results show accurate corrections when the gate accepts, but coverage is below the 10% development target for both injection signs. Zero clean false-trigger scenes in this evaluation is encouraging, but the one-sided 95% upper bound is 10.5%; this does not establish a clean false-trigger probability below 5%. The evidence supports selective correction on tested synthetic roll perturbations, not a generally reliable calibration method.
+
+#### Evaluation command and implementation notes
+
+The tracker uses NumPy, SciPy KDTree, and OpenCV, so the calibration runs reported here used the CPU; `--gpus all` exposes a GPU to the container but does not accelerate this script.
+
+The saved gate was evaluated with:
+
+```bash
+cd /workspace/bevfusion
+CURVE_OBJECTIVE_MODE=kernel_sum \
+CURVE_SCENES=scene-0107,scene-0108,scene-0109,scene-0110,scene-0120,scene-0121,scene-0122,scene-0123,scene-0124,scene-0125 \
+FROZEN_GATE_MODE=evaluate \
+FROZEN_GATE_TAG=holdout_batch_01 \
+python3 experiments/calibration_baseline/score_curve_frozen_gate.py
+```
+
+The evaluation used the saved `frozen_kernel_sum_gate.joblib`; fitting again changes the gate and is not a frozen evaluation. The camera-calibration experiments for this project phase are complete at the scope reported here. No further calibration runs are included in these results.
+
+### Relevant experiment files
+
+- `experiments/calibration_baseline/soac_ocamo_baseline_audit.md` — scientific SOAC reference and OCaMo/LTO adaptation audit.
+- `experiments/calibration_baseline/check_nuscenes_projection.py` and `check_projection_sequence.py` — nuScenes projection diagnostics.
+- `experiments/calibration_baseline/sweep_rotation_score.py` — candidate rotation score sweep.
+- `experiments/calibration_baseline/sweep_rotation_recovery.py` — synthetic correction-grid recovery checks.
+- `experiments/calibration_baseline/run_online_roll_tracker.py` — finite/ring-range filtering, support modes, and roll-tracking comparisons under robust-Chamfer and kernel-sum objectives.
+- `experiments/calibration_baseline/run_online_roll_tracker_deployable.py` — runtime-support, GT-free diagnostic copy.
+- `experiments/calibration_baseline/score_curve_groupcv.py`, `score_curve_nested_gate.py`, and `score_curve_frozen_gate.py` — score-curve feature extraction, nested development screening, and frozen-gate fitting/evaluation.
+- CSVs are written under `results/calibration_baseline/`; generated plots and results should be kept with their scene/configuration labels.
+
+## Usage
+
+### Prerequisites
+
+The code is built with following libraries:
+
+- Python >= 3.8, \<3.9
+- OpenMPI = 4.0.4 and mpi4py = 3.0.3 (Needed for torchpack)
+- Pillow = 8.4.0 (see [here](https://github.com/mit-han-lab/bevfusion/issues/63))
+- [PyTorch](https://github.com/pytorch/pytorch) >= 1.9, \<= 1.10.2
+- [tqdm](https://github.com/tqdm/tqdm)
+- [torchpack](https://github.com/mit-han-lab/torchpack)
+- [mmcv](https://github.com/open-mmlab/mmcv) = 1.4.0
+- [mmdetection](http://github.com/open-mmlab/mmdetection) = 2.20.0
+- [nuscenes-dev-kit](https://github.com/nutonomy/nuscenes-devkit)
+
+After installing these dependencies, please run this command to install the codebase:
+
+```bash
+python setup.py develop
+```
+
+We also provide a [Dockerfile](docker/Dockerfile) to ease environment setup. To get started with docker, please make sure that `nvidia-docker` is installed on your machine. After that, please execute the following command to build the docker image:
+
+```bash
+cd docker && docker build . -t bevfusion
+```
+
+We can then run the docker with the following command:
+
+```bash
+nvidia-docker run -it -v `pwd`/../data:/dataset --shm-size 16g bevfusion /bin/bash
+```
+
+We recommend the users to run data preparation (instructions are available in the next section) outside the docker if possible. Note that the dataset directory should be an absolute path. Within the docker, please run the following command to clone our repo and install custom CUDA extensions:
+
+```bash
+cd home && git clone https://github.com/mit-han-lab/bevfusion && cd bevfusion
+python setup.py develop
+```
+
+You can then create a symbolic link `data` to the `/dataset` directory in the docker.
+
+### Data Preparation
+
+#### nuScenes
+
+Please follow the instructions from [here](https://github.com/open-mmlab/mmdetection3d/blob/master/docs/en/datasets/nuscenes_det.md) to download and preprocess the nuScenes dataset. Please remember to download both detection dataset and the map extension (for BEV map segmentation). After data preparation, you will be able to see the following directory structure (as is indicated in mmdetection3d):
+
+```
+mmdetection3d
+├── mmdet3d
+├── tools
+├── configs
+├── data
+│   ├── nuscenes
+│   │   ├── maps
+│   │   ├── samples
+│   │   ├── sweeps
+│   │   ├── v1.0-test
+|   |   ├── v1.0-trainval
+│   │   ├── nuscenes_database
+│   │   ├── nuscenes_infos_train.pkl
+│   │   ├── nuscenes_infos_val.pkl
+│   │   ├── nuscenes_infos_test.pkl
+│   │   ├── nuscenes_dbinfos_train.pkl
+
+```
+
+### Evaluation
+
+We also provide instructions for evaluating our pretrained models. Please download the checkpoints using the following script:
+
+```bash
+./tools/download_pretrained.sh
+```
+
+Then, you will be able to run:
+
+```bash
+torchpack dist-run -np [number of gpus] python tools/test.py [config file path] pretrained/[checkpoint name].pth --eval [evaluation type]
+```
+
+For example, if you want to evaluate the detection variant of BEVFusion, you can try:
+
+```bash
+torchpack dist-run -np 8 python tools/test.py configs/nuscenes/det/transfusion/secfpn/camera+lidar/swint_v0p075/convfuser.yaml pretrained/bevfusion-det.pth --eval bbox
+```
+
+While for the segmentation variant of BEVFusion, this command will be helpful:
+
+```bash
+torchpack dist-run -np 8 python tools/test.py configs/nuscenes/seg/fusion-bev256d2-lss.yaml pretrained/bevfusion-seg.pth --eval map
+```
+
+### Training
+
+We provide instructions to reproduce our results on nuScenes.
+
+For example, if you want to train the camera-only variant for object detection, please run:
+
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/det/centerhead/lssfpn/camera/256x704/swint/default.yaml --model.encoders.camera.backbone.init_cfg.checkpoint pretrained/swint-nuimages-pretrained.pth
+```
+
+For camera-only BEV segmentation model, please run:
+
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/seg/camera-bev256d2.yaml --model.encoders.camera.backbone.init_cfg.checkpoint pretrained/swint-nuimages-pretrained.pth
+```
+
+For LiDAR-only detector, please run:
+
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/det/transfusion/secfpn/lidar/voxelnet_0p075.yaml
+```
+
+For LiDAR-only BEV segmentation model, please run:
+
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/seg/lidar-centerpoint-bev128.yaml
+```
+
+For BEVFusion detection model, please run:
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/det/transfusion/secfpn/camera+lidar/swint_v0p075/convfuser.yaml --model.encoders.camera.backbone.init_cfg.checkpoint pretrained/swint-nuimages-pretrained.pth --load_from pretrained/lidar-only-det.pth
+```
+
+For BEVFusion segmentation model, please run:
+```bash
+torchpack dist-run -np 8 python tools/train.py configs/nuscenes/seg/fusion-bev256d2-lss.yaml --model.encoders.camera.backbone.init_cfg.checkpoint pretrained/swint-nuimages-pretrained.pth
+```
+
+Note: please run `tools/test.py` separately after training to get the final evaluation metrics.
+
+## Deployment on TensorRT
+[CUDA-BEVFusion](https://github.com/NVIDIA-AI-IOT/Lidar_AI_Solution/tree/master/CUDA-BEVFusion): Best practice for TensorRT, which provides INT8 acceleration solutions and achieves 25fps on ORIN.
+
+## FAQs
+
+Q: Can we directly use the info files prepared by mmdetection3d?
+
+A: We recommend re-generating the info files using this codebase since we forked mmdetection3d before their [coordinate system refactoring](https://github.com/open-mmlab/mmdetection3d/blob/master/docs/en/changelog.md).
+
+## Acknowledgements
+
+BEVFusion is based on [mmdetection3d](https://github.com/open-mmlab/mmdetection3d). It is also greatly inspired by the following outstanding contributions to the open-source community: [LSS](https://github.com/nv-tlabs/lift-splat-shoot), [BEVDet](https://github.com/HuangJunjie2017/BEVDet), [TransFusion](https://github.com/XuyangBai/TransFusion), [CenterPoint](https://github.com/tianweiy/CenterPoint), [MVP](https://github.com/tianweiy/MVP), [FUTR3D](https://arxiv.org/abs/2203.10642), [CVT](https://github.com/bradyz/cross_view_transformers) and [DETR3D](https://github.com/WangYueFt/detr3d).
+
+Please also check out related papers in the camera-only 3D perception community such as [BEVDet4D](https://arxiv.org/abs/2203.17054), [BEVerse](https://arxiv.org/abs/2205.09743), [BEVFormer](https://arxiv.org/abs/2203.17270), [M2BEV](https://arxiv.org/abs/2204.05088), [PETR](https://arxiv.org/abs/2203.05625) and [PETRv2](https://arxiv.org/abs/2206.01256), which might be interesting future extensions to BEVFusion.
+
+
+## Citation
+
+If BEVFusion is useful or relevant to your research, please kindly recognize our contributions by citing our paper:
+
+```bibtex
+@inproceedings{liu2022bevfusion,
+  title={BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird's-Eye View Representation},
+  author={Liu, Zhijian and Tang, Haotian and Amini, Alexander and Yang, Xingyu and Mao, Huizi and Rus, Daniela and Han, Song},
+  booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+  year={2023}
+}
+```
