@@ -1,0 +1,26 @@
+{
+  "dataset": "nuScenes",
+  "version": "v1.0-mini",
+  "source": "official nuScenes",
+  "source_page": "https://www.nuscenes.org/nuscenes#download",
+  "source_url": "https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-mini.tgz",
+  "source_provenance": "URL supplied by user after login through official Mini download control",
+  "dataroot": "C:\\Users\\chany\\Desktop\\BlendEd\\AI in Visual Computing\\Camera-LiDAR-backfire\\datasets\\nuscenes",
+  "download_started_utc": "2026-10-19T08:54:18.336520+00:00",
+  "validation_completed_utc": "2026-10-19T09:00:21.487003+00:00",
+  "archive": {
+    "name": "v1.0-mini.tgz",
+    "bytes": 4168148189,
+    "sha256": "e5d9c2b5ced29f9e3d39651e2093d27e892d0571f10962409974b21033a254ee",
+    "official_sha256": null,
+    "checksum_note": "Locally calculated SHA-256 is a reproducibility fingerprint, not an official authenticity checksum.",
+    "gzip_integrity": "passed",
+    "tar_member_validation": "passed",
+    "retained": true
+  },
+  "extracted_file_count": 31225,
+  "extracted_file_bytes": 5374922749,
+  "extracted_sizes_verified_against_archive": true,
+  "disk_usage_bytes": 5374922749,
+  "duration_seconds": 365.38
+}
