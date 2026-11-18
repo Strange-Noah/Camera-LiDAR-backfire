@@ -136,3 +136,9 @@ runs/*
 # torch hipify generated files
 *_hip.*
 *.hip
+
+results/
+lidar_results_formatted/
+nuscenes/
+pretrained/
+*.pkl
