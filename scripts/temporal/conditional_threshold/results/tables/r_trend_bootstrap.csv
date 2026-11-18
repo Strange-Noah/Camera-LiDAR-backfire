@@ -1,0 +1,5 @@
+﻿group,loss_increases_across_all_4_bins,loss_r_ge1_greater_than_r_lt01,crossover_earlier_across_all_4_bins,crossover_r_ge1_earlier_than_r_lt01
+car,0.622,1.0,0.998,1.0
+pedestrian,0.984,1.0,0.136,0.916
+traffic_cone,0.924,1.0,0.806,0.998
+ALL,1.0,1.0,1.0,1.0
