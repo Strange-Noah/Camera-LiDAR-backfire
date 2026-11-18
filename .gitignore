@@ -58,3 +58,4 @@ known_hosts*
 .mypy_cache/
 .ruff_cache/
 .ipynb_checkpoints/
+OCaMo/
