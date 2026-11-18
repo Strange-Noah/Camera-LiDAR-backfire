@@ -1,121 +1,113 @@
-# Camera–LiDAR backfire
+# When Fusion Backfires
 
-Research on camera–LiDAR fusion robustness under sensor misalignment.
-The 850-scene nuScenes metadata audit is complete (CONDITIONAL GO).
-BEVFusion/MultiCorrupt deployment and inference are separate, future milestones.
+### Camera–LiDAR Fusion Robustness under Spatial and Temporal Misalignment
 
-## Storage and compute
+Camera–LiDAR fusion combines visual appearance and LiDAR geometry to improve 3D object detection. However, inaccurate spatial calibration or temporal synchronization can make fusion less reliable than LiDAR-only detection.
 
-- GitHub is the source of truth for scripts, configuration, environment locks, and reports.
-- A Runpod Network Volume is mounted at `/workspace`; dataset root is
-  `/workspace/datasets/nuscenes` (not its `v1.0-mini` subdirectory).
-- The Pod, `/root/camera-lidar-backfire` checkout, and `/opt/venvs/nuscenes-metadata`
-  environment are disposable and recreated from this repository.
-- `/workspace/{datasets,checkpoints,results,cache,staging}` survives Pod replacement.
-  Keep the volume in the same datacenter as replacement compute.
+**Our research question:** Under what conditions does sensor fusion become worse than using LiDAR alone, and how effectively can calibration and motion compensation mitigate this failure?
 
-## Team collaboration
+We investigate this question using **BEVFusion** and the **nuScenes** dataset through two parallel experimental tracks: spatial misalignment and temporal misalignment.
 
-We use a Runpod **Team with Dev members**: GitHub `main` holds reviewed code,
-environment definitions and project conventions; each member develops on a personal
-branch and a separate disposable Pod. All project Pods use the same Network Volume
-in EU-RO-1, mounted at `/workspace`. Clone the repository into your Pod-local home;
-never share a Git working tree or writable Python environment across Pods.
+**Project status (November 2026):** Both research tracks have completed their principal experiments. The repository retains their independently developed implementations and provides a unified index of their results. Adaptive gated fusion remains a proposed direction, not an implemented final system.
 
-Dev members create their own Pods **in the Team context**. Charges are deducted from
-the Team account, with member Cost Centers for internal settlement; this does not
-charge each member's personal Runpod balance.
+## Research at a Glance
 
-The dataset is canonical input, not an output directory. Use non-root experiment
-users and administrator-managed filesystem permissions; Dev membership alone does
-not enforce read-only data and still permits deleting the entire volume.
+|Track|Main question|Principal finding|
+|---|---|---|
+|**Spatial Misalignment**|How do rotational calibration errors affect fusion, and can online calibration restore performance?|Fusion performance degrades with increasing rotational noise. OCaMo frequently improves calibration geometry, but downstream detection recovery is limited.|
+|**Temporal Misalignment**|How does sensor staleness cause backfire, and which conditions determine vulnerability?|Camera and LiDAR timing errors have different consequences. Ego-motion consistency substantially mitigates some failures, while object-level vulnerability depends strongly on apparent displacement and initial camera benefit.|
 
-**Rollout status:** the owner confirmed Team conversion. Dataset modes and a
-Landlock-protected non-root experiment login have been applied and tested on the
-maintenance Pod. Every new/restarted Pod must provision that protected login before
-experiments; default root sessions are not protected. Member invitations and Cost
-Centers still require separate verification. The existing volume is reused in place.
-See [dataset protection and per-Pod setup](docs/dataset_readonly.md).
+Backfire is defined relative to a matched LiDAR-only reference under the same evaluation protocol. Results from different evaluation subsets are not treated as directly interchangeable.
 
-- [Team workflow, billing, safety and rollout checklist](docs/team_collaboration.md)
-- [English message for teammates](docs/team_invitation.md)
-- [Personal environment example](configs/member.env.example)
+## 1. Spatial Misalignment and Online Calibration
 
-## Administrator bootstrap: new Ubuntu 24.04 CPU Pod
+We simulated persistent rotational calibration errors independently across six cameras using five Gaussian noise levels (σ = 1°–5°) and five random seeds.
 
-Attach the project Network Volume at `/workspace` at creation. Use at least
-4 vCPU and 16 GB RAM. Register your SSH public key before boot; expose only 22/tcp.
-These are administrator bootstrap commands, not the member experiment login.
-For member checkouts and non-root environments, follow the team workflow above.
-From a root shell inside the Pod:
+Each condition was evaluated on the complete 6,019-frame nuScenes validation set, using clean BEVFusion and LiDAR-only detection as references.
 
-```bash
-apt-get update
-apt-get install -y python3.12-venv git curl ca-certificates
-git clone https://github.com/Strange-Noah/Camera-LiDAR-backfire.git /root/camera-lidar-backfire
-cd /root/camera-lidar-backfire
-./scripts/prepare_storage.sh
-./scripts/setup_metadata_env.sh
-```
+The spatial experiments show decreasing detection performance as rotational noise increases. In the five-seed mean, perturbed fusion falls below LiDAR-only at the tested σ = 4° and 5° levels; statistical uncertainty prevents claiming a sharply established crossover threshold.
 
-Configuration is in `configs/metadata.env`; environment variables can override paths.
-The setup script uses the committed full package lock when present. See
-`environment/metadata/` for the environment definition and captured Python version.
+We subsequently integrated an OCaMo-based online calibration method into BEVFusion, with six independent camera-specific trackers. All 25 corrected conditions were evaluated, totaling 150,475 corrected detection frames.
 
-## Deliberate dataset acquisition (once per volume)
+**Online calibration reduced rotational error in 76.6% of camera trajectories, but average detection recovery remained small: +0.1845 percentage points in mAP and +0.1112 percentage points in NDS. At σ = 4° and 5°, mean corrected fusion performance remained below LiDAR-only.**
 
-Log in to the official nuScenes website and accept its terms yourself first.
-The URL in the acquisition script was supplied by the user from that official page.
-Run this **on the Pod**, never on the Mac:
+![Spatial calibration and BEVFusion detection recovery](results/project_summary/spatial_recovery.png)
 
-```bash
-python3.12 scripts/acquire_nuscenes_mini.py --persistent-root /workspace
-```
+The small corrected-versus-perturbed differences require caution because strict prediction identity between the historical Spatial inference path and the later Corrected inference path was not established.
 
-This downloads only `v1.0-mini.tgz` to `/workspace/staging`, tests gzip integrity,
-validates archive paths, extracts mini, verifies every extracted file size against
-its archive entry, and records SHA-256 and provenance in `dataset_manifest.json`.
-The archive is retained. A local SHA-256 is a fingerprint, not an official checksum.
-Acquisition refuses to overwrite an existing dataset. Do not rerun it on a populated
-volume; verification never downloads data.
+[Spatial results and reproducibility](https://github.com/Strange-Noah/Camera-LiDAR-backfire/blob/5e8bf5701ad4db1da13d73eabd361eb10668a10e/rotation_robustness/README.md) · [OCaMo baseline](https://github.com/Strange-Noah/Camera-LiDAR-backfire/blob/85f489a840a65bacbbe139b9781fc062faac58e0/docs/ocamo/FULL_METHOD_RESULTS.md)
 
-## Pre-audit verification
+## 2. Temporal Misalignment and Ego-Motion Compensation
 
-Run from the protected member login after sourcing your configured
-`.local/member.env`; do not run this from the administrator root bootstrap shell.
+The temporal track studies stale camera images, stale LiDAR sweeps, and joint timing errors, with both naive sensor substitution and ego-consistent or compensated variants.
 
-```bash
-./scripts/verify_nuscenes.sh --render-once
-```
+Its completed experiments identify several distinct failure mechanisms:
 
-The bounded check loads the official devkit, resolves one camera and LiDAR sample,
-calibration, ego pose and timestamps, and a short annotation/instance chain.
-`--render-once` optionally creates one camera/LiDAR projection. Results are saved to
-`/workspace/results/smoke_test`. A `PASS` marker is written only after all checks.
-This is schema and file-access validation, not a statistical metadata audit.
+- Under the later paired camera-staleness protocol, naive camera substitution produces aggregate mAP backfire at approximately 700–800 ms, while ego-consistent camera delivery remains above LiDAR-only through approximately 1.0 s of measured delay.
 
-No datasets, model weights, credentials, or large predictions belong in Git.
-Small verification reports and environment locks may be committed.
+- Stale LiDAR is substantially more damaging. Naive LiDAR staleness already causes backfire at the first tested approximately 50 ms offset; ego-motion compensation moves the crossover to between 50 and 100 ms.
 
-See [storage and recovery](docs/storage_and_recovery.md) for volume expansion and
-Pod replacement. `configs/runpod-create-pod.json` is an MCP `create-pod` request
-shape for a future replacement, not an instruction to create another Pod now.
-Re-check inventory and pricing before reusing it.
+- Joint misalignment illustrates that consistent transformations mitigate geometric errors but cannot fully recover stale dynamic object content.
 
-## Verified checkpoint
 
-See [pre-audit deployment report](docs/pre_audit_deployment.md) for the completed
-acceptance checklist, live resource IDs, reproducibility proof, and known limits.
-Both isolated environments loaded 10 scenes / 404 samples / 18,538 annotations.
-This describes the earlier pre-audit checkpoint; the subsequent full metadata audit
-is documented below. No model deployment has been performed.
+These thresholds refer to specific experimental protocols and paired subsets, not universal timing limits.
 
-## Full metadata audit checkpoint
+![Temporal misalignment and ego-motion consistency](results/project_summary/temporal_overview.png)
 
-The official 850-scene trainval metadata-only audit is complete: 34,149 samples, 64,386 trajectories and 1,166,187 annotations. The reviewed recommendation is **CONDITIONAL GO**, with class/perturbation-specific restrictions; this is not a model-performance result.
+[Complete temporal synthesis](https://github.com/Strange-Noah/Camera-LiDAR-backfire/blob/2e8dd75aecf6be6f2de8249f5cfce02c35fb8167/results/temporal_misalignment/temporal_misalignment_synthesis_en.md)
 
-- [Research report and supported/unsupported claims](results/metadata_audit/README.md)
-- [Machine-readable gates](results/metadata_audit/gating_report.json)
-- [Methods, validity rules and reproduction commands](docs/metadata_audit_methods.md)
+### Conditional Backfire
 
-Row-level Parquet and large trajectory tables remain on the persistent volume at `/workspace/results/metadata_audit/`. Only small derived summaries and figures are versioned here. No trainval sensor blobs, GPU deployment, BEVFusion or corruption/inference were needed.
+A complementary object-level analysis studies how temporal failure depends on relative lateral displacement, object size, distance, motion, and scene conditions.
+
+Using the normalized displacement measure `r500`, the reported miss-rate crossover occurs earlier for larger displacement: approximately 135 ms for r500 ≥ 1, 258 ms for 0.5 ≤ r500 < 1, and 519 ms for 0.1 ≤ r500 < 0.5. The r500 < 0.1 group does not cross in the tested delay range.
+
+These are **object-level miss-rate thresholds**, not aggregate nuScenes mAP thresholds.
+
+![Conditional backfire under normalized lateral displacement](results/project_summary/conditional_displacement.png)
+
+[Conditional analysis, methods and results](https://github.com/Strange-Noah/Camera-LiDAR-backfire/blob/58b49c53e3bf452ad6b87438c5a94b72ad852cac/scripts/temporal/conditional_threshold/README.md)
+
+## Interpretation
+
+The two experimental tracks point toward a common conclusion:
+
+**Fusion robustness cannot be inferred from sensor alignment alone; it must be evaluated at the downstream detection level and under the conditions in which each modality contributes useful information.**
+
+Calibration recovery, ego-motion consistency, and object-level reliability offer complementary ways to understand or mitigate backfire. Adaptive or gated fusion is a potential next step; this repository does not claim a completed, validated universal gating policy.
+
+## Research Documentation
+
+- [Research overview and scientific findings](docs/research_overview.md)
+
+- [Experiment branches, reports and reproducibility index](docs/experiment_index.md)
+
+- [Curated results and figure provenance](results/project_summary/README.md)
+
+
+## Infrastructure and Earlier Project Work
+
+The `main` branch also retains the initial nuScenes metadata audit, deployment infrastructure, experiment-user protections and storage documentation. These are historical engineering foundations, not the complete implementation of both final research tracks.
+
+- [Metadata audit](results/metadata_audit/README.md)
+
+- [Audit methodology](docs/metadata_audit_methods.md)
+
+- [Team collaboration and independent execution](docs/team_collaboration.md)
+
+- [Dataset protection](docs/dataset_readonly.md)
+
+- [Storage and recovery](docs/storage_and_recovery.md)
+
+- [Experiment environment and source navigation](docs/experiment_index.md)
+
+
+## Reproducibility and Scope
+
+The experimental branches use separate environments and compute configurations. There is **no single root-level installation command** that reproduces all tracks.
+
+Use the pinned source versions, environment instructions, evaluation populations and artifacts listed in the [experiment index](docs/experiment_index.md).
+
+Large nuScenes data, model checkpoints and full prediction artifacts are not stored in this repository. Selected reports, figures and summary tables are included for inspection.
+
+The repository is a research record. Experimental limitations and unverified extensions are stated separately from completed findings.
